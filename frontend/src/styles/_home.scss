@@ -1,0 +1,252 @@
+@import "./presets";
+
+.home{
+    display: flex;
+    flex-direction: column;
+
+    .bg-ink{
+        position: absolute;
+        width: 86px;
+        height: 86px;
+        z-index: -1;
+    }
+
+    .image-1{
+        left: 137px;
+        top: 188.09px;
+
+        transform: rotate(-35.63deg);
+    }
+
+    .image-2{
+        left: 556.46px;
+        top: 125px;
+
+        transform: rotate(13.08deg);
+    }
+    
+    .image-3{
+        left: 1399.41px;
+        top: 209px;
+
+        transform: rotate(20.71deg);
+    }
+    .image-4{
+        left: 1674.57px;
+        top: 198.17px;
+
+        transform: rotate(-33.54deg);
+    }
+    .image-5{
+        left: 1219.41px;
+        top: 30px;
+
+        transform: rotate(40.99deg);
+    }
+    .image-6{
+        left: 986px;
+        top: 130.63px;
+
+        transform: rotate(-11.15deg);
+    }
+    .image-7{
+        left: 1698.84px;
+        top: 743px;
+
+        transform: rotate(21.01deg);
+    }
+    .image-8{
+        left: 747.9px;
+        top: 741.62px;
+        
+        transform: rotate(32.56deg); 
+    }
+    .image-9{
+        left: 800px;
+        top: 555.28px;
+
+        transform: rotate(-12.95deg);
+    }
+    .image-10{
+        left: 609px;
+        top: 534.73px;
+
+        transform: rotate(-33.71deg);
+    }
+    .image-11{
+        left: 1099px;
+        top: 722.68px;
+
+        transform: rotate(-35.29deg);
+    }
+    .image-12{
+        left: 1651px;
+        top: 1021.18px;
+
+        transform: rotate(-33.27deg);
+    }
+    .image-13{
+        left: 2.54px;
+        top: 572.51px;
+
+        transform: rotate(-38.87deg);
+    }
+    .image-14{
+        left: 1405.98px;
+        top: 976.94px;
+        
+        transform: rotate(-91.63deg); 
+    }
+    .image-15{
+        left: 1220.3px;
+        top: 513.25px;
+
+        transform: rotate(-41.46deg);
+    }
+    .image-16{
+        left: 1090.95px;
+        top: 909.33px;
+
+        transform: rotate(23.74deg);
+    }
+    .image-17{
+        left: 1569px;
+        top: 482.63px;
+
+        transform: rotate(-47.72deg);
+    }
+    .image-18{
+        left: 887.66px;
+        top: 1002.84px;
+
+        transform: rotate(-28.61deg);
+    }
+    .image-19{
+        left: 200.07px;
+        top: 404.73px;
+
+        transform: rotate(22.71deg);
+    }
+    .image-20{
+        left: -5.48px;
+        top: 924.44px;
+
+        transform: rotate(39.83deg);
+    }
+    .image-21{
+        left: 794px;
+        top: 330.5px;
+
+        transform: rotate(-18.65deg);
+    }
+    .image-22{
+        left: 429.47px;
+        top: 871px;
+
+        transform: rotate(29.59deg);
+    }
+    .image-23{
+        left: 1105.19px;
+        top: 304.26px;
+
+        transform: rotate(31.5deg);
+    }
+
+    .blocks{
+        display: flex;
+        width: 43%;
+        margin: 0 auto;
+        margin-top: 7rem;
+        justify-content: space-between;
+    }
+
+    .col{
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+    }
+
+    .col-2{
+        .block{
+            margin-top: 16rem;
+        }
+    }
+
+    .block{
+        background-color: #E85A4F;
+        width: 22rem;
+        height: 26rem;
+        padding: 1rem 2rem;
+        color: #EAE7DC;
+        box-shadow: 7px 5px 0px black;
+        font-weight: bold;
+        font-size: 20px;
+
+        .pergament{
+            width: 100px;
+            margin-bottom: 1rem;
+        }
+        
+        .feather{
+            width: 80px;
+            margin-bottom: 1.3rem;
+            margin-top: .5rem;
+        }
+
+        .envelope{
+            width: 95px;
+        }
+    }
+
+    .order{
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 4rem;
+        @include button;
+        padding: .8rem;
+        width: 80%;
+    }
+
+    .reviews{
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 4rem;
+
+        .header-reviews{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+
+            p{
+                font-size: 40px;
+                letter-spacing: 4px;
+            }
+            a{
+                @include button;
+            }
+        }
+
+        .review{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            
+            img{
+                border-radius: 50%;
+                width: 120px;
+            }
+
+            .name{
+                font-size: 32px;
+                color: #E85A4F;
+                font-weight: bold;
+            }
+
+            .desc{
+                font-size: 18px;
+            }
+        }
+    }
+}
