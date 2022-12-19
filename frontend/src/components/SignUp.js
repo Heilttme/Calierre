@@ -1,13 +1,33 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import testimonial from "../images/negr.png"
+import axios from "axios"
 
 const SignUp = () => {
   const [usernameFocus, setUsernameFocus] = useState(false)
   const [emailFocus, setEmailFocus] = useState(false)
   const [password1Focus, setPassword1Focus] = useState(false)
   const [password2Focus, setPassword2Focus] = useState(false)
-  
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password1: "",
+    password2: "",
+  })
+
+  const changeFormData = (e) => {
+    setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  const signUp = () => {
+    if (formData.password1 === formData.password2) {
+      const req = axios.post("http://127.0.0.1:8000/api/v1/auth/users/", {username: formData.username, email: formData.email, password: formData.password1})
+        .then(data => console.log(data.data))
+        .catch(data => console.log(data.response.data))
+    }
+  }
+
   return (
     <div className='login-page'>
       <div className='left-col'>
@@ -21,8 +41,9 @@ const SignUp = () => {
               id="username"
               onFocus={() => setUsernameFocus(true)}
               onBlur={() => setUsernameFocus(false)}
+              onChange={(e) => changeFormData(e)}
             />
-            <motion.label animate={usernameFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">Username</motion.label>
+            <motion.label animate={formData.username || usernameFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">Username</motion.label>
           </div>
           
           <div className='email-block block'>
@@ -31,8 +52,9 @@ const SignUp = () => {
               id="email"
               onFocus={() => setEmailFocus(true)}
               onBlur={() => setEmailFocus(false)}
+              onChange={(e) => changeFormData(e)}
             />
-            <motion.label animate={emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">E-mail</motion.label>
+            <motion.label animate={formData.email || emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">E-mail</motion.label>
           </div>
 
           <div className='password-block block'>
@@ -41,8 +63,9 @@ const SignUp = () => {
               id="password1"
               onFocus={() => setPassword1Focus(true)}
               onBlur={() => setPassword1Focus(false)}
+              onChange={(e) => changeFormData(e)}
             />
-            <motion.label animate={password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">Password</motion.label>
+            <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">Password</motion.label>
           </div>
 
           <div className='password-block block'>
@@ -51,11 +74,12 @@ const SignUp = () => {
               id="password2"
               onFocus={() => setPassword2Focus(true)}
               onBlur={() => setPassword2Focus(false)}
+              onChange={(e) => changeFormData(e)}
             />
-            <motion.label animate={password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">Password again</motion.label>
+            <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">Password again</motion.label>
           </div>
 
-          <button className='login-button'>Sign up</button>
+          <button className='login-button' onClick={signUp}>Sign up</button>
         </div>
       </div>
       <div className='right-col'>

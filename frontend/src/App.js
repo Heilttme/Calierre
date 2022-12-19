@@ -5,8 +5,23 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer"
 import Customize from "./components/Customize"
 import { Routes, Route } from "react-router-dom"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const App = () => {
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+  })
+
+  useEffect(() => {
+    if (localStorage.getItem("k")){
+      const res = axios.post("http://127.0.0.1:8000/auth/token/login/" )
+    }
+  
+  }, [])
+  
+  
   return (
     <div className="app">
       <Navigation/>

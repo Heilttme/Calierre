@@ -34,7 +34,7 @@ const Customize = () => {
           </div>
         </div>
       </div>
-      <button>Submit letter</button>
+      <button>Submit a letter</button>
     </div>
   )
 }
