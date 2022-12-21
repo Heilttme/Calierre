@@ -164,6 +164,7 @@
   text-align: center;
   margin: 0 auto;
   margin-top: 4rem;
+  display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
   color: #EAE7DC;
@@ -193,6 +194,7 @@
   letter-spacing: 4px;
 }
 .home .reviews .header-reviews a {
+  display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
   color: #EAE7DC;
@@ -314,6 +316,7 @@
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='red' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
 .login-page .left-col .form .login-button {
+  display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
   color: #EAE7DC;
@@ -390,6 +393,7 @@
   resize: none;
 }
 .customize button {
+  display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
   color: #EAE7DC;
@@ -436,6 +440,7 @@
   color: rgba(0, 0, 0, 0.68);
 }
 .forgot-page button {
+  display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
   color: #EAE7DC;
@@ -454,12 +459,41 @@
   color: #E85A4F;
 }
 
+.activate {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 38rem;
+  margin-top: 3rem;
+}
+.activate h1 {
+  color: #E85A4F;
+  margin-bottom: 1rem;
+}
+.activate p {
+  margin-top: 0.3rem;
+  font-size: 20px;
+}
+.activate a {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
 a {
   text-decoration: none;
 }
 
 a:visited {
-  color: unset;
+  color: #EAE7DC;
 }
 
 li {
@@ -502,6 +536,7 @@ body {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
+  display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
   color: #EAE7DC;

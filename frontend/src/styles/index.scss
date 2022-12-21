@@ -3,13 +3,14 @@
 @import "./logIn";
 @import "./customize";
 @import "./forgot_password";
+@import "./verification";
 
 a{
     text-decoration: none;
 }
 
 a:visited{
-    color: unset;
+    color: #EAE7DC;
 }
 
 li{

@@ -1,0 +1,21 @@
+.activate{
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 38rem;
+    margin-top: 3rem;
+
+    h1{
+        color: #E85A4F;
+        margin-bottom: 1rem;
+    }
+    
+    p{
+        margin-top: .3rem;
+        font-size: 20px;
+    }
+
+    a{
+        @include button;
+        margin-top: 1.5rem;
+    }
+}
