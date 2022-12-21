@@ -7,6 +7,7 @@ import Customize from "./components/Customize"
 import { Routes, Route } from "react-router-dom"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
   const [userData, setUserData] = useState({
@@ -30,6 +31,8 @@ const App = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/sign_up" element={<SignUp/>} />
         <Route path="/customize" element={<Customize/>} />
+        <Route path="/reset" element={<ForgotPassword/>} />
+        {/* <Route path="/activate/:uid/:token" element={<Activate/>} /> */}
       </Routes>
       <Footer/>
     </div> 

@@ -22,7 +22,19 @@ const Login = () => {
   }
 
   const logIn = (e) => {
-    const res = axios.post("http://127.0.0.1:8000/auth/token/login/", {email: formData.email, password: formData.password}).then(data => localStorage.setItem("k", data.data.auth_token))
+    const body = JSON.stringify({email: formData.email, password: formData.password})
+    console.log(body);
+
+    const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    }
+    
+    const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", body, config).then(data => {
+      localStorage.setItem("access", data.data.access)
+      localStorage.setItem("refresh", data.data.refresh)
+    })
 
   }
 
@@ -55,14 +67,17 @@ const Login = () => {
             />
             <motion.label animate={formData.password || passwordFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">Password</motion.label>
           </div>
-          <div className='check'>
-            <input 
-              type="checkbox"
-              id="remember"
-              name="remember"
-              onChange={(e) => changeFormData(e)}
-            />
-            <label htmlFor="remember">Remember me</label>
+          <div className='check-forgot'>
+            <div className='check'>
+              <input 
+                type="checkbox"
+                id="remember"
+                name="remember"
+                onChange={(e) => changeFormData(e)}
+              />
+              <label htmlFor="remember">Remember me</label>
+            </div>
+            <a href='/reset'>Forgot your password?</a>
           </div>
           <button className='login-button' onClick={logIn}>Log in</button>
         </div>

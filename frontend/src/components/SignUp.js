@@ -22,7 +22,7 @@ const SignUp = () => {
 
   const signUp = () => {
     if (formData.password1 === formData.password2) {
-      const req = axios.post("http://127.0.0.1:8000/api/v1/auth/users/", {username: formData.username, email: formData.email, password: formData.password1})
+      const req = axios.post("http://127.0.0.1:8000/auth/users/", {username: formData.username, email: formData.email, password: formData.password1, re_password: formData.password2})
         .then(data => console.log(data.data))
         .catch(data => console.log(data.response.data))
     }

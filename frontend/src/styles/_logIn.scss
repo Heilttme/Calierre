@@ -66,6 +66,16 @@
                 display: none;
             }
 
+            .check-forgot{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                a{
+                    color: #E85A4F;
+                }
+            }
+
             .check{
                 label{
                     cursor: pointer;

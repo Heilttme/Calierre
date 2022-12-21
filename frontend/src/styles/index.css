@@ -282,6 +282,14 @@
 .login-page .left-col .form input[type=checkbox] {
   display: none;
 }
+.login-page .left-col .form .check-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.login-page .left-col .form .check-forgot a {
+  color: #E85A4F;
+}
 .login-page .left-col .form .check label {
   cursor: pointer;
 }
@@ -393,6 +401,57 @@
   letter-spacing: 0.195em;
   cursor: pointer;
   margin-top: 1rem;
+}
+
+.forgot-page {
+  margin-left: 8rem;
+  margin-top: 5rem;
+  margin-bottom: 32rem;
+}
+.forgot-page h1 {
+  margin-bottom: 0.5rem;
+}
+.forgot-page .block {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.forgot-page .email-block {
+  margin-top: 2rem;
+}
+.forgot-page .email-block input {
+  height: 40px;
+  padding: 0.6rem 1.2rem;
+  width: 400px;
+  background-color: #D8C3A5;
+  border: none;
+  outline: none;
+}
+.forgot-page .email-block .text-label {
+  z-index: 1;
+  position: absolute;
+  top: 0.4rem;
+  left: 1rem;
+  font-size: 1.2em;
+  cursor: text;
+  color: rgba(0, 0, 0, 0.68);
+}
+.forgot-page button {
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  padding: 0.6rem 3rem;
+}
+.forgot-page .success-reset {
+  opacity: 0;
+  margin-top: 1rem;
+  color: #E85A4F;
 }
 
 a {

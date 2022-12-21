@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "authentication",
     "rest_framework",
-    "rest_framework.authtoken",
     "djoser",
-    "corsheaders"
+    "authentication",
+    'rest_framework_simplejwt',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -90,7 +90,7 @@ DATABASES = {
 
 # tnshjjjtrazswljd
 
-EMAIL_BACKEND = "django.core.mail.backend.smtp.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT  = 587
 EMAIL_HOST_USER = "writeme2376@gmail.com"
@@ -140,33 +140,38 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
 DJOSER = {
-    "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
-    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
-    "ACTIVATION_URL": "#/activate/{iud}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
-    "SERIALIZERS": {
-        "user_create": "authentication.serializers.UserCreateSerializer",
-        "user": "authentication.serializers.UserCreateSerializer",
-        "user_delete": "djoser.serializers.UserDeleteSerializer",
-    },
-    "LOGIN_FILED": "email",
-    "USER_CREATE_PASSWORD_RETYPE": True,
-    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
-    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
-    "SEND_CONFIRMATION_EMAIL": True,
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    # 'ACTIVATION_URL': 'httpactivate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'authentication.serializers.UserCreateSerializer',
+        'user': 'authentication.serializers.UserCreateSerializer',
+        'current_user': 'authentication.serializers.UserCreateSerializer',
+    }
 }
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
 }
+
+DOMAIN = "localhost:3000"
 
 AUTH_USER_MODEL = "authentication.LetterUser"
