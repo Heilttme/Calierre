@@ -1,10 +1,15 @@
 import React from 'react'
 
-const Navigation = () => {
+const Navigation = ({userData}) => {
   return (
     <div className='header'>
         <a href='/' className='logo'>Write me</a>
-        <a href='/login' className='login'>Log in</a>
+        {
+          userData.username ? 
+            <a href='/profile' className='login'>{userData.username}</a>
+          :
+            <a href='/login' className='login'>Log in</a>
+        }
     </div>
   )
 }

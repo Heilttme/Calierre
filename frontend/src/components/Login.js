@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import testimonial from "../images/negr.png"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [emailFocus, setEmailFocus] = useState(false)
@@ -13,6 +14,8 @@ const Login = () => {
     rememberMe: false
   })
 
+  const navigate = useNavigate()
+  
   const changeFormData = (e) => {
     if (e.target.type !== "checkbox"){
       setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
@@ -22,18 +25,11 @@ const Login = () => {
   }
 
   const logIn = (e) => {
-    const body = JSON.stringify({email: formData.email, password: formData.password})
-    console.log(body);
-
-    const config = {
-      headers: {
-          'Content-Type': 'application/json'
-      }
-    }
     
-    const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", body, config).then(data => {
+    const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", {email: formData.email, password: formData.password}).then(data => {
       localStorage.setItem("access", data.data.access)
       localStorage.setItem("refresh", data.data.refresh)
+      navigate("/")
     })
 
   }
@@ -61,6 +57,7 @@ const Login = () => {
             <input
               name="password"
               id="password"
+              type="password"
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
               onChange={(e) => changeFormData(e)}

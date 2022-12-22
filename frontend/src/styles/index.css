@@ -488,6 +488,111 @@
   margin-top: 1.5rem;
 }
 
+.profile {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+.profile .wrapper {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 3rem;
+}
+.profile .left-col {
+  display: flex;
+  flex-direction: column;
+}
+.profile .left-col img {
+  width: 234px;
+}
+.profile .left-col button {
+  margin-top: 2rem;
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  padding: 0.8rem 1rem;
+}
+.profile .right-col {
+  display: flex;
+  flex-direction: column;
+}
+.profile .right-col .selectors {
+  display: flex;
+  gap: 1rem;
+}
+.profile .right-col .selectors .block-select {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  background-color: #b4b1a7;
+  transition: all 0.1s ease-in-out;
+}
+.profile .right-col .selectors .active {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+}
+.profile .right-col .block {
+  margin-top: 2rem;
+  height: 100%;
+}
+.profile .right-col .block .wrapper-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.profile .right-col .block .info {
+  display: flex;
+  gap: 8rem;
+}
+.profile .right-col .block .info li {
+  margin-top: 0.2rem;
+}
+.profile .right-col .block .buttons {
+  margin-top: auto;
+  display: flex;
+  gap: 2rem;
+}
+.profile .right-col .block .buttons button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+}
+
 a {
   text-decoration: none;
 }
@@ -534,8 +639,8 @@ body {
 }
 .header .login {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
+  right: 1rem;
+  top: 0.8rem;
   display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;

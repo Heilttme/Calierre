@@ -16,7 +16,7 @@ class UserAccountManager(BaseUserManager):
         
 class LetterUser(AbstractUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
-    username = models.CharField(max_length=255)
+    username = models.CharField(max_length=15)
 
     objects = UserAccountManager()
 

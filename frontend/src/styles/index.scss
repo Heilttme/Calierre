@@ -4,6 +4,7 @@
 @import "./customize";
 @import "./forgot_password";
 @import "./verification";
+@import "./profile";
 
 a{
     text-decoration: none;
@@ -50,8 +51,8 @@ body{
 
     .login{
         position: absolute;
-        right: .5rem;
-        top: .5rem;
+        right: 1rem;
+        top: .8rem;
         @include button;
     }
 }

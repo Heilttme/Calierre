@@ -35,7 +35,7 @@ const SignUp = () => {
           <h2>Sign up</h2>
         </span>
         <div className='form'>
-          <div className='email-block block'>
+          <div className='username-block block'>
             <input
               name="username"
               id="username"
@@ -50,6 +50,7 @@ const SignUp = () => {
             <input
               name="email"
               id="email"
+              type="email"
               onFocus={() => setEmailFocus(true)}
               onBlur={() => setEmailFocus(false)}
               onChange={(e) => changeFormData(e)}
@@ -61,6 +62,7 @@ const SignUp = () => {
             <input
               name="password1"
               id="password1"
+              type="password"
               onFocus={() => setPassword1Focus(true)}
               onBlur={() => setPassword1Focus(false)}
               onChange={(e) => changeFormData(e)}
@@ -72,6 +74,7 @@ const SignUp = () => {
             <input
               name="password2"
               id="password2"
+              type="password"
               onFocus={() => setPassword2Focus(true)}
               onBlur={() => setPassword2Focus(false)}
               onChange={(e) => changeFormData(e)}
