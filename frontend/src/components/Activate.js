@@ -5,10 +5,6 @@ import { useParams } from "react-router-dom"
 const Activate = () => {
   const { uid, token } = useParams()  
 
-  console.log(uid)  
-  console.log(token)  
-  console.log(1212132144214214);
-  
   useEffect(() => {
     const res = axios.post(`http://127.0.0.1:8000/auth/users/activation/`, {uid, token})
   }, [])

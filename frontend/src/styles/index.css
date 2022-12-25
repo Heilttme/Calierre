@@ -1,6 +1,7 @@
 .home {
   display: flex;
   flex-direction: column;
+  margin-top: 5rem;
 }
 .home .bg-ink {
   position: absolute;
@@ -624,16 +625,35 @@ body {
 }
 
 .header {
+  background-color: #EAE7DC;
   width: 100%;
-  height: 4rem;
-  text-align: center;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 5rem;
+}
+.header .quote {
+  color: #EAE7DC;
+  font-size: 3em;
+  position: absolute;
+  left: 9%;
+  top: 30%;
+  letter-spacing: 4px;
+}
+.header .quote-mark {
+  position: absolute;
+  left: 4%;
+  top: 28%;
+  height: 24px;
+  width: 24px;
+  scale: 4;
+  color: #EAE7DC;
 }
 .header .logo {
-  font-size: 28px;
+  position: absolute;
+  top: 1.5rem;
+  transform: translateY(-50%);
   font-weight: bold;
   color: #E85A4F;
 }

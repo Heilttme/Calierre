@@ -8,6 +8,8 @@ const SignUp = () => {
   const [emailFocus, setEmailFocus] = useState(false)
   const [password1Focus, setPassword1Focus] = useState(false)
   const [password2Focus, setPassword2Focus] = useState(false)
+  const [rightPageData, setRightPageData] = useState(null)
+  const [errors, setErrors] = useState([])
 
   const [formData, setFormData] = useState({
     username: "",
@@ -23,8 +25,11 @@ const SignUp = () => {
   const signUp = () => {
     if (formData.password1 === formData.password2) {
       const req = axios.post("http://127.0.0.1:8000/auth/users/", {username: formData.username, email: formData.email, password: formData.password1, re_password: formData.password2})
-        .then(data => console.log(data.data))
-        .catch(data => console.log(data.response.data))
+        .then(data => setRightPageData(200))
+        .catch(data => {
+          setRightPageData(400)
+          setErrors(data)
+        })
     }
   }
 
@@ -86,7 +91,26 @@ const SignUp = () => {
         </div>
       </div>
       <div className='right-col'>
-        <img src={testimonial}></img>
+        {
+          rightPageData === null ?
+            <img src={testimonial}></img>
+          : rightPageData === 200 ?
+            (
+              <>
+                <h2>You have successfully created an account</h2>
+                <h2>Check your e-mail for a letter to verify your account</h2>
+                <button>Send the letter again</button>
+              </>
+            )
+          : rightPageData === 400 &&
+            (
+              <>
+                {/* <h2>Whoops...</h2>
+                <h2>Some errors occured here:</h2>
+                {errors.map(el => <)} */}
+              </>
+            )
+        }
       </div>
     </div>
   )
