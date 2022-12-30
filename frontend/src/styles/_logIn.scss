@@ -32,7 +32,6 @@
             flex-direction: column;
             justify-content: flex-start;
             
-
             .block{
                 position: relative;
                 margin-bottom: 2rem;
@@ -48,8 +47,17 @@
                 padding: .6rem 1.2rem;
                 width: 400px;
                 background-color: #D8C3A5;
-                border: none;
+                border: 1px solid #D8C3A5;
                 outline: none;
+                transition: all .1s ease-in-out;
+
+                &:focus{
+                    border: 1px solid#B4B1A7;
+                }
+            }
+
+            .error{
+                border: 1px solid #E98074;
             }
 
             .text-label{

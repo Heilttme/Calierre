@@ -15,6 +15,9 @@
 
         img{
             width: 234px;
+            height: 234px;
+            object-fit: cover;
+            flex-shrink: 0;
         }
 
         button{

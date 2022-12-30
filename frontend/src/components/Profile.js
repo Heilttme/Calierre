@@ -2,22 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
 
-const Profile = ({userData}) => {
+const Profile = ({ userData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
 
   const navigate = useNavigate()
   
-  
   useEffect(() => {
     !localStorage.getItem("access") && navigate("/") 
   }, [])
+
+  const logout = () => {
+    authorize(false)
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    navigate("/")
+  }
   
   return (
     <div className='profile'>
         <h1>{userData.username}</h1>
         <div className='wrapper'>
             <div className='left-col'>
-                <img src={testimonial}/>
+                <img className='skeleton' src={testimonial}/>
                 <button>Change picture</button>
             </div>
             <div className='right-col'>
@@ -36,13 +42,13 @@ const Profile = ({userData}) => {
                                     <li>Password</li>  
                                     </ul>
                                     <ul className='right-values'>
-                                    <li>{userData.username}</li>  
-                                    <li>{userData.email}</li>  
-                                    <li>**********</li>  
+                                    <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>{userData.username}</li>  
+                                    <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>{userData.email}</li>  
+                                    <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>**********</li>  
                                     </ul>
                                 </div>
                                 <div className='buttons'>
-                                    <button>Logout</button>
+                                    <button onClick={logout}>Logout</button>
                                     <button>Edit</button>
                                 </div>
                             </div>

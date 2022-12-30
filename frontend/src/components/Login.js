@@ -4,14 +4,16 @@ import testimonial from "../images/negr.png"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+const Login = ({ authorize }) => {
   const [emailFocus, setEmailFocus] = useState(false)
   const [passwordFocus, setPasswordFocus] = useState(false)
+  const [errors, setErrors] = useState([])
+  const [errorTypes, setErrorTypes] = useState([])
+  const [rightPageData, setRightPageData] = useState(null)
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false
   })
 
   const navigate = useNavigate()
@@ -25,13 +27,18 @@ const Login = () => {
   }
 
   const logIn = (e) => {
-    
-    const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", {email: formData.email, password: formData.password}).then(data => {
+    const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", {email: formData.email, password: formData.password})
+    .then(data => {
       localStorage.setItem("access", data.data.access)
       localStorage.setItem("refresh", data.data.refresh)
+      authorize(true)
       navigate("/")
     })
-
+    .catch(data => {
+      setRightPageData(400)
+      setErrorTypes([...new Set([...Object.keys(data.response.data)])])
+      setErrors([...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')])
+    })
   }
 
   return (
@@ -49,6 +56,7 @@ const Login = () => {
               onFocus={() => setEmailFocus(true)}
               onBlur={() => setEmailFocus(false)}
               onChange={(e) => changeFormData(e)}
+              className={`${errorTypes.includes("detail") && "error"}`}
             />
             <motion.label animate={formData.email || emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">E-mail</motion.label>
           </div>
@@ -61,26 +69,37 @@ const Login = () => {
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
               onChange={(e) => changeFormData(e)}
+              className={`${errorTypes.includes("detail") && "error"}`}
             />
             <motion.label animate={formData.password || passwordFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">Password</motion.label>
           </div>
           <div className='check-forgot'>
-            <div className='check'>
-              <input 
-                type="checkbox"
-                id="remember"
-                name="remember"
-                onChange={(e) => changeFormData(e)}
-              />
-              <label htmlFor="remember">Remember me</label>
-            </div>
             <a href='/reset'>Forgot your password?</a>
           </div>
           <button className='login-button' onClick={logIn}>Log in</button>
         </div>
       </div>
       <div className='right-col'>
-        <img src={testimonial}></img>
+        {
+          (rightPageData === null || errors.length === 0) ?
+            <img src={testimonial}></img>
+          : rightPageData === 200 ?
+            (
+              <>
+                <h2>You have successfully created an account</h2>
+                <h2>Check your e-mail for a letter to verify your account</h2>
+                <button>Send the letter again</button>
+              </>
+            )
+          : rightPageData === 400 && errors.length !== 0 &&
+            (
+              <>
+                <h2>Whoops...</h2>
+                <h2>Some errors occured here</h2>
+                {errors.map(el => <p>{el.charAt(0).toUpperCase() + el.slice(1)}</p>)}
+              </>
+            )
+        }
       </div>
     </div>
   )

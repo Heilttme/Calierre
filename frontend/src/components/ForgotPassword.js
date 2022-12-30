@@ -3,14 +3,23 @@ import { motion } from "framer-motion"
 import axios from 'axios'
 
  
-const ForgotPassword = () => {
+const ForgotPassword = ({setTempEmail}) => {
   const [emailData, setEmailData] = useState("")
   const [emailFocus, setEmailFocus] = useState(false)
-  const [status, setStatus] = useState(false)
-      
+  const [status, setStatus] = useState(null)
+  const [pending, setPending] = useState(false)
   const sendPasswordReset = () => {
+    setPending(true)
     const res = axios.post("http://127.0.0.1:8000/auth/users/reset_password/", {email: emailData})
-        .then(data => setStatus(data.status))
+        .then(data => {
+          setStatus(data.status)
+          setPending(false)
+          setTempEmail(emailData)
+        })
+        .catch(data => {
+          setStatus(data.status)
+          setPending(false)
+        })
   }
   
   return (
@@ -27,9 +36,12 @@ const ForgotPassword = () => {
           />
           <motion.label animate={emailData || emailFocus ? {y: -30, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">E-mail</motion.label>
         </div>
-      <button onClick={sendPasswordReset}>Send</button>
+      <div className='button'>
+        <button onClick={sendPasswordReset}>Send</button>
+        {pending && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
+      </div>
       <motion.h2 
-          animate={{opacity: status == 204 ? 1 : 0}}
+          animate={{opacity: status != null ? 1 : 0}}
           className='success-reset'
       >
           Check your e-mail for a letter
