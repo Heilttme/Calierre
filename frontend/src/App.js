@@ -55,7 +55,6 @@ const App = () => {
 
   }, [authenticated])
 
-  console.log(authenticated);
   
   return (
     <div className="app">

@@ -658,8 +658,12 @@
   margin: 0 auto;
   margin-bottom: 35rem;
 }
+.password-restore .wrapper-restore {
+  display: flex;
+  justify-content: space-between;
+}
 .password-restore .form {
-  width: 40%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -701,6 +705,10 @@
       -ms-user-select: none;
           user-select: none;
 }
+.password-restore .form .button-block {
+  position: relative;
+  width: 100%;
+}
 .password-restore .form button {
   display: inline-block;
   padding: 0.6rem 1.5rem;
@@ -713,7 +721,49 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  width: 100%;
   margin-top: 0.8rem;
+}
+.password-restore .form .ring-wrapper {
+  position: absolute;
+  right: -1rem;
+  top: 0.1rem;
+}
+.password-restore .form .lds-ring {
+  display: inline-block;
+  position: relative;
+}
+.password-restore .form .lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #E85A4F transparent transparent transparent;
+}
+.password-restore .form .lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+.password-restore .form .lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+.password-restore .form .lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 a {
