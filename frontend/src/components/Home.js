@@ -7,7 +7,7 @@ import testimonial from "../images/negr.png"
 
 const Home = () => {
   return (
-    <div className='home'>
+    <div className='home' >
       <img src={ink} className='bg-ink image-1'/>
       <img src={ink} className='bg-ink image-2'/>
       <img src={ink} className='bg-ink image-3'/>

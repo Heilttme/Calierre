@@ -12,6 +12,7 @@ import Activate from "./components/Activate";
 import Profile from "./components/Profile";
 import useStore from "./store";
 import PasswordRestore from "./components/PasswordRestore"
+import { motion } from "framer-motion"
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
     email: "",
   })
 
+  const [blur, setBlur] = useState(true)
   const [tempEmail, setTempEmail] = useState("")
   
   const authenticated = useStore(state => state.authenticated)
@@ -57,7 +59,7 @@ const App = () => {
 
   
   return (
-    <div className="app">
+    <div className="app" >
       <Navigation userData={userData}/>
       <main>
         <Routes>

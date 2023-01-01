@@ -544,10 +544,16 @@
   margin-top: 1.5rem;
 }
 
+.profile-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 .profile {
   width: 50%;
   margin: 0 auto;
   margin-top: 3rem;
+  padding-bottom: 28rem;
 }
 .profile .wrapper {
   margin-top: 1.5rem;
@@ -624,14 +630,32 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
   justify-content: space-between;
+}
+.profile .right-col .block .wrapper-info input {
+  background-color: #D8C3A5;
+  border: 1px solid #D8C3A5;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+  padding: 4px;
+}
+.profile .right-col .block .wrapper-info input:focus {
+  border: 1px solid #B4B1A7;
 }
 .profile .right-col .block .info {
   display: flex;
   gap: 8rem;
+  height: 100%;
 }
 .profile .right-col .block .info li {
   margin-top: 0.2rem;
+  padding: 2px 0;
+  height: 24px;
+}
+.profile .right-col .block .info .right-values li {
+  display: flex;
+  padding: 0;
 }
 .profile .right-col .block .buttons {
   margin-top: auto;
@@ -798,9 +822,12 @@ body {
 
 main {
   margin-top: 5rem;
+  width: 100%;
+  height: 100%;
 }
 
 .header {
+  z-index: 1999;
   background-color: #EAE7DC;
   width: 100%;
   position: relative;
@@ -851,7 +878,6 @@ main {
 }
 
 .footer {
-  margin-top: 5rem;
   width: 100%;
   background-color: #D8C3A5;
   color: #E85A4F;

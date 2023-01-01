@@ -37,8 +37,8 @@ const PasswordRestore = ({tempEmail}) => {
         draggable: true,
         progress: 0,
         theme: "light",
-        });
-      setTimeout(() => navigate("/"), 4000)
+      })
+      setTimeout(() => navigate("/login"), 4000)
     })
     .catch((data) => {
       setPending(false)
@@ -92,18 +92,7 @@ const PasswordRestore = ({tempEmail}) => {
         {errors.map(el => <p>{el[0].charAt(0).toUpperCase() + el[0].slice(1)}</p>)}
       </div>}
     </div>
-    <ToastContainer
-      // position="bottom-right"
-      // autoClose={4000}
-      // hideProgressBar={false}
-      // newestOnTop={false}
-      // closeOnClick
-      // rtl={false}
-      // pauseOnFocusLoss
-      // draggable
-      // pauseOnHover
-      // theme="light"
-    />
+    <ToastContainer />
   </div>
   )
 }
