@@ -40,14 +40,22 @@ const App = () => {
   
   useEffect(() => {
     if (localStorage.getItem("access")){
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `JWT ${localStorage.getItem('access')}`,
-          "Accept": "application/json"
-        }
+      if (localStorage.getItem("refresh")) {
+        const res = axios.post("http://127.0.0.1:8000/auth/jwt/refresh/", {refresh: localStorage.getItem("refresh")}).then(data => {
+          localStorage.setItem("access", data.data.access)
+
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `JWT ${localStorage.getItem('access')}`,
+              "Accept": "application/json"
+            }
+          }
+           
+          const res = axios.get("http://127.0.0.1:8000/auth/users/me/", config).then(data => setUserData({username: data.data.username, email: data.data.email}))
+        })
       }
-      const res = axios.get("http://127.0.0.1:8000/auth/users/me/", config).then(data => setUserData({username: data.data.username, email: data.data.email}))
+      
     } else {
       setUserData({
         username: "",

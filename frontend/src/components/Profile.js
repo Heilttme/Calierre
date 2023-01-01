@@ -45,9 +45,11 @@ const Profile = ({ userData, authorize }) => {
         }
       }
     
-    if (userData.username !== formData.username) axios.patch("http://127.0.0.1:8000/auth/users/me/", {username: formData.username}, config).catch(data => console.log(data.response.data))
-    // if (userData.email !== formData.email) axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.username, current_password: formData.currentPassword}, config)
-    // if (userData.password) axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
+    if (userData.username !== formData.username) axios.put("http://127.0.0.1:8000/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(data => console.log(data))
+    if (userData.email !== formData.email) axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(data => console.log(data))
+    if (formData.password) {
+        axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config).then(data => console.log(data)).then(data => console.log(data))
+    }
   }
 
   return (
