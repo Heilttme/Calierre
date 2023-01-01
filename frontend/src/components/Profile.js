@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { formToJSON } from 'axios'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -6,13 +6,28 @@ import testimonial from "../images/negr.png"
 
 const Profile = ({ userData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
-  const [edit, setEdit] = useState("false")
+  const [edit, setEdit] = useState(false)
+  const [formData, setFormData] = useState({
+    username: userData.username,
+    email: userData.email,
+    password: "",
+    currentPassword: ""
+  })
 
   const navigate = useNavigate()
   
   useEffect(() => {
     !localStorage.getItem("access") && navigate("/") 
   }, [])
+
+  
+  const changeFormData = (e) => {
+    setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+    
+  useEffect(() => {
+    setFormData(prev => ({...prev, username: userData.username, email: userData.email}))
+  }, [userData])
 
   const logout = () => {
     authorize(false)
@@ -22,9 +37,19 @@ const Profile = ({ userData, authorize }) => {
   }
 
   const confirmChanges = () => {
-
+    const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `JWT ${localStorage.getItem('access')}`,
+          "Accept": "application/json"
+        }
+      }
+    
+    if (userData.username !== formData.username) axios.patch("http://127.0.0.1:8000/auth/users/me/", {username: formData.username}, config).catch(data => console.log(data.response.data))
+    // if (userData.email !== formData.email) axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.username, current_password: formData.currentPassword}, config)
+    // if (userData.password) axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
   }
-  
+
   return (
     <div className='profile-container'>
         {/* {usernameEdit && <UsernameEditMenu/>} */}
@@ -57,28 +82,46 @@ const Profile = ({ userData, authorize }) => {
                                                 <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
                                                 {!edit ? 
                                                       userData.username :
-                                                    <input value={userData.username}/>}
+                                                    <input
+                                                      name='username'  
+                                                      value={formData.username}
+                                                      onChange={(e) => changeFormData(e)}
+                                                    />}
                                                 </li>  
                                                 <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
                                                     {!edit ? 
                                                       userData.email :
-                                                    <input value={userData.email}/>}
+                                                    <input
+                                                      name='email'  
+                                                      value={formData.email}
+                                                      onChange={(e) => changeFormData(e)}
+                                                    />}
                                                 </li>  
                                                 <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
                                                     {!edit ? 
                                                       "*********" :
-                                                    <input/>}
+                                                    <input
+                                                      name='password'
+                                                      type="password"
+                                                      value={formData.password}
+                                                      onChange={(e) => changeFormData(e)}
+                                                    />}
                                                 </li>  
                                             </ul>
                                         </div>
                                         {edit && <div className='password-confirm'>
                                             <h4>Enter your current password to confirm</h4>
-                                            <input />
+                                            <input 
+                                              name='currentPassword'
+                                              type="password"
+                                              value={formData.currentPassword}
+                                              onChange={(e) => changeFormData(e)}
+                                            />
                                         </div>}
                                         <div className='buttons'>
                                             <button onClick={logout}>Logout</button>
                                             <button onClick={() => setEdit(prev => !prev)}>Edit</button>
-                                            {edit && <button onClick={confirmChanges}>Confim</button>}
+                                            {edit && <button className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>Confim</button>}
                                         </div>
                                     </div>
                                 :

@@ -35,6 +35,7 @@ const Login = ({ authorize }) => {
       navigate("/")
     })
     .catch(data => {
+      console.log(data);
       setRightPageData(400)
       setErrorTypes([...new Set([...Object.keys(data.response.data)])])
       setErrors([...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')])

@@ -175,6 +175,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   padding: 0.8rem;
   width: 80%;
 }
@@ -205,6 +206,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
 }
 .home .reviews .review {
   display: flex;
@@ -334,6 +336,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   margin-top: 0.8rem;
 }
 
@@ -411,6 +414,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   margin-top: 1rem;
 }
 
@@ -462,6 +466,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   padding: 0.6rem 3rem;
 }
 .forgot-page .button .lds-ring {
@@ -541,6 +546,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   margin-top: 1.5rem;
 }
 
@@ -584,6 +590,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   padding: 0.8rem 1rem;
 }
 .profile .right-col {
@@ -606,6 +613,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   background-color: #b4b1a7;
   transition: all 0.1s ease-in-out;
 }
@@ -621,6 +629,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
 }
 .profile .right-col .block {
   margin-top: 2rem;
@@ -674,7 +683,12 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   padding: 0.8rem 1.6rem;
+}
+.profile .right-col .block .buttons .disabled {
+  cursor: unset;
+  background-color: #B4B1A7;
 }
 
 .password-restore {
@@ -745,6 +759,7 @@
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   width: 100%;
   margin-top: 0.8rem;
 }
@@ -875,6 +890,7 @@ main {
   text-align: center;
   letter-spacing: 0.195em;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
 }
 
 .footer {

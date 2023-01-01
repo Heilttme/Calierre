@@ -75,6 +75,7 @@
                         border: 1px solid#B4B1A7;
                     }
                 }
+
             }
             
             .info{
@@ -105,6 +106,12 @@
                 button{
                     @include button;
                     padding: .8rem 1.6rem;
+
+                }
+                
+                .disabled{
+                    cursor: unset;
+                    background-color: #B4B1A7;
                 }
             }
         }
