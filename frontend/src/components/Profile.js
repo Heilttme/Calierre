@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = ({ userData, setUserData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
@@ -13,6 +15,14 @@ const Profile = ({ userData, setUserData, authorize }) => {
     password: "",
     currentPassword: ""
   })
+
+  const [curImage, setCurImage] = useState("")
+
+  useEffect(() => {
+    res = axios.get("http://localhost:8000/media/pfps/akGyeiIkDUc.jpg")
+  }, [])
+  const [pending, setPending] = useState(false)
+  
   const [usernameSuccess, setUsernameSuccess] = useState(null)
   const [emailSuccess, setEmailSuccess] = useState(null)
   const [passwordSuccess, setPasswordSuccess] = useState(null)
@@ -44,17 +54,29 @@ const Profile = ({ userData, setUserData, authorize }) => {
     localStorage.removeItem('refresh');
     navigate("/")
   }
-  console.log(usernameSuccess);
-  console.log(emailSuccess);
+
+  const setImage = (e) => {
+    const uploadData = new FormData()
+    uploadData.append("image", e.target.files[0])
+    const config = {
+      headers: {
+        "Authorization": `JWT ${localStorage.getItem('access')}`,
+      }
+    }
+
+    const res = axios.patch("http://127.0.0.1:8000/auth/users/me/", uploadData, config)
+  }
 
   const confirmChanges = () => {
+    setPending(true)
+    
     const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `JWT ${localStorage.getItem('access')}`,
-          "Accept": "application/json"
-        }
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${localStorage.getItem('access')}`,
+        "Accept": "application/json"
       }
+    }
 
     let res1 = false
     let res2 = false
@@ -63,20 +85,91 @@ const Profile = ({ userData, setUserData, authorize }) => {
     if (userData.username !== formData.username) res1 = axios.put("http://127.0.0.1:8000/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(() => {
       setUsernameSuccess(true)
       setUserData(prev => ({...prev, username: formData.username}))
-    }).catch(() => setUsernameSuccess(false))
+      toast.success('Username changed successfully', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })
+    }).catch(() => {
+      setUsernameSuccess(false)
+      toast.error('Username error occured', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })
+    })
 
     setTimeout(() => {
       if (userData.email !== formData.email) res2 = axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(() => {
         setEmailSuccess(true)
         setUserData(prev => ({...prev, email: formData.email}))
-      }).catch(() => setEmailSuccess(false))
+        toast.success('E-mail changed successfully', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      }).catch((data) => {
+        setEmailSuccess(false)
+        toast.error('E-mail error occured', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      })
 
       setTimeout(() => {
-        if (formData.password) res3 = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config).then(() => setPasswordSuccess(true)).catch(() => setPasswordSuccess(false))
+        if (formData.password) res3 = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
+        .then(() => {
+          setPasswordSuccess(true)
+          toast.success('Password changed successfully', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            theme: "light",
+          })
+        })
+        .catch(() => {
+          setPasswordSuccess(false)
+          toast.error('Password error occured', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            theme: "light",
+          })
+        })
         
         Promise.all([res1 && res1, res2 && res2, res3 && res3])
         .then(() => {
           setFormData(prev => ({...prev, currentPassword: ""}))
+          setPending(false)
         })
       }, 2000)
       
@@ -86,16 +179,14 @@ const Profile = ({ userData, setUserData, authorize }) => {
 
   return (
     <div className='profile-container'>
-        {/* {usernameEdit && <UsernameEditMenu/>} */}
-        {/* {emailEdit && <EmailEditMenu/>} */}
-        {/* {passwordEdit && <PasswordEditMenu/>} */}
         <div className='profile-wrapper' >
             <div className='profile'>
                 <h1>{userData.username}</h1>
                 <div className='wrapper'>
                     <div className='left-col'>
                         <img className='skeleton' src={testimonial}/>
-                        <button>Change picture</button>
+                        <input type="file" id='file' accept='image/*' onChange={(e) => setImage(e)}/>
+                        <label for="file">Select image</label>
                     </div>
                     <div className='right-col'>
                         <ul className='selectors'>
@@ -159,6 +250,9 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                             <button onClick={logout}>Logout</button>
                                             <button onClick={() => setEdit(prev => !prev)}>Edit</button>
                                             {edit && <button disabled={!formData.currentPassword && true} className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>Confim</button>}
+                                            {pending && <div className='ring-wrapper'>
+                                              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                            </div>}
                                         </div>
                                     </div>
                                 :
@@ -171,6 +265,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                 </div>
             </div>
         </div>
+      <ToastContainer />
     </div>
   )
 }

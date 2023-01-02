@@ -595,7 +595,10 @@
      object-fit: cover;
   flex-shrink: 0;
 }
-.profile .left-col button {
+.profile .left-col input[type=file] {
+  display: none;
+}
+.profile .left-col label {
   margin-top: 2rem;
   display: inline-block;
   padding: 0.6rem 1.5rem;
@@ -611,7 +614,7 @@
   transition: all 0.15s ease-in-out;
   padding: 0.8rem 1rem;
 }
-.profile .left-col button:hover {
+.profile .left-col label:hover {
   background-color: #ee7366;
 }
 .profile .right-col {
@@ -702,6 +705,7 @@
 .profile .right-col .block .buttons {
   margin-top: auto;
   display: flex;
+  position: relative;
   gap: 2rem;
 }
 .profile .right-col .block .buttons button {
@@ -728,6 +732,47 @@
 }
 .profile .right-col .block .buttons .disabled:hover {
   background-color: #B4B1A7;
+}
+.profile .right-col .block .buttons .ring-wrapper {
+  position: absolute;
+  right: -1rem;
+  top: -0.5rem;
+}
+.profile .right-col .block .buttons .lds-ring {
+  display: inline-block;
+  position: relative;
+}
+.profile .right-col .block .buttons .lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #E85A4F transparent transparent transparent;
+}
+.profile .right-col .block .buttons .lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+.profile .right-col .block .buttons .lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+.profile .right-col .block .buttons .lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .password-restore {
