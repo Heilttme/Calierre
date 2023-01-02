@@ -179,6 +179,9 @@
   padding: 0.8rem;
   width: 80%;
 }
+.home .order:hover {
+  background-color: #ee7366;
+}
 .home .reviews {
   width: 70%;
   margin: 0 auto;
@@ -207,6 +210,9 @@
   letter-spacing: 0.195em;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
+}
+.home .reviews .header-reviews a:hover {
+  background-color: #ee7366;
 }
 .home .reviews .review {
   display: flex;
@@ -339,6 +345,9 @@
   transition: all 0.15s ease-in-out;
   margin-top: 0.8rem;
 }
+.login-page .left-col .form .login-button:hover {
+  background-color: #ee7366;
+}
 
 .customize {
   width: 75%;
@@ -417,6 +426,9 @@
   transition: all 0.15s ease-in-out;
   margin-top: 1rem;
 }
+.customize button:hover {
+  background-color: #ee7366;
+}
 
 .forgot-page {
   margin-left: 8rem;
@@ -468,6 +480,9 @@
   cursor: pointer;
   transition: all 0.15s ease-in-out;
   padding: 0.6rem 3rem;
+}
+.forgot-page .button button:hover {
+  background-color: #ee7366;
 }
 .forgot-page .button .lds-ring {
   display: inline-block;
@@ -549,6 +564,9 @@
   transition: all 0.15s ease-in-out;
   margin-top: 1.5rem;
 }
+.activate a:hover {
+  background-color: #ee7366;
+}
 
 .profile-wrapper {
   width: 100%;
@@ -593,6 +611,9 @@
   transition: all 0.15s ease-in-out;
   padding: 0.8rem 1rem;
 }
+.profile .left-col button:hover {
+  background-color: #ee7366;
+}
 .profile .right-col {
   display: flex;
   flex-direction: column;
@@ -617,6 +638,9 @@
   background-color: #b4b1a7;
   transition: all 0.1s ease-in-out;
 }
+.profile .right-col .selectors .block-select:hover {
+  background-color: #ee7366;
+}
 .profile .right-col .selectors .active {
   display: inline-block;
   padding: 0.6rem 1.5rem;
@@ -631,6 +655,9 @@
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
+.profile .right-col .selectors .active:hover {
+  background-color: #ee7366;
+}
 .profile .right-col .block {
   margin-top: 2rem;
   height: 100%;
@@ -639,7 +666,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.9rem;
   justify-content: space-between;
 }
 .profile .right-col .block .wrapper-info input {
@@ -652,9 +679,15 @@
 .profile .right-col .block .wrapper-info input:focus {
   border: 1px solid #B4B1A7;
 }
+.profile .right-col .block .wrapper-info .error {
+  border: 1px solid #E98074;
+}
+.profile .right-col .block .wrapper-info .success {
+  border: 1px solid #00cc66;
+}
 .profile .right-col .block .info {
   display: flex;
-  gap: 8rem;
+  gap: 9rem;
   height: 100%;
 }
 .profile .right-col .block .info li {
@@ -686,8 +719,14 @@
   transition: all 0.15s ease-in-out;
   padding: 0.8rem 1.6rem;
 }
+.profile .right-col .block .buttons button:hover {
+  background-color: #ee7366;
+}
 .profile .right-col .block .buttons .disabled {
   cursor: unset;
+  background-color: #B4B1A7;
+}
+.profile .right-col .block .buttons .disabled:hover {
   background-color: #B4B1A7;
 }
 
@@ -762,6 +801,9 @@
   transition: all 0.15s ease-in-out;
   width: 100%;
   margin-top: 0.8rem;
+}
+.password-restore .form button:hover {
+  background-color: #ee7366;
 }
 .password-restore .form .ring-wrapper {
   position: absolute;
@@ -891,6 +933,9 @@ main {
   letter-spacing: 0.195em;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
+}
+.header .login:hover {
+  background-color: #ee7366;
 }
 
 .footer {

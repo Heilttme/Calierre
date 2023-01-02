@@ -61,7 +61,7 @@
                 height: 100%;
                 display: flex;
                 flex-direction: column;
-                gap: 2rem;
+                gap: 1.9rem;
                 justify-content: space-between;
 
                 input{
@@ -76,13 +76,20 @@
                     }
                 }
 
+                .error{
+                    border: 1px solid #E98074;
+                }
+
+                .success{
+                    border: 1px solid  #00cc66;
+                }
+
             }
             
             .info{
                 display: flex;
-                gap: 8rem;
+                gap: 9rem;
                 height: 100%;
-
                 
                 li{
                     margin-top: .2rem;
@@ -112,6 +119,10 @@
                 .disabled{
                     cursor: unset;
                     background-color: #B4B1A7;
+
+                    &:hover{
+                        background-color: #B4B1A7;
+                    }
                 }
             }
         }

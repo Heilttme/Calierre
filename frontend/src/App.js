@@ -77,7 +77,7 @@ const App = () => {
           <Route path="/customize" element={<Customize/>} />
           <Route path="/reset" element={<ForgotPassword setTempEmail={setTempEmail} />} />
           <Route path="/activate/:uid/:token" element={<Activate/>} />
-          <Route path="/profile" element={<Profile userData={userData} authorize={authorize}/>} /> 
+          <Route path="/profile" element={<Profile userData={userData} authorize={authorize} setUserData={setUserData} />} /> 
           <Route path="password/reset/confirm/:uid/:token" element={<PasswordRestore userData={userData} tempEmail={tempEmail} />} />
         </Routes>
       </main>

@@ -12,6 +12,10 @@
     cursor: pointer;
 
     transition: all .15s ease-in-out;
+
+    &:hover{
+        background-color: #ee7366;
+    }
 }
 
 
@@ -23,6 +27,7 @@
 //     #8E8D8A
 //     #E98074
 //     #E85A4F
+//     #00cc66
 // }
 
 // #B4B1A7 grey disabled

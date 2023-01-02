@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
 
-const Profile = ({ userData, authorize }) => {
+const Profile = ({ userData, setUserData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
   const [edit, setEdit] = useState(false)
   const [formData, setFormData] = useState({
@@ -13,6 +13,15 @@ const Profile = ({ userData, authorize }) => {
     password: "",
     currentPassword: ""
   })
+  const [usernameSuccess, setUsernameSuccess] = useState(null)
+  const [emailSuccess, setEmailSuccess] = useState(null)
+  const [passwordSuccess, setPasswordSuccess] = useState(null)
+
+  useEffect(() => {
+    setUsernameSuccess(null)
+    setEmailSuccess(null)
+    setPasswordSuccess(null)
+  }, [edit])
 
   const navigate = useNavigate()
   
@@ -35,6 +44,8 @@ const Profile = ({ userData, authorize }) => {
     localStorage.removeItem('refresh');
     navigate("/")
   }
+  console.log(usernameSuccess);
+  console.log(emailSuccess);
 
   const confirmChanges = () => {
     const config = {
@@ -44,12 +55,33 @@ const Profile = ({ userData, authorize }) => {
           "Accept": "application/json"
         }
       }
+
+    let res1 = false
+    let res2 = false
+    let res3 = false
     
-    if (userData.username !== formData.username) axios.put("http://127.0.0.1:8000/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(data => console.log(data))
-    if (userData.email !== formData.email) axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(data => console.log(data))
-    if (formData.password) {
-        axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config).then(data => console.log(data)).then(data => console.log(data))
-    }
+    if (userData.username !== formData.username) res1 = axios.put("http://127.0.0.1:8000/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(() => {
+      setUsernameSuccess(true)
+      setUserData(prev => ({...prev, username: formData.username}))
+    }).catch(() => setUsernameSuccess(false))
+
+    setTimeout(() => {
+      if (userData.email !== formData.email) res2 = axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(() => {
+        setEmailSuccess(true)
+        setUserData(prev => ({...prev, email: formData.email}))
+      }).catch(() => setEmailSuccess(false))
+
+      setTimeout(() => {
+        if (formData.password) res3 = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config).then(() => setPasswordSuccess(true)).catch(() => setPasswordSuccess(false))
+        
+        Promise.all([res1 && res1, res2 && res2, res3 && res3])
+        .then(() => {
+          setFormData(prev => ({...prev, currentPassword: ""}))
+        })
+      }, 2000)
+      
+    }, 2000)
+    
   }
 
   return (
@@ -88,7 +120,8 @@ const Profile = ({ userData, authorize }) => {
                                                       name='username'  
                                                       value={formData.username}
                                                       onChange={(e) => changeFormData(e)}
-                                                    />}
+                                                      className={`${usernameSuccess === true ? "success" : usernameSuccess === false && "error"}`}
+                                                      />}
                                                 </li>  
                                                 <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
                                                     {!edit ? 
@@ -97,6 +130,7 @@ const Profile = ({ userData, authorize }) => {
                                                       name='email'  
                                                       value={formData.email}
                                                       onChange={(e) => changeFormData(e)}
+                                                      className={`${emailSuccess === true ? "success" : emailSuccess === false && "error"}`}
                                                     />}
                                                 </li>  
                                                 <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
@@ -107,7 +141,8 @@ const Profile = ({ userData, authorize }) => {
                                                       type="password"
                                                       value={formData.password}
                                                       onChange={(e) => changeFormData(e)}
-                                                    />}
+                                                      className={`${passwordSuccess === true ? "success" : passwordSuccess === false && "error"}`}
+                                                      />}
                                                 </li>  
                                             </ul>
                                         </div>
@@ -123,7 +158,7 @@ const Profile = ({ userData, authorize }) => {
                                         <div className='buttons'>
                                             <button onClick={logout}>Logout</button>
                                             <button onClick={() => setEdit(prev => !prev)}>Edit</button>
-                                            {edit && <button className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>Confim</button>}
+                                            {edit && <button disabled={!formData.currentPassword && true} className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>Confim</button>}
                                         </div>
                                     </div>
                                 :
