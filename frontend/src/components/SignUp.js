@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import testimonial from "../images/negr.png"
 import axios from "axios"
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { t } from 'i18next'
+
 
 const SignUp = () => {
   const [usernameFocus, setUsernameFocus] = useState(false)
   const [emailFocus, setEmailFocus] = useState(false)
   const [password1Focus, setPassword1Focus] = useState(false)
   const [password2Focus, setPassword2Focus] = useState(false)
-  const [rightPageData, setRightPageData] = useState(null)
-  const [errors, setErrors] = useState([])
   const [errorTypes, setErrorTypes] = useState([])
+  const [pending, setPending] = useState(false)
 
   const [formData, setFormData] = useState({
     username: "",
@@ -24,25 +27,63 @@ const SignUp = () => {
   }
 
   const signUp = () => {
+    setPending(true)
     const req = axios.post("http://127.0.0.1:8000/auth/users/", {username: formData.username, email: formData.email, password: formData.password1, re_password: formData.password2})
       .then(data => {
+        setPending(false)
         localStorage.getItem("access")
         localStorage.getItem("refresh")
+        toast.success(t("Confirmation letter was send successfully"), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+        setTimeout(() => {
+          toast.info(t("Activate your account before logging in"), {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            theme: "light",
+          })
+        }, 1000)
       })
       .catch(data => {
-        setRightPageData(400)
+        setPending(false)
         setErrorTypes([...new Set([...Object.keys(data.response.data)])])
-        setErrors([...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')])
+        const errorsNow = [...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')]
+        for (let i = 0; i < errorsNow.length; i++) {
+          toast.error(t(errorsNow[i][0]), {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            theme: "light",
+          })
+        }
       })
   }
 
-  console.log(errorTypes);
+  const handleEnterPress = (e) => {
+    if (e.key === "Enter") signUp()
+  }
 
   return (
-    <div className='login-page'>
+    <div className='login-page' onKeyDown={(e) => handleEnterPress(e)}>
       <div className='left-col'>
         <span className='header-login'>
-          <h2>Sign up</h2>
+          <h2>{t("Sign up")}</h2>
         </span>
         <div className='form'>
           <div className='username-block block'>
@@ -54,7 +95,7 @@ const SignUp = () => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("username") && "error"}`}
             />
-            <motion.label animate={formData.username || usernameFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">Username</motion.label>
+            <motion.label animate={formData.username || usernameFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">{t("Username")}</motion.label>
           </div>
           
           <div className='email-block block'>
@@ -67,7 +108,7 @@ const SignUp = () => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("email") && "error"}`}
             />
-            <motion.label animate={formData.email || emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">E-mail</motion.label>
+            <motion.label animate={formData.email || emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
           </div>
 
           <div className='password-block block'>
@@ -80,7 +121,7 @@ const SignUp = () => {
               onChange={(e) => changeFormData(e)}
               className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
             />
-            <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">Password</motion.label>
+            <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">{t("Password")}</motion.label>
           </div>
 
           <div className='password-block block'>
@@ -93,35 +134,22 @@ const SignUp = () => {
               onChange={(e) => changeFormData(e)}
               className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
             />
-            <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">Password again</motion.label>
+            <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">{t("Password again")}</motion.label>
           </div>
-
-          <button className='login-button' onClick={signUp}>Sign up</button>
+          <div className='button-pending'>
+            <button className='login-button' onClick={signUp}>{t("Sign up")}</button>
+            {pending && <div className='ring-wrapper'>
+              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>}
+          </div>
         </div>
       </div>
       <div className='right-col'>
-        {
-          (rightPageData === null || errors.length === 0) ?
             <img src={testimonial}></img>
-          : rightPageData === 200 ?
-            (
-              <>
-                <h2>You have successfully created an account</h2>
-                <h2>Check your e-mail for a letter to verify your account</h2>
-                <button>Send the letter again</button>
-              </>
-            )
-          : rightPageData === 400 && errors.length !== 0 &&
-            (
-              <>
-                <h2>Whoops...</h2>
-                {console.log(errors)}
-                <h2>Some errors occured here</h2>
-                {errors.map(el => <p>{el[0].charAt(0).toUpperCase() + el[0].slice(1)}</p>)}
-              </>
-            )
-        }
       </div>
+      <ToastContainer
+        limit={3}
+       />
     </div>
   )
 }

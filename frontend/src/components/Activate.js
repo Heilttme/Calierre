@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from "axios"
 import { useParams } from "react-router-dom"
+import { t } from 'i18next'
 
 const Activate = () => {
   const { uid, token } = useParams()  
@@ -11,10 +12,10 @@ const Activate = () => {
   
   return (
     <div className='activate'>
-      <h1>Account verification</h1>
-      <p>You have successfully verified your account!</p>
-      <p>You may now log in and order a letter.</p>
-      <a href="/login">Log in</a>
+      <h1>{t("Account verification")}</h1>
+      <p>{t("You have successfully verified your account!")}</p>
+      <p>{t("You may now log in and order a letter.")}</p>
+      <a href="/login">{t("Log in")}</a>
     </div>
   )
 }

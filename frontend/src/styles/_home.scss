@@ -3,6 +3,7 @@
 .home{
     display: flex;
     flex-direction: column;
+    position: relative;
 
     .bg-ink{
         position: absolute;
@@ -150,6 +151,12 @@
         top: 304.26px;
 
         transform: rotate(31.5deg);
+    }
+
+    .language{
+        position: absolute;
+        right: 2.5rem;
+        top: 8rem;
     }
 
     .blocks{
