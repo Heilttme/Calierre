@@ -1,0 +1,129 @@
+.contact{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    
+    
+    .left-col{
+        padding: 2rem;
+        padding-right: 3rem;
+        width: 50%;
+        background-color: #E85A4F;
+        border-radius: 20px;
+
+        h1{
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        h2{
+            color: white;
+            margin-bottom: .3rem;
+        }
+    }
+    
+    .form{
+        margin-left: 1rem;
+        display: grid;
+        gap: 1.5rem;
+        grid-template-areas: 
+            "NAME SURNAME"
+            "MESSAGE MESSAGE"
+            "BTN BTN";
+
+            .name{
+                grid-area: NAME;
+            }
+            
+            .surname{
+                grid-area: SURNAME;
+            }
+
+            .message{
+                grid-area: MESSAGE;
+            }
+
+            input{
+                height: 35px;
+                padding: .6rem 1.2rem;
+                width: 100%;
+                background-color: #D8C3A5;
+                border: 2px solid #D8C3A5;
+                outline: none;
+                transition: all .1s ease-in-out;
+                margin-bottom: .5rem;
+        
+                &:focus{
+                    border: 2px solid white;
+                }
+            }
+
+            textarea{
+                width: 100%;
+                resize: none;
+                background-color: #D8C3A5;
+                border: none;
+                height: 200px;
+                padding: .6rem;
+                border: 2px solid #D8C3A5;
+                outline: none;
+                transition: all .1s ease-in-out;
+        
+                &:focus{
+                    border: 2px solid white;
+                }
+            }
+
+            button{
+                @include button;
+                margin-top: .8rem;
+                background-color: #D8C3A5;
+                color: #E85A4F;
+
+                grid-area: BTN;
+
+                &:hover{
+                    background-color: #cec2b2;
+                }
+            }
+    }
+
+    .info{
+        h1{
+            color: #E85A4F;
+            margin-bottom: .5rem;
+        }
+
+        p{
+            font-size: 1.3em;
+        }
+
+        ul{
+            background-color: #E85A4F;
+            border-radius: 20px;
+            margin-top: 1rem;
+            padding: 2rem;
+            padding-top: 1rem;
+        }
+
+        .block{
+            margin-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #B4B1A7;
+
+
+            h2{
+                color: white;
+                // color: #E85A4F;
+            }
+
+            p{
+                font-size: 1.1em;
+                color: white;
+                opacity: .7;
+            }
+        }
+    }
+}

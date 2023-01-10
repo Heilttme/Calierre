@@ -19,10 +19,6 @@ const Profile = ({ userData, setUserData, authorize }) => {
 
   const [curImage, setCurImage] = useState("")
 
-  // useEffect(() => {
-  //   const res = axios.get("http://localhost:8000/media/pfps/akGyeiIkDUc.jpg").then(data => setCurImage(data.data))
-  // }, [])
-
   const [pending, setPending] = useState(false)
   
   const [usernameSuccess, setUsernameSuccess] = useState(null)
@@ -79,6 +75,8 @@ const Profile = ({ userData, setUserData, authorize }) => {
         "Authorization": `JWT ${localStorage.getItem('access')}`,
       }
     }
+
+    console.log(123213);
 
     const res = axios.put("http://127.0.0.1:8000/auth/users/me/", uploadData, config)
     .then(() => {
@@ -271,10 +269,19 @@ const Profile = ({ userData, setUserData, authorize }) => {
       }, 2000)
       
     }, 2000)
-    
-    
   }
 
+  const orders = userData.orders.map(el => (
+    <div className='order'>
+      <h2>{el.title}</h2>
+      <p>{el.data}</p>
+      <p className='content'><strong>Country</strong>: {el.country}</p>
+      <p className='content'><strong>Region</strong>: {el.region}</p>
+      <p className='content'><strong>City</strong>: {el.city}</p>
+      <p className='content'>{el.content}</p>
+    </div>
+  ))
+  
   return (
     <div className='profile-container'>
         <div className='profile-wrapper' >
@@ -357,7 +364,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     </div>
                                 :
                                     <div className='orders'>
-
+                                      {orders}
                                     </div>
                             }
                         </div>

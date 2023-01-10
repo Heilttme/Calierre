@@ -6,6 +6,7 @@ import { t } from 'i18next'
 const Navigation = ({userData}) => {
   const [shown, setShown] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [initialPos, setInitialPos] = useState(false)
   const location = useLocation()
 
   const handleScroll = () => {
@@ -16,18 +17,22 @@ const Navigation = ({userData}) => {
   useEffect(() => {
     if (location.pathname === "/"){
       window.addEventListener('scroll', handleScroll, { passive: true })
+      setScrollPosition(0)
+      setInitialPos(true)
     } else {
       setScrollPosition(1)
+      setInitialPos(false)
     }
 
     return () => {
         window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [location.pathname])
 
   return (
     <motion.div
-      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "5rem", top: "0"}}
+      // initial={ initialPos && {height: "100vh", backgroundColor: "#E85A4F"}}
+      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "5rem", top: "0", backgroundColor: "#EAE7DC"}}
       transition={{height: {duration: 1}, backgroundColor: {duration: 1}}}
       className='header'
     >

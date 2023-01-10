@@ -229,8 +229,54 @@
                 font-size: 40px;
                 letter-spacing: 4px;
             }
-            a{
+
+            button{
                 @include button;
+            }
+        }
+
+        .leave-review{
+            display: flex;
+            overflow: hidden;
+            align-items: center;
+            gap: 2rem;
+
+            div{
+                display: flex;
+                flex-direction: column;
+            }
+            
+            img{
+                object-fit: cover;
+                border-radius: 100%;
+                width: 120px;
+                height: 120px;
+            }
+
+            .name{
+                font-size: 32px;
+                color: #E85A4F;
+                font-weight: bold;
+            }
+
+            input{
+                background-color: #D8C3A5;
+                border: 1px solid #D8C3A5;
+                outline: none;
+                transition: all .1s ease-in-out;
+                padding: .5rem;
+                margin-top: .5rem;
+                min-width: 400px;
+                
+                &:focus{
+                    border: 1px solid#B4B1A7;
+                }
+            }
+
+            button{
+                margin-top: 1rem;
+                @include button;
+                
             }
         }
 
@@ -241,8 +287,10 @@
             margin-bottom: 1.5rem;
             
             img{
-                border-radius: 50%;
+                object-fit: cover;
+                border-radius: 100%;
                 width: 120px;
+                height: 120px;
             }
 
             .name{
@@ -255,5 +303,12 @@
                 font-size: 18px;
             }
         }
+
+        .more-reviews{
+            @include button;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        
     }
 }

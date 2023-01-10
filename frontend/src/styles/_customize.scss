@@ -94,9 +94,25 @@
         }
     }
 
-    button{
-        @include button;
-        padding: .6rem 5rem;
+    .buttons{
         margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button{
+            @include button;
+            padding: .6rem 5rem;
+        }
+        
+        a{
+            color: #E85A4F;
+            transition: all .15s ease-in-out;
+
+            &:hover{
+                color: #E98074;
+            }
+        }
+
     }
 }

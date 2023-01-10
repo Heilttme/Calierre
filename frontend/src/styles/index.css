@@ -203,7 +203,7 @@
   font-size: 40px;
   letter-spacing: 4px;
 }
-.home .reviews .header-reviews a {
+.home .reviews .header-reviews button {
   display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
@@ -217,7 +217,59 @@
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
-.home .reviews .header-reviews a:hover {
+.home .reviews .header-reviews button:hover {
+  background-color: #ee7366;
+}
+.home .reviews .leave-review {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  gap: 2rem;
+}
+.home .reviews .leave-review div {
+  display: flex;
+  flex-direction: column;
+}
+.home .reviews .leave-review img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  width: 120px;
+  height: 120px;
+}
+.home .reviews .leave-review .name {
+  font-size: 32px;
+  color: #E85A4F;
+  font-weight: bold;
+}
+.home .reviews .leave-review input {
+  background-color: #D8C3A5;
+  border: 1px solid #D8C3A5;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  min-width: 400px;
+}
+.home .reviews .leave-review input:focus {
+  border: 1px solid #B4B1A7;
+}
+.home .reviews .leave-review button {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.home .reviews .leave-review button:hover {
   background-color: #ee7366;
 }
 .home .reviews .review {
@@ -227,8 +279,11 @@
   margin-bottom: 1.5rem;
 }
 .home .reviews .review img {
-  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
   width: 120px;
+  height: 120px;
 }
 .home .reviews .review .name {
   font-size: 32px;
@@ -237,6 +292,25 @@
 }
 .home .reviews .review .desc {
   font-size: 18px;
+}
+.home .reviews .more-reviews {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  width: 100%;
+  margin: 2rem 0;
+}
+.home .reviews .more-reviews:hover {
+  background-color: #ee7366;
 }
 
 .login-page {
@@ -482,7 +556,13 @@
   outline: none;
   resize: none;
 }
-.customize button {
+.customize .buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.customize .buttons button {
   display: inline-block;
   padding: 0.6rem 1.5rem;
   background-color: #E85A4F;
@@ -496,10 +576,16 @@
   cursor: pointer;
   transition: all 0.15s ease-in-out;
   padding: 0.6rem 5rem;
-  margin-top: 1rem;
 }
-.customize button:hover {
+.customize .buttons button:hover {
   background-color: #ee7366;
+}
+.customize .buttons a {
+  color: #E85A4F;
+  transition: all 0.15s ease-in-out;
+}
+.customize .buttons a:hover {
+  color: #E98074;
 }
 
 .forgot-page {
@@ -639,6 +725,20 @@
   width: 50%;
   margin: 0 auto;
   margin-top: 3rem;
+}
+.profile .orders .order {
+  width: 100%;
+  background-color: #E85A4F;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.profile .orders .order h2 {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+.profile .orders .order p {
+  color: white;
 }
 .profile .wrapper {
   margin-top: 1.5rem;
@@ -1098,6 +1198,122 @@
 }
 .payment button:hover {
   background-color: #ee7366;
+}
+
+.contact {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.contact .left-col {
+  padding: 2rem;
+  padding-right: 3rem;
+  width: 50%;
+  background-color: #E85A4F;
+  border-radius: 20px;
+}
+.contact .left-col h1 {
+  color: white;
+  margin-bottom: 1rem;
+}
+.contact .left-col h2 {
+  color: white;
+  margin-bottom: 0.3rem;
+}
+.contact .form {
+  margin-left: 1rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-areas: "NAME SURNAME" "MESSAGE MESSAGE" "BTN BTN";
+}
+.contact .form .name {
+  grid-area: NAME;
+}
+.contact .form .surname {
+  grid-area: SURNAME;
+}
+.contact .form .message {
+  grid-area: MESSAGE;
+}
+.contact .form input {
+  height: 35px;
+  padding: 0.6rem 1.2rem;
+  width: 100%;
+  background-color: #D8C3A5;
+  border: 2px solid #D8C3A5;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+  margin-bottom: 0.5rem;
+}
+.contact .form input:focus {
+  border: 2px solid white;
+}
+.contact .form textarea {
+  width: 100%;
+  resize: none;
+  background-color: #D8C3A5;
+  border: none;
+  height: 200px;
+  padding: 0.6rem;
+  border: 2px solid #D8C3A5;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+}
+.contact .form textarea:focus {
+  border: 2px solid white;
+}
+.contact .form button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  margin-top: 0.8rem;
+  background-color: #D8C3A5;
+  color: #E85A4F;
+  grid-area: BTN;
+}
+.contact .form button:hover {
+  background-color: #ee7366;
+}
+.contact .form button:hover {
+  background-color: #cec2b2;
+}
+.contact .info h1 {
+  color: #E85A4F;
+  margin-bottom: 0.5rem;
+}
+.contact .info p {
+  font-size: 1.3em;
+}
+.contact .info ul {
+  background-color: #E85A4F;
+  border-radius: 20px;
+  margin-top: 1rem;
+  padding: 2rem;
+  padding-top: 1rem;
+}
+.contact .info .block {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #B4B1A7;
+}
+.contact .info .block h2 {
+  color: white;
+}
+.contact .info .block p {
+  font-size: 1.1em;
+  color: white;
+  opacity: 0.7;
 }
 
 a {

@@ -53,8 +53,11 @@ const Customize = () => {
             <textarea/>
           </div>
         </div>
+        <div className='buttons'>
+          <button onClick={proceed}>{t("Proceed")}</button>
+          <a href='/contact'>Need more than 1 letter?</a>
+        </div>
       </div>
-      <button onClick={proceed}>{t("Proceed")}</button>
     </div>
   )
 }
