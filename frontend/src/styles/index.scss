@@ -6,6 +6,10 @@
 @import "./verification";
 @import "./profile";
 @import "./password_restore";
+@import "./destination";
+@import "./payment";
+@import "./leave_review";
+@import "./contact";
 
 a{
     text-decoration: none;
@@ -32,7 +36,17 @@ img{
 
 body{
     background-color: #EAE7DC;
+    position: relative;
+    min-height: calc(100vh - 5rem);
+
+    &::after{
+        content: "";
+        display: block;
+        height: 75px;
+    }
+    
 }
+
 
 main{
     margin-top: 5rem;
@@ -50,19 +64,21 @@ main{
     justify-content: center;
     height: 5rem;
 
-    .quote{
-        color: #EAE7DC;
-        font-size: 3em;
+    .quote-block{
         position: absolute; 
         left: 9%;
         top: 30%;
         letter-spacing: 4px;
     }
 
+    .quote{
+        color: #EAE7DC;
+        font-size: 3em;
+        letter-spacing: 4px;
+        margin-top: 2rem;
+    }
+
     .quote-mark{
-        position: absolute; 
-        left: 4%;
-        top: 28%;
         height: 24px;
         width: 24px;
         scale: 4;
@@ -85,9 +101,82 @@ main{
     }
 }
 
+@media (max-width: 1280px) {
+    .extended{
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        .quote-block{
+            padding: 2rem;
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .extended{
+        .logo{
+            font-size: 8em !important;
+        }
+    }
+}
+
+@media (max-width: 666px) {
+    .extended{
+        .quote-block{
+            top: 39%;
+        }
+    }
+}
+
+@media (max-width: 560px) {
+    .extended{
+        .logo{
+            font-size: 6em !important;
+        }
+
+        .quote-block{
+            top: 32%;
+            padding: 1rem;
+            
+            .quote{
+                font-size: 2.5em;
+            }
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    .extended{
+        .logo{
+            font-size: 5em !important;
+            top: 5% !important
+        }
+
+        .quote-block{
+            top: 30%;
+            
+            .quote{
+                font-size: 2.2em;
+            }
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .extended{
+        .quote-block{
+            .quote{
+                font-size: 2em;
+            }
+        }
+    }
+}
+
 .footer{
-    // margin-top: 5rem;
+    position: absolute;
+    bottom: 0px;
     width: 100%;
+    height: 75px;
     background-color: #D8C3A5;
     color: #E85A4F;
     display: flex;
@@ -114,24 +203,24 @@ main{
     }
 }
 
-.skeleton{
-    @keyframes skeleton-animation {
-        0%{
-          background-color: hsl(200, 20%, 70%); 
-        }
+// .skeleton{
+//     @keyframes skeleton-animation {
+//         0%{
+//           background-color: hsl(200, 20%, 70%); 
+//         }
 
-        100%{
-          background-color: hsl(200, 20%, 95%); 
-        }
-    }
-    opacity: .8;
+//         100%{
+//           background-color: hsl(200, 20%, 95%); 
+//         }
+//     }
+//     opacity: .8;
 
-    animation: skeleton-animation 1s linear alternate infinite;
-}
+//     animation: skeleton-animation 1s linear alternate infinite;
+// }
 
-.skeleton-text {
-    width: 100%;
-    height: .8rem;
-    margin-bottom: .8rem;
-    border-radius: .125rem;
-  }
+// .skeleton-text {
+//     width: 100%;
+//     height: .8rem;
+//     margin-bottom: .8rem;
+//     border-radius: .125rem;
+//   }

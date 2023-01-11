@@ -1,6 +1,6 @@
 import axios, { formToJSON } from 'axios'
 import { motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Profile = ({ userData, setUserData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
   const [edit, setEdit] = useState(false)
+  const [curPasswordError, setCurPasswordError] = useState(false)
   const [formData, setFormData] = useState({
     username: userData.username,
     email: userData.email,
@@ -18,15 +19,14 @@ const Profile = ({ userData, setUserData, authorize }) => {
 
   const [curImage, setCurImage] = useState("")
 
-  useEffect(() => {
-    res = axios.get("http://localhost:8000/media/pfps/akGyeiIkDUc.jpg")
-  }, [])
   const [pending, setPending] = useState(false)
   
   const [usernameSuccess, setUsernameSuccess] = useState(null)
   const [emailSuccess, setEmailSuccess] = useState(null)
   const [passwordSuccess, setPasswordSuccess] = useState(null)
 
+  const confirmPasswordInputRef = useRef(null)
+  
   useEffect(() => {
     setUsernameSuccess(null)
     setEmailSuccess(null)
@@ -55,16 +55,69 @@ const Profile = ({ userData, setUserData, authorize }) => {
     navigate("/")
   }
 
+  const checkPassword = (e) => {
+    if (!formData.currentPassword) {
+      e.preventDefault()
+      setEdit(true)
+      setTimeout(() => confirmPasswordInputRef.current.focus(), 100)
+    }
+  } 
+
   const setImage = (e) => {
     const uploadData = new FormData()
     uploadData.append("image", e.target.files[0])
+    uploadData.append("username", userData.username)
+    uploadData.append("email", userData.email)
+    uploadData.append("password", formData.currentPassword)
+
     const config = {
       headers: {
         "Authorization": `JWT ${localStorage.getItem('access')}`,
       }
     }
 
-    const res = axios.patch("http://127.0.0.1:8000/auth/users/me/", uploadData, config)
+    console.log(123213);
+
+    const res = axios.put("http://127.0.0.1:8000/auth/users/me/", uploadData, config)
+    .then(() => {
+      setUserData(prev => ({...prev, image: `http://127.0.0.1:8000/media/pfps/${e.target.files[0].name}`}))
+      toast.success('Image has been changed successfully', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })
+    })
+    .catch((data) => {
+      if (data.response.data.current_password) {
+        setCurPasswordError(true)
+        toast.error('Current password error has occured', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      } else {
+        toast.error('Image error occured', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      }
+    })
   }
 
   const confirmChanges = () => {
@@ -85,7 +138,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     if (userData.username !== formData.username) res1 = axios.put("http://127.0.0.1:8000/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(() => {
       setUsernameSuccess(true)
       setUserData(prev => ({...prev, username: formData.username}))
-      toast.success('Username changed successfully', {
+      toast.success('Username has been changed successfully', {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -95,25 +148,39 @@ const Profile = ({ userData, setUserData, authorize }) => {
         progress: 0,
         theme: "light",
       })
-    }).catch(() => {
-      setUsernameSuccess(false)
-      toast.error('Username error occured', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-      })
+    }).catch((data) => {
+      if (data.response.data.current_password) {
+        setCurPasswordError(true)
+        toast.error('Current password error has occured', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      } else {
+        setUsernameSuccess(false)
+        toast.error('Username error has occured', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      }
     })
 
     setTimeout(() => {
       if (userData.email !== formData.email) res2 = axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(() => {
         setEmailSuccess(true)
         setUserData(prev => ({...prev, email: formData.email}))
-        toast.success('E-mail changed successfully', {
+        toast.success('E-mail has been changed successfully', {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -124,24 +191,38 @@ const Profile = ({ userData, setUserData, authorize }) => {
           theme: "light",
         })
       }).catch((data) => {
-        setEmailSuccess(false)
-        toast.error('E-mail error occured', {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          theme: "light",
-        })
+        if (data.response.data.current_password) {
+          setCurPasswordError(true)
+          toast.error('Current password error has occured', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            theme: "light",
+          })
+        } else {
+          setEmailSuccess(false)
+          toast.error('E-mail error has occured', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            theme: "light",
+          })
+        }
       })
 
       setTimeout(() => {
         if (formData.password) res3 = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
         .then(() => {
           setPasswordSuccess(true)
-          toast.success('Password changed successfully', {
+          toast.success('Password has been changed successfully', {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: true,
@@ -152,18 +233,32 @@ const Profile = ({ userData, setUserData, authorize }) => {
             theme: "light",
           })
         })
-        .catch(() => {
-          setPasswordSuccess(false)
-          toast.error('Password error occured', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "light",
-          })
+        .catch((data) => {
+          if (data.response.data.current_password) {
+            setCurPasswordError(true)
+            toast.error('Current password error has occured', {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: 0,
+              theme: "light",
+            })
+          } else {
+            setPasswordSuccess(false)
+            toast.error('Password error has occured', {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: 0,
+              theme: "light",
+            })
+          }
         })
         
         Promise.all([res1 && res1, res2 && res2, res3 && res3])
@@ -174,9 +269,19 @@ const Profile = ({ userData, setUserData, authorize }) => {
       }, 2000)
       
     }, 2000)
-    
   }
 
+  const orders = userData.orders.map(el => (
+    <div className='order'>
+      <h2>{el.title}</h2>
+      <p>{el.data}</p>
+      <p className='content'><strong>Country</strong>: {el.country}</p>
+      <p className='content'><strong>Region</strong>: {el.region}</p>
+      <p className='content'><strong>City</strong>: {el.city}</p>
+      <p className='content'>{el.content}</p>
+    </div>
+  ))
+  
   return (
     <div className='profile-container'>
         <div className='profile-wrapper' >
@@ -184,9 +289,9 @@ const Profile = ({ userData, setUserData, authorize }) => {
                 <h1>{userData.username}</h1>
                 <div className='wrapper'>
                     <div className='left-col'>
-                        <img className='skeleton' src={testimonial}/>
-                        <input type="file" id='file' accept='image/*' onChange={(e) => setImage(e)}/>
-                        <label for="file">Select image</label>
+                        <img className='skeleton' src={userData.image}/>
+                        <input type="file" id='file' accept='image/*' onClick={checkPassword} onChange={(e) => setImage(e)}/>
+                        <label htmlFor="file" className={`${!formData.currentPassword && "disabled"}`}>Select image</label>
                     </div>
                     <div className='right-col'>
                         <ul className='selectors'>
@@ -244,6 +349,8 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                               type="password"
                                               value={formData.currentPassword}
                                               onChange={(e) => changeFormData(e)}
+                                              ref={confirmPasswordInputRef}
+                                              className={`${curPasswordError && "error"}`}
                                             />
                                         </div>}
                                         <div className='buttons'>
@@ -257,7 +364,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     </div>
                                 :
                                     <div className='orders'>
-
+                                      {orders}
                                     </div>
                             }
                         </div>

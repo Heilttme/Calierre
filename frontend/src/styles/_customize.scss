@@ -1,9 +1,13 @@
 .customize{
     width: 75%;
     margin: 0 auto;
-    margin-bottom: 10rem;
+
+    h2{
+        margin-bottom: .2rem;
+    }
 
     .form{
+        width: 50%;
 
         .block{
             margin-top: 1.2rem;
@@ -22,6 +26,10 @@
                     border: none;
                 }
 
+                .error {
+                    border: 1px solid #E85A4F;
+                }
+                
                 img{
                     width: 36px;
                     margin-left: .8rem;
@@ -67,6 +75,10 @@
                 outline: none;
                 resize: none;
             }
+
+            .error {
+                border: 1px solid #E85A4F;
+            }
         }
 
         .details{
@@ -82,8 +94,25 @@
         }
     }
 
-    button{
-        @include button;
+    .buttons{
         margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button{
+            @include button;
+            padding: .6rem 5rem;
+        }
+        
+        a{
+            color: #E85A4F;
+            transition: all .15s ease-in-out;
+
+            &:hover{
+                color: #E98074;
+            }
+        }
+
     }
 }
