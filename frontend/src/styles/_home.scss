@@ -214,6 +214,55 @@
         width: 80%;
     }
 
+
+    .order-options{
+        width: 70%;
+        margin: 1rem auto;
+        margin-top: 4rem;
+
+        .header-options{
+            font-size: 40px;
+            letter-spacing: 4px;
+        }
+        
+        .wrapper{
+            color: #EAE7DC;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 4rem;
+            width: 100%;
+
+            .option{
+                padding: 1rem 5rem;
+                padding-top: 6rem;
+                background-color: #E85A4F;
+                position: relative;
+                border-radius: 4px;
+
+                .before{
+                    position: absolute;
+                    left: 50%;
+                    top: -20%;
+                    width: 60%;
+                    transform: translateX(-50%);
+                    text-align: center;
+                    padding: 1rem;
+                    background-color: black;
+                    border-radius: 4px;
+                    
+                    p{
+                        color: #E85A4F;
+                        font-size: 1.5em;
+
+                        strong{
+                            font-size: 1.7em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .reviews{
         width: 70%;
         margin: 0 auto;

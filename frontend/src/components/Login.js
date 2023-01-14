@@ -33,15 +33,14 @@ const Login = ({ authorize }) => {
   const logIn = () => {
     const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", {email: formData.email, password: formData.password})
     .then(data => {
+      authorize(true)
       localStorage.setItem("access", data.data.access)
       localStorage.setItem("refresh", data.data.refresh)
-      authorize(true)
       navigate("/")
     })
     .catch(data => {
       setRightPageData(400)
       setErrorTypes([...new Set([...Object.keys(data.response.data)])])
-      // setErrors([...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')])
       const errorsNow = [...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')]
       for (let i = 0; i < errorsNow.length; i++) {
         toast.error(t(errorsNow[i]), {

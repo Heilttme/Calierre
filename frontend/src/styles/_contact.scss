@@ -30,6 +30,7 @@
         gap: 1.5rem;
         grid-template-areas: 
             "NAME SURNAME"
+            "EMAIL EMAIL"
             "MESSAGE MESSAGE"
             "BTN BTN";
 
@@ -43,6 +44,10 @@
 
             .message{
                 grid-area: MESSAGE;
+            }
+
+            .email{
+                grid-area: EMAIL;
             }
 
             input{
@@ -124,6 +129,69 @@
                 color: white;
                 opacity: .7;
             }
+        }
+    }
+}
+
+
+@media (max-width: 1450px) {
+    .contact{
+        flex-direction: column;
+        gap: 3rem;
+        margin-bottom: 4rem;
+
+        .left-col{
+            width: 80%;
+        }
+
+        .info{
+            width: 80%;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .contact{
+
+        .left-col{
+            width: 100%;
+        }
+
+        .info{
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .contact{
+        width: 92%;
+
+        .left-col{
+            width: 100%;
+        }
+
+        .info{
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .contact{
+
+        .left-col{
+            padding: 1.5rem;
+        }
+
+        .form{
+            margin-left: .2rem;
+            grid-template-areas: 
+                "NAME NAME"
+                "SURNAME SURNAME"
+                "EMAIL EMAIL"
+                "MESSAGE MESSAGE"
+                "BTN BTN";
         }
     }
 }

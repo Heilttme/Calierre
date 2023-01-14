@@ -30,8 +30,10 @@ const Customize = () => {
           <h2>{t("Font")}</h2>
           <div className='additional'>
             <select className={`${fontError && "error"}`}></select>
-            <img src={eye}/>
-            <span>{t("Chosen font example")}</span>
+            <span>
+              <img src={eye}/>
+              <span>{t("Chosen font example")}</span>
+            </span>
           </div>
         </div>
         <div className='big-content'>

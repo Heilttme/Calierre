@@ -20,7 +20,7 @@ const App = () => {
   })
   
   const [blur, setBlur] = useState(true)
-  const [tempEmail, setTempEmail] = useState("")
+  const [menuOpened, setMenuOpened] = useState(false)
   
   const authenticated = useStore(state => state.authenticated)
   const authorize = useStore(state => state.authorize)
@@ -82,7 +82,7 @@ const App = () => {
   
   return (
     <div className="app">
-      <Navigation userData={userData}/>
+      <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} />
       <main>
         <Routes>
           <Route path="/" element={<Home changeLanguage={changeLanguage} language={language} userData={userData} />} />
@@ -91,12 +91,12 @@ const App = () => {
           <Route path="/customize" element={<Customize/>} />
           <Route path="/customize/destination" element={<Destination/>} />
           <Route path="/customize/destination/payment" element={<Pay />} />
-          <Route path="/reset" element={<ForgotPassword setTempEmail={setTempEmail} />} />
+          <Route path="/reset" element={<ForgotPassword />} />
           {/* <Route path="/review" element={<LeaveReview />} /> */}
           <Route path="/activate/:uid/:token" element={<Activate/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/profile" element={<Profile userData={userData} authorize={authorize} setUserData={setUserData} />} /> 
-          <Route path="password/reset/confirm/:uid/:token" element={<PasswordRestore userData={userData} tempEmail={tempEmail} />} />
+          <Route path="password/reset/confirm/:uid/:token" element={<PasswordRestore userData={userData} />} />
         </Routes>
       </main>
       <Footer/>

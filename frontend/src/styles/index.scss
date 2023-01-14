@@ -64,6 +64,95 @@ main{
     justify-content: center;
     height: 5rem;
 
+    .menu{
+        z-index: 110;
+        width: 14rem;
+        position: fixed;
+        left: -14rem;
+        top: 0;
+        min-height: 100vh;
+        background-color: #D8C3A5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 5rem;
+        transition: all .3s ease-in-out;
+
+        a{
+            @include button;
+            margin-top: 2rem;
+            width: 70%;
+            background-color: #D8C3A5;
+            color: #E85A4F;
+            border: 2px solid #E85A4F;
+        }
+    }
+
+    .opened{
+        left: 0;
+    }
+
+    .hamburger-wrapper{
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        cursor: pointer;
+        padding: 1rem;
+        z-index: 1100;
+    }
+
+    .hamburger{
+        position: relative;
+
+        width: 24px;
+        height: 2px;
+        border-radius: 10px;
+        background-color: #E85A4F;
+        transition: transform .2s ease-in-out;
+
+        &::before{
+            content: "";
+            position: absolute;
+            top: -6px;
+            width: 24px;
+            height: 2px;
+            border-radius: 10px;
+            background-color: #E85A4F;
+            // transition: transform .2s ease-in-out;
+            // transition: top .01s ease-in-out;
+        }
+
+        &::after{
+            content: "";
+            position: absolute;
+            top: 6px;
+            width: 24px;
+            height: 2px;
+            border-radius: 10px;
+            background-color: #E85A4F;
+            // transition: transform .2s ease-in-out;
+            // transition: top .01s ease-in-out;
+        }
+    }
+
+    .opened-hamburger{
+        .hamburger{
+            background: transparent;
+    
+            &::before{
+                transform: rotate(45deg);
+                border-radius: 0px;
+                top: 0;
+            }
+    
+            &::after{
+                transform: rotate(-45deg);
+                border-radius: 0px;
+                top: 0;
+            }
+        }
+    }
+
     .quote-block{
         position: absolute; 
         left: 9%;
@@ -99,6 +188,21 @@ main{
         top: .8rem;
         @include button;
     }
+
+    .order{
+        @include button;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 4rem;
+        padding: .8rem 4rem;
+        background-color: #fff;
+        color: #E85A4F;
+
+        &:hover{
+            background-color: #D8C3A5
+        }
+    }
+
 }
 
 @media (max-width: 1280px) {
@@ -113,8 +217,15 @@ main{
 }
 
 @media (max-width: 850px) {
+    .header{
+        .logo{
+            left: 40% !important;
+        }
+    }
+    
     .extended{
         .logo{
+            left: 5% !important;
             font-size: 8em !important;
         }
     }
@@ -122,20 +233,31 @@ main{
 
 @media (max-width: 666px) {
     .extended{
-        .quote-block{
-            top: 39%;
-        }
-    }
-}
-
-@media (max-width: 560px) {
-    .extended{
         .logo{
             font-size: 6em !important;
         }
 
+    }
+}
+
+@media (max-width: 560px) {
+    .header{
+        .logo{
+            left: 4.5rem !important;
+        }
+
+        .opened{
+            width: 100vw;
+        }
+    }
+    
+    .extended{
+        .logo{
+            font-size: 4.5em !important;
+        }
+
         .quote-block{
-            top: 32%;
+            top: 13rem;
             padding: 1rem;
             
             .quote{
@@ -145,18 +267,41 @@ main{
     }
 }
 
+@media (max-width: 400px) {
+    .header{
+        .hamburger-wrapper{
+            left: 0rem;
+            top: .9rem;
+        }
+        
+        .logo{
+            left: 3.2rem !important;
+            top: 2.3rem !important;
+            font-size: 1.5em !important;
+        }
+        
+        .login{
+            font-size: .8em;
+            right: .5rem;
+            padding: .6rem 1rem;
+        }
+    }
+}
+
 @media (max-width: 380px) {
     .extended{
         .logo{
-            font-size: 5em !important;
-            top: 5% !important
+            font-size: 3em !important;
+            top: 7% !important
         }
 
         .quote-block{
-            top: 30%;
-            
             .quote{
                 font-size: 2.2em;
+            }
+
+            .order{
+                padding: .8rem 1.8rem;
             }
         }
     }
@@ -167,6 +312,10 @@ main{
         .quote-block{
             .quote{
                 font-size: 2em;
+            }
+
+            .order{
+                font-size: .8em;
             }
         }
     }
@@ -203,24 +352,114 @@ main{
     }
 }
 
-// .skeleton{
-//     @keyframes skeleton-animation {
-//         0%{
-//           background-color: hsl(200, 20%, 70%); 
-//         }
 
-//         100%{
-//           background-color: hsl(200, 20%, 95%); 
-//         }
-//     }
-//     opacity: .8;
+@media (max-width: 820px) {
+    .footer{
+        font-size: 1em;
 
-//     animation: skeleton-animation 1s linear alternate infinite;
-// }
+        .icons{
+            display: flex;
+            
+            .tg{
+                width: 32px;
+            }
+    
+            .ig{
+                width: 52px;
+            }
+        }
+    }
+}
 
-// .skeleton-text {
-//     width: 100%;
-//     height: .8rem;
-//     margin-bottom: .8rem;
-//     border-radius: .125rem;
-//   }
+@media (max-width: 666px) {
+    .footer{
+        font-size: .9em;
+        
+        .icons{
+            display: flex;
+            
+            .tg{
+                width: 28px;
+            }
+    
+            .ig{
+                width: 48px;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .footer{
+        font-size: .75em;
+        height: 55px;
+        
+        .icons{
+            display: flex;
+            gap: .1rem;
+            
+            .tg{
+                width: 24px;
+            }
+    
+            .ig{
+                width: 42px;
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .footer{
+        font-size: .6em;
+        
+        .icons{
+            display: flex;
+            
+            .tg{
+                width: 22px;
+            }
+    
+            .ig{
+                width: 40px;
+            }
+        }
+    }
+}
+
+@media (max-width: 415px) {
+    .footer{
+        font-size: .5em;
+        height: 45px;
+        
+        .icons{
+            display: flex;
+            
+            .tg{
+                width: 18px;
+            }
+    
+            .ig{
+                width: 32px;
+            }
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    .footer{
+        font-size: .4em;
+        
+        .icons{
+            display: flex;
+            
+            .tg{
+                width: 14px;
+            }
+    
+            .ig{
+                width: 26px;
+            }
+        }
+    }
+}

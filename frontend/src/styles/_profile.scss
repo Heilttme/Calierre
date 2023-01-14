@@ -7,7 +7,6 @@
     width: 50%;
     margin: 0 auto;
     margin-top: 3rem;
-    // padding-bottom: 28rem;
     
     .orders{
         .order{
@@ -127,6 +126,7 @@
                 li{
                     margin-top: .2rem;
                     padding: 2px 0;
+                    padding-top: -1rem;
                     height: 24px;
                 }
                 
@@ -140,14 +140,16 @@
             
             .buttons{
                 margin-top: auto;
-                display: flex;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
                 position: relative;
                 gap: 2rem;
     
                 button{
                     @include button;
                     padding: .8rem 1.6rem;
-
+                    display: flex;
+                    justify-content: center;
                 }
                 
                 .disabled{
@@ -230,10 +232,26 @@
     }    
 }
 
+@media (max-width: 850px) {
+    .profile .right-col .block .info {
+        gap: 5rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .profile .right-col .block .info {
+        gap: 2rem;
+    }
+}
+
 @media (max-width: 600px) {
     .profile{
         width: 85%;
         margin-bottom: 3rem;
+        
+        .right-col .block .info {
+            gap: 8rem;
+        }
         
         .wrapper{
             flex-direction: column;
@@ -253,6 +271,34 @@
             }
         }
     }
+}
 
+@media (max-width: 480px) {
+    .profile .right-col .block .info {
+            gap: 5rem;
+    }
     
+    // .profile .right-col .block .buttons button {
+    //     display: block;
+    // }
+}
+
+@media (max-width: 400px) {
+    .profile{
+        
+        .right-col .block .info {
+            gap: 2rem;
+        }
+        
+    }
+}
+
+@media (max-width: 350px) {
+    .profile{
+        
+        .right-col .block .info {
+            gap: .5rem;
+        }
+        
+    }
 }

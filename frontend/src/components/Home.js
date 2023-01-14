@@ -57,6 +57,7 @@ const Home = ({ language, changeLanguage, userData }) => {
     </div>
   ))
 
+
   return (
     <div className='home' >
       <img src={ink} className='bg-ink image-1'/>
@@ -118,7 +119,46 @@ const Home = ({ language, changeLanguage, userData }) => {
           </div>
         </div>
       </div>
-      <a href='/customize' className='order'>{t("Order a letter")}</a>
+      <div className='order-options'>
+        <p className='header-options'>{t("Order options")}</p>
+        <div className='wrapper'>
+
+          <div className='option'>
+              <div className='before'>
+                <h2>Basic</h2>
+                <p>$<strong>5</strong></p>
+              </div>
+              <div className='describe'>
+                <p>chet eto d</p>
+                <p>eche eto</p>
+                <p>i vse</p>
+              </div>
+          </div>
+          <div className='option'>
+              <div className='before'>
+                <h2>Advanced</h2>
+                <p>$<strong>7</strong></p>
+              </div>
+              <div className='describe'>
+                <p>chet eto d</p>
+                <p>eche eto</p>
+                <p>i vse</p>
+              </div>
+          </div>
+          <div className='option'>
+              <div className='before'>
+                <h2>Multiple</h2>
+                <p>$<strong>3</strong></p>
+              </div>
+              <div className='describe'>
+                <p>chet eto d</p>
+                <p>eche eto</p>
+                <p>i vse</p>
+              </div>
+          </div>
+        </div>
+      </div>
+      {/* <a href='/customize' className='order'>{t("Order a letter")}</a> */}
       <div className='reviews'>
         <span className='header-reviews'><p>{t("See our reviews")}</p><button onClick={() => {
           if (userData.email) setLeaveReview(prev => !prev) 
@@ -143,7 +183,7 @@ const Home = ({ language, changeLanguage, userData }) => {
             </div>
           </motion.div>
         {reviewsDisplay.splice(0, shownReviews)}
-        <button className={`more-reviews ${shownReviews >= reviewsDisplay.length && "disabled"}`} onClick={() => setShownReviews(prev => prev += 2)}>More</button>
+        <button className={`more-reviews`} onClick={() => setShownReviews(prev => prev += 2)}>More</button>
       </div>
     </div>
   )

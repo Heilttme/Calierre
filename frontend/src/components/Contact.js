@@ -14,6 +14,10 @@ const Contact = () => {
             <h2>Last name</h2>  
             <input/>
           </div> 
+          <div className='field email'>
+            <h2>E-mail</h2>  
+            <input/>
+          </div> 
           <div className='field message'>
             <h2>Message</h2>  
             <textarea/>
