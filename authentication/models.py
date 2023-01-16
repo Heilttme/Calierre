@@ -22,12 +22,11 @@ class LetterUser(AbstractUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=15)
     image = models.ImageField(default="pfps/default_pfp.jpg", upload_to=upload_path)
-    # orders = models.
 
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', "image"]
+    REQUIRED_FIELDS = ["is_staff", 'username', "image"]
 
 
 class Review(models.Model):

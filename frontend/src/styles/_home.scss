@@ -161,10 +161,15 @@
 
     .blocks{
         display: flex;
-        width: 43%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70%;
+        gap: 4rem;
         margin: 0 auto;
         margin-top: 7rem;
         justify-content: space-between;
+        user-select: none;
     }
 
     .col{
@@ -175,22 +180,24 @@
 
     .col-2{
         .block{
-            margin-top: 16rem;
+            margin-top: 8rem;
         }
     }
 
     .block{
         background-color: #E85A4F;
-        width: 22rem;
-        height: 26rem;
+        overflow: hidden;
+        width: 9.5rem;
+        height: 8rem;
         padding: 1rem 2rem;
         color: #EAE7DC;
         box-shadow: 7px 5px 0px black;
         font-weight: bold;
         font-size: 20px;
+        white-space: pre-wrap;
 
         .pergament{
-            width: 100px;
+            width: 90px;
             margin-bottom: 1rem;
         }
         
@@ -202,6 +209,23 @@
 
         .envelope{
             width: 95px;
+        }
+
+    }
+
+    .pergament-previews{
+        display: flex;
+        justify-content: center;
+        margin-top: 10rem;
+
+        .pergament-paper{
+            background-color:#D8C3A5;
+            height: 700px;
+            width: 550px;
+            padding: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            user-select: none;
         }
     }
 
@@ -218,7 +242,7 @@
     .order-options{
         width: 70%;
         margin: 1rem auto;
-        margin-top: 4rem;
+        margin-top: 13rem;
 
         .header-options{
             font-size: 40px;

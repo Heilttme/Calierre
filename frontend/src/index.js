@@ -4,6 +4,7 @@ import './styles/index.css';
 import App from './App';
 import { BrowserRouter as Router } from "react-router-dom"
 import "./i18n"
+import { YMaps } from '@pbe/react-yandex-maps';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

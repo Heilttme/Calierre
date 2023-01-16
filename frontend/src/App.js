@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useStore from "./store";
-import { motion } from "framer-motion"
 import { useTranslation } from "react-i18next";
 
 
@@ -21,6 +20,17 @@ const App = () => {
   
   const [blur, setBlur] = useState(true)
   const [menuOpened, setMenuOpened] = useState(false)
+
+  const [orderData, setOrderData] = useState({
+    title: "",
+    content: "",
+    details: "",
+    mistakes: "",
+  })
+
+  const changeOrderData = (e) => {
+    setOrderData(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
   
   const authenticated = useStore(state => state.authenticated)
   const authorize = useStore(state => state.authorize)
@@ -82,17 +92,16 @@ const App = () => {
   
   return (
     <div className="app">
-      <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} />
+      <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} changeLanguage={changeLanguage} language={language} />
       <main>
         <Routes>
-          <Route path="/" element={<Home changeLanguage={changeLanguage} language={language} userData={userData} />} />
+          <Route path="/" element={<Home userData={userData} />} />
           <Route path="/login" element={<Login authorize={authorize}/>} />
           <Route path="/sign_up" element={<SignUp />} />
-          <Route path="/customize" element={<Customize/>} />
-          <Route path="/customize/destination" element={<Destination/>} />
-          <Route path="/customize/destination/payment" element={<Pay />} />
+          <Route path="/customize" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
+          <Route path="/customize/destination" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
+          <Route path="/customize/destination/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
           <Route path="/reset" element={<ForgotPassword />} />
-          {/* <Route path="/review" element={<LeaveReview />} /> */}
           <Route path="/activate/:uid/:token" element={<Activate/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/profile" element={<Profile userData={userData} authorize={authorize} setUserData={setUserData} />} /> 

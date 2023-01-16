@@ -9,15 +9,33 @@ import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import { use } from 'i18next'
 
-const Home = ({ language, changeLanguage, userData }) => {
+const Home = ({ userData }) => {
   const { t, i18n } = useTranslation()
   const [reviews, setReviews] = useState([])
   const [leaveReview, setLeaveReview] = useState(false)
   const [reviewValue, setReviewValue] = useState("")
   const [shownReviews, setShownReviews] = useState(3)
+  const [expandedBlock1, setExpandedBlock1] = useState(false)
+  const [expandedBlock2, setExpandedBlock2] = useState(false)
+  const [expandedBlock3, setExpandedBlock3] = useState(false)
+
+  const [fullTextTitle, setFullTextTitle] = useState("Hi Jessica")
+  const [fullText, setFullText] = useState("I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie ")
+  const [paperTitleText, setPaperTitleText] = useState("")
+  const [paperText, setPaperText] = useState("")
   
   const navigate = useNavigate()
+
+  useEffect(() => {
+    for (let i = 0; i < fullTextTitle.length; i++) {
+      setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 200))
+    }
+    for (let i = 0; i < fullText.length; i++) {
+      setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 200) + (i * 200))
+    }
+  }, [])
 
   useEffect(() => {
     const res = axios.get("http://127.0.0.1:8000/authentication/reviews/").then(data => {
@@ -57,9 +75,8 @@ const Home = ({ language, changeLanguage, userData }) => {
     </div>
   ))
 
-
   return (
-    <div className='home' >
+    <div className='home'>
       <img src={ink} className='bg-ink image-1'/>
       <img src={ink} className='bg-ink image-2'/>
       <img src={ink} className='bg-ink image-3'/>
@@ -84,39 +101,41 @@ const Home = ({ language, changeLanguage, userData }) => {
       <img src={ink} className='bg-ink image-22'/>
       <img src={ink} className='bg-ink image-23'/>
 
-      {language === "ru" ?
-        <svg onClick={changeLanguage} className='language' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="64" height="36"><rect fill="#fff" width="9" height="3"/><rect fill="#d52b1e" y="3" width="9" height="3"/><rect fill="#0039a6" y="2" width="9" height="2"/></svg>
-      :
-      <svg onClick={changeLanguage} className='language' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="64" height="36">
-      <clipPath id="s">
-        <path d="M0,0 v30 h60 v-30 z"/>
-      </clipPath>
-      <g clip-path="url(#s)">
-        <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-        <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
-        <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-        <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-      </g>
-      </svg>
-      }
-
       <div className='blocks'>
         <div className='col col-1'>
-          <div className='block'>
+          <motion.div
+            className='block'
+            animate={expandedBlock1 ? {width: "22rem", height: "26rem"} : {width: "9.5rem", height: "8rem"}}
+            onClick={() => setExpandedBlock1(prev => !prev)}
+          >
             <img className='pergament' src={pergament}/>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div className='block'>
+          </motion.div>
+          <motion.div 
+            className='block' 
+            animate={expandedBlock2 ? {width: "22rem", height: "26rem"} : {width: "9.5rem", height: "8rem"}}
+            onClick={() => setExpandedBlock2(prev => !prev)}
+          >
             <img className='envelope' src={envelope}/>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
+          </motion.div>
         </div>
         <div className='col col-2'>
-          <div className='block'>
+          <motion.div 
+            className='block' 
+            animate={expandedBlock3 ? {width: "22rem", height: "26rem"} : {width: "9.5rem", height: "8rem"}}
+            onClick={() => setExpandedBlock3(prev => !prev)}
+          >
               <img className='feather' src={feather}/>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className='pergament-previews'>
+        <div className='pergament-paper'>
+          {paperTitleText}
+          <br/>
+          {paperText}
         </div>
       </div>
       <div className='order-options'>

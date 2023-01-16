@@ -76,8 +76,6 @@ const Profile = ({ userData, setUserData, authorize }) => {
       }
     }
 
-    console.log(123213);
-
     const res = axios.put("http://127.0.0.1:8000/auth/users/me/", uploadData, config)
     .then(() => {
       setUserData(prev => ({...prev, image: `http://127.0.0.1:8000/media/pfps/${e.target.files[0].name}`}))
@@ -272,13 +270,18 @@ const Profile = ({ userData, setUserData, authorize }) => {
   }
 
   const orders = userData.orders.map(el => (
-    <div className='order'>
-      <h2>{el.title}</h2>
-      <p>{el.data}</p>
-      <p className='content'><strong>Country</strong>: {el.country}</p>
-      <p className='content'><strong>Region</strong>: {el.region}</p>
-      <p className='content'><strong>City</strong>: {el.city}</p>
-      <p className='content'>{el.content}</p>
+    <div className='order-wrapper'>
+      <div className='order'>
+        <h2>{el.title ? el.title : "NO TITLE"}</h2>
+        <p>{el.data}</p>
+        <p className='content'><strong>Country</strong>: {el.country}</p>
+        <p className='content'><strong>Region</strong>: {el.region}</p>
+        <p className='content'><strong>City</strong>: {el.city}</p>
+        <p className='content'>{el.content}</p>
+      </div>
+      <div className='complete'>
+
+      </div>
     </div>
   ))
   

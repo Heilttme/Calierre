@@ -1,13 +1,21 @@
 .customize{
-    width: 75%;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
     margin: 0 auto;
+    margin-bottom: 5rem;
+
+    .left-col{
+        width: 100%;
+    }
+
 
     h2{
         margin-bottom: .2rem;
     }
 
     .form{
-        width: 50%;
+        width: 100%;
 
         .block{
             margin-top: 1.2rem;
@@ -75,7 +83,7 @@
                 padding: 1.2rem 1rem;
                 background-color: #D8C3A5;
                 width: 100%;
-                height: 200px;
+                height: 450px;
                 border: none;
                 outline: none;
                 resize: none;
@@ -83,6 +91,53 @@
 
             .error {
                 border: 1px solid #E85A4F;
+            }
+        }
+
+        .mistakes{
+            input[type=checkbox]{
+                display: none;
+            }
+
+            label{
+                cursor: pointer;
+                user-select: none;
+            }
+            
+            label::before{
+                content: '';
+                background-color: #D8C3A5;
+                display: inline-block;
+                width: 1.25rem;
+                height: 1.25rem;
+                flex-shrink: 0;
+                flex-grow: 0;
+                border: 1px solid #adb5bd;
+                border-radius: .25rem;
+                margin-right: .5rem;
+                margin-bottom: -.25rem;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 50% 50%;
+            }
+            
+            input[type=checkbox]:checked+label::before{
+                border-color: #D8C3A5;
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='red' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");  
+            }
+        }
+
+        .mistakes-input{
+            overflow: hidden;
+            
+            textarea{
+                padding: 1.2rem 1rem;
+                background-color: #D8C3A5;
+                width: 100%;
+                height: 100px;
+                border: none;
+                outline: none;
+                resize: none;
             }
         }
 
@@ -109,6 +164,15 @@
             @include button;
             padding: .6rem 5rem;
         }
+
+        .disabled{
+            cursor: unset;
+            background-color: #B4B1A7;
+
+            &:hover{
+                background-color: #B4B1A7;
+            }
+        }
         
         a{
             color: #E85A4F;
@@ -119,6 +183,71 @@
             }
         }
 
+    }
+
+    .right-col{
+        width: 25%;
+
+        h1{
+            margin-bottom: 2.5rem;
+        }
+
+        .option{
+            background-color: #E85A4F;            
+            padding: 1rem 2rem;
+            padding-top: 3.5rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            position: relative;
+            
+            span{
+                position: absolute;
+                left: 1rem;
+                top: -1.5rem;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                background-color: #232424;
+                gap: 1rem;
+                
+                h2{
+                    margin: 0;
+                    color: #fff;
+                }
+                
+                p{
+                    font-size: 1.4em;
+                    color: #E85A4F;
+
+                    strong{
+                        font-size: 1.3em;
+                    }
+                }
+            }
+
+            .desc{
+                margin-bottom: 1rem;
+                margin-left: .5rem;
+                
+                p{
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    color: #fff;
+                    font-size: 1.1em;
+                    border-bottom: 1px solid #B4B1A7;
+                    padding-bottom: .5rem;
+                    margin-bottom: .5rem;
+                }
+            }
+
+            button{
+                @include button;
+                background-color:#D8C3A5;
+            }
+
+        }
     }
 }
 

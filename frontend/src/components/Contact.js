@@ -27,6 +27,17 @@ const Contact = () => {
       </div>
       <div className='info'>
         <h1>How can we help?</h1>
+        <div className='hours'>
+          <div>
+            Mon-Fri:<strong>10am - 7pm</strong>
+          </div>
+          <div>
+            Saturday:<strong>10am - 5pm</strong>
+          </div>
+          <div>
+            Sunday:<strong>Closed</strong>
+          </div>
+        </div>
         <p>We are open to any of your questions</p>
         <ul>
           <li className='block'>
