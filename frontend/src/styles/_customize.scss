@@ -1,5 +1,5 @@
 .customize{
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -8,7 +8,16 @@
     .left-col{
         width: 100%;
     }
+    
+    textarea{
+        border-radius: 8px;
+        font-size: 1.2em;
+    }
 
+    input{
+        border-radius: 8px;
+        font-size: 1.2em;
+    }
 
     h2{
         margin-bottom: .2rem;
@@ -231,20 +240,109 @@
                 margin-left: .5rem;
                 
                 p{
-                    width: 30%;
+                    width: 100%;
                     display: flex;
-                    justify-content: center;
                     color: #fff;
-                    font-size: 1.1em;
-                    border-bottom: 1px solid #B4B1A7;
+                    font-size: 1.07em;
+                    border-bottom: 1px solid rgb(235, 232, 232);
                     padding-bottom: .5rem;
-                    margin-bottom: .5rem;
+                    margin-bottom: .8rem;
+
+                }
+
+                .additional{
+                    border: none;
+                    font-size: 1em;
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 1rem;
+                }
+            }
+
+            .seal-choice{
+                margin-bottom: .5rem;
+
+                .additional{
+                    display: flex;
+                    gap: 2rem;
+                }
+                
+                h3{
+                    color: white;
+                }
+
+                .seal{
+                    margin-top: .4rem;
+                    margin-bottom: .8rem;
+                    
+                    [type="radio"]:checked,
+                    [type="radio"]:not(:checked) {
+                        position: absolute;
+                        left: -9999px;
+                    }
+                    [type="radio"]:checked + label,
+                    [type="radio"]:not(:checked) + label
+                    {
+                        position: relative;
+                        padding-left: 28px;
+                        cursor: pointer;
+                        line-height: 20px;
+                        display: inline-block;
+                        color: #fff;
+                    }
+                    [type="radio"]:checked + label:before,
+                    [type="radio"]:not(:checked) + label:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 18px;
+                        height: 18px;
+                        border: 1px solid #ddd;
+                        border-radius: 100%;
+                        background: #fff;
+                    }
+                    [type="radio"]:checked + label:after,
+                    [type="radio"]:not(:checked) + label:after {
+                        content: '';
+                        width: 12px;
+                        height: 12px;
+                        background: #E85A4F;
+                        position: absolute;
+                        top: 4px;
+                        left: 4px;
+                        border-radius: 100%;
+                        -webkit-transition: all 0.2s ease;
+                        transition: all 0.2s ease;
+                    }
+                    [type="radio"]:not(:checked) + label:after {
+                        opacity: 0;
+                        -webkit-transform: scale(0);
+                        transform: scale(0);
+                    }
+                    [type="radio"]:checked + label:after {
+                        opacity: 1;
+                        -webkit-transform: scale(1);
+                        transform: scale(1);
+                    }
+
+                    a{
+                        color: #fff;
+                        border-bottom: 1px solid #fff;;
+                    }
+
                 }
             }
 
             button{
                 @include button;
-                background-color:#D8C3A5;
+
+                background-color: #fff;
+                color: #E85A4F;
+
+                &:hover{
+                    background-color: #d4d3d1;
+                }
             }
 
         }

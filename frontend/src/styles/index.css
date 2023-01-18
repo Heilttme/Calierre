@@ -138,7 +138,7 @@ example {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 70%;
+  width: 80%;
   gap: 4rem;
   margin: 0 auto;
   margin-top: 7rem;
@@ -159,13 +159,13 @@ example {
 .home .block {
   background-color: #E85A4F;
   overflow: hidden;
-  width: 9.5rem;
-  height: 8rem;
+  width: 22rem;
+  height: 26rem;
   padding: 1rem 2rem;
   color: #EAE7DC;
   box-shadow: 7px 5px 0px black;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.05em;
   white-space: pre-wrap;
 }
 .home .block .pergament {
@@ -187,11 +187,11 @@ example {
 }
 .home .pergament-previews .pergament-paper {
   background-color: #D8C3A5;
-  height: 700px;
-  width: 550px;
+  height: 800px;
+  width: 600px;
   padding: 1.5rem;
-  font-family: "Dancing Script", cursive;
-  font-size: 3em;
+  font-family: "Bad Script", cursive;
+  font-size: 1.5em;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -259,6 +259,12 @@ example {
 }
 .home .order-options .wrapper .option .before p strong {
   font-size: 1.7em;
+}
+.home .order-options .wrapper .option .describe p {
+  font-size: 1.3em;
+  border-bottom: 1px #fff solid;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .home .reviews {
   width: 70%;
@@ -567,7 +573,7 @@ example {
 }
 
 .customize {
-  width: 70%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -575,6 +581,14 @@ example {
 }
 .customize .left-col {
   width: 100%;
+}
+.customize textarea {
+  border-radius: 8px;
+  font-size: 1.2em;
+}
+.customize input {
+  border-radius: 8px;
+  font-size: 1.2em;
 }
 .customize h2 {
   margin-bottom: 0.2rem;
@@ -770,14 +784,84 @@ example {
   margin-left: 0.5rem;
 }
 .customize .right-col .option .desc p {
-  width: 30%;
+  width: 100%;
   display: flex;
-  justify-content: center;
   color: #fff;
-  font-size: 1.1em;
-  border-bottom: 1px solid #B4B1A7;
+  font-size: 1.07em;
+  border-bottom: 1px solid rgb(235, 232, 232);
   padding-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+.customize .right-col .option .desc .additional {
+  border: none;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  margin-top: 1rem;
+}
+.customize .right-col .option .seal-choice {
   margin-bottom: 0.5rem;
+}
+.customize .right-col .option .seal-choice .additional {
+  display: flex;
+  gap: 2rem;
+}
+.customize .right-col .option .seal-choice h3 {
+  color: white;
+}
+.customize .right-col .option .seal-choice .seal {
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+.customize .right-col .option .seal-choice .seal [type=radio]:checked,
+.customize .right-col .option .seal-choice .seal [type=radio]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+.customize .right-col .option .seal-choice .seal [type=radio]:checked + label,
+.customize .right-col .option .seal-choice .seal [type=radio]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #fff;
+}
+.customize .right-col .option .seal-choice .seal [type=radio]:checked + label:before,
+.customize .right-col .option .seal-choice .seal [type=radio]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+.customize .right-col .option .seal-choice .seal [type=radio]:checked + label:after,
+.customize .right-col .option .seal-choice .seal [type=radio]:not(:checked) + label:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #E85A4F;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  transition: all 0.2s ease;
+}
+.customize .right-col .option .seal-choice .seal [type=radio]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+.customize .right-col .option .seal-choice .seal [type=radio]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+.customize .right-col .option .seal-choice .seal a {
+  color: #fff;
+  border-bottom: 1px solid #fff;
 }
 .customize .right-col .option button {
   display: inline-block;
@@ -792,10 +876,14 @@ example {
   letter-spacing: 0.195em;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
-  background-color: #D8C3A5;
+  background-color: #fff;
+  color: #E85A4F;
 }
 .customize .right-col .option button:hover {
   background-color: #ee7366;
+}
+.customize .right-col .option button:hover {
+  background-color: #d4d3d1;
 }
 
 @media (max-width: 1400px) {
@@ -1412,7 +1500,16 @@ example {
 .destination h2 {
   margin: 0.4rem 0;
 }
+.destination .input-block {
+  display: flex;
+}
+.destination img {
+  height: 35px;
+  align-items: center;
+  cursor: pointer;
+}
 .destination input {
+  font-size: 1.15em;
   height: 35px;
   padding: 0.6rem 1.2rem;
   width: 100%;
@@ -1425,19 +1522,49 @@ example {
 .destination input:focus {
   border: 1px solid #B4B1A7;
 }
+.destination .city {
+  cursor: not-allowed;
+}
 .destination textarea {
   width: 100%;
   resize: none;
   background-color: #D8C3A5;
   border: none;
   height: 200px;
-  padding: 0.6rem;
+  font-size: 1.15em;
+  padding: 0.6rem 1rem;
   border: 1px solid #D8C3A5;
   outline: none;
   transition: all 0.1s ease-in-out;
 }
 .destination textarea:focus {
   border: 1px solid #B4B1A7;
+}
+.destination .map-container {
+  position: relative;
+}
+.destination .map-container .map-wrapper {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.destination .map-container .map-wrapper .map {
+  display: none;
+}
+.destination .map-container .map-wrapper .opened-map {
+  display: block;
+  width: 95vw;
+  height: 80vh;
+}
+.destination .map-container .map-wrapper button {
+  left: 0;
+  top: -1rem;
+  position: absolute;
+}
+.destination .map-container .opened {
+  display: block;
 }
 .destination button {
   display: inline-block;

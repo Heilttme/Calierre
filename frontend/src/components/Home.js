@@ -21,21 +21,41 @@ const Home = ({ userData }) => {
   const [expandedBlock2, setExpandedBlock2] = useState(false)
   const [expandedBlock3, setExpandedBlock3] = useState(false)
 
-  const [fullTextTitle, setFullTextTitle] = useState("Hi Jessica")
-  const [fullText, setFullText] = useState("I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie I would like to say your my bestie ")
+  const texts = [
+    {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев"},
+    {head: "Дорогой Владислав!", end: "Ваши Никита и Анастасия", content: 'В связи со сложившимися обстоятельствами, а именно: \n невозможностью больше глядеть на пустующую 14 страницу наших паспортов и постоянно отвечать на вопросы: "Ну когда же уже???", мы все-таки решили совершить обряд бракосочетания. \n В связи с чем, будем рады видеть Вас на нашей свадьбе 5 июня 2023 года!!! \n Данное мероприятие будет проходить в нескольких действиях: \n Действие 1 (для души): Торжественное, по адресу: г. Москва, ул. Горная 48 \n Действие 2 (для желудка): Горько-Поцелуйно-Выпивательное,  по адресу: г. Москва, ул. Полянка 11'},
+    {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
+    {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга.Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
+  ]
+
+  const [textObject, setTextObject] = useState(texts[Math.floor(Math.random() * texts.length)])
+  const [fullTextTitle, setFullTextTitle] = useState("")
+  const [fullEndTitle, setFullEndTitle] = useState("")
+  const [fullText, setFullText] = useState("")
   const [paperTitleText, setPaperTitleText] = useState("")
+  const [paperEndText, setPaperEndText] = useState("")
   const [paperText, setPaperText] = useState("")
+  
+  
+  useEffect(() => {
+    setFullTextTitle(textObject.head)
+    setFullText(textObject.content)
+    setFullEndTitle(textObject.end)
+  }, [textObject])
   
   const navigate = useNavigate()
 
   useEffect(() => {
     for (let i = 0; i < fullTextTitle.length; i++) {
-      setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 200))
+      setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 70))
     }
     for (let i = 0; i < fullText.length; i++) {
-      setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 200) + (i * 200))
+      setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 70) + (i * 70))
     }
-  }, [])
+    for (let i = 0; i < fullEndTitle.length; i++) {
+      setTimeout(() => setPaperEndText(prev => prev += fullEndTitle[i]), 4000 + (fullEndTitle.length * 70) + (fullText.length * 70) + (i * 70))
+    }
+  }, [fullText])
 
   useEffect(() => {
     const res = axios.get("http://127.0.0.1:8000/authentication/reviews/").then(data => {
@@ -64,7 +84,6 @@ const Home = ({ userData }) => {
     })
   }
 
-  
   const reviewsDisplay = reviews.map(el => (
     <div key={uuidv4()} className='review'>
       <img src={`http://127.0.0.1:8000${el.image}`}/>
@@ -105,37 +124,44 @@ const Home = ({ userData }) => {
         <div className='col col-1'>
           <motion.div
             className='block'
-            animate={expandedBlock1 ? {width: "22rem", height: "26rem"} : {width: "9.5rem", height: "8rem"}}
             onClick={() => setExpandedBlock1(prev => !prev)}
           >
             <img className='pergament' src={pergament}/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Письмо во все времена было очень популярным средством коммуникации. Считалось, что образованный человек просто обязан уметь писать красивые письма. Сейчас, конечно, ситуация изменилась, но от красивого и отлично составленного письма можно остаться под впечатлением и в наше время тоже!</p>
           </motion.div>
           <motion.div 
             className='block' 
-            animate={expandedBlock2 ? {width: "22rem", height: "26rem"} : {width: "9.5rem", height: "8rem"}}
             onClick={() => setExpandedBlock2(prev => !prev)}
           >
             <img className='envelope' src={envelope}/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Наша компания предоставляет каждому человеку возможность получить в свои руки настоящее, красиво оформленное, грамотное письмо, которое не оставит без внимания ближнего.</p>
           </motion.div>
         </div>
         <div className='col col-2'>
           <motion.div 
             className='block' 
-            animate={expandedBlock3 ? {width: "22rem", height: "26rem"} : {width: "9.5rem", height: "8rem"}}
             onClick={() => setExpandedBlock3(prev => !prev)}
           >
-              <img className='feather' src={feather}/>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <img className='feather' src={feather}/>
+            <p>
+              Напишите признание в любви своей второй половинке <br/>
+              <br/>
+              Напишите романтическое письмо и подарите своей возлюбленной <br/>
+              <br/>
+              Напишите необычное письмо другу, он будет очень удивлён  <br/>
+              <br/>
+              И многое другое 
+            </p>
           </motion.div>
         </div>
       </div>
       <div className='pergament-previews'>
         <div className='pergament-paper'>
           {paperTitleText}
-          <br/>
+          {paperTitleText ? <br/>: ""}
           {paperText}
+          {paperEndText ? <br/>: ""}
+          {paperEndText}
         </div>
       </div>
       <div className='order-options'>
@@ -148,9 +174,8 @@ const Home = ({ userData }) => {
                 <p>$<strong>5</strong></p>
               </div>
               <div className='describe'>
-                <p>chet eto d</p>
-                <p>eche eto</p>
-                <p>i vse</p>
+                <p>·Printed letter</p>
+                <p>·Seal options</p>
               </div>
           </div>
           <div className='option'>
@@ -159,9 +184,9 @@ const Home = ({ userData }) => {
                 <p>$<strong>7</strong></p>
               </div>
               <div className='describe'>
-                <p>chet eto d</p>
-                <p>eche eto</p>
-                <p>i vse</p>
+                <p>·Handwritten letter</p>
+                <p>·Huge variety of sealing wax</p>
+                <p>·Seal options</p>
               </div>
           </div>
           <div className='option'>
@@ -170,9 +195,9 @@ const Home = ({ userData }) => {
                 <p>$<strong>3</strong></p>
               </div>
               <div className='describe'>
-                <p>chet eto d</p>
-                <p>eche eto</p>
-                <p>i vse</p>
+                <p>·For your events</p>
+                {/* <p></p> */}
+                {/* <p>i vse</p> */}
               </div>
           </div>
         </div>

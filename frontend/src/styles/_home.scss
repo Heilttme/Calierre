@@ -164,7 +164,7 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        width: 70%;
+        width: 80%;
         gap: 4rem;
         margin: 0 auto;
         margin-top: 7rem;
@@ -187,13 +187,15 @@
     .block{
         background-color: #E85A4F;
         overflow: hidden;
-        width: 9.5rem;
-        height: 8rem;
+        // width: 9.5rem;
+        // height: 8rem;
+        width: 22rem;
+        height: 26rem;
         padding: 1rem 2rem;
         color: #EAE7DC;
         box-shadow: 7px 5px 0px black;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 1.05em;
         white-space: pre-wrap;
 
         .pergament{
@@ -220,11 +222,11 @@
 
         .pergament-paper{
             background-color:#D8C3A5;
-            height: 700px;
-            width: 550px;
+            height: 800px;
+            width: 600px;
             padding: 1.5rem;
-            font-family: 'Dancing Script', cursive;
-            font-size: 3em;
+            font-family: 'Bad Script', cursive;
+            font-size: 1.5em;
             user-select: none;
         }
     }
@@ -281,6 +283,15 @@
                         strong{
                             font-size: 1.7em;
                         }
+                    }
+                }
+
+                .describe{
+                    p{
+                        font-size: 1.3em;
+                        border-bottom: 1px #fff solid;
+                        padding-bottom: .5rem;
+                        margin-bottom: .5rem;
                     }
                 }
             }

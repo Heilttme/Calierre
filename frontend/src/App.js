@@ -26,6 +26,13 @@ const App = () => {
     content: "",
     details: "",
     mistakes: "",
+    city: "Moscow",
+    street: "",
+    detailsForCourier: "",
+    option: "",
+    sealBasic: "",
+    sealAdvanced: "",
+    waxAdvanced: "",
   })
 
   const changeOrderData = (e) => {
