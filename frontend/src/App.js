@@ -12,13 +12,22 @@ const App = () => {
   }, [])
   
   const [userData, setUserData] = useState({
+    id: null,
     username: "",
     email: "",
     image: "",
-    orders: []
+    orders: [],
+    ordersForWriter: [],
+    staff: false,
   })
+
   
-  const [blur, setBlur] = useState(true)
+  useEffect(() => {
+    if (userData.staff === true) {
+      const res = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
+    }
+  }, [userData.staff])
+  
   const [menuOpened, setMenuOpened] = useState(false)
 
   const [orderData, setOrderData] = useState({
@@ -63,7 +72,7 @@ const App = () => {
           }
            
           const res = axios.get("http://127.0.0.1:8000/auth/users/me/", config).then(data => {
-            const resOrders = axios.post("http://127.0.0.1:8000/authentication/orders/", {id: data.data.id}).then(data2 => setUserData({username: data.data.username, email: data.data.email, image: data.data.image, orders: data2.data.orders}))
+            const resOrders = axios.post("http://127.0.0.1:8000/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: data.data.image, orders: data2.data.orders, staff: data.data.is_staff})))
           })
         })
       }

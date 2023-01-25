@@ -138,7 +138,7 @@ example {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 85%;
   gap: 4rem;
   margin: 0 auto;
   margin-top: 7rem;
@@ -159,13 +159,13 @@ example {
 .home .block {
   background-color: #E85A4F;
   overflow: hidden;
-  width: 22rem;
-  height: 26rem;
+  width: 26rem;
+  height: 30rem;
   padding: 1rem 2rem;
   color: #EAE7DC;
   box-shadow: 7px 5px 0px black;
   font-weight: bold;
-  font-size: 1.05em;
+  font-size: 1.25em;
   white-space: pre-wrap;
 }
 .home .block .pergament {
@@ -222,7 +222,7 @@ example {
 .home .order-options {
   width: 70%;
   margin: 1rem auto;
-  margin-top: 13rem;
+  margin-top: 15rem;
 }
 .home .order-options .header-options {
   font-size: 40px;
@@ -265,6 +265,9 @@ example {
   border-bottom: 1px #fff solid;
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.home .order-options .wrapper .option .describe p:last-child {
+  border-bottom: none;
 }
 .home .reviews {
   width: 70%;
@@ -744,7 +747,25 @@ example {
   color: #E98074;
 }
 .customize .right-col {
-  width: 25%;
+  width: 30%;
+}
+.customize .right-col button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  margin-bottom: 1rem;
+}
+.customize .right-col button:hover {
+  background-color: #ee7366;
 }
 .customize .right-col h1 {
   margin-bottom: 2.5rem;
@@ -791,6 +812,9 @@ example {
   border-bottom: 1px solid rgb(235, 232, 232);
   padding-bottom: 0.5rem;
   margin-bottom: 0.8rem;
+}
+.customize .right-col .option .desc p:last-child {
+  border-bottom: none;
 }
 .customize .right-col .option .desc .additional {
   border: none;
@@ -878,6 +902,7 @@ example {
   transition: all 0.15s ease-in-out;
   background-color: #fff;
   color: #E85A4F;
+  margin-top: 0.5rem;
 }
 .customize .right-col .option button:hover {
   background-color: #ee7366;
@@ -886,49 +911,62 @@ example {
   background-color: #d4d3d1;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1700px) {
   .customize {
-    width: 85%;
+    width: 90%;
+  }
+  .customize .right-col {
+    width: 38%;
+  }
+}
+@media (max-width: 1300px) {
+  .customize {
+    width: 90%;
+  }
+  .customize .right-col {
+    width: 45%;
   }
 }
 @media (max-width: 1200px) {
-  .customize .form {
-    width: 60%;
+  .customize .right-col {
+    width: 50%;
+  }
+}
+@media (max-width: 1100px) {
+  .customize .right-col {
+    width: 59%;
   }
 }
 @media (max-width: 1000px) {
-  .customize .form {
-    width: 75%;
+  .customize .right-col {
+    width: 70%;
   }
 }
-@media (max-width: 800px) {
-  .customize .form {
-    width: 90%;
+@media (max-width: 900px) {
+  .customize .right-col {
+    width: 80%;
+    margin: 0 auto;
   }
 }
-@media (max-width: 800px) {
-  .customize .form {
+@media (max-width: 400px) {
+  .customize .right-col {
     width: 100%;
+    margin: 0 auto;
+  }
+  .customize .right-col .option button {
+    font-size: 0.8em;
+  }
+  .customize .right-col .option span {
+    left: 0.4rem;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 1100px) {
   .customize .buttons {
     display: block;
   }
   .customize .buttons a {
     display: block;
-    margin-top: 1rem;
-  }
-  .customize .form .font .additional {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  .customize .form .font .additional select {
-    width: 100%;
-  }
-  .customize .form .font .additional span {
-    gap: 1rem;
+    margin-top: 0.5rem;
   }
 }
 .forgot-page {
@@ -1069,6 +1107,33 @@ example {
   margin: 0 auto;
   margin-top: 3rem;
 }
+.profile .username {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile .username strong {
+  color: #E85A4F;
+  font-size: 1.2em;
+}
+.profile .orders a {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  margin-top: 1rem;
+}
+.profile .orders a:hover {
+  background-color: #ee7366;
+}
 .profile .orders .order {
   width: 100%;
   background-color: #E85A4F;
@@ -1082,6 +1147,56 @@ example {
 }
 .profile .orders .order p {
   color: white;
+}
+.profile .orders .order button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  margin-top: 1rem;
+  background-color: #fff;
+  color: #E85A4F;
+  padding: 0.4rem 2rem;
+}
+.profile .orders .order button:hover {
+  background-color: #ee7366;
+}
+.profile .orders .order button:hover {
+  background-color: #d4d3d1;
+}
+.profile .orders .empty.untaken {
+  background-color: #E85A4F;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #fff;
+}
+.profile .orders .empty.untaken h1 {
+  font-size: 1.5em;
+}
+.profile .orders .empty.untaken p {
+  margin-top: 1rem;
+  font-size: 1.2em;
+}
+.profile .orders .empty.taken {
+  background-color: #E85A4F;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #fff;
+}
+.profile .orders .empty.taken h1 {
+  font-size: 1.5em;
+}
+.profile .orders .empty.taken p {
+  margin-top: 1rem;
+  font-size: 1.2em;
 }
 .profile .wrapper {
   margin-top: 1.5rem;
@@ -1757,6 +1872,15 @@ example {
   padding: 2rem;
   padding-top: 1rem;
 }
+.contact .info .hours {
+  width: 75%;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+}
+.contact .info .hours div {
+  display: flex;
+  justify-content: space-between;
+}
 .contact .info .block {
   margin-top: 1rem;
   padding-bottom: 1rem;
@@ -2021,10 +2145,11 @@ main {
   transition: all 0.15s ease-in-out;
   text-align: center;
   margin: 0 auto;
-  margin-top: 4rem;
-  padding: 0.8rem 4rem;
+  margin-top: 6rem;
+  padding: 1.6rem 6rem;
   background-color: #fff;
   color: #E85A4F;
+  font-size: 2em;
 }
 .header .order:hover {
   background-color: #ee7366;
@@ -2130,7 +2255,7 @@ main {
   display: flex;
   gap: 0.5rem;
 }
-.footer .icons .tg {
+.footer .icons .vk {
   width: 40px;
 }
 .footer .icons .ig {

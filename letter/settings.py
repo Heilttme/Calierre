@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "authentication",
     'rest_framework_simplejwt',
     "corsheaders",
+    "email_app",
 ]
 
 MIDDLEWARE = [
@@ -73,8 +74,12 @@ WSGI_APPLICATION = 'letter.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "Nikson123123",
+        'HOST': "localhost",
+        'POST': "",
     }
 }
 
@@ -83,8 +88,8 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT  = 587
-EMAIL_HOST_USER = "writeme2376@gmail.com"
-EMAIL_HOST_PASSWORD = "tnshjjjtrazswljd"
+EMAIL_HOST_USER = "calierre.help@gmail.com"
+EMAIL_HOST_PASSWORD = "svptcinioluzvfoy"
 EMAIL_USE_TLS = True
 
 # Password validation
@@ -162,6 +167,12 @@ DJOSER = {
         'user_create': 'authentication.serializers.UserCreateSerializer',
         'user': 'authentication.serializers.UserCreateSerializer',
         'current_user': 'authentication.serializers.UserCreateSerializer',
+    },
+    "EMAIL": {
+        "activation": "email_app.views.ActivationEmail",
+        "confirmation": "email_app.views.ConfirmationEmail",
+        "password_changed_confirmation": "email_app.views.PasswordChangedConfirmationEmail",
+        "password_reset": "email_app.views.PasswordResetEmail",
     }
 }
 

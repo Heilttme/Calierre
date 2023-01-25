@@ -195,7 +195,12 @@
     }
 
     .right-col{
-        width: 25%;
+        width: 30%;
+
+        button{
+            @include button;
+            margin-bottom: 1rem;
+        }
 
         h1{
             margin-bottom: 2.5rem;
@@ -248,6 +253,9 @@
                     padding-bottom: .5rem;
                     margin-bottom: .8rem;
 
+                    &:last-child{
+                        border-bottom: none;
+                    }
                 }
 
                 .additional{
@@ -339,6 +347,7 @@
 
                 background-color: #fff;
                 color: #E85A4F;
+                margin-top: .5rem;
 
                 &:hover{
                     background-color: #d4d3d1;
@@ -350,69 +359,173 @@
 }
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1700px) {
     .customize{
-        width: 85%;
+        width: 90%;
+
+        .left-col{
+            // width: 90% !important;
+        }
+    }
+    
+    .customize .right-col {
+        width: 38%;
     }
 }
 
-@media (max-width: 1200px) {
+
+@media (max-width: 1300px) {
     .customize{
-    
-        .form{
-            width: 60%;
+        width: 90%;
+
+        .left-col{
+            // width: 90% !important;
         }
+    }
+    
+    .customize .right-col {
+        width: 45%;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .customize .right-col {
+        width: 50%;
+    }
+}
+
+
+@media (max-width: 1100px) {
+    .customize .right-col {
+        width: 59%;
     }
 }
 
 @media (max-width: 1000px) {
-    .customize{
-    
-        .form{
-            width: 75%;
-        }
+    .customize .right-col {
+        width: 70%;
     }
 }
 
-@media (max-width: 800px) {
-    .customize{
+
+@media (max-width: 900px) {
     
-        .form{
-            width: 90%;
-        }
+    .customize .right-col {
+        width: 80%;
+        margin: 0 auto;
     }
 }
 
-@media (max-width: 800px) {
-    .customize{
+
+@media (max-width: 400px) {
     
-        .form{
-            width: 100%;
+    .customize .right-col {
+        width: 100%;
+        margin: 0 auto;
+
+        .option button{
+            font-size: .8em;
         }
     }
+
+    .customize .right-col .option span {
+        left: .4rem;
+    }
+
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 1100px) {
     .customize .buttons {
         display: block;
-
         a{
             display: block;
-            margin-top: 1rem;
-        }
-    }
-
-    .customize .form .font .additional {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .5rem;
-
-        select{
-            width: 100%;
-        }
-
-        span{
-            gap: 1rem;
+            margin-top: .5rem;
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @media (max-width: 1400px) {
+//     .customize{
+//         width: 85%;
+//     }
+// }
+
+// @media (max-width: 1200px) {
+//     .customize{
+    
+//         .form{
+//             width: 60%;
+//         }
+//     }
+// }
+
+// @media (max-width: 1000px) {
+//     .customize{
+    
+//         .form{
+//             width: 75%;
+//         }
+//     }
+// }
+
+// @media (max-width: 800px) {
+//     .customize{
+    
+//         .form{
+//             width: 90%;
+//         }
+//     }
+// }
+
+// @media (max-width: 800px) {
+//     .customize{
+    
+//         .form{
+//             width: 100%;
+//         }
+//     }
+// }
+
+// @media (max-width: 600px) {
+//     .customize .buttons {
+//         display: block;
+
+//         a{
+//             display: block;
+//             margin-top: 1rem;
+//         }
+//     }
+
+//     .customize .form .font .additional {
+//         flex-direction: column;
+//         align-items: flex-start;
+//         gap: .5rem;
+
+//         select{
+//             width: 100%;
+//         }
+
+//         span{
+//             gap: 1rem;
+//         }
+//     }
+// }

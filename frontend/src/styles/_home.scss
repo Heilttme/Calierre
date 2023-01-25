@@ -164,7 +164,7 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        width: 80%;
+        width: 85%;
         gap: 4rem;
         margin: 0 auto;
         margin-top: 7rem;
@@ -189,13 +189,13 @@
         overflow: hidden;
         // width: 9.5rem;
         // height: 8rem;
-        width: 22rem;
-        height: 26rem;
+        width: 26rem;
+        height: 30rem;
         padding: 1rem 2rem;
         color: #EAE7DC;
         box-shadow: 7px 5px 0px black;
         font-weight: bold;
-        font-size: 1.05em;
+        font-size: 1.25em;
         white-space: pre-wrap;
 
         .pergament{
@@ -244,7 +244,7 @@
     .order-options{
         width: 70%;
         margin: 1rem auto;
-        margin-top: 13rem;
+        margin-top: 15rem;
 
         .header-options{
             font-size: 40px;
@@ -292,6 +292,10 @@
                         border-bottom: 1px #fff solid;
                         padding-bottom: .5rem;
                         margin-bottom: .5rem;
+
+                        &:last-child{
+                            border-bottom: none;
+                        }
                     }
                 }
             }

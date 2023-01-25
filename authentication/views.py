@@ -41,9 +41,6 @@ def add_review(request):
     
 @api_view(["POST"])
 def get_orders(request):
-    def remove_data(order):
-        order.id = ""
-        return order
     
     orders = Order.objects.filter(user=request.data.get("id"))
 
@@ -52,3 +49,49 @@ def get_orders(request):
     return Response({"orders": OrderSerializer(orders, many=True).data})
 
 
+@api_view(["POST"])
+def get_orders_from_users(request):
+    orders = Order.objects.all()
+    
+    return Response({"orders": OrderSerializer(orders, many=True).data})
+
+@api_view(["POST"])
+def change_order_status_taken(request):
+    order = list(Order.objects.filter(id=request.data.get("id")))[0]
+
+    order.taken = True
+    order.save()
+
+    return Response({"status": status.HTTP_200_OK})
+
+    
+@api_view(["POST"])
+def change_order_status_checked(request):
+    order = Order.objects.filter(id=request.data.get("id"))[0]
+
+    order.checked = 1
+    order.save()
+
+    return Response({"status": status.HTTP_200_OK})
+
+@api_view(["POST"])
+def change_order_status_completed(request):
+    order = Order.objects.filter(id=request.data.get("id"))[0]
+
+    order.completed = 1
+    order.save()
+
+    return Response({"status": status.HTTP_200_OK})
+
+
+@api_view(["POST"])
+def change_order_status_delivered(request):
+    order = Order.objects.filter(id=request.data.get("id"))[0]
+
+    order.delivered = 1
+    order.save()
+
+    return Response({"status": status.HTTP_200_OK})
+
+
+    

@@ -206,10 +206,11 @@ main{
         @include button;
         text-align: center;
         margin: 0 auto;
-        margin-top: 4rem;
-        padding: .8rem 4rem;
+        margin-top: 6rem;
+        padding: 1.6rem 6rem;
         background-color: #fff;
         color: #E85A4F;
+        font-size: 2em;
 
         &:hover{
             background-color: #D8C3A5
@@ -355,7 +356,7 @@ main{
         display: flex;
         gap: .5rem;
         
-        .tg{
+        .vk{
             width: 40px;
         }
 

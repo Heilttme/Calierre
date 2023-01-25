@@ -1,5 +1,5 @@
 import axios, { formToJSON } from 'axios'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
@@ -12,7 +12,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
   const [curPasswordError, setCurPasswordError] = useState(false)
   const [formData, setFormData] = useState({
     username: userData.username,
-    email: userData.email,
+    // email: userData.email,
     password: "",
     currentPassword: ""
   })
@@ -22,14 +22,14 @@ const Profile = ({ userData, setUserData, authorize }) => {
   const [pending, setPending] = useState(false)
   
   const [usernameSuccess, setUsernameSuccess] = useState(null)
-  const [emailSuccess, setEmailSuccess] = useState(null)
+  // const [emailSuccess, setEmailSuccess] = useState(null)
   const [passwordSuccess, setPasswordSuccess] = useState(null)
 
   const confirmPasswordInputRef = useRef(null)
   
   useEffect(() => {
     setUsernameSuccess(null)
-    setEmailSuccess(null)
+    // setEmailSuccess(null)
     setPasswordSuccess(null)
   }, [edit])
 
@@ -174,47 +174,47 @@ const Profile = ({ userData, setUserData, authorize }) => {
       }
     })
 
-    setTimeout(() => {
-      if (userData.email !== formData.email) res2 = axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(() => {
-        setEmailSuccess(true)
-        setUserData(prev => ({...prev, email: formData.email}))
-        toast.success('E-mail has been changed successfully', {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          theme: "light",
-        })
-      }).catch((data) => {
-        if (data.response.data.current_password) {
-          setCurPasswordError(true)
-          toast.error('Current password error has occured', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "light",
-          })
-        } else {
-          setEmailSuccess(false)
-          toast.error('E-mail error has occured', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "light",
-          })
-        }
-      })
+    // setTimeout(() => {
+    //   if (userData.email !== formData.email) res2 = axios.post("http://127.0.0.1:8000/auth/users/set_email/", {new_email: formData.email, current_password: formData.currentPassword}, config).then(() => {
+    //     setEmailSuccess(true)
+    //     setUserData(prev => ({...prev, email: formData.email}))
+    //     toast.success('E-mail has been changed successfully', {
+    //       position: "bottom-right",
+    //       autoClose: 5000,
+    //       hideProgressBar: true,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: 0,
+    //       theme: "light",
+    //     })
+    //   }).catch((data) => {
+    //     if (data.response.data.current_password) {
+    //       setCurPasswordError(true)
+    //       toast.error('Current password error has occured', {
+    //         position: "bottom-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: true,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: 0,
+    //         theme: "light",
+    //       })
+    //     } else {
+    //       setEmailSuccess(false)
+    //       toast.error('E-mail error has occured', {
+    //         position: "bottom-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: true,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: 0,
+    //         theme: "light",
+    //       })
+    //     }
+    //   })
 
       setTimeout(() => {
         if (formData.password) res3 = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
@@ -266,7 +266,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
         })
       }, 2000)
       
-    }, 2000)
+    // }, 2000)
   }
 
   const orders = userData.orders.map(el => (
@@ -274,22 +274,41 @@ const Profile = ({ userData, setUserData, authorize }) => {
       <div className='order'>
         <h2>{el.title ? el.title : "NO TITLE"}</h2>
         <p>{el.data}</p>
-        <p className='content'><strong>Country</strong>: {el.country}</p>
-        <p className='content'><strong>Region</strong>: {el.region}</p>
-        <p className='content'><strong>City</strong>: {el.city}</p>
+        {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
         <p className='content'>{el.content}</p>
       </div>
-      <div className='complete'>
-
-      </div>
     </div>
+  ))
+
+  const takeOrder = (id) => {
+    const res1 = axios.post("http://127.0.0.1:8000/authentication/change_order_status_taken/", {id}).then(data => {
+      const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
+    })
+  }
+
+  const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false).map(el => (
+    <AnimatePresence>
+      <motion.div exit={{x: 100}} className='order-wrapper'>
+        <div className='order'>
+          <h2>{el.title ? el.title : "NO TITLE"}</h2>
+          <p>{el.data}</p>
+          {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
+          <p className='content'>{el.content}</p>
+        <button onClick={() => takeOrder(el.id)}>Take</button>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  ))
+
+  const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false).map(el => (
+    <TakenOrdersForWriter el={el} setUserData={setUserData} />
   ))
   
   return (
     <div className='profile-container'>
         <div className='profile-wrapper' >
             <div className='profile'>
-                <h1>{userData.username}</h1>
+                <div className='username'><h1>{userData.username}</h1> {userData.staff ? <strong>Writer</strong> : ""}</div>
                 <div className='wrapper'>
                     <div className='left-col'>
                         <img className='skeleton' src={userData.image}/>
@@ -300,6 +319,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                         <ul className='selectors'>
                             <li onClick={() => setSelectedBlock("info")} className={`${selectedBlock == "info" && "active"} block-select`}>Info</li>
                             <li onClick={() => setSelectedBlock("orders")} className={`${selectedBlock == "orders" && "active"} block-select`}>Orders</li>
+                            {userData.staff && <li onClick={() => setSelectedBlock("taken")} className={`${selectedBlock == "taken" && "active"} block-select`}>Taken</li>}
                         </ul>    
                         <div className='block'>
                             {
@@ -307,12 +327,22 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     <div className='wrapper-info'>
                                         <div className='info'>
                                             <ul className='left-keys'>
-                                                <li>Username</li>  
                                                 <li>E-mail</li>  
-                                                <li>Password</li>  
+                                                <li>Username</li>  
+                                                <li>Password</li> 
                                             </ul>
                                             <ul className='right-values'>
-                                                <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
+                                                <li>
+                                                    {/* {!edit ?  */}
+                                                      {userData.email} {/* : */}
+                                                    {/* <input
+                                                      name='email'  
+                                                      value={formData.email}
+                                                      onChange={(e) => changeFormData(e)}
+                                                      className={`${emailSuccess === true ? "success" : emailSuccess === false && "error"}`}
+                                                    />} */}
+                                                </li>  
+                                                <li>
                                                 {!edit ? 
                                                       userData.username :
                                                     <input
@@ -322,17 +352,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                                       className={`${usernameSuccess === true ? "success" : usernameSuccess === false && "error"}`}
                                                       />}
                                                 </li>  
-                                                <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
-                                                    {!edit ? 
-                                                      userData.email :
-                                                    <input
-                                                      name='email'  
-                                                      value={formData.email}
-                                                      onChange={(e) => changeFormData(e)}
-                                                      className={`${emailSuccess === true ? "success" : emailSuccess === false && "error"}`}
-                                                    />}
-                                                </li>  
-                                                <li className={`${(!userData.username || !userData.email) && "skeleton-text skeleton"}`}>
+                                                <li>
                                                     {!edit ? 
                                                       "*********" :
                                                     <input
@@ -365,9 +385,28 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                             </div>}
                                         </div>
                                     </div>
-                                :
+                                : selectedBlock === "taken" ? 
+                                    <div className='taken orders'>
+                                        {takenOrdersForWriter.length ? takenOrdersForWriter : 
+                                          <div className='empty taken'>
+                                            <h1>Your taken orders list is empty</h1>
+                                            <p>See your orders to take one</p>
+                                          </div>
+                                        }
+                                    </div>
+                                      :
                                     <div className='orders'>
-                                      {orders}
+                                      {userData.staff ? untakenOrdersForWriter.length ? untakenOrdersForWriter : 
+                                        <div className='empty untaken'>
+                                          <h1>Your untaken orders list is empty</h1>
+                                          <p>You will get e-mail notification when somebody orders a letter</p>
+                                        </div>
+                                      : orders.length ? orders : 
+                                        <div className='empty'>
+                                            <h1>Your orders list is empty</h1>
+                                            <a href='/customize'>Make order</a>
+                                        </div> 
+                                      }
                                     </div>
                             }
                         </div>
@@ -380,63 +419,31 @@ const Profile = ({ userData, setUserData, authorize }) => {
   )
 }
 
-// const PasswordEditMenu = () => {
-//   const [password1Focus, setPassword1Focus] = useState(false)
-//   const [password2Focus, setPassword2Focus] = useState(false)
-//   const [errors, setErrors] = useState([])
-//   const [formData, setFormData] = useState({
-//     password1: "",
-//     password2: "",
-//     cur_password: ""
-//   })
+const TakenOrdersForWriter = ({ el, setUserData }) => {
+  const [exited, setExited] = useState(false)
 
-//   const changeFormData = (e) => {
-//       setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
-//   }
-
-//   const submitData = () => {
-//     const res = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password1, re_new_password: formData.password2, current_password: formData.cur_password})
-//   }
+  const confirmOrder = (id) => {
+    setUserData(prev => ({...prev, ordersForWriter: prev.ordersForWriter.filter(el => el.id !== id)}))
+    const res1 = axios.post("http://127.0.0.1:8000/authentication/change_order_status_completed/", {id}).then(data => {
+      const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => {
+        setExited(true)
+        // setUserData(prev => ({...prev, ordersForWriter: data.data.orders}))
+      })
+    })
+  }
   
-//   return (
-//     <div className='reset-block' style={{backdropFilter: "none", filter: "none"}}>
-//       <h1>Enter current password</h1>
-//       <div className='cur_password-block block'>
-//         <input
-//           name="cur_password"
-//           id="cur_password"
-//           onFocus={() => password1Focus(true)}
-//           onBlur={() => password1Focus(false)}
-//           onChange={(e) => changeFormData(e)}
-//         //   className={`${errorTypes.includes("detail") && "error"}`}
-//         />
-//         <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="cur_password">Current password</motion.label>
-//       </div>
-//       <div className='password1-block block'>
-//         <input
-//           name="password1"
-//           id="password1"
-//           onFocus={() => password1Focus(true)}
-//           onBlur={() => password1Focus(false)}
-//           onChange={(e) => changeFormData(e)}
-//         //   className={`${errorTypes.includes("detail") && "error"}`}
-//         />
-//         <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">Password</motion.label>
-//       </div>
-//       <div className='password2-block block'>
-//         <input
-//           name="password2"
-//           id="password2"
-//           onFocus={() => password2Focus(true)}
-//           onBlur={() => password2Focus(false)}
-//           onChange={(e) => changeFormData(e)}
-//         //className={`${errorTypes.includes("detail") && "error"}`}
-//         />
-//         <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">Password again</motion.label>
-//       </div>
-//       <button onClick={submitData}>Submit</button>
-//     </div>
-//   )
-// }
+  return (
+    <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
+      <div className='order'>
+        <h2>{el.title ? el.title : "NO TITLE"}</h2>
+        <p>{el.data}</p>
+        {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
+        <p className='content'>{el.content}</p>
+      {/* <button onClick={() => takeOrder(el.id)}>Take</button> */}
+      <button onClick={() => confirmOrder(el.id)}>Done</button>
+      </div>
+    </motion.div>
+  )
+}
 
 export default Profile

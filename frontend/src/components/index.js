@@ -10,7 +10,6 @@ import Profile from "./Profile"
 import PasswordRestore from "./PasswordRestore"
 import Pay from "./Pay"
 import Destination from "./Destination"
-import LeaveReview from "./LeaveReview"
 import Contact from "./Contact"
 
-export { Home, Login, SignUp, Navigation, Footer, Customize, ForgotPassword, Activate, Profile, PasswordRestore, Pay, Destination, LeaveReview, Contact }
+export { Home, Login, SignUp, Navigation, Footer, Customize, ForgotPassword, Activate, Profile, PasswordRestore, Pay, Destination, Contact }

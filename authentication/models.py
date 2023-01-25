@@ -35,15 +35,15 @@ class Review(models.Model):
 
 
 class Order(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, default="")
     content = models.CharField(max_length=2550)
-    font = models.CharField(max_length=255)
-
-    country = models.CharField(max_length=255)
-    region = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
+    
+    taken = models.BooleanField(default=False)      # first step: writer takes order
+    completed = models.BooleanField(default=False)  # second step: writer completes order
+    checked = models.BooleanField(default=False)    # third step: expert checks letter
+    delivered = models.BooleanField(default=False)  # fourth step: delivery co delivers order
+    
     street = models.CharField(max_length=255)
-
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(default=datetime.now(), blank=True, null=True)
 
     user = models.ForeignKey(LetterUser, on_delete=models.CASCADE)

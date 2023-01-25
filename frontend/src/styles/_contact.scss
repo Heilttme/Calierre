@@ -113,6 +113,17 @@
             padding-top: 1rem;
         }
 
+        .hours{
+            width: 75%;
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+            
+            div{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
         .block{
             margin-top: 1rem;
             padding-bottom: 1rem;
