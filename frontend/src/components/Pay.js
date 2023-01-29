@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Pay = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +7,10 @@ const Pay = () => {
     expires: "",
     cvv: ""
   })
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   const changeFormData = (e) => {
     setFormData(prev => ({...prev, [e.target.name]: e.target.value}))

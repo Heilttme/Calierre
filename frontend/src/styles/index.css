@@ -12,6 +12,7 @@ example {
   width: 86px;
   height: 86px;
   z-index: -1;
+  display: none;
 }
 .home .image-1 {
   left: 137px;
@@ -23,55 +24,110 @@ example {
   top: 125px;
   transform: rotate(13.08deg);
 }
+@media (max-width: 656px) {
+  .home .image-2 {
+    display: none;
+  }
+}
 .home .image-3 {
   left: 1399.41px;
   top: 209px;
   transform: rotate(20.71deg);
+}
+@media (max-width: 1499px) {
+  .home .image-3 {
+    display: none;
+  }
 }
 .home .image-4 {
   left: 1674.57px;
   top: 198.17px;
   transform: rotate(-33.54deg);
 }
+@media (max-width: 1774px) {
+  .home .image-4 {
+    display: none;
+  }
+}
 .home .image-5 {
   left: 1219.41px;
   top: 30px;
   transform: rotate(40.99deg);
+}
+@media (max-width: 1319px) {
+  .home .image-5 {
+    display: none;
+  }
 }
 .home .image-6 {
   left: 986px;
   top: 130.63px;
   transform: rotate(-11.15deg);
 }
+@media (max-width: 1086px) {
+  .home .image-6 {
+    display: none;
+  }
+}
 .home .image-7 {
   left: 1698.84px;
   top: 743px;
   transform: rotate(21.01deg);
+}
+@media (max-width: 1799px) {
+  .home .image-7 {
+    display: none;
+  }
 }
 .home .image-8 {
   left: 747.9px;
   top: 741.62px;
   transform: rotate(32.56deg);
 }
+@media (max-width: 848px) {
+  .home .image-8 {
+    display: none;
+  }
+}
 .home .image-9 {
   left: 800px;
   top: 555.28px;
   transform: rotate(-12.95deg);
+}
+@media (max-width: 901px) {
+  .home .image-9 {
+    display: none;
+  }
 }
 .home .image-10 {
   left: 609px;
   top: 534.73px;
   transform: rotate(-33.71deg);
 }
+@media (max-width: 709px) {
+  .home .image-10 {
+    display: none;
+  }
+}
 .home .image-11 {
   left: 1099px;
   top: 722.68px;
   transform: rotate(-35.29deg);
 }
+@media (max-width: 1199px) {
+  .home .image-11 {
+    display: none;
+  }
+}
 .home .image-12 {
   left: 1651px;
   top: 1021.18px;
   transform: rotate(-33.27deg);
+}
+@media (max-width: 1751px) {
+  .home .image-12 {
+    display: none;
+  }
 }
 .home .image-13 {
   left: 2.54px;
@@ -83,25 +139,50 @@ example {
   top: 976.94px;
   transform: rotate(-91.63deg);
 }
+@media (max-width: 1506px) {
+  .home .image-14 {
+    display: none;
+  }
+}
 .home .image-15 {
   left: 1220.3px;
   top: 513.25px;
   transform: rotate(-41.46deg);
+}
+@media (max-width: 1320px) {
+  .home .image-15 {
+    display: none;
+  }
 }
 .home .image-16 {
   left: 1090.95px;
   top: 909.33px;
   transform: rotate(23.74deg);
 }
+@media (max-width: 1190px) {
+  .home .image-16 {
+    display: none;
+  }
+}
 .home .image-17 {
   left: 1569px;
   top: 482.63px;
   transform: rotate(-47.72deg);
 }
+@media (max-width: 1669px) {
+  .home .image-17 {
+    display: none;
+  }
+}
 .home .image-18 {
   left: 887.66px;
   top: 1002.84px;
   transform: rotate(-28.61deg);
+}
+@media (max-width: 987px) {
+  .home .image-18 {
+    display: none;
+  }
 }
 .home .image-19 {
   left: 200.07px;
@@ -118,15 +199,30 @@ example {
   top: 330.5px;
   transform: rotate(-18.65deg);
 }
+@media (max-width: 894px) {
+  .home .image-21 {
+    display: none;
+  }
+}
 .home .image-22 {
   left: 429.47px;
   top: 871px;
   transform: rotate(29.59deg);
 }
+@media (max-width: 529px) {
+  .home .image-22 {
+    display: none;
+  }
+}
 .home .image-23 {
   left: 1105.19px;
   top: 304.26px;
   transform: rotate(31.5deg);
+}
+@media (max-width: 1206px) {
+  .home .image-23 {
+    display: none;
+  }
 }
 .home .language {
   position: absolute;
@@ -191,6 +287,9 @@ example {
   width: 600px;
   padding: 1.5rem;
   font-family: "Bad Script", cursive;
+  -o-font-family: "Bad Script", cursive;
+  -ms-font-family: "Bad Script", cursive;
+  -moz-font-family: "Bad Script", cursive;
   font-size: 1.5em;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -261,7 +360,7 @@ example {
   font-size: 1.7em;
 }
 .home .order-options .wrapper .option .describe p {
-  font-size: 1.3em;
+  font-size: 1.1em;
   border-bottom: 1px #fff solid;
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
@@ -401,6 +500,187 @@ example {
   background-color: #B4B1A7;
 }
 
+@media (max-width: 1800px) {
+  .home .block {
+    width: 22rem;
+    height: 26rem;
+    font-size: 1em;
+  }
+  .home .order-options {
+    width: 85%;
+  }
+}
+@media (max-width: 1650px) {
+  .home .blocks {
+    width: 92%;
+  }
+}
+@media (max-width: 1550px) {
+  .home .pergament-previews .pergament-paper {
+    height: 660px;
+    width: 480px;
+    font-size: 1.35em;
+  }
+  .home .order-options {
+    width: 95%;
+  }
+}
+@media (max-width: 1400px) {
+  .home .block {
+    width: 20rem;
+    height: 26rem;
+    font-size: 0.95em;
+  }
+  .home .pergament-previews .pergament-paper {
+    height: 660px;
+    width: 480px;
+    font-size: 1.35em;
+  }
+  .home .order-options .wrapper .option {
+    padding: 1rem 3rem;
+    padding-top: 6rem;
+  }
+}
+@media (max-width: 1320px) {
+  .home .pergament-previews .pergament-paper {
+    height: 620px;
+    width: 420px;
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 1260px) {
+  .home .blocks {
+    position: unset;
+    transform: none;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+  .home .col-2 .block {
+    margin-top: 5rem;
+  }
+  .home .block {
+    width: 36rem;
+    height: 42rem;
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 1200px) {
+  .home .order-options .wrapper .option {
+    padding: 1rem 1.7rem;
+    padding-top: 6rem;
+  }
+}
+@media (max-width: 1000px) {
+  .home .reviews {
+    width: 87%;
+  }
+}
+@media (max-width: 900px) {
+  .home .order-options .wrapper {
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+  }
+  .home .order-options .wrapper .option {
+    margin-top: 5rem;
+  }
+  .home .order-options .wrapper .option .describe p {
+    font-size: 1.35em;
+  }
+  .home .order-options .wrapper .option .before {
+    width: 35%;
+    left: -10%;
+    transform: none;
+  }
+  .home .reviews .header-reviews p {
+    font-size: 2em;
+    letter-spacing: 3px;
+  }
+}
+@media (max-width: 800px) {
+  .home .reviews {
+    width: 95%;
+  }
+}
+@media (max-width: 700px) {
+  .home .order-options .wrapper {
+    width: 80%;
+  }
+  .home .order-options .wrapper .option .describe p {
+    font-size: 1.2em;
+  }
+  .home .order-options .wrapper .option .before {
+    font-size: 0.9em;
+  }
+  .home .reviews .header-reviews p {
+    font-size: 1.5em;
+    letter-spacing: 2px;
+  }
+  .home .block {
+    width: 28rem;
+    height: 32rem;
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 560px) {
+  .home .reviews .header-reviews {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .home .reviews .header-reviews p {
+    font-size: 2em;
+    letter-spacing: 3px;
+  }
+}
+@media (max-width: 500px) {
+  .home .order-options .wrapper {
+    width: 85%;
+  }
+  .home .order-options .wrapper .option .describe p {
+    font-size: 1.1em;
+  }
+  .home .order-options .wrapper .option .before {
+    width: 45%;
+  }
+  .home .block {
+    width: 22rem;
+    height: 30rem;
+    font-size: 1.1em;
+  }
+  .home .pergament-previews .pergament-paper {
+    height: 560px;
+    width: 370px;
+    font-size: 1.1em;
+  }
+}
+@media (max-width: 500px) {
+  .home .pergament-previews .pergament-paper {
+    height: 500px;
+    width: 320px;
+    font-size: 0.94em;
+  }
+}
+@media (max-width: 380px) {
+  .home .order-options .wrapper {
+    width: 85%;
+  }
+  .home .order-options .wrapper .option .describe p {
+    font-size: 1em;
+  }
+  .home .order-options .wrapper .option .before {
+    width: 55%;
+  }
+  .home .reviews .header-reviews p {
+    font-size: 1.5em;
+  }
+  .home .block {
+    width: 18rem;
+    height: 24rem;
+    font-size: 0.85em;
+  }
+}
 example {
   color: #EAE7DC #D8C3A5 #8E8D8A #E98074 #E85A4F #00cc66 #B4B1A7 grey disabled;
 }
@@ -410,7 +690,7 @@ example {
   justify-content: space-between;
   width: 75%;
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: 6rem;
 }
 .login-page .left-col .header-login {
   display: flex;
@@ -575,6 +855,63 @@ example {
   }
 }
 
+@media (max-width: 550px) {
+  .login-page .left-col .header-login h2 {
+    font-size: 1.75em;
+  }
+  .login-page .left-col .form input {
+    width: 350px;
+  }
+  .login-page .left-col .form .login-button {
+    width: 350px;
+  }
+}
+@media (max-width: 450px) {
+  .login-page .left-col .header-login h2 {
+    font-size: 1.55em;
+  }
+  .login-page .left-col .form input {
+    width: 300px;
+  }
+  .login-page .left-col .form .text-label {
+    font-size: 1.1em !important;
+    top: 0.5rem;
+  }
+  .login-page .left-col .form .login-button {
+    width: 300px;
+  }
+}
+@media (max-width: 380px) {
+  .login-page .left-col .header-login h2 {
+    font-size: 1.35em;
+  }
+  .login-page .left-col .header-login {
+    margin-bottom: 1.5rem;
+  }
+  .login-page .left-col .form input {
+    width: 250px;
+  }
+  .login-page .left-col .form .text-label {
+    font-size: 1em !important;
+    top: 0.5rem;
+  }
+  .login-page .left-col .form .login-button {
+    width: 250px;
+    font-size: 0.9em;
+  }
+}
+@media (max-width: 310px) {
+  .login-page .left-col .header-login h2 {
+    font-size: 1.1em;
+  }
+  .login-page .left-col .form input {
+    width: 220px;
+  }
+  .login-page .left-col .form .login-button {
+    width: 220px;
+    font-size: 0.75em;
+  }
+}
 .customize {
   width: 80%;
   display: flex;
@@ -2096,6 +2433,7 @@ main {
   font-size: 3em;
   letter-spacing: 4px;
   margin-top: 2rem;
+  line-height: 3.5rem;
 }
 .header .quote-mark {
   height: 24px;
@@ -2163,8 +2501,8 @@ main {
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .extended .quote-block {
-    padding: 2rem;
+  .extended .quote-block .quote {
+    font-size: 2.2em;
   }
 }
 @media (max-width: 850px) {
@@ -2174,29 +2512,98 @@ main {
   .extended .logo {
     left: 5% !important;
     font-size: 8em !important;
+    top: 6rem !important;
+  }
+  .extended .quote-block {
+    padding: 2rem;
+  }
+  .extended .quote-block .quote {
+    font-size: 1.8em;
+  }
+}
+@media (max-width: 750px) {
+  .header .order {
+    padding: 1.5rem 4.5rem;
+  }
+  .extended .quote-block .quote {
+    margin-top: 3rem;
+    font-size: 1.5em;
   }
 }
 @media (max-width: 666px) {
   .extended .logo {
+    top: 4.5rem !important;
     font-size: 6em !important;
+  }
+  .extended .quote-block {
+    padding: 0.4rem;
+  }
+  .extended .quote-block .quote {
+    margin-top: 3rem;
+    font-size: 1.45em;
+    line-height: 2rem;
+  }
+  .header .order {
+    margin-top: 3rem;
+    padding: 1.3rem 2.5rem;
+    font-size: 1.45em;
   }
 }
 @media (max-width: 560px) {
   .header .logo {
-    left: 4.5rem !important;
+    left: 15% !important;
+    top: 3.5rem !important;
+  }
+  .extended .logo {
+    left: 5% !important;
+    font-size: 8em !important;
+  }
+  .extended .quote-block {
+    padding: 2rem;
+  }
+  .extended .quote-block .quote {
+    font-size: 1.8em;
+  }
+  .header .extended .logo {
+    top: 3rem !important;
+    left: 2rem !important;
+  }
+  .header .quote-block {
+    padding: 0.2rem;
+    left: 10%;
   }
   .header .opened {
     width: 100vw;
   }
+  .header .order {
+    padding: 1.3rem 3rem;
+    font-size: 1.15em;
+  }
   .extended .logo {
     font-size: 4.5em !important;
   }
+  .extended .quote-block .quote {
+    margin-top: 3rem;
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 440px) {
+  .header .logo {
+    left: 17% !important;
+    top: 3.2rem !important;
+  }
+  .extended .logo {
+    left: 5% !important;
+    font-size: 4em !important;
+  }
   .extended .quote-block {
-    top: 13rem;
-    padding: 1rem;
+    padding: 2rem;
   }
   .extended .quote-block .quote {
-    font-size: 2.5em;
+    font-size: 1.8em;
+  }
+  .extended .quote-block .quote {
+    font-size: 1.4rem;
   }
 }
 @media (max-width: 400px) {
@@ -2204,32 +2611,44 @@ main {
     left: 0rem;
     top: 0.9rem;
   }
-  .header .logo {
-    left: 3.2rem !important;
-    top: 2.3rem !important;
-    font-size: 1.5em !important;
+  .header .extended .logo {
+    left: 1rem !important;
+    top: 3rem !important;
+    font-size: 3.6em !important;
   }
   .header .login {
     font-size: 0.8em;
     right: 0.5rem;
     padding: 0.6rem 1rem;
   }
+  .extended .quote-block .quote {
+    font-size: 1.3rem;
+  }
+  .header .order {
+    padding: 1.3rem 2.5rem;
+    font-size: 1em;
+  }
 }
 @media (max-width: 380px) {
+  .header .logo {
+    font-size: 1.7em !important;
+    top: 2.9rem !important;
+  }
   .extended .logo {
     font-size: 3em !important;
     top: 7% !important;
   }
   .extended .quote-block .quote {
-    font-size: 2.2em;
+    font-size: 1em;
+    line-height: 1.8rem;
   }
   .extended .quote-block .order {
-    padding: 0.8rem 1.8rem;
+    padding: 1rem 1.8rem;
   }
 }
 @media (max-width: 300px) {
   .extended .quote-block .quote {
-    font-size: 2em;
+    font-size: 1em;
   }
   .extended .quote-block .order {
     font-size: 0.8em;
@@ -2269,8 +2688,9 @@ main {
   .footer .icons {
     display: flex;
   }
-  .footer .icons .tg {
-    width: 32px;
+  .footer .icons .vk {
+    width: 30px;
+    margin-top: 0.1rem;
   }
   .footer .icons .ig {
     width: 52px;
@@ -2283,7 +2703,7 @@ main {
   .footer .icons {
     display: flex;
   }
-  .footer .icons .tg {
+  .footer .icons .vk {
     width: 28px;
   }
   .footer .icons .ig {
@@ -2299,7 +2719,7 @@ main {
     display: flex;
     gap: 0.1rem;
   }
-  .footer .icons .tg {
+  .footer .icons .vk {
     width: 24px;
   }
   .footer .icons .ig {
@@ -2313,7 +2733,7 @@ main {
   .footer .icons {
     display: flex;
   }
-  .footer .icons .tg {
+  .footer .icons .vk {
     width: 22px;
   }
   .footer .icons .ig {
@@ -2328,7 +2748,7 @@ main {
   .footer .icons {
     display: flex;
   }
-  .footer .icons .tg {
+  .footer .icons .vk {
     width: 18px;
   }
   .footer .icons .ig {
@@ -2342,7 +2762,7 @@ main {
   .footer .icons {
     display: flex;
   }
-  .footer .icons .tg {
+  .footer .icons .vk {
     width: 14px;
   }
   .footer .icons .ig {

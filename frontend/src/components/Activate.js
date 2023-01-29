@@ -7,7 +7,12 @@ const Activate = () => {
   const { uid, token } = useParams()  
 
   useEffect(() => {
-    const res = axios.post(`http://127.0.0.1:8000/auth/users/activation/`, {uid, token})
+    window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
+    const res = axios.post(`/auth/users/activation/`, {uid, token})
+    // const res = axios.post(`http://127.0.0.1:8000/auth/users/activation/`, {uid, token})
   }, [])
   
   return (

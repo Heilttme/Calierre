@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { motion } from 'framer-motion'
 import { t } from 'i18next';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +18,10 @@ const PasswordRestore = ({tempEmail}) => {
     password2: ""
   })
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   const navigate = useNavigate()
   const { uid, token } = useParams()
   
@@ -31,7 +35,7 @@ const PasswordRestore = ({tempEmail}) => {
 
   const submitData = () => {
     setPending(true)
-    const res = axios.post("http://127.0.0.1:8000/auth/users/reset_password_confirm/", {uid, token, new_password: formData.password1, re_new_password: formData.password2, email: tempEmail})
+    const res = axios.post("/auth/users/reset_password_confirm/", {uid, token, new_password: formData.password1, re_new_password: formData.password2, email: tempEmail})
     .then(data => {
       setPending(false)
       toast.success(t('Successfuly changed. Redirecting...'), {

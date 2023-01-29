@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import testimonial from "../images/negr.png"
 import axios from 'axios'
@@ -13,6 +13,10 @@ const Login = ({ authorize }) => {
   const [errors, setErrors] = useState([])
   const [errorTypes, setErrorTypes] = useState([])
   const [rightPageData, setRightPageData] = useState(null)
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   const [formData, setFormData] = useState({
     email: "",
@@ -31,7 +35,7 @@ const Login = ({ authorize }) => {
 
   
   const logIn = () => {
-    const res = axios.post("http://127.0.0.1:8000/auth/jwt/create/", {email: formData.email, password: formData.password})
+    const res = axios.post("/auth/jwt/create/", {email: formData.email, password: formData.password})
     .then(data => {
       authorize(true)
       localStorage.setItem("access", data.data.access)
@@ -66,7 +70,7 @@ const Login = ({ authorize }) => {
       <div className='left-col'>
         <span className='header-login'>
           <h2>{t("Log in")}</h2>
-          <a href='/sign_up'>{t("Create an account")}</a>
+          <a href='/#/sign_up'>{t("Create an account")}</a>
         </span>
         <div className='form'>
           <div className='email-block block'>
@@ -99,7 +103,7 @@ const Login = ({ authorize }) => {
           <button className='login-button' onClick={logIn}>{t("Log in")}</button>
         </div>
       </div>
-      <div className='right-col'>
+      {/* <div className='right-col'>
         {
           // (rightPageData === null || errors.length === 0) ?
             <img src={testimonial}></img>
@@ -120,7 +124,7 @@ const Login = ({ authorize }) => {
           //     </>
           //   )
         }
-      </div>
+      </div> */}
       <ToastContainer
         limit={3}
       />

@@ -13,6 +13,10 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [symbols, setSymbols] = useState(0)
   const { width, height } = useWindowsDimensions()
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
   const navigate = useNavigate()
 
   const proceed = () => {

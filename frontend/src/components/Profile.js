@@ -17,6 +17,10 @@ const Profile = ({ userData, setUserData, authorize }) => {
     currentPassword: ""
   })
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   const [curImage, setCurImage] = useState("")
 
   const [pending, setPending] = useState(false)
@@ -76,9 +80,9 @@ const Profile = ({ userData, setUserData, authorize }) => {
       }
     }
 
-    const res = axios.put("http://127.0.0.1:8000/auth/users/me/", uploadData, config)
+    const res = axios.put("/auth/users/me/", uploadData, config)
     .then(() => {
-      setUserData(prev => ({...prev, image: `http://127.0.0.1:8000/media/pfps/${e.target.files[0].name}`}))
+      setUserData(prev => ({...prev, image: `/media/pfps/${e.target.files[0].name}`}))
       toast.success('Image has been changed successfully', {
         position: "bottom-right",
         autoClose: 5000,
@@ -133,7 +137,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     let res2 = false
     let res3 = false
     
-    if (userData.username !== formData.username) res1 = axios.put("http://127.0.0.1:8000/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(() => {
+    if (userData.username !== formData.username) res1 = axios.put("/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(() => {
       setUsernameSuccess(true)
       setUserData(prev => ({...prev, username: formData.username}))
       toast.success('Username has been changed successfully', {
@@ -217,7 +221,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     //   })
 
       setTimeout(() => {
-        if (formData.password) res3 = axios.post("http://127.0.0.1:8000/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
+        if (formData.password) res3 = axios.post("/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
         .then(() => {
           setPasswordSuccess(true)
           toast.success('Password has been changed successfully', {
@@ -281,8 +285,8 @@ const Profile = ({ userData, setUserData, authorize }) => {
   ))
 
   const takeOrder = (id) => {
-    const res1 = axios.post("http://127.0.0.1:8000/authentication/change_order_status_taken/", {id}).then(data => {
-      const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
+    const res1 = axios.post("/authentication/change_order_status_taken/", {id}).then(data => {
+      const res2 = axios.post("/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
     })
   }
 
@@ -424,12 +428,12 @@ const TakenOrdersForWriter = ({ el, setUserData }) => {
 
   const confirmOrder = (id) => {
     setUserData(prev => ({...prev, ordersForWriter: prev.ordersForWriter.filter(el => el.id !== id)}))
-    const res1 = axios.post("http://127.0.0.1:8000/authentication/change_order_status_completed/", {id}).then(data => {
-      const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => {
+    // const res1 = axios.post("http://127.0.0.1:8000/authentication/change_order_status_completed/", {id}).then(data => {
+      // const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => {
         setExited(true)
         // setUserData(prev => ({...prev, ordersForWriter: data.data.orders}))
-      })
-    })
+      // })
+    // })
   }
   
   return (

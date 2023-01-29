@@ -3,8 +3,7 @@
     justify-content: space-between;
     width: 75%;
     margin: 0 auto;
-    // margin-bottom: 33rem;
-    margin-top: 4rem;
+    margin-top: 6rem;
 
 
     .left-col{
@@ -169,4 +168,81 @@
               }
         }
     }
+}
+
+@media (max-width: 550px) {
+    .login-page .left-col .header-login h2 {
+        font-size: 1.75em;
+    }
+
+    .login-page .left-col .form input {
+        width: 350px;
+
+    }
+    
+    .login-page .left-col .form .login-button {
+        width: 350px;
+    }
+    
+}
+
+@media (max-width: 450px) {
+    .login-page .left-col .header-login h2 {
+        font-size: 1.55em;
+    }
+
+    .login-page .left-col .form input {
+        width: 300px;
+    }
+
+    .login-page .left-col .form .text-label {
+        font-size: 1.1em !important;;
+        top: .5rem;
+    }
+    
+    .login-page .left-col .form .login-button {
+        width: 300px;
+    }
+    
+}
+
+@media (max-width: 380px) {
+    .login-page .left-col .header-login h2 {
+        font-size: 1.35em;
+    }
+
+    .login-page .left-col .header-login {
+        margin-bottom: 1.5rem;
+    }
+
+    .login-page .left-col .form input {
+        width: 250px;
+    }
+
+    .login-page .left-col .form .text-label {
+        font-size: 1em !important; 
+        top: .5rem;
+    }
+    
+    .login-page .left-col .form .login-button {
+        width: 250px;
+        font-size: .9em;
+    }
+    
+}
+
+@media (max-width: 310px) {
+    .login-page .left-col .header-login h2 {
+        font-size: 1.1em;
+    }
+
+    .login-page .left-col .form input {
+        width: 220px;
+    }
+    
+    .login-page .left-col .form .login-button {
+        width: 220px;
+        font-size: .75em;
+    }
+    
 }

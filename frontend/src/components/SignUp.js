@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import testimonial from "../images/negr.png"
 import axios from "axios"
@@ -22,13 +22,17 @@ const SignUp = () => {
     password2: "",
   })
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   const changeFormData = (e) => {
     setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
   const signUp = () => {
     setPending(true)
-    const req = axios.post("http://127.0.0.1:8000/auth/users/", {username: formData.username, email: formData.email, password: formData.password1, re_password: formData.password2})
+    const req = axios.post("/auth/users/", {username: formData.username, email: formData.email, password: formData.password1, re_password: formData.password2})
       .then(data => {
         setPending(false)
         localStorage.getItem("access")
@@ -144,9 +148,9 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <div className='right-col'>
+      {/* <div className='right-col'>
             <img src={testimonial}></img>
-      </div>
+      </div> */}
       <ToastContainer
         limit={3}
        />

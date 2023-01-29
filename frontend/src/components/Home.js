@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { use } from 'i18next'
+import { Link, NavLink } from "react-router-dom"
 
 const Home = ({ userData }) => {
   const { t, i18n } = useTranslation()
@@ -21,11 +22,15 @@ const Home = ({ userData }) => {
   const [expandedBlock2, setExpandedBlock2] = useState(false)
   const [expandedBlock3, setExpandedBlock3] = useState(false)
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   const texts = [
-    {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев."},
+    // {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев."},
     {head: "Дорогой Владислав!", end: "Ваши Никита и Анастасия", content: 'В связи со сложившимися обстоятельствами, а именно: \n невозможностью больше глядеть на пустующую 14 страницу наших паспортов и постоянно отвечать на вопросы: "Ну когда же уже?", мы все-таки решили совершить обряд бракосочетания. \n В связи с чем, будем рады видеть Вас на нашей свадьбе 5 июня 2023 года! \n Данное мероприятие будет проходить в нескольких действиях: \n Действие 1 (для души): Торжественное, по адресу: г. Москва, ул. Горная 48 \n Действие 2 (для желудка): Горько-Поцелуйно-Выпивательное,  по адресу: г. Москва, ул. Полянка 11'},
-    {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
-    {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга. Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
+    // {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
+    // {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга. Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
   ]
 
   const [textObject, setTextObject] = useState(texts[Math.floor(Math.random() * texts.length)])
@@ -58,7 +63,7 @@ const Home = ({ userData }) => {
   }, [fullText])
 
   useEffect(() => {
-    const res = axios.get("http://127.0.0.1:8000/authentication/reviews/").then(data => {
+    const res = axios.get("/authentication/reviews/").then(data => {
       const newReviews = []
       for (let i = 0; i < data.data.items.length; i++){
         newReviews.push({
@@ -78,10 +83,12 @@ const Home = ({ userData }) => {
   }
 
   const submitReview = () => {
-    const res = axios.post("http://127.0.0.1:8000/authentication/add_review/", {content: reviewValue, email: userData.email}).then(() => {
+    const res = axios.post("/authentication/add_review/", {content: reviewValue, email: userData.email}).then((data) => {
+      console.log(data);
       setLeaveReview(false)
       setReviewValue("")
     })
+    .catch(data => console.log(data.response.data))
   }
 
   const reviewsDisplay = reviews.map(el => (
@@ -120,6 +127,15 @@ const Home = ({ userData }) => {
       <img src={ink} className='bg-ink image-22'/>
       <img src={ink} className='bg-ink image-23'/>
 
+      <div className='pergament-previews'>
+        <div className='pergament-paper'>
+          {paperTitleText}
+          {paperTitleText ? <br/>: ""}
+          {paperText}
+          {paperEndText ? <br/>: ""}
+          {paperEndText}
+        </div>
+      </div>
       <div className='blocks'>
         <div className='col col-1'>
           <motion.div
@@ -153,15 +169,6 @@ const Home = ({ userData }) => {
               И многое другое 
             </p>
           </motion.div>
-        </div>
-      </div>
-      <div className='pergament-previews'>
-        <div className='pergament-paper'>
-          {paperTitleText}
-          {paperTitleText ? <br/>: ""}
-          {paperText}
-          {paperEndText ? <br/>: ""}
-          {paperEndText}
         </div>
       </div>
       <div className='order-options'>

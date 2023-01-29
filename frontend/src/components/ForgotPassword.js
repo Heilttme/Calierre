@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
@@ -10,10 +10,13 @@ const ForgotPassword = ({setTempEmail}) => {
   const [pending, setPending] = useState(false)
   const [errorTypes, setErrorTypes] = useState([])
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   
   const sendPasswordReset = () => {
     setPending(true)
-    const res = axios.post("http://127.0.0.1:8000/auth/users/reset_password/", {email: emailData})
+    const res = axios.post("/auth/users/reset_password/", {email: emailData})
         .then(data => {
           toast.success(t('Successfuly sent. Check your e-mail'), {
             position: "bottom-right",
