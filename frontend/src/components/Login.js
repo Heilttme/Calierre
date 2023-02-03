@@ -6,24 +6,30 @@ import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
+import { useStore } from 'zustand'
 
-const Login = ({ authorize }) => {
+const Login = ({ authorize, authenticated }) => {
   const [emailFocus, setEmailFocus] = useState(false)
   const [passwordFocus, setPasswordFocus] = useState(false)
   const [errors, setErrors] = useState([])
   const [errorTypes, setErrorTypes] = useState([])
   const [rightPageData, setRightPageData] = useState(null)
+  
+  const navigate = useNavigate()
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
+
+  useEffect(() => {
+    authenticated && navigate("/#") 
+  }, [authenticated])
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
 
-  const navigate = useNavigate()
   
   const changeFormData = (e) => {
     if (e.target.type !== "checkbox"){
@@ -98,7 +104,7 @@ const Login = ({ authorize }) => {
             <motion.label animate={formData.password || passwordFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
           </div>
           <div className='check-forgot'>
-            <a href='/reset'>{t("Forgot your password?")}</a>
+            <a href='/#/reset'>{t("Forgot your password?")}</a>
           </div>
           <button className='login-button' onClick={logIn}>{t("Log in")}</button>
         </div>

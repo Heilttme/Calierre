@@ -5,12 +5,13 @@ import axios from "axios";
 import useStore from "./store";
 import { useTranslation } from "react-i18next";
 
-
 const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
-  
+
+  const [blurred, setBlurred] = useState(false)
+
   const [userData, setUserData] = useState({
     id: null,
     username: "",
@@ -21,10 +22,9 @@ const App = () => {
     staff: false,
   })
 
-  
   useEffect(() => {
     if (userData.staff === true) {
-      const res = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
+      const res = axios.post("/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
     }
   }, [userData.staff])
   
@@ -37,6 +37,7 @@ const App = () => {
     mistakes: "",
     city: "Moscow",
     street: "",
+    flat: "",
     detailsForCourier: "",
     option: "",
     sealBasic: "",
@@ -60,7 +61,7 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem("access")){
       if (localStorage.getItem("refresh")) {
-        const res = axios.post("http://127.0.0.1:8000/auth/jwt/refresh/", {refresh: localStorage.getItem("refresh")}).then(data => {
+        const res = axios.post("/auth/jwt/refresh/", {refresh: localStorage.getItem("refresh")}).then(data => {
           localStorage.setItem("access", data.data.access)
 
           const config = {
@@ -71,8 +72,8 @@ const App = () => {
             }
           }
            
-          const res = axios.get("http://127.0.0.1:8000/auth/users/me/", config).then(data => {
-            const resOrders = axios.post("http://127.0.0.1:8000/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: data.data.image, orders: data2.data.orders, staff: data.data.is_staff})))
+          const res = axios.get("/auth/users/me/", config).then(data => {
+            const resOrders = axios.post("/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: data.data.image, orders: data2.data.orders, staff: data.data.is_staff})))
           })
         })
       }
@@ -109,14 +110,14 @@ const App = () => {
   return (
     <div className="app">
       <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} changeLanguage={changeLanguage} language={language} />
-      <main>
+      <main >
         <Routes>
           <Route path="/" element={<Home userData={userData} />} />
-          <Route path="/login" element={<Login authorize={authorize}/>} />
-          <Route path="/sign_up" element={<SignUp />} />
-          <Route path="/customize" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
-          <Route path="/customize/destination" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
-          <Route path="/customize/destination/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
+          <Route path="/login" element={<Login authorize={authorize} authenticated={authenticated}/>} />
+          <Route path="/sign_up" element={<SignUp authenticated={authenticated} />} />
+          <Route path="/order" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
+          <Route path="/order/delivery" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
+          <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} />} />
           <Route path="/reset" element={<ForgotPassword />} />
           <Route path="/activate/:uid/:token" element={<Activate/>} />
           <Route path="/contact" element={<Contact/>} />

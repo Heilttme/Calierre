@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { t } from 'i18next'
 
 const Profile = ({ userData, setUserData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
@@ -276,7 +277,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
   const orders = userData.orders.map(el => (
     <div className='order-wrapper'>
       <div className='order'>
-        <h2>{el.title ? el.title : "NO TITLE"}</h2>
+        <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
         <p className='content'>{el.content}</p>
@@ -294,11 +295,11 @@ const Profile = ({ userData, setUserData, authorize }) => {
     <AnimatePresence>
       <motion.div exit={{x: 100}} className='order-wrapper'>
         <div className='order'>
-          <h2>{el.title ? el.title : "NO TITLE"}</h2>
+          <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
           <p>{el.data}</p>
           {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
           <p className='content'>{el.content}</p>
-        <button onClick={() => takeOrder(el.id)}>Take</button>
+        <button onClick={() => takeOrder(el.id)}>{t("Take")}</button>
         </div>
       </motion.div>
     </AnimatePresence>
@@ -312,18 +313,18 @@ const Profile = ({ userData, setUserData, authorize }) => {
     <div className='profile-container'>
         <div className='profile-wrapper' >
             <div className='profile'>
-                <div className='username'><h1>{userData.username}</h1> {userData.staff ? <strong>Writer</strong> : ""}</div>
+                <div className='username'><h1>{userData.username}</h1> {userData.staff ? <strong>{t("Writer")}</strong> : ""}</div>
                 <div className='wrapper'>
                     <div className='left-col'>
                         <img className='skeleton' src={userData.image}/>
                         <input type="file" id='file' accept='image/*' onClick={checkPassword} onChange={(e) => setImage(e)}/>
-                        <label htmlFor="file" className={`${!formData.currentPassword && "disabled"}`}>Select image</label>
+                        <label htmlFor="file" className={`${!formData.currentPassword && "disabled"}`}>{t("Select image")}</label>
                     </div>
                     <div className='right-col'>
                         <ul className='selectors'>
-                            <li onClick={() => setSelectedBlock("info")} className={`${selectedBlock == "info" && "active"} block-select`}>Info</li>
-                            <li onClick={() => setSelectedBlock("orders")} className={`${selectedBlock == "orders" && "active"} block-select`}>Orders</li>
-                            {userData.staff && <li onClick={() => setSelectedBlock("taken")} className={`${selectedBlock == "taken" && "active"} block-select`}>Taken</li>}
+                            <li onClick={() => setSelectedBlock("info")} className={`${selectedBlock == "info" && "active"} block-select`}>{t("Info")}</li>
+                            <li onClick={() => setSelectedBlock("orders")} className={`${selectedBlock == "orders" && "active"} block-select`}>{t("Orders")}</li>
+                            {userData.staff && <li onClick={() => setSelectedBlock("taken")} className={`${selectedBlock == "taken" && "active"} block-select`}>{t("Taken")}</li>}
                         </ul>    
                         <div className='block'>
                             {
@@ -331,9 +332,9 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     <div className='wrapper-info'>
                                         <div className='info'>
                                             <ul className='left-keys'>
-                                                <li>E-mail</li>  
-                                                <li>Username</li>  
-                                                <li>Password</li> 
+                                                <li>{t("E-mail-profile")}</li>  
+                                                <li>{t("Username")}</li>  
+                                                <li>{t("Password")}</li> 
                                             </ul>
                                             <ul className='right-values'>
                                                 <li>
@@ -370,7 +371,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                             </ul>
                                         </div>
                                         {edit && <div className='password-confirm'>
-                                            <h4>Enter your current password to confirm</h4>
+                                            <h4>{t("Enter your current password to confirm")}</h4>
                                             <input 
                                               name='currentPassword'
                                               type="password"
@@ -381,9 +382,9 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                             />
                                         </div>}
                                         <div className='buttons'>
-                                            <button onClick={logout}>Logout</button>
-                                            <button onClick={() => setEdit(prev => !prev)}>Edit</button>
-                                            {edit && <button disabled={!formData.currentPassword && true} className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>Confim</button>}
+                                            <button onClick={logout}>{t("Logout")}</button>
+                                            <button onClick={() => setEdit(prev => !prev)}>{t("Edit")}</button>
+                                            {edit && <button disabled={!formData.currentPassword && true} className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>{t("Confim")}</button>}
                                             {pending && <div className='ring-wrapper'>
                                               <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                                             </div>}
@@ -393,8 +394,8 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     <div className='taken orders'>
                                         {takenOrdersForWriter.length ? takenOrdersForWriter : 
                                           <div className='empty taken'>
-                                            <h1>Your taken orders list is empty</h1>
-                                            <p>See your orders to take one</p>
+                                            <h1>{t("Your taken orders list is empty")}</h1>
+                                            <p>{t("See your orders to take one")}</p>
                                           </div>
                                         }
                                     </div>
@@ -402,13 +403,13 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     <div className='orders'>
                                       {userData.staff ? untakenOrdersForWriter.length ? untakenOrdersForWriter : 
                                         <div className='empty untaken'>
-                                          <h1>Your untaken orders list is empty</h1>
-                                          <p>You will get e-mail notification when somebody orders a letter</p>
+                                          <h1>{t("Your untaken orders list is empty")}</h1>
+                                          <p>{t("You will get e-mail notification when somebody orders a letter")}</p>
                                         </div>
                                       : orders.length ? orders : 
                                         <div className='empty'>
-                                            <h1>Your orders list is empty</h1>
-                                            <a href='/customize'>Make order</a>
+                                            <h1>{t("Your orders list is empty")}</h1>
+                                            <a href='/customize'>{t("Make order")}</a>
                                         </div> 
                                       }
                                     </div>
@@ -439,12 +440,12 @@ const TakenOrdersForWriter = ({ el, setUserData }) => {
   return (
     <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
       <div className='order'>
-        <h2>{el.title ? el.title : "NO TITLE"}</h2>
+        <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
         <p className='content'>{el.content}</p>
       {/* <button onClick={() => takeOrder(el.id)}>Take</button> */}
-      <button onClick={() => confirmOrder(el.id)}>Done</button>
+      <button onClick={() => confirmOrder(el.id)}>{t("Done")}</button>
       </div>
     </motion.div>
   )

@@ -10,7 +10,6 @@
         width: 86px;
         height: 86px;
         z-index: -1;
-        display: none;
     }
 
     .image-1{
@@ -625,6 +624,10 @@
         width: 36rem;
         height: 42rem;
         font-size: 1.5em;
+    }
+
+    .home .order-options {
+        margin-top: 5rem;
     }
 }
 

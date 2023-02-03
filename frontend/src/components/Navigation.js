@@ -53,8 +53,8 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
     >
       <div className={`menu${menuOpened && scrollPosition != 0 ? " opened" : ""}`}>
         <div className='links'>
-          <a href='/#/customize' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>Order</a>
-          <a href='/#/contact' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>Contact</a>
+          <a href='/#/order' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Order")}</a>
+          <a href='/#/contact' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Contact")}</a>
         </div>
         {language === "ru" ?
           <svg onClick={changeLanguage} className='language' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="64" height="36"><rect fill="#fff" width="9" height="3"/><rect fill="#d52b1e" y="3" width="9" height="3"/><rect fill="#0039a6" y="2" width="9" height="2"/></svg>
@@ -89,7 +89,7 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
           <div className='quote-block'>
             <svg className='quote-mark' fill='currentColor' xmlns="http://www.w3.org/2000/svg"><path d="M9 3c-5.252 1.039-9 4.905-9 10.609v7.391h9.983v-10h-3.983c0-2.211 1.563-4.932 3.996-5.849l-.996-2.151zm14 0c-5.252 1.039-8.983 4.905-8.983 10.609v7.391h9.983v-10h-4c0-2.211 1.563-4.932 3.995-5.849l-.995-2.151zm-.567 1.156l.241.52c-2.394 1.391-3.674 4.159-3.674 6.324v1h4v8h-7.983v-6.391c0-4.687 2.82-8.248 7.416-9.453m-14-.001l.241.521c-2.394 1.391-3.674 4.159-3.674 6.324v1h3.983v8h-7.983v-6.391c0-4.686 2.827-8.247 7.433-9.454"/></svg>
             <motion.h3 className='quote' animate={scrollPosition == 0 ? {} : {}}>{t("Word in a beautiful wrapper might be the thing that touches humans soul")}</motion.h3>
-            <a href='/#/customize' className='order'>{t("Order a letter")}</a>
+            <a href='/#/order' className='order'>{t("Order a letter")}</a>
           </div>
       }
       {

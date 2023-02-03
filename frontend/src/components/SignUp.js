@@ -5,15 +5,17 @@ import axios from "axios"
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
+import { useNavigate } from 'react-router-dom'
 
-
-const SignUp = () => {
+const SignUp = ({authenticated}) => {
   const [usernameFocus, setUsernameFocus] = useState(false)
   const [emailFocus, setEmailFocus] = useState(false)
   const [password1Focus, setPassword1Focus] = useState(false)
   const [password2Focus, setPassword2Focus] = useState(false)
   const [errorTypes, setErrorTypes] = useState([])
   const [pending, setPending] = useState(false)
+
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     username: "",
@@ -25,6 +27,10 @@ const SignUp = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
+
+  useEffect(() => {
+    authenticated && navigate("/#") 
+  }, [authenticated])
 
   const changeFormData = (e) => {
     setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
