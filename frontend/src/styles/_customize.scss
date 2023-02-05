@@ -197,11 +197,6 @@
     .right-col{
         width: 30%;
 
-        button{
-            @include button;
-            margin-bottom: 1rem;
-        }
-
         h1{
             margin-bottom: 2.5rem;
         }
@@ -265,11 +260,22 @@
                     padding: 0;
                     margin-top: 1rem;
                 }
+
             }
 
             .seal-choice{
                 margin-bottom: .5rem;
 
+                button{
+                    background-color: unset;
+                    color: white;
+                    padding: 0;
+
+                    &:hover{
+                        background-color: unset;
+                    }
+                }
+                
                 .additional{
                     display: flex;
                     gap: 2rem;

@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .models import Review, LetterUser, Order
 from .serializers import ReviewSerializer, UserCreateSerializer, OrderSerializer
 from rest_framework import status
+from yookassa import Configuration, Payment
+import uuid
 
 
 @api_view(["GET"])
@@ -94,4 +96,25 @@ def change_order_status_delivered(request):
     return Response({"status": status.HTTP_200_OK})
 
 
+@api_view(["POST"])
+def proceed_payment(request):
+    idempotence_key = str(uuid.uuid4())
+    Configuration.account_id = "981414"
+    Configuration.secret_key = "test_xYrXIFIklBpTkoKe1W1MvFSFKvXtbie3LGj4kKr_KoM"
     
+    payment = Payment.create({
+        "amount": {
+            "value": "2.00",
+            "currency": "RUB"
+        },
+        "payment_token": request.data.get("ptk"),
+        "confirmation": {
+            "type": "redirect",
+            "return_url": "https://calierre.ru/#/success_order"
+        },
+        "description": "Заказ №72"
+    }, idempotence_key)
+
+    print(payment.status)
+
+    return Response(status=status.HTTP_100_CONTINUE)

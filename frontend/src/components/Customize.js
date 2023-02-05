@@ -5,6 +5,13 @@ import eye from "../images/eye-outline.png"
 import { AnimatePresence, motion } from "framer-motion"
 import { toast, ToastContainer } from "react-toastify"
 import useWindowsDimensions from "./useWindowsDimensions"
+import Lily from "../images/LILY.png"
+import Flower from "../images/FLOWER.png"
+import Text from "../images/TEXT.png"
+import Tree from "../images/TREE.png"
+import Rose from "../images/ROSE.png"
+import Wedding from "../images/WEDDING.png"
+import Royal from "../images/ROYAL.png"
 
 const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [contentError, setContentError] = useState(false)
@@ -12,7 +19,14 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [mistakes, setMistakes] = useState(false)
   const [symbols, setSymbols] = useState(0)
   const { width, height } = useWindowsDimensions()
+  const [seal, setSeal] = useState("")
+  const [demo, setDemo] = useState(false)
 
+  const showDemo = (par) => {
+    setSeal(par)
+    setDemo(true)
+  }
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
@@ -90,7 +104,6 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   }
 
   const countSymbols = (e) => setSymbols(e.target.value.length)
-  console.log(orderData);
 
   return (
     <div className='customize'>
@@ -182,20 +195,11 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                 <li className='seal'>
                   <input 
                     name='sealBasic'
-                    id='sealBasic1'
-                    type="radio"
-                    onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "heart"}))}
-                  />
-                  <label htmlFor='sealBasic1'>{t("Wizard")}  <a href='#'>{t("View")}</a></label>
-                </li>
-                <li className='seal'>
-                  <input 
-                    name='sealBasic'
                     id='sealBasic2'
                     type="radio"
-                    onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "flower"}))}
+                    onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Flower"}))}
                   />
-                  <label htmlFor='sealBasic2'>{t("Flower")}  <a href='#'>{t("View")}</a></label>
+                  <label htmlFor='sealBasic2'>{t("Flower")}  <button onClick={() => showDemo("Flower")} href='#'>{t("View")}</button></label>
                 </li>
                 <li className='seal'>
                   <input 
@@ -204,7 +208,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                     type="radio"
                     onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Tree"}))}
                   />
-                  <label htmlFor='sealBasic3'>{t("Tree")}  <a href='#'>{t("View")}</a></label>
+                  <label htmlFor='sealBasic3'>{t("Tree")}  <button onClick={() => showDemo("Tree")} href='#'>{t("View")}</button></label>
                 </li>
                 <li className='seal'>
                   <input 
@@ -213,7 +217,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                     type="radio"
                     onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Lily"}))}
                   />
-                  <label htmlFor='sealBasic4'>{t("Lily")}  <a href='#'>{t("View")}</a></label>
+                  <label htmlFor='sealBasic4'>{t("Lily")}  <button onClick={() => showDemo("Lily")} href='#'>{t("View")}</button></label>
                 </li>
                 <li className='seal'>
                   <input 
@@ -222,16 +226,16 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                     type="radio"
                     onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Wedding rings"}))}
                   />
-                  <label htmlFor='sealBasic5'>{t("Wedding rings")}  <a href='#'>{t("View")}</a></label>
+                  <label htmlFor='sealBasic5'>{t("Wedding rings")}  <button onClick={() => showDemo("Wedding")} href='#'>{t("View")}</button></label>
                 </li>
                 <li className='seal'>
                   <input 
                     name='sealBasic'
                     id='sealBasic6'
                     type="radio"
-                    onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Moose"}))}
+                    onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Royal"}))}
                   />
-                  <label htmlFor='sealBasic6'>{t("Moose")}  <a href='#'>{t("View")}</a></label>
+                  <label htmlFor='sealBasic6'>{t("Royal")}  <button onClick={() => showDemo("Royal")} href='#'>{t("View")}</button></label>
                 </li>
                 <li className='seal'>
                   <input 
@@ -240,7 +244,16 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                     type="radio"
                     onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "KUST"}))}
                   />
-                  <label htmlFor='sealBasic7'>KUST  <a href='#'>{t("View")}</a></label>
+                  <label htmlFor='sealBasic7'>KUST  <button onClick={() => showDemo("KUST")} href='#'>{t("View")}</button></label>
+                </li>
+                <li className='seal'>
+                  <input 
+                    name='sealBasic'
+                    id='sealBasic7'
+                    type="radio"
+                    onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealBasic: "Rose"}))}
+                  />
+                  <label htmlFor='sealBasic7'>Rose  <button onClick={() => showDemo("Rose")} href='#'>{t("View")}</button></label>
                 </li>
               </ul>
             </div>
@@ -262,20 +275,11 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                   <li className='seal'>
                     <input 
                       name='sealAdvanced'
-                      id='sealAdvanced1'
-                      type="radio"
-                      onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Wizard"}))}
-                    />
-                    <label htmlFor='sealAdvanced1'>{t("Wizard")}  <a href='#'>{t("View")}</a></label>
-                  </li>
-                  <li className='seal'>
-                    <input 
-                      name='sealAdvanced'
                       id='sealAdvanced2'
                       type="radio"
                       onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Flower"}))}
                     />
-                    <label htmlFor='sealAdvanced2'>{t("Flower")}  <a href='#'>{t("View")}</a></label>
+                    <label htmlFor='sealAdvanced2'>{t("Flower")}  <button onClick={() => showDemo("Flower")} href='#'>{t("View")}</button></label>
                   </li>
                   <li className='seal'>
                     <input 
@@ -284,7 +288,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                       type="radio"
                       onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Tree"}))}
                     />
-                    <label htmlFor='sealAdvanced3'>{t("Tree")}  <a href='#'>{t("View")}</a></label>
+                    <label htmlFor='sealAdvanced3'>{t("Tree")}  <button onClick={() => showDemo("Tree")} href='#'>{t("View")}</button></label>
                   </li>
                   <li className='seal'>
                     <input 
@@ -293,7 +297,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                       type="radio"
                       onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Lily"}))}
                     />
-                    <label htmlFor='sealAdvanced4'>{t("Lily")}  <a href='#'>{t("View")}</a></label>
+                    <label htmlFor='sealAdvanced4'>{t("Lily")}  <button onClick={() => showDemo("Lily")} href='#'>{t("View")}</button></label>
                   </li>
                   <li className='seal'>
                     <input 
@@ -302,16 +306,16 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                       type="radio"
                       onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Wedding rings"}))}
                     />
-                    <label htmlFor='sealAdvanced5'>{t("Wedding rings")}  <a href='#'>{("View")}</a></label>
+                    <label htmlFor='sealAdvanced5'>{t("Wedding rings")}  <button onClick={() => showDemo("Wedding")} href='#'>{("View")}</button></label>
                   </li>
                   <li className='seal'>
                     <input 
                       name='sealAdvanced'
                       id='sealAdvanced6'
                       type="radio"
-                      onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Moose"}))}
+                      onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Royal"}))}
                     />
-                    <label htmlFor='sealAdvanced6'>{t("Moose")}  <a href='#'>{t("View")}</a></label>
+                    <label htmlFor='sealAdvanced6'>{t("Royal")}  <button onClick={() => showDemo("Royal")} href='#'>{t("View")}</button></label>
                   </li>
                   <li className='seal'>
                     <input 
@@ -320,7 +324,16 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                       type="radio"
                       onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "KUST"}))}
                     />
-                    <label htmlFor='sealAdvanced7'>KUST  <a href='#'>{t("View")}</a></label>
+                    <label htmlFor='sealAdvanced7'>KUST  <button onClick={() => showDemo("KUST")} href='#'>{t("View")}</button></label>
+                  </li>
+                  <li className='seal'>
+                    <input 
+                      name='sealAdvanced'
+                      id='sealAdvanced7'
+                      type="radio"
+                      onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Rose"}))}
+                    />
+                    <label htmlFor='sealAdvanced7'>Rose  <button onClick={() => showDemo("Rose")} href='#'>{t("View")}</button></label>
                   </li>
                 </ul>
 
@@ -367,10 +380,10 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
             </div>
             <button onClick={() => toDelivery("Multiple")}>{t("Opt for multiple")}</button>
           </div>
-
         </div>
       </motion.div>
       <ToastContainer />
+      <div className='seal-demo'><img src={seal}/></div>
     </div> 
   )
 }

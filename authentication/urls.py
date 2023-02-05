@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_reviews, get_orders, add_review, get_orders_from_users, change_order_status_taken, change_order_status_checked, change_order_status_completed, change_order_status_delivered
+from .views import get_reviews, get_orders, add_review, get_orders_from_users, change_order_status_taken, change_order_status_checked, change_order_status_completed, change_order_status_delivered, proceed_payment
 
 urlpatterns = [
     path("reviews/", get_reviews),
@@ -10,4 +10,5 @@ urlpatterns = [
     path("change_order_status_checked/", change_order_status_checked),
     path("change_order_status_completed/", change_order_status_completed),
     path("change_order_status_delivered/", change_order_status_delivered),
+    path("proceed_payment/", proceed_payment),
 ]

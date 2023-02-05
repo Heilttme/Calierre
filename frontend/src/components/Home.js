@@ -3,7 +3,7 @@ import ink from "../images/ink.png"
 import pergament from "../images/pergament.png"
 import feather from "../images/feather_pen.png"
 import envelope from "../images/envelope.png"
-import testimonial from "../images/negr.png"
+import rose from "../images/rose_let.png"
 import { useTranslation } from "react-i18next"
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
@@ -158,15 +158,25 @@ const Home = ({ userData }) => {
             className='block' 
             onClick={() => setExpandedBlock3(prev => !prev)}
           >
+            <img className='feather' src={rose}/>
+            <p>
+              Напишите признание в любви своей второй половинке.
+              <br/>
+              <br/>
+              Поздравьте своего друга с днём рождения через письмо, он будет приятно удивлён.
+              <br/>
+              <br/>
+              Письмо может служить очень интересным и необычным подарком на такие праздники, как 14 февраля, 8 марта.
+            </p>
+          </motion.div>
+          <motion.div 
+            className='block' 
+            onClick={() => setExpandedBlock3(prev => !prev)}
+          >
             <img className='feather' src={feather}/>
             <p>
-              {t("Напишите признание в любви своей второй половинке")} <br/>
-              <br/>
-              {t("Напишите романтическое письмо и подарите своей возлюбленной")} <br/>
-              <br/>
-              {t("Напишите необычное письмо другу, он будет очень удивлён")}  <br/>
-              <br/>
-              {t("И многое другое")} 
+            Помимо писем наша компания занимается изготовлением именных, креативных пригласительных, которые послужат отличным тоном в организации вашего мероприятия, будь то свадьба, корпоратив или день рождения и помогут оставить хорошее впечатление.
+
             </p>
           </motion.div>
         </div>
@@ -178,7 +188,7 @@ const Home = ({ userData }) => {
           <div className='option'>
               <div className='before'>
                 <h2>{t("Basic")}</h2>
-                <p>$<strong>5</strong></p>
+                <p>₽<strong>490</strong></p>
               </div>
               <div className='describe'>
                 <p>·{t("Printed letter")}</p>
@@ -188,7 +198,7 @@ const Home = ({ userData }) => {
           <div className='option'>
               <div className='before'>
                 <h2>{t("Advanced")}</h2>
-                <p>$<strong>7</strong></p>
+                <p>₽<strong>690</strong></p>
               </div>
               <div className='describe'>
                 <p>·{t("Handwritten letter")}</p>
@@ -196,15 +206,13 @@ const Home = ({ userData }) => {
                 <p>·{t("Seal options")}</p>
               </div>
           </div>
-          <div className='option'>
+          <div className='option multiple-b'>
               <div className='before'>
-                <h2>{t("Multiple")}</h2>
-                <p>$<strong>3</strong></p>
+                <h2 className='multiple'>{t("Multiple")}</h2>
+                <p className='multiple-p'><strong>From 10</strong></p>
               </div>
               <div className='describe'>
                 <p>·{t("For your events")}</p>
-                {/* <p></p> */}
-                {/* <p>i vse</p> */}
               </div>
           </div>
         </div>
