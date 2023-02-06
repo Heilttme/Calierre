@@ -99,8 +99,8 @@ def change_order_status_delivered(request):
 @api_view(["POST"])
 def proceed_payment(request):
     idempotence_key = str(uuid.uuid4())
-    Configuration.account_id = "981414"
-    Configuration.secret_key = "test_xYrXIFIklBpTkoKe1W1MvFSFKvXtbie3LGj4kKr_KoM"
+    Configuration.account_id = "978735"
+    Configuration.secret_key = "live_ApcdQ1-ndCwXIrD1-WxcZseMgRmO1-Y45kV8Lqq-HZU"
     
     payment = Payment.create({
         "amount": {

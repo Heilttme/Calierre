@@ -3,6 +3,11 @@ from templated_mail.mail import BaseEmailMessage
 
 from djoser import utils
 from djoser.conf import settings
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
 
 
 class ActivationEmail(BaseEmailMessage):
@@ -40,3 +45,29 @@ class PasswordResetEmail(BaseEmailMessage):
 class PasswordChangedConfirmationEmail(BaseEmailMessage):
     template_name = "emails/password_changed_confirmation.html"
 
+
+@api_view(["POST"])
+def send_order_notification(request):
+    data = request.data.get("orderData")
+    send_mail(
+        "New order",
+            f"title: {data.get('title')} \n\
+            content: {data.get('content')} \n\
+            details: {data.get('details')} \n\
+            mistakes: {data.get('mistakes')} \n\
+            city: {data.get('city')} \n\
+            street: {data.get('street')} \n\
+            flat: {data.get('flat')} \n\
+            detailsForCourier: {data.get('detailsForCourier')} \n\
+            option: {data.get('option')} \n\
+            sealBasic: {data.get('sealBasic')} \n\
+            sealAdvanced: {data.get('sealAdvanced')} \n\
+            waxAdvanced: {data.get('waxAdvanced')} \n\
+            dateTime: {data.get('dateTime')} \n\
+            phone: {data.get('phone')}",
+        "settings.EMAIL_HOST_USER",
+        ["calierre01@mail.ru"],
+        fail_silently=False
+    )
+    
+    return Response(status=status.HTTP_200_OK)

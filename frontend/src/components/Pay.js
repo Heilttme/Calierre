@@ -13,7 +13,7 @@ const Pay = ({orderData, setBlurred}) => {
     card: "",
     name: "",
     expires: "",
-    cvv: ""
+    cvc: ""
   })
 
   const [method, setMethod] = useState("")
@@ -43,11 +43,12 @@ const Pay = ({orderData, setBlurred}) => {
 
   const pay = () => {
     window.checkout.tokenize({
-      number: "5555555555554444",
-      cvc: "999",
-      month: "11",
-      year: "25",
+      number: formData.card,
+      cvc: formData.cvc,
+      month: formData.expires.split("/")[0],
+      year: formData.expires.split("/")[1],
     }).then(res => {
+      const eres = axios.post("/email/send_email/", {orderData})
       if (res.status === 'success') {
           const { paymentToken } = res.data.response
           
@@ -55,13 +56,13 @@ const Pay = ({orderData, setBlurred}) => {
             .then()
             .catch()
       }
-    })
+    }).catch(data => console.log(data))
   }
 
   useEffect(() => {
-    console.log(orderData);
     if (!orderData.content || !orderData.option || !orderData.dateTime || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
+
 
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
@@ -99,6 +100,7 @@ const Pay = ({orderData, setBlurred}) => {
                   <li>{orderData.dateTime.split("T")[1]}</li>
                 </ul>
               </div>
+              <h1 className='total'>Total: {orderData.option === "Basic" ? "₽490" : "₽690"}</h1>
             </div>
           </div>
           <div className='right-col'>
@@ -142,10 +144,10 @@ const Pay = ({orderData, setBlurred}) => {
                   />
               </div>
               <div className='field cvv'>
-                  <h2>CVV</h2>
+                  <h2>CVC</h2>
                   <input
-                    name='cvv'
-                    value={formData.cvv}
+                    name='cvc'
+                    value={formData.cvc}
                     onChange={(e) => changeFormData(e)}
                   />
               </div>

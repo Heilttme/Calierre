@@ -14,6 +14,7 @@ const Destination = ({ orderData, setOrderData }) => {
 
   const [dateTimeError, setDateTimeError] = useState(false)
   const [addressError, setAddressError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
 
   const changeFormData = (e) => {
     setOrderData(prev => ({...prev, [e.target.name]: e.target.value}))
@@ -74,7 +75,7 @@ const Destination = ({ orderData, setOrderData }) => {
   }, [])
 
   const toPay = () => {
-    if (!orderData.street || !dateTime.length) {
+    if (!orderData.street || !dateTime.length || !orderData.phone) {
       toast.error(t("Please fill necessary fields"), {
         position: "bottom-right",
         autoClose: 5000,
@@ -90,6 +91,9 @@ const Destination = ({ orderData, setOrderData }) => {
       }
       if (!dateTime.length) {
         setDateTimeError(true)
+      }
+      if (!orderData.phone) {
+        setPhoneError(true)
       }
     } else {
       navigate("/order/delivery/payment")
@@ -125,13 +129,13 @@ const Destination = ({ orderData, setOrderData }) => {
                   value={orderData.street}
                   onChange={(e) => changeFormData(e)}
                 />
-              </div>
+            </div>
             </div>
             <div className='field f-4'>
               <h2>{t("Flat")}</h2>
               <div className='input-block'>
                 <input
-                  name='street'
+                  name='flat'
                   value={orderData.flat}
                   onChange={(e) => changeFormData(e)}
                 />
@@ -145,6 +149,18 @@ const Destination = ({ orderData, setOrderData }) => {
                 onChange={(e) => changeFormData(e)}
               />
             </div>
+            <div className='field f-4'>
+              <h2>{t("Reciever phone number")}</h2>
+              <div className='input-block'>
+                <input
+                  className={`${phoneError && "error"}`}
+                  name='phone'
+                  value={orderData.phone}
+                  onChange={(e) => changeFormData(e)}
+                />
+              </div>
+            </div>
+            
             <div className='date-time'>
               <h2>{t("Date and time")}</h2>
               <input className={`date-input${dateTimeError ? " error" : ""}`} type="datetime-local" value={dateTime} onChange={(e) => setDate(e)} />

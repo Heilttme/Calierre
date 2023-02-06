@@ -1971,6 +1971,7 @@ example {
 .destination {
   width: 75%;
   margin: 0 auto;
+  margin-bottom: 2rem;
 }
 .destination [class*=copyrights-pane] {
   display: none;
@@ -2200,6 +2201,9 @@ example {
 }
 .payment h2 {
   margin-bottom: 0.4rem;
+}
+.payment .total {
+  margin-top: 1rem;
 }
 .payment .form {
   width: 100%;

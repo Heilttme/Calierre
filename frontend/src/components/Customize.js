@@ -13,6 +13,7 @@ import Rose from "../images/ROSE.png"
 import Wedding from "../images/WEDDING.png"
 import Royal from "../images/ROYAL.png"
 import useScrollBlock from "./useBlockScroll"
+import useStore from "../store";
 
 const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [contentError, setContentError] = useState(false)
@@ -23,7 +24,13 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [seal, setSeal] = useState("")
   const [demo, setDemo] = useState(false)
   const [blockScroll, allowScroll] = useScrollBlock()
+  const authenticated = useStore(state => state.authenticated)
 
+  useEffect(() => {
+    console.log(authenticated);
+    !authenticated && navigate("/#") 
+  }, [authenticated])
+  
   const showDemo = (e, par) => {
     setSeal(par)
     setDemo(true)
@@ -105,7 +112,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
       })
     }
   }
-
+  
   const countSymbols = (e) => setSymbols(e.target.value.length)
 
   return (

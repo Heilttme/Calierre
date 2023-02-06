@@ -44,6 +44,7 @@ const App = () => {
     sealAdvanced: "",
     waxAdvanced: "",
     dateTime: "",
+    phone: "",
   })
 
   const changeOrderData = (e) => {
@@ -81,8 +82,13 @@ const App = () => {
       
     } else {
       setUserData({
+        id: null,
         username: "",
         email: "",
+        image: "",
+        orders: [],
+        ordersForWriter: [],
+        staff: false,
       })
     }
 
@@ -116,7 +122,7 @@ const App = () => {
           <Route path="/" element={<Home userData={userData} />} />
           <Route path="/login" element={<Login authorize={authorize} authenticated={authenticated}/>} />
           <Route path="/sign_up" element={<SignUp authenticated={authenticated} />} />
-          <Route path="/order" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
+          <Route path="/order" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} authenticated={authenticated} />} />
           <Route path="/order/delivery" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
           {/* <Route path="/order/delivery/time" element={<DeliveryTime orderData={orderData} changeOrderData={changeOrderData} />} /> */}
           <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} />} />
