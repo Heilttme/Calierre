@@ -10,9 +10,54 @@ const Destination = ({ orderData, setOrderData }) => {
   const [coords, setCoords] = useState([55.753994, 37.622093])
   const [mapOpened, setMapOpened] = useState(false)
   const navigate = useNavigate()
+  const [dateTime, setDateTime] = useState("")
+
+  const [dateTimeError, setDateTimeError] = useState(false)
+  const [addressError, setAddressError] = useState(false)
 
   const changeFormData = (e) => {
     setOrderData(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  const setDate = (e) => {
+    const date = new Date()
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+
+    let hours = date.getHours()
+
+    let inpDay = e.target.value.split("-")[2].split("T")[0]
+
+    if (inpDay[0] === "0") {
+      inpDay = inpDay[1]
+    }
+    
+    let inpMon = e.target.value.split("-")[1]
+    
+    if (inpMon[0] === "0") {
+      inpMon = inpMon[1]
+    }
+
+    let inpYear = e.target.value.split("-")[0]
+
+    if ((inpDay > day || inpMon > month) && inpMon >= month && inpYear >= year) {
+      setDateTime(e.target.value)
+      setOrderData(prev => ({...prev, dateTime: e.target.value}))
+    } else {
+      toast.error('Please select correct date', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })
+      setDateTimeError(true)
+    }
   }
 
   const onMapClick = (e) => {
@@ -28,9 +73,9 @@ const Destination = ({ orderData, setOrderData }) => {
     if (!orderData.content || !orderData.option || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 
-  const toPayment = () => {
-    if (!orderData.street) {
-      toast.error(t("Please write delivery street"), {
+  const toPay = () => {
+    if (!orderData.street || !dateTime.length) {
+      toast.error(t("Please fill necessary fields"), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -40,6 +85,12 @@ const Destination = ({ orderData, setOrderData }) => {
         progress: 0,
         theme: "light",
       })
+      if (!orderData.street) {
+        setAddressError(true)
+      }
+      if (!dateTime.length) {
+        setDateTimeError(true)
+      }
     } else {
       navigate("/order/delivery/payment")
     }
@@ -70,6 +121,7 @@ const Destination = ({ orderData, setOrderData }) => {
                 <img onClick={() => setMapOpened(true)} src={map}/>
                 <input
                   name='street'
+                  className={addressError ? "error" : ""}
                   value={orderData.street}
                   onChange={(e) => changeFormData(e)}
                 />
@@ -93,7 +145,11 @@ const Destination = ({ orderData, setOrderData }) => {
                 onChange={(e) => changeFormData(e)}
               />
             </div>
-            <button onClick={() => toPayment()}>{t("Continue to payment")}</button>
+            <div className='date-time'>
+              <h2>{t("Date and time")}</h2>
+              <input className={`date-input${dateTimeError ? " error" : ""}`} type="datetime-local" value={dateTime} onChange={(e) => setDate(e)} />
+            </div>
+            <button onClick={() => toPay()}>{t("Next")}</button>
           </div>
           <div className='map-container'>
             <div className={`map-wrapper ${mapOpened ? "opened" : ""}`}>

@@ -1,9 +1,26 @@
 .customize{
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    margin-bottom: 5rem;
+    position: relative;
+    
+    .seal-demo{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        
+        img{
+            width: 800px;
+            height: 600px;
+        }
+    }
+    
+    .customize-wrapper{
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        margin-bottom: 5rem;
+    }
 
     .left-col{
         width: 100%;
@@ -288,6 +305,8 @@
                 .seal{
                     margin-top: .4rem;
                     margin-bottom: .8rem;
+                    display: flex;
+                    align-items: center;
                     
                     [type="radio"]:checked,
                     [type="radio"]:not(:checked) {
@@ -362,6 +381,7 @@
 
         }
     }
+
 }
 
 

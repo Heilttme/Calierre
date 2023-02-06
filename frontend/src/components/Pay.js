@@ -16,6 +16,7 @@ const Pay = ({orderData, setBlurred}) => {
     cvv: ""
   })
 
+  const [method, setMethod] = useState("")
   const [extendedText, setExtendedText] = useState(false)
   const { height, width } = useWindowDimensions()
 
@@ -58,9 +59,9 @@ const Pay = ({orderData, setBlurred}) => {
   }
 
   useEffect(() => {
-    if (!orderData.content || !orderData.option || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
+    console.log(orderData);
+    if (!orderData.content || !orderData.option || !orderData.dateTime || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
-
 
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
@@ -80,10 +81,12 @@ const Pay = ({orderData, setBlurred}) => {
                   <li>Option</li>
                   <li>Seal</li>
                   {orderData.waxAdvanced && <li>Wax</li>}
+                  <li>Date</li>
+                  <li>Time</li>
                 </ul>
                 <ul className='s-col'>
                   {orderData.title && <li>{orderData.title}</li>}
-                  <li onClick={(e) => {e.stopPropagation() ;setExtendedText(true)}} className='content'>{orderData.content.slice(0, width > 720 ? 30 : 10)}...</li>
+                  <li onClick={(e) => {e.stopPropagation();setExtendedText(true)}} className='content'>{orderData.content.slice(0, width > 720 ? 30 : 10)}...</li>
                   {orderData.details && <li>{orderData.details}</li>}
                   <li>{orderData.city}</li>
                   <li>{orderData.street}</li>
@@ -92,23 +95,28 @@ const Pay = ({orderData, setBlurred}) => {
                   <li>{orderData.option}</li>
                   <li>{orderData.option === "Basic" ? orderData.sealBasic : orderData.sealAdvanced}</li>
                   {orderData.waxAdvanced && <li>{orderData.waxAdvanced}</li>}
+                  <li>{orderData.dateTime.split("T")[0]}</li>
+                  <li>{orderData.dateTime.split("T")[1]}</li>
                 </ul>
               </div>
             </div>
           </div>
           <div className='right-col'>
-            <h1>{t("Add payment information")}</h1>
-            <div className='payment-methods'>
-              <button>
+            <div className='pay-head'>
+              <h1>{t("Add payment information")}</h1>
+              {method !== "" && <button className='back' onClick={() => setMethod("")}>Back</button>}
+            </div>
+            {method === "" && <div className='payment-methods'>
+              <button onClick={() => setMethod("sber")}>
                 <img className='sberpay' width={64} src={sberPay}/>
                 SberPay
               </button>
-              <button>
+              <button onClick={() => setMethod("credit")}>
                 <img className='credit' width={42} src={credit}/>
                 Credit Card
               </button>
-            </div>
-            {/* <div className='form'>
+            </div>}
+            {method === "credit" && <div className='form'>
               <div className='field credit'>
                   <h2>{t("Credit card")}</h2>
                   <input
@@ -142,7 +150,7 @@ const Pay = ({orderData, setBlurred}) => {
                   />
               </div>
               <button className="pay" onClick={pay}>{t("Pay")}</button>
-            </div> */}
+            </div>}
           </div>
       </motion.div>
       <motion.div

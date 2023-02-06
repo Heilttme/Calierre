@@ -1,3 +1,4 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
 example {
   color: #EAE7DC #D8C3A5 #8E8D8A #E98074 #E85A4F #00cc66 #B4B1A7 grey disabled;
 }
@@ -945,6 +946,20 @@ example {
   }
 }
 .customize {
+  position: relative;
+}
+.customize .seal-demo {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.customize .seal-demo img {
+  width: 800px;
+  height: 600px;
+}
+.customize .customize-wrapper {
   width: 80%;
   display: flex;
   justify-content: space-between;
@@ -1195,6 +1210,8 @@ example {
 .customize .right-col .option .seal-choice .seal {
   margin-top: 0.4rem;
   margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
 }
 .customize .right-col .option .seal-choice .seal [type=radio]:checked,
 .customize .right-col .option .seal-choice .seal [type=radio]:not(:checked) {
@@ -1996,6 +2013,15 @@ example {
 .destination input:focus {
   border: 1px solid #B4B1A7;
 }
+.destination .date-input {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.destination .error {
+  border: 1px solid #E85A4F;
+}
 .destination .city {
   cursor: not-allowed;
 }
@@ -2177,7 +2203,6 @@ example {
 }
 .payment .form {
   width: 100%;
-  margin-left: 1rem;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
@@ -2211,6 +2236,28 @@ example {
 }
 .payment input:focus {
   border: 1px solid #B4B1A7;
+}
+.payment .pay-head {
+  display: flex;
+  justify-content: space-between;
+}
+.payment .pay-head button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  padding: 0.4rem 1.4rem;
+}
+.payment .pay-head button:hover {
+  background-color: #ee7366;
 }
 .payment .payment-methods {
   display: flex;
@@ -2475,46 +2522,6 @@ example {
   color: white;
   opacity: 0.7;
 }
-.contact .vacations {
-  margin-left: 5rem;
-  margin-top: 5rem;
-  margin-bottom: 3rem;
-}
-.contact .vacations h1 {
-  color: #E85A4F;
-  margin-bottom: 0.5rem;
-  font-size: 2.2em;
-}
-.contact .vacations p {
-  font-size: 1.2em;
-  margin-bottom: 1rem;
-}
-.contact .vacations h2 {
-  color: #E85A4F;
-  font-size: 1.8em;
-  margin-bottom: 0.6rem;
-}
-.contact .vacations li {
-  position: relative;
-  padding-left: 1rem;
-  font-size: 1.2em;
-  margin-bottom: 0.5rem;
-}
-.contact .vacations li::before {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 100%;
-  background-color: #E85A4F;
-  top: 50%;
-  left: 0rem;
-  transform: translateY(-50%);
-}
-.contact .vacations .apply {
-  margin-top: 0.6rem;
-  font-size: 1.5em;
-}
 
 @media (max-width: 1450px) {
   .block-1 {
@@ -2565,6 +2572,65 @@ example {
     font-size: 1.2em;
   }
 }
+.vacations {
+  margin-left: 5rem;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+.vacations h1 {
+  color: #E85A4F;
+  margin-bottom: 0.5rem;
+  font-size: 2.2em;
+}
+.vacations p {
+  font-size: 1.2em;
+  margin-bottom: 1rem;
+}
+.vacations h2 {
+  color: #E85A4F;
+  font-size: 1.8em;
+  margin-bottom: 0.6rem;
+}
+.vacations li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 1.2em;
+  margin-bottom: 0.5rem;
+}
+.vacations li::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #E85A4F;
+  top: 50%;
+  left: 0rem;
+  transform: translateY(-50%);
+}
+.vacations .apply {
+  margin-top: 0.6rem;
+  font-size: 1.5em;
+}
+.vacations a {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  margin-top: 0.6rem;
+}
+.vacations a:hover {
+  background-color: #ee7366;
+}
+
 a {
   text-decoration: none;
 }

@@ -52,6 +52,14 @@
         }
     }
 
+    .date-input{
+        user-select: none;
+    }
+
+    .error{
+        border: 1px solid #E85A4F;
+    }
+
     .city{
         cursor: not-allowed;
     }

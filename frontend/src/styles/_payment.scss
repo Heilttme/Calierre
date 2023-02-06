@@ -72,7 +72,7 @@
 
     .form{
         width: 100%;
-        margin-left: 1rem;
+        // margin-left: 1rem;
         display: grid;
         gap: 1.5rem;
         grid-template-columns: 1fr 1fr;
@@ -117,6 +117,17 @@
 
         &:focus{
             border: 1px solid#B4B1A7;
+        }
+    }
+
+    .pay-head{
+        display: flex;
+        justify-content: space-between;
+
+        button{
+            @include button;
+            
+            padding: .4rem 1.4rem;
         }
     }
 

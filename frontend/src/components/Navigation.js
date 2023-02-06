@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import { useLocation } from 'react-router-dom'
 import { t } from 'i18next'
-import useScrollBlock from "./useBlockScroll"
 import useWindowDimensions from "./useWindowsDimensions"
+import useScrollBlock from "./useBlockScroll"
  
 const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpened }) => {
-  const [shown, setShown] = useState(true)
+  const [scrolledBlocked, setScrolledBlocked] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [initialPos, setInitialPos] = useState(false)
   const location = useLocation()
   const { height, width } = useWindowDimensions()
-
   const [blockScroll, allowScroll] = useScrollBlock()
 
   const handleScroll = () => {
@@ -34,16 +33,26 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
     }
   }, [location.pathname])
 
-  // console.log(scrollPosition);
-  // useEffect(() => {
-  //   if (width <= 560 && menuOpened) blockScroll() 
-  //   else allowScroll()
-  // }, [width, menuOpened])
-
   const closeOnClick = (e) => {
     e.preventDefault()
     setMenuOpened(false)
   }
+
+  const pageAccessedByReload = (
+    (window.performance.navigation && window.performance.navigation.type === 1) ||
+      window.performance
+        .getEntriesByType('navigation')
+        .map((nav) => nav.type)
+        .includes('reload')
+  )
+
+  useEffect(() => {
+    if (!scrolledBlocked && scrollPosition !== 0 && location.pathname === "/" && !pageAccessedByReload) {
+      setScrolledBlocked(true)  
+      blockScroll()
+      setTimeout(() => allowScroll(), 500)
+    }
+  }, [scrollPosition])
 
   return (
     <motion.div
@@ -55,6 +64,7 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
         <div className='links'>
           <a href='/#/order' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Order")}</a>
           <a href='/#/contact' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Contact")}</a>
+          <a href='/#/vacations' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Vacations")}</a>
         </div>
         {language === "ru" ?
           <svg onClick={changeLanguage} className='language' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="64" height="36"><rect fill="#fff" width="9" height="3"/><rect fill="#d52b1e" y="3" width="9" height="3"/><rect fill="#0039a6" y="2" width="9" height="2"/></svg>
