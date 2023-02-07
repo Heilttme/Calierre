@@ -48,23 +48,22 @@ class PasswordChangedConfirmationEmail(BaseEmailMessage):
 
 @api_view(["POST"])
 def send_order_notification(request):
-    data = request.data.get("orderData")
     send_mail(
         "New order",
-            f"title: {data.get('title')} \n\
-            content: {data.get('content')} \n\
-            details: {data.get('details')} \n\
-            mistakes: {data.get('mistakes')} \n\
-            city: {data.get('city')} \n\
-            street: {data.get('street')} \n\
-            flat: {data.get('flat')} \n\
-            detailsForCourier: {data.get('detailsForCourier')} \n\
-            option: {data.get('option')} \n\
-            sealBasic: {data.get('sealBasic')} \n\
-            sealAdvanced: {data.get('sealAdvanced')} \n\
-            waxAdvanced: {data.get('waxAdvanced')} \n\
-            dateTime: {data.get('dateTime')} \n\
-            phone: {data.get('phone')}",
+            f"title: {request.data.get('title')} \n\
+            content: {request.data.get('content')} \n\
+            details: {request.data.get('details')} \n\
+            mistakes: {request.data.get('mistakes')} \n\
+            city: {request.data.get('city')} \n\
+            street: {request.data.get('street')} \n\
+            flat: {request.data.get('flat')} \n\
+            detailsForCourier: {request.data.get('detailsForCourier')} \n\
+            option: {request.data.get('option')} \n\
+            sealBasic: {request.data.get('sealBasic')} \n\
+            sealAdvanced: {request.data.get('sealAdvanced')} \n\
+            waxAdvanced: {request.data.get('waxAdvanced')} \n\
+            dateTime: {request.data.get('dateTime')} \n\
+            phone: {request.data.get('phone')}",
         "settings.EMAIL_HOST_USER",
         ["calierre01@mail.ru"],
         fail_silently=False

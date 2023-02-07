@@ -7,28 +7,26 @@ import { motion } from "framer-motion"
 import useWindowDimensions from "./useWindowsDimensions"
 import sberPay from "../images/sber_pay.png"
 import credit from "../images/credit_card.png"
+import QRCode from "react-qr-code";
+import { toast, ToastContainer } from 'react-toastify';
 
-const Pay = ({orderData, setBlurred}) => {
-  const [formData, setFormData] = useState({
-    card: "",
-    name: "",
-    expires: "",
-    cvc: ""
-  })
-
+const Pay = ({orderData, setBlurred, userData }) => {
   const [method, setMethod] = useState("")
   const [extendedText, setExtendedText] = useState(false)
   const { height, width } = useWindowDimensions()
-
+  const [mobile] = useState((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+  const [displayedQR, setDisplayedQR] = useState(false)
+  const [QRValue, setQRValue] = useState("")
+  const [pendingCredit, setPendingCredit] = useState(false)
+  const [pendingSber, setPendingSber] = useState(false)
+  
   const navigate = useNavigate()
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
 
-  const changeFormData = (e) => {
-    setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
-  }
-  
+  console.log(mobile);
+
   // useEffect(() => {
   //   const script = document.createElement("script")
   //   script.src = "https://static.yoomoney.ru/checkout-js/v1/checkout.js"
@@ -41,22 +39,34 @@ const Pay = ({orderData, setBlurred}) => {
   //   }
   // }, [])
 
-  const pay = () => {
-    window.checkout.tokenize({
-      number: formData.card,
-      cvc: formData.cvc,
-      month: formData.expires.split("/")[0],
-      year: formData.expires.split("/")[1],
-    }).then(res => {
-      const eres = axios.post("/email/send_email/", {orderData})
-      if (res.status === 'success') {
-          const { paymentToken } = res.data.response
-          
-          const pres = axios.post("/authentication/proceed_payment/", {ptk: paymentToken})
-            .then()
-            .catch()
+  const pay = (method) => {
+    method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
+    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}})
+    .then(data => { 
+        if (method === "sberpay") setPendingSber(false)
+        // const eres = axios.post("/email/send_email/", {orderData})
+        if (method === "sberpay" && !mobile){
+          setDisplayedQR(true)
+          setQRValue(data.data.url)
+        } else {
+          setPendingCredit(false)
+          window.location.replace(data.data.url) 
+        }
       }
-    }).catch(data => console.log(data))
+    )
+    .catch(data => 
+      toast.error(t("Payment was cancelled. Try again later"), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })  
+    )
+
   }
 
   useEffect(() => {
@@ -104,21 +114,43 @@ const Pay = ({orderData, setBlurred}) => {
             </div>
           </div>
           <div className='right-col'>
-            <div className='pay-head'>
-              <h1>{t("Add payment information")}</h1>
-              {method !== "" && <button className='back' onClick={() => setMethod("")}>Back</button>}
-            </div>
-            {method === "" && <div className='payment-methods'>
-              <button onClick={() => setMethod("sber")}>
+            <motion.div
+              animate={displayedQR ? {opacity: 0, display: "none"} : {}}
+              transition={{display: {delay: .4}, opacity: {duration: .3}}}
+              className='payment-methods'
+            >
+              <div className='pay-head'>
+                <h1>{t("Add payment information")}</h1>
+              </div>
+              <button className='pay-btn' onClick={() => pay("sberpay")}>
                 <img className='sberpay' width={64} src={sberPay}/>
                 SberPay
+                {pendingSber && <div className='ring-wrapper'>
+                  <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </div>}
               </button>
-              <button onClick={() => setMethod("credit")}>
+              <button className='pay-btn' onClick={() => pay("credit")}>
                 <img className='credit' width={42} src={credit}/>
                 Credit Card
+                {pendingCredit && <div className='ring-wrapper'>
+                  <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </div>}
               </button>
-            </div>}
-            {method === "credit" && <div className='form'>
+            </motion.div>
+            {<motion.div
+              animate={displayedQR ? {opacity: 1, display: "block"} : {opacity: 0}}
+              transition={{display: {delay: .4}, opacity: {delay: .4, duration: .3}}}
+              className='qr'
+            >
+              <h1>Sberpay</h1>
+              <p>Scan this QR code with your Sber app</p>
+              <QRCode
+                value={QRValue}
+                width="256"
+                height="256"
+              />
+            </motion.div>}
+            {/* {method === "credit" && <div className='form'>
               <div className='field credit'>
                   <h2>{t("Credit card")}</h2>
                   <input
@@ -152,7 +184,7 @@ const Pay = ({orderData, setBlurred}) => {
                   />
               </div>
               <button className="pay" onClick={pay}>{t("Pay")}</button>
-            </div>}
+            </div>} */}
           </div>
       </motion.div>
       <motion.div
@@ -167,6 +199,9 @@ const Pay = ({orderData, setBlurred}) => {
         <h1>Content</h1>
         <p>{orderData.content}</p>
       </motion.div>
+      <ToastContainer
+        limit={3}
+       />
     </div>
   )
 }

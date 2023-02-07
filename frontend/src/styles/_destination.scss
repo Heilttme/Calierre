@@ -2,6 +2,7 @@
     width: 75%;
     margin: 0 auto;
     margin-bottom: 2rem;
+    position: relative;
 
     [class*="copyrights-pane"] {
         display: none;
@@ -83,14 +84,14 @@
     }
     
     .map-container{
-        position: relative;
-
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        
         .map-wrapper{
             display: none;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
+            position: relative;
             
             .map{
                 display: none;
@@ -126,6 +127,10 @@
 @media (max-width: 1200px) {
     .destination .form{
         width: 70%;
+    }
+
+    .destination .map-container .map-wrapper {
+        left: 0%;
     }
 }
 
@@ -170,7 +175,7 @@
 }
 
 @media (max-width: 400px) {
-    .destination button {
+    .destination .form button {
         width: 100%;
     }
 }

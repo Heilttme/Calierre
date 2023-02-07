@@ -1,4 +1,4 @@
-import { Home, Login, SignUp, Navigation, Footer, Customize, ForgotPassword, Activate, Profile, PasswordRestore, Pay, Destination, LeaveReview, Contact, Vacations, DeliveryTime } from "./components"
+import { Home, Login, SignUp, Navigation, Footer, Customize, ForgotPassword, Activate, Profile, PasswordRestore, Pay, Destination, LeaveReview, Contact, Vacations, DeliveryTime, SuccessfulPayment } from "./components"
 import { Routes, Route } from "react-router-dom"
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -125,13 +125,14 @@ const App = () => {
           <Route path="/order" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} authenticated={authenticated} />} />
           <Route path="/order/delivery" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
           {/* <Route path="/order/delivery/time" element={<DeliveryTime orderData={orderData} changeOrderData={changeOrderData} />} /> */}
-          <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} />} />
+          <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} userData={userData} />} />
           <Route path="/reset" element={<ForgotPassword />} />
           <Route path="/activate/:uid/:token" element={<Activate/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/vacations" element={<Vacations/>} />
           <Route path="/profile" element={<Profile userData={userData} authorize={authorize} setUserData={setUserData} />} /> 
           <Route path="password/reset/confirm/:uid/:token" element={<PasswordRestore userData={userData} />} />
+          <Route path="/success_order" element={<SuccessfulPayment />} />
         </Routes>
       </main>
       <Footer/>

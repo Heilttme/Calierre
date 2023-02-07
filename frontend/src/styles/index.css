@@ -1,6 +1,6 @@
 @import url("https://cdn.syncfusion.com/ej2/material.css");
 example {
-  color: #EAE7DC #D8C3A5 #8E8D8A #E98074 #E85A4F #00cc66 #B4B1A7 grey disabled;
+  color: #EAE7DC #D8C3A5 #E85A4F #8E8D8A #E98074 #00cc66 #B4B1A7 grey disabled;
 }
 
 .home {
@@ -715,7 +715,7 @@ example {
   }
 }
 example {
-  color: #EAE7DC #D8C3A5 #8E8D8A #E98074 #E85A4F #00cc66 #B4B1A7 grey disabled;
+  color: #EAE7DC #D8C3A5 #E85A4F #8E8D8A #E98074 #00cc66 #B4B1A7 grey disabled;
 }
 
 .login-page {
@@ -1972,6 +1972,7 @@ example {
   width: 75%;
   margin: 0 auto;
   margin-bottom: 2rem;
+  position: relative;
 }
 .destination [class*=copyrights-pane] {
   display: none;
@@ -2042,14 +2043,14 @@ example {
   border: 1px solid #B4B1A7;
 }
 .destination .map-container {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
 }
 .destination .map-container .map-wrapper {
   display: none;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
+  position: relative;
 }
 .destination .map-container .map-wrapper .map {
   display: none;
@@ -2091,6 +2092,9 @@ example {
   .destination .form {
     width: 70%;
   }
+  .destination .map-container .map-wrapper {
+    left: 0%;
+  }
 }
 @media (max-width: 850px) {
   .destination .form {
@@ -2125,7 +2129,7 @@ example {
   }
 }
 @media (max-width: 400px) {
-  .destination button {
+  .destination .form button {
     width: 100%;
   }
 }
@@ -2152,6 +2156,7 @@ example {
   background-color: #E85A4F;
   padding: 2.5rem;
   border-radius: 10px;
+  min-width: 600px;
 }
 .payment .payment-wrapper .letter h1 {
   color: white;
@@ -2263,6 +2268,17 @@ example {
 .payment .pay-head button:hover {
   background-color: #ee7366;
 }
+.payment .qr {
+  min-width: 500px;
+  opacity: 0;
+  display: none;
+}
+.payment .qr p {
+  font-size: 1.4em;
+}
+.payment .qr svg {
+  margin-top: 3rem;
+}
 .payment .payment-methods {
   display: flex;
   flex-direction: column;
@@ -2328,6 +2344,50 @@ example {
 .payment .pay:hover {
   background-color: #ee7366;
 }
+.payment .pay-btn {
+  position: relative;
+}
+.payment .ring-wrapper {
+  position: absolute;
+  top: -0.6rem;
+  left: -3rem;
+}
+.payment .lds-ring {
+  display: inline-block;
+  position: relative;
+}
+.payment .lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #E85A4F transparent transparent transparent;
+}
+.payment .lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+.payment .lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+.payment .lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 @media (max-width: 1650px) {
   .payment {
@@ -2356,6 +2416,12 @@ example {
   }
 }
 @media (max-width: 1100px) {
+  .payment .payment-wrapper .letter {
+    min-width: unset;
+  }
+  .payment .qr {
+    min-width: unset;
+  }
   .payment .left-col {
     width: 95%;
   }

@@ -35,15 +35,46 @@ class Review(models.Model):
 
 
 class Order(models.Model):
-    title = models.CharField(max_length=255, default="")
-    content = models.CharField(max_length=2550)
+    title = models.CharField(max_length=255, blank=True, null=True)
+    content = models.CharField(max_length=2550, blank=True, null=True)
+    details = models.CharField(max_length=255, blank=True, null=True)
+    mistakes = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    street = models.CharField(max_length=255, blank=True, null=True)
+    flat = models.CharField(max_length=255, blank=True, null=True)
+    details_for_courier = models.CharField(max_length=255, blank=True, null=True)
+    option = models.CharField(max_length=255, blank=True, null=True)
+    seal_basic = models.CharField(max_length=255, blank=True, null=True)
+    seal_advanced = models.CharField(max_length=255, blank=True, null=True)
+    wax_advanced = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=255, blank=True, null=True)
+    delivery = models.CharField(max_length=255, blank=True, null=True)
+
+    payment_id = models.CharField(max_length=255, default="", blank=True, null=True)
+    # title = models.CharField(max_length=255, default="")
+    # content = models.CharField(max_length=2550, default="")
+    # details = models.CharField(max_length=255, default="")
+    # mistakes = models.CharField(max_length=255, default="")
+    # city = models.CharField(max_length=255, default="Moscow")
+    # street = models.CharField(max_length=255, default="")
+    # flat = models.CharField(max_length=255, default="")
+    # details_for_courier = models.CharField(max_length=255, default="")
+    # option = models.CharField(max_length=255, default="")
+    # seal_basic = models.CharField(max_length=255, default="")
+    # seal_advanced = models.CharField(max_length=255, default="")
+    # wax_advanced = models.CharField(max_length=255, default="")
+    # phone = models.CharField(max_length=255, default="")
+    # delivery = models.CharField(max_length=255, default="")
+
+    # payment_id = models.CharField(max_length=255, default="")
+
+    date = models.DateTimeField(default=datetime.now(), blank=True, null=True)
     
+    paid = models.BooleanField(default=False)
+    notified = models.BooleanField(default=False)
     taken = models.BooleanField(default=False)      # first step: writer takes order
     completed = models.BooleanField(default=False)  # second step: writer completes order
     checked = models.BooleanField(default=False)    # third step: expert checks letter
     delivered = models.BooleanField(default=False)  # fourth step: delivery co delivers order
-    
-    street = models.CharField(max_length=255)
-    date = models.DateTimeField(default=datetime.now(), blank=True, null=True)
 
     user = models.ForeignKey(LetterUser, on_delete=models.CASCADE)

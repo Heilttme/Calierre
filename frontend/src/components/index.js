@@ -13,5 +13,6 @@ import Destination from "./Destination"
 import Contact from "./Contact"
 import Vacations from "./Vacations"
 import DeliveryTime from "./DeliveryTime"
+import SuccessfulPayment from "./SuccessfulPayment"
 
-export { Home, Login, SignUp, Navigation, Footer, Customize, ForgotPassword, Activate, Profile, PasswordRestore, Pay, Destination, Contact, Vacations, DeliveryTime }
+export { Home, Login, SignUp, Navigation, Footer, Customize, ForgotPassword, Activate, Profile, PasswordRestore, Pay, Destination, Contact, Vacations, DeliveryTime, SuccessfulPayment }

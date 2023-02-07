@@ -27,7 +27,6 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const authenticated = useStore(state => state.authenticated)
 
   useEffect(() => {
-    console.log(authenticated);
     !authenticated && navigate("/#") 
   }, [authenticated])
   
@@ -412,9 +411,11 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
             seal === "Rose" ?
               Rose :
             seal === "Text" ?
-              Text: 
-            seal === "Royal" &&
-              Royal
+              Text :
+            seal === "Royal" ?
+              Royal :
+            ""
+
         }
         />
       </motion.div>

@@ -5,6 +5,8 @@ import axios from "axios"
 import map from "../images/map.jpg"
 import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
+import InputMask from 'react-input-mask';
+
 
 const Destination = ({ orderData, setOrderData }) => {
   const [coords, setCoords] = useState([55.753994, 37.622093])
@@ -17,7 +19,19 @@ const Destination = ({ orderData, setOrderData }) => {
   const [phoneError, setPhoneError] = useState(false)
 
   const changeFormData = (e) => {
-    setOrderData(prev => ({...prev, [e.target.name]: e.target.value}))
+    if (e.target.name === "phone"){
+      let el = e.target.value
+      el = el.replace('-', "")
+      el = el.replace('-', "")
+      el = el.replace("(", "")
+      el = el.replace(")", "")
+      el = el.replace("+", "")
+      el = el.replace(" ", "")
+      el = el.replace(" ", "")
+      setOrderData(prev => ({...prev, [e.target.name]: el}))
+    } else {
+      setOrderData(prev => ({...prev, [e.target.name]: e.target.value}))
+    }
   }
 
   const setDate = (e) => {
@@ -75,7 +89,7 @@ const Destination = ({ orderData, setOrderData }) => {
   }, [])
 
   const toPay = () => {
-    if (!orderData.street || !dateTime.length || !orderData.phone) {
+    if (!orderData.street || !dateTime.length || orderData.phone.split("_").join("").length < 11) {
       toast.error(t("Please fill necessary fields"), {
         position: "bottom-right",
         autoClose: 5000,
@@ -86,20 +100,21 @@ const Destination = ({ orderData, setOrderData }) => {
         progress: 0,
         theme: "light",
       })
+      
       if (!orderData.street) {
         setAddressError(true)
       }
       if (!dateTime.length) {
         setDateTimeError(true)
       }
-      if (!orderData.phone) {
+      if (orderData.phone.split("_").join("").length < 11) {
         setPhoneError(true)
       }
     } else {
       navigate("/order/delivery/payment")
     }
   }
-  
+
   return (
     <YMaps>
       <div className='destination'>
@@ -152,12 +167,20 @@ const Destination = ({ orderData, setOrderData }) => {
             <div className='field f-4'>
               <h2>{t("Reciever phone number")}</h2>
               <div className='input-block'>
-                <input
+                <InputMask
+                  mask={"+7 (999) 999-99-99"}
+                  name='phone'
+                  value={orderData.phone}
+                  placeholder='+7 (999) 444-55-66'
+                  onChange={(e) => changeFormData(e)}
                   className={`${phoneError && "error"}`}
+                />
+                {/* <input
+                  type="tel"
                   name='phone'
                   value={orderData.phone}
                   onChange={(e) => changeFormData(e)}
-                />
+                /> */}
               </div>
             </div>
             
@@ -167,6 +190,7 @@ const Destination = ({ orderData, setOrderData }) => {
             </div>
             <button onClick={() => toPay()}>{t("Next")}</button>
           </div>
+        </div>
           <div className='map-container'>
             <div className={`map-wrapper ${mapOpened ? "opened" : ""}`}>
               <Map
@@ -183,7 +207,6 @@ const Destination = ({ orderData, setOrderData }) => {
               <button className='cross' onClick={() => setMapOpened(false)}>X</button>
             </div>
           </div>
-        </div>
       </div>
       <ToastContainer />
     </YMaps>
