@@ -37,13 +37,13 @@ const Contact = () => {
           <h1>{t("How can we help?")}</h1>
           <div className='hours'>
             <div>
-              {t("Mon-Fri:")}<strong>{t("10am - 7pm")}</strong>
+              <span>{t("Mon-Fri")}</span><strong>{t("10am - 7pm")}</strong>
             </div>
             <div>
-              {t("Saturday:")}<strong>{t("10am - 5pm")}</strong>
+              {t("Saturday")}<strong>{t("10am - 5pm")}</strong>
             </div>
             <div>
-              {t("Sunday:")}<strong>{t("Closed")}</strong>
+              {t("Sunday")}<strong>{t("Closed")}</strong>
             </div>
           </div>
           <p>{t("We are open to any of your questions")}</p>

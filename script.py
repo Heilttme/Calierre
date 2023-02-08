@@ -5,7 +5,7 @@ Configuration.account_id = "978735"
 Configuration.secret_key = "live_r-oXGg8Z5jvLzPCEFMDiBlypmS1xVOiWVj5tkrhxjI8"
 
 while True:
-    orders = post("http://localhost:8000/authentication/get_orders_from_users/").json().get("orders")
+    orders = post("https://api.calierre.ru/authentication/get_orders_from_users/").json().get("orders")
     for i in range(len(orders)):
         payment = Payment.find_one(orders[i].get("payment_id"))
         if payment.status == "succeeded" and not orders[i].get("notified"):
@@ -27,7 +27,7 @@ while True:
             user = orders[i].get("user")
             payment_id = orders[i].get("payment_id")
             
-            post("http://localhost:8000/email/send_email/", {
+            post("http://api.calierre.ru/email/send_email/", {
                 "content": content, 
                 "details": details, 
                 "mistakes": mistakes, 
@@ -45,4 +45,4 @@ while True:
                 "payment_id": payment_id
             })
 
-            post("http://localhost:8000/authentication/set_order_notified/", {"id": orders[i].get("id")})
+            post("https://api.calierre.ru/authentication/set_order_notified/", {"id": orders[i].get("id")})

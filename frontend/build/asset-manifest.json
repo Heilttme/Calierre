@@ -1,20 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.08daa7d7.css",
-    "main.js": "/static/js/main.b8f25df0.js",
+    "main.css": "/static/css/main.38005f57.css",
+    "main.js": "/static/js/main.74382fc5.js",
+    "static/media/LILY.png": "/static/media/LILY.88b7a96288323637bed6.png",
+    "static/media/TEXT.png": "/static/media/TEXT.40bdd5cbfeae0030c456.png",
+    "static/media/FLOWER.png": "/static/media/FLOWER.1c7ac9ddbaf3380e758c.png",
+    "static/media/ROYAL.png": "/static/media/ROYAL.944d69fed9b2fed93773.png",
+    "static/media/TREE.png": "/static/media/TREE.b9243b971691315d7651.png",
+    "static/media/ROSE.png": "/static/media/ROSE.6aaffea52ac0d4b68001.png",
+    "static/media/WEDDING.png": "/static/media/WEDDING.0c5de4bf69b4c1f5b971.png",
     "static/media/negr.png": "/static/media/negr.c2734cf5f17dec9c97dd.png",
     "static/media/feather_pen.png": "/static/media/feather_pen.7293c96799c8e2f19b5e.png",
     "static/media/pergament.png": "/static/media/pergament.328e530c7d1f7e190bf0.png",
     "static/media/envelope.png": "/static/media/envelope.e7486038d06cda6d6e04.png",
+    "static/media/credit_card.png": "/static/media/credit_card.d82a8dca7aac8db395a9.png",
     "static/media/map.jpg": "/static/media/map.9fb60fc8b92eb066d128.jpg",
     "static/media/ink.png": "/static/media/ink.5fcc61d6c5069c778611.png",
+    "static/media/sber_pay.png": "/static/media/sber_pay.db456fa8527a9644f0c1.png",
     "index.html": "/index.html",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.08daa7d7.css.map": "/static/css/main.08daa7d7.css.map",
-    "main.b8f25df0.js.map": "/static/js/main.b8f25df0.js.map"
+    "main.38005f57.css.map": "/static/css/main.38005f57.css.map",
+    "main.74382fc5.js.map": "/static/js/main.74382fc5.js.map"
   },
   "entrypoints": [
-    "static/css/main.08daa7d7.css",
-    "static/js/main.b8f25df0.js"
+    "static/css/main.38005f57.css",
+    "static/js/main.74382fc5.js"
   ]
 }

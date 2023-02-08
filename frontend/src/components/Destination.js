@@ -147,7 +147,7 @@ const Destination = ({ orderData, setOrderData }) => {
             </div>
             </div>
             <div className='field f-4'>
-              <h2>{t("Flat")}</h2>
+              <h2>{t("Room")}</h2>
               <div className='input-block'>
                 <input
                   name='flat'

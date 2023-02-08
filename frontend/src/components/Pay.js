@@ -41,31 +41,31 @@ const Pay = ({orderData, setBlurred, userData }) => {
 
   const pay = (method) => {
     method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
-    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}})
-    .then(data => { 
-        if (method === "sberpay") setPendingSber(false)
-        // const eres = axios.post("/email/send_email/", {orderData})
-        if (method === "sberpay" && !mobile){
-          setDisplayedQR(true)
-          setQRValue(data.data.url)
-        } else {
-          setPendingCredit(false)
-          window.location.replace(data.data.url) 
-        }
-      }
-    )
-    .catch(data => 
-      toast.error(t("Payment was cancelled. Try again later"), {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-      })  
-    )
+    const res = axios.post("/authentication/aaaa/", {method, mobile, orderData: {...orderData, user: userData.id}}).then(data => console.log(data))
+    // .then(data => { 
+    //     if (method === "sberpay") setPendingSber(false)
+    //     if (method === "sberpay" && !mobile){
+    //       setDisplayedQR(true)
+    //       setQRValue(data.data.url)
+    //     } else {
+    //       setPendingCredit(false)
+    //       window.location.replace(data.data.url) 
+    //     }
+    //   }
+    // )
+    // .catch(data => 
+    //   {console.log(data);
+    //   toast.error(t("Payment was cancelled. Try again later"), {
+    //     position: "bottom-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: true,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: 0,
+    //     theme: "light",
+    //   })  }
+    // )
 
   }
 

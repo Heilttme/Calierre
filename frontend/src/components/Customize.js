@@ -1,6 +1,6 @@
 import { t } from 'i18next'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import eye from "../images/eye-outline.png"
 import { AnimatePresence, motion } from "framer-motion"
 import { toast, ToastContainer } from "react-toastify"
@@ -27,7 +27,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const authenticated = useStore(state => state.authenticated)
 
   useEffect(() => {
-    !authenticated && navigate("/#") 
+    !authenticated && navigate("/") 
   }, [authenticated])
   
   const showDemo = (e, par) => {
@@ -179,7 +179,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
             </div>
             <div className='buttons'>
               <button disabled={next && true} className={`${next ? "disabled" : ""}`} onClick={proceed}>{t("Next")}</button>
-              <a href='/contact'>{t("Need more than 1 letter?")}</a>
+              <Link to='/contact'>{t("Need more than 1 letter?")}</Link>
             </div>
           </motion.div>
         </motion.div>

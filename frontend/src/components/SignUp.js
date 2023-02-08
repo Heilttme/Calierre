@@ -29,7 +29,7 @@ const SignUp = ({authenticated}) => {
   }, [])
 
   useEffect(() => {
-    authenticated && navigate("/#") 
+    authenticated && navigate("/") 
   }, [authenticated])
 
   const changeFormData = (e) => {

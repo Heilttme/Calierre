@@ -54,11 +54,10 @@ const App = () => {
   const authenticated = useStore(state => state.authenticated)
   const authorize = useStore(state => state.authorize)
 
-  useEffect(() => {
-    if (localStorage.getItem("access")) {
-      authorize(true)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (localStorage.getItem("access")) {
+  //   }
+  // }, [])
   
   useEffect(() => {
     if (localStorage.getItem("access")){
@@ -75,7 +74,8 @@ const App = () => {
           }
            
           const res = axios.get("/auth/users/me/", config).then(data => {
-            const resOrders = axios.post("/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: data.data.image, orders: data2.data.orders, staff: data.data.is_staff})))
+            authorize(true)
+            const resOrders = axios.post("/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: "https://api.calierre.ru/media/pfps/" + data.data.image.split("/")[data.data.image.split("/").length - 1], orders: data2.data.orders, staff: data.data.is_staff})))
           })
         })
       }
@@ -112,6 +112,9 @@ const App = () => {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("language"))
   }, [])
+
+  console.log(authenticated);
+  
 
   
   return (

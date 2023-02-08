@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { t } from 'i18next'
 
 const Activate = () => {
@@ -20,7 +20,7 @@ const Activate = () => {
       <h1>{t("Account verification")}</h1>
       <p>{t("You have successfully verified your account!")}</p>
       <p>{t("You may now log in and order a letter.")}</p>
-      <a href="/login">{t("Log in")}</a>
+      <Link to="/login">{t("Log in")}</Link>
     </div>
   )
 }

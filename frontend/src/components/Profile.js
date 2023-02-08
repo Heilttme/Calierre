@@ -1,7 +1,7 @@
 import axios, { formToJSON } from 'axios'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import testimonial from "../images/negr.png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -409,7 +409,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                       : orders.length ? orders : 
                                         <div className='empty'>
                                             <h1>{t("Your orders list is empty")}</h1>
-                                            <a href='/customize'>{t("Make order")}</a>
+                                            <Link to='/customize'>{t("Make order")}</Link>
                                         </div> 
                                       }
                                     </div>

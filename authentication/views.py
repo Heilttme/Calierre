@@ -167,6 +167,7 @@ def set_order_notified(request):
 @api_view(["POST"])
 def proceed_payment(request):
     idempotence_key = str(uuid.uuid4())
+    print(request)
 
     Configuration.account_id = "978735"
     Configuration.secret_key = "live_r-oXGg8Z5jvLzPCEFMDiBlypmS1xVOiWVj5tkrhxjI8"
@@ -222,8 +223,6 @@ def proceed_payment(request):
         }, idempotence_key)
         return_data = payment.confirmation.confirmation_url
 
-    # post("http://localhost:8000/authentication/check_payment_status/", {"orderData": request.data.get("orderData"), "id": payment.id})
-    # asyncio.run(check_payment_status(payment.id, request.data.get("orderData")))
     title = request.data.get("orderData").get("title")
     content = request.data.get("orderData").get("content")
     details = request.data.get("orderData").get("details")
@@ -259,3 +258,8 @@ def proceed_payment(request):
     })
     
     return Response({"url": return_data}, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def aaaa(request):
+    return Response(status=status.HTTP_200_OK)

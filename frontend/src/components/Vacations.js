@@ -1,5 +1,6 @@
 import { t } from 'i18next'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Vacations = () => {
   return (
@@ -12,7 +13,7 @@ const Vacations = () => {
           <li>{t("Live inside MEH")}</li>
         </ul>
         <h2 className='apply'>{t("If you want to apply to us, then submit form")}</h2>
-        <a href='/#/contact'>Contact</a>
+        <Link to='/contact'>Contact</Link>
     </div>
   )
 }

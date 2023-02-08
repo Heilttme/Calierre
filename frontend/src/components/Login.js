@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import testimonial from "../images/negr.png"
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
@@ -22,7 +22,7 @@ const Login = ({ authorize, authenticated }) => {
   }, [])
 
   useEffect(() => {
-    authenticated && navigate("/#") 
+    authenticated && navigate("/") 
   }, [authenticated])
 
   const [formData, setFormData] = useState({
@@ -76,7 +76,7 @@ const Login = ({ authorize, authenticated }) => {
       <div className='left-col'>
         <span className='header-login'>
           <h2>{t("Log in")}</h2>
-          <a href='/#/sign_up'>{t("Create an account")}</a>
+          <Link to='/sign_up'>{t("Create an account")}</Link>
         </span>
         <div className='form'>
           <div className='email-block block'>
@@ -104,7 +104,7 @@ const Login = ({ authorize, authenticated }) => {
             <motion.label animate={formData.password || passwordFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
           </div>
           <div className='check-forgot'>
-            <a href='/#/reset'>{t("Forgot your password?")}</a>
+            <Link to='/reset'>{t("Forgot your password?")}</Link>
           </div>
           <button className='login-button' onClick={logIn}>{t("Log in")}</button>
         </div>
