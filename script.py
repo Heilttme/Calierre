@@ -1,5 +1,6 @@
 from requests import post
 from yookassa import Configuration, Payment
+from time import sleep
 
 Configuration.account_id = "978735"
 Configuration.secret_key = "live_r-oXGg8Z5jvLzPCEFMDiBlypmS1xVOiWVj5tkrhxjI8"
@@ -27,7 +28,7 @@ while True:
             user = orders[i].get("user")
             payment_id = orders[i].get("payment_id")
             
-            post("http://api.calierre.ru/email/send_email/", {
+            post("https://api.calierre.ru/email/send_email/", {
                 "content": content, 
                 "details": details, 
                 "mistakes": mistakes, 
@@ -46,3 +47,4 @@ while True:
             })
 
             post("https://api.calierre.ru/authentication/set_order_notified/", {"id": orders[i].get("id")})
+    sleep(30)

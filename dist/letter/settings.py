@@ -5,7 +5,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -15,11 +14,10 @@ SECRET_KEY = 'django-insecure-+5)l$9hbje@c(@0*9i&c!_=5a5cfzkl6&b$coraf9vrk@@5e=@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "api.calierre.ru", "127.0.0.1"]
 
 CORS_ALLOW_ALL_ORIGINS = True
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -182,6 +180,6 @@ SIMPLE_JWT = {
    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
 
-DOMAIN = "calierre.ru/#"
+DOMAIN = "calierre.ru"
 
 AUTH_USER_MODEL = "authentication.LetterUser"

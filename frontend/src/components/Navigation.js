@@ -58,7 +58,7 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
 
   return (
     <motion.div
-      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "5rem", top: "0", backgroundColor: "#EAE7DC"}}
+      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "4rem", top: "0", backgroundColor: "#EAE7DC"}}
       transition={{height: {duration: 1}, backgroundColor: {duration: 1}}}
       className={`header ${scrollPosition == 0 && "extended"}`}
     >

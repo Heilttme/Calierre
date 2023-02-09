@@ -41,31 +41,30 @@ const Pay = ({orderData, setBlurred, userData }) => {
 
   const pay = (method) => {
     method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
-    const res = axios.post("/authentication/aaaa/", {method, mobile, orderData: {...orderData, user: userData.id}}).then(data => console.log(data))
-    // .then(data => { 
-    //     if (method === "sberpay") setPendingSber(false)
-    //     if (method === "sberpay" && !mobile){
-    //       setDisplayedQR(true)
-    //       setQRValue(data.data.url)
-    //     } else {
-    //       setPendingCredit(false)
-    //       window.location.replace(data.data.url) 
-    //     }
-    //   }
-    // )
-    // .catch(data => 
-    //   {console.log(data);
-    //   toast.error(t("Payment was cancelled. Try again later"), {
-    //     position: "bottom-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: true,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: 0,
-    //     theme: "light",
-    //   })  }
-    // )
+    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}})
+    .then(data => { 
+        if (method === "sberpay") setPendingSber(false)
+        if (method === "sberpay" && !mobile){
+          setDisplayedQR(true)
+          setQRValue(data.data.url)
+        } else {
+          setPendingCredit(false)
+          window.location.replace(data.data.url) 
+        }
+      }
+    )
+    .catch(data => 
+      toast.error(t("Payment was cancelled. Try again later"), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })
+    )
 
   }
 
@@ -93,7 +92,6 @@ const Pay = ({orderData, setBlurred, userData }) => {
                   <li>Seal</li>
                   {orderData.waxAdvanced && <li>Wax</li>}
                   <li>Date</li>
-                  <li>Time</li>
                 </ul>
                 <ul className='s-col'>
                   {orderData.title && <li>{orderData.title}</li>}
@@ -107,7 +105,6 @@ const Pay = ({orderData, setBlurred, userData }) => {
                   <li>{orderData.option === "Basic" ? orderData.sealBasic : orderData.sealAdvanced}</li>
                   {orderData.waxAdvanced && <li>{orderData.waxAdvanced}</li>}
                   <li>{orderData.dateTime.split("T")[0]}</li>
-                  <li>{orderData.dateTime.split("T")[1]}</li>
                 </ul>
               </div>
               <h1 className='total'>Total: {orderData.option === "Basic" ? "₽490" : "₽690"}</h1>
@@ -120,7 +117,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
               className='payment-methods'
             >
               <div className='pay-head'>
-                <h1>{t("Add payment information")}</h1>
+                <h1>{t("Pay")}</h1>
               </div>
               <button className='pay-btn' onClick={() => pay("sberpay")}>
                 <img className='sberpay' width={64} src={sberPay}/>

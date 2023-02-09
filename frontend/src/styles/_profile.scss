@@ -132,13 +132,14 @@
         flex-direction: column;
 
         .selectors{
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
 
             .block-select{
                 @include button;
                 background-color: #b4b1a7;
-
+                padding: .6rem 1.5rem;
                 transition: all .1s ease-in-out
             }
 
@@ -333,13 +334,25 @@
             }
         }
     }
+
+    .profile .right-col .block .info li {
+        font-size: .8em;
+    }
+
+    .profile .right-col .selectors .block-select {
+        font-size: 1.2em;
+    }
 }
 
 @media (max-width: 480px) {
     .profile .right-col .block .info {
             gap: 5rem;
     }
-    
+
+    .profile .right-col .selectors .block-select {
+        font-size: .9em;
+    }
+
     // .profile .right-col .block .buttons button {
     //     display: block;
     // }
@@ -361,6 +374,10 @@
         .right-col .block .info {
             gap: .5rem;
         }
-        
+    }
+
+    .profile .right-col .selectors .block-select {
+        font-size: .8em;
+        padding: .6rem .8rem;
     }
 }

@@ -383,8 +383,9 @@
         
         .wrapper{
             color: #EAE7DC;
-            display: flex;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
             margin-top: 4rem;
             width: 100%;
 
@@ -436,6 +437,21 @@
                         &:last-child{
                             border-bottom: none;
                         }
+                    }
+
+                }
+                .contact-us{
+                    @include button;
+                    background-color: #fff;
+                    margin: 0 auto;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 1rem;
+                    color: #E85A4F;
+
+                    &:hover{
+                        background-color: rgb(201, 199, 199);
                     }
                 }
 
@@ -673,7 +689,7 @@
 
 @media (max-width: 900px) {
     .home .order-options .wrapper {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         width: 60%;
         margin: 0 auto;
 
@@ -786,6 +802,10 @@
 
     .home .order-options .wrapper .option .before {
         width: 70%;
+    }
+
+    .home .order-options .wrapper .option .contact-us {
+        font-size: .7em;
     }
 }
 

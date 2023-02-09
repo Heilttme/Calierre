@@ -71,7 +71,7 @@ def add_orders(request):
     phone = request.data.get("phone")
     user = request.data.get("user")
     payment_id = request.data.get("payment_id")
-    
+
     order = OrderSerializer(data={"title": title, 
         "content": content, 
         "details": details, 
@@ -185,10 +185,11 @@ def proceed_payment(request):
                 },
                 "confirmation": {
                     "type": "mobile_application",
-                    "return_url": "https://calierre.ru/#/success_order"
+                    "return_url": "https://calierre.ru/success_order"
                 },
                 "description": "Заказ №72"
             }, idempotence_key)
+            return_data = payment.confirmation.confirmation_url
         else:
             payment = Payment.create({
                 "amount": {
@@ -216,14 +217,12 @@ def proceed_payment(request):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": "https://calierre.ru/#/success_order"
+                "return_url": "https://calierre.ru/success_order"
             },
             "description": "Заказ №72"
         }, idempotence_key)
         return_data = payment.confirmation.confirmation_url
 
-    # post("http://localhost:8000/authentication/check_payment_status/", {"orderData": request.data.get("orderData"), "id": payment.id})
-    # asyncio.run(check_payment_status(payment.id, request.data.get("orderData")))
     title = request.data.get("orderData").get("title")
     content = request.data.get("orderData").get("content")
     details = request.data.get("orderData").get("details")
@@ -240,7 +239,8 @@ def proceed_payment(request):
     phone = request.data.get("orderData").get("phone")
     user = request.data.get("orderData").get("user")
     
-    post("http://localhost:3000/authentication/add_orders/", {"title": title, 
+    # post("http://localhost:8000/authentication/add_orders/", {"title": title, 
+    post("https://api.calierre.ru/authentication/add_orders/", {"title": title, 
         "content": content, 
         "details": details, 
         "mistakes": mistakes, 
@@ -259,3 +259,8 @@ def proceed_payment(request):
     })
     
     return Response({"url": return_data}, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def aaaa(request):
+    return Response(status=status.HTTP_200_OK)

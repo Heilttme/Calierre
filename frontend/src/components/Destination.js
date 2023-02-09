@@ -41,8 +41,6 @@ const Destination = ({ orderData, setOrderData }) => {
     let month = date.getMonth() + 1
     let year = date.getFullYear()
 
-    let hours = date.getHours()
-
     let inpDay = e.target.value.split("-")[2].split("T")[0]
 
     if (inpDay[0] === "0") {
@@ -122,7 +120,10 @@ const Destination = ({ orderData, setOrderData }) => {
           <div className='left-col'>
             <h1>{t("Choose delivery destination")}</h1>
             <div className='field f-3'>
-              <h2>{t("City")}</h2>
+              <div className='city-h-wrapper'>
+                <h2>{t("City")}</h2>
+                <span className='city-warn'>{t("Calierre currently delivers only in Moscow")}</span>
+              </div>
               <div className='input-block'>
                 <img onClick={() => setMapOpened(true)} src={map}/>
                 <input
@@ -186,7 +187,7 @@ const Destination = ({ orderData, setOrderData }) => {
             
             <div className='date-time'>
               <h2>{t("Date and time")}</h2>
-              <input className={`date-input${dateTimeError ? " error" : ""}`} type="datetime-local" value={dateTime} onChange={(e) => setDate(e)} />
+              <input className={`date-input${dateTimeError ? " error" : ""}`} type="date" value={dateTime} onChange={(e) => setDate(e)} />
             </div>
             <button onClick={() => toPay()}>{t("Next")}</button>
           </div>

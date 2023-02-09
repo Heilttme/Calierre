@@ -1,5 +1,8 @@
 .customize{
     position: relative;
+    margin: 0 auto;
+
+    
     
     .seal-demo{
         position: fixed;
@@ -20,6 +23,11 @@
         justify-content: space-between;
         margin: 0 auto;
         margin-bottom: 5rem;
+
+        button{
+            @include button;
+            margin-bottom: .5rem;
+        }
     }
 
     .left-col{
@@ -38,6 +46,7 @@
 
     h2{
         margin-bottom: .2rem;
+        font-size: 1.2em;
     }
 
     .form{
@@ -243,11 +252,11 @@
                 }
                 
                 p{
-                    font-size: 1.4em;
+                    font-size: 1em;
                     color: #E85A4F;
 
                     strong{
-                        font-size: 1.3em;
+                        font-size: 1.4em;
                     }
                 }
             }
@@ -283,16 +292,7 @@
             .seal-choice{
                 margin-bottom: .5rem;
 
-                button{
-                    background-color: unset;
-                    color: white;
-                    padding: 0;
 
-                    &:hover{
-                        background-color: unset;
-                    }
-                }
-                
                 .additional{
                     display: flex;
                     gap: 2rem;
@@ -399,11 +399,27 @@
     }
 }
 
+@media (max-width: 1400px) {
+    .customize{
+        .customize-wrapper{
+            width: 90%;
+        }
+
+        .left-col{
+            // width: 90% !important;
+        }
+    }
+    
+    .customize .right-col {
+        width: 45%;
+    }
+}
 
 @media (max-width: 1300px) {
     .customize{
-        width: 90%;
-
+        .customize-wrapper{
+            width: 100%;
+        }
         .left-col{
             // width: 90% !important;
         }
@@ -432,17 +448,44 @@
     .customize .right-col {
         width: 70%;
     }
+
+    .customize .form .content .content-header span {
+        font-size: .9em;
+    }
 }
 
-
 @media (max-width: 900px) {
-    
     .customize .right-col {
         width: 80%;
         margin: 0 auto;
     }
+
+    .customize .seal-demo img{
+        width: 600px;
+        height: 450px;
+    }
 }
 
+@media (max-width: 650px) {
+    .customize .seal-demo img{
+        width: 400px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 500px) {
+    .customize .right-col .option .seal-choice .additional {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .customize .seal-demo img{
+        width: 320px;
+        height: 240px;
+    }
+}
 
 @media (max-width: 400px) {
     
@@ -457,6 +500,10 @@
 
     .customize .right-col .option span {
         left: .4rem;
+    }
+
+    .customize .form .content .content-header span {
+        font-size: .6em;
     }
 
 }

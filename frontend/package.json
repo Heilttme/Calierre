@@ -1,7 +1,6 @@
 {
     "name": "frontend",
     "version": "0.1.0",
-    "homePage": ".", 
     "private": true,
     "dependencies": {
         "@pbe/react-yandex-maps": "^1.2.2",

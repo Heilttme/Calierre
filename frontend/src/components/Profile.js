@@ -63,6 +63,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
   const checkPassword = (e) => {
     if (!formData.currentPassword) {
       e.preventDefault()
+      setSelectedBlock("info")
       setEdit(true)
       setTimeout(() => confirmPasswordInputRef.current.focus(), 100)
     }
@@ -409,7 +410,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                       : orders.length ? orders : 
                                         <div className='empty'>
                                             <h1>{t("Your orders list is empty")}</h1>
-                                            <Link to='/customize'>{t("Make order")}</Link>
+                                            <Link to='/order'>{t("Make order")}</Link>
                                         </div> 
                                       }
                                     </div>

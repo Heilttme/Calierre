@@ -21,46 +21,13 @@ const Home = ({ userData }) => {
   const [expandedBlock1, setExpandedBlock1] = useState(false)
   const [expandedBlock2, setExpandedBlock2] = useState(false)
   const [expandedBlock3, setExpandedBlock3] = useState(false)
+  // const [reviewsDisplay, setReviewsDisplay] = useState([])
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
 
-  const texts = [
-    {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев."},
-    {head: "Дорогой Владислав!", end: "Ваши Никита и Анастасия", content: 'В связи со сложившимися обстоятельствами, а именно: \n невозможностью больше глядеть на пустующую 14 страницу наших паспортов и постоянно отвечать на вопросы: "Ну когда же уже?", мы все-таки решили совершить обряд бракосочетания. \n В связи с чем, будем рады видеть Вас на нашей свадьбе 5 июня 2023 года! \n Данное мероприятие будет проходить в нескольких действиях: \n Действие 1 (для души): Торжественное, по адресу: г. Москва, ул. Горная 48 \n Действие 2 (для желудка): Горько-Поцелуйно-Выпивательное,  по адресу: г. Москва, ул. Полянка 11'},
-    {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
-    {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга. Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
-  ]
-
-  const [textObject, setTextObject] = useState(texts[Math.floor(Math.random() * texts.length)])
-  const [fullTextTitle, setFullTextTitle] = useState("")
-  const [fullEndTitle, setFullEndTitle] = useState("")
-  const [fullText, setFullText] = useState("")
-  const [paperTitleText, setPaperTitleText] = useState("")
-  const [paperEndText, setPaperEndText] = useState("")
-  const [paperText, setPaperText] = useState("")
-  
-  
-  useEffect(() => {
-    setFullTextTitle(textObject.head)
-    setFullText(textObject.content)
-    setFullEndTitle(textObject.end)
-  }, [textObject])
-  
   const navigate = useNavigate()
-
-  useEffect(() => {
-    for (let i = 0; i < fullTextTitle.length; i++) {
-      setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 70))
-    }
-    for (let i = 0; i < fullText.length; i++) {
-      setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 70) + (i * 70))
-    }
-    for (let i = 0; i < fullEndTitle.length; i++) {
-      setTimeout(() => setPaperEndText(prev => prev += fullEndTitle[i]), 4000 + (fullEndTitle.length * 70) + (fullText.length * 70) + (i * 70))
-    }
-  }, [fullText])
 
   useEffect(() => {
     const res = axios.get("/authentication/reviews/").then(data => {
@@ -75,16 +42,15 @@ const Home = ({ userData }) => {
 
       setReviews(newReviews.reverse())
     })
-
+    
   }, [leaveReview])
-
+  
   const setReview = (e) => {
     setReviewValue(e.target.value)
   }
 
   const submitReview = () => {
     const res = axios.post("/authentication/add_review/", {content: reviewValue, email: userData.email}).then((data) => {
-      console.log(data);
       setLeaveReview(false)
       setReviewValue("")
     })
@@ -93,13 +59,14 @@ const Home = ({ userData }) => {
 
   const reviewsDisplay = reviews.map(el => (
     <div key={uuidv4()} className='review'>
-      <img src={`http://127.0.0.1:8000${el.image}`}/>
+      <img src={`https://api.calierre.ru${el.image}`}/>
       <div className='text'>
         <p className='name'>{el.username}</p>
         <p className='desc'>{el.review}</p>
       </div>
     </div>
   ))
+
 
   return (
     <div className='home'>
@@ -128,13 +95,7 @@ const Home = ({ userData }) => {
       <img src={ink} className='bg-ink image-23'/>
 
       <div className='pergament-previews'>
-        <div className='pergament-paper'>
-          {paperTitleText}
-          {paperTitleText ? <br/>: ""}
-          {paperText}
-          {paperEndText ? <br/>: ""}
-          {paperEndText}
-        </div>
+        <Paper/>
       </div>
       <div className='blocks'>
         <div className='col col-1'>
@@ -214,6 +175,7 @@ const Home = ({ userData }) => {
               <div className='describe'>
                 <p>·{t("For your events")}</p>
               </div>
+              <a className='contact-us' href='/contact'>Contact us</a>
           </div>
         </div>
       </div>
@@ -244,6 +206,51 @@ const Home = ({ userData }) => {
         {reviewsDisplay.splice(0, shownReviews)}
         <button className={`more-reviews`} onClick={() => setShownReviews(prev => prev += 2)}>{t("More")}</button>
       </div>
+    </div>
+  )
+}
+
+const Paper = () => {
+  const texts = [
+    {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев."},
+    {head: "Дорогой Владислав!", end: "Ваши Никита и Анастасия", content: 'В связи со сложившимися обстоятельствами, а именно: \n невозможностью больше глядеть на пустующую 14 страницу наших паспортов и постоянно отвечать на вопросы: "Ну когда же уже?", мы все-таки решили совершить обряд бракосочетания. \n В связи с чем, будем рады видеть Вас на нашей свадьбе 5 июня 2023 года! \n Данное мероприятие будет проходить в нескольких действиях: \n Действие 1 (для души): Торжественное, по адресу: г. Москва, ул. Горная 48 \n Действие 2 (для желудка): Горько-Поцелуйно-Выпивательное,  по адресу: г. Москва, ул. Полянка 11'},
+    {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
+    {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга. Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
+  ]
+
+  const [textObject, setTextObject] = useState(texts[Math.floor(Math.random() * texts.length)])
+  const [fullTextTitle, setFullTextTitle] = useState("")
+  const [fullEndTitle, setFullEndTitle] = useState("")
+  const [fullText, setFullText] = useState("")
+  const [paperTitleText, setPaperTitleText] = useState("")
+  const [paperEndText, setPaperEndText] = useState("")
+  const [paperText, setPaperText] = useState("")
+  
+  useEffect(() => {
+    setFullTextTitle(textObject.head)
+    setFullText(textObject.content)
+    setFullEndTitle(textObject.end)
+  }, [textObject])
+
+  useEffect(() => {
+    for (let i = 0; i < fullTextTitle.length; i++) {
+      setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 70))
+    }
+    for (let i = 0; i < fullText.length; i++) {
+      setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 70) + (i * 70))
+    }
+    for (let i = 0; i < fullEndTitle.length; i++) {
+      setTimeout(() => setPaperEndText(prev => prev += fullEndTitle[i]), 4000 + (fullEndTitle.length * 70) + (fullText.length * 70) + (i * 70))
+    }
+  }, [fullText])
+  
+  return (
+    <div className='pergament-paper'>
+      {paperTitleText}
+      {paperTitleText ? <br/>: ""}
+      {paperText}
+      {paperEndText ? <br/>: ""}
+      {paperEndText}
     </div>
   )
 }

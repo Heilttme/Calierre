@@ -180,6 +180,6 @@ SIMPLE_JWT = {
    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
 
-DOMAIN = "calierre.ru/#"
+DOMAIN = "calierre.ru"
 
 AUTH_USER_MODEL = "authentication.LetterUser"

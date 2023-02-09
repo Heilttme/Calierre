@@ -71,7 +71,7 @@ def add_orders(request):
     phone = request.data.get("phone")
     user = request.data.get("user")
     payment_id = request.data.get("payment_id")
-    
+
     order = OrderSerializer(data={"title": title, 
         "content": content, 
         "details": details, 
@@ -167,7 +167,6 @@ def set_order_notified(request):
 @api_view(["POST"])
 def proceed_payment(request):
     idempotence_key = str(uuid.uuid4())
-    print(request)
 
     Configuration.account_id = "978735"
     Configuration.secret_key = "live_r-oXGg8Z5jvLzPCEFMDiBlypmS1xVOiWVj5tkrhxjI8"
@@ -186,10 +185,11 @@ def proceed_payment(request):
                 },
                 "confirmation": {
                     "type": "mobile_application",
-                    "return_url": "https://calierre.ru/#/success_order"
+                    "return_url": "https://calierre.ru/success_order"
                 },
                 "description": "Заказ №72"
             }, idempotence_key)
+            return_data = payment.confirmation.confirmation_url
         else:
             payment = Payment.create({
                 "amount": {
@@ -217,7 +217,7 @@ def proceed_payment(request):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": "https://calierre.ru/#/success_order"
+                "return_url": "https://calierre.ru/success_order"
             },
             "description": "Заказ №72"
         }, idempotence_key)
@@ -239,7 +239,8 @@ def proceed_payment(request):
     phone = request.data.get("orderData").get("phone")
     user = request.data.get("orderData").get("user")
     
-    post("http://localhost:3000/authentication/add_orders/", {"title": title, 
+    # post("http://localhost:8000/authentication/add_orders/", {"title": title, 
+    post("https://api.calierre.ru/authentication/add_orders/", {"title": title, 
         "content": content, 
         "details": details, 
         "mistakes": mistakes, 

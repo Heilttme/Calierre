@@ -17,6 +17,19 @@
 
     .left-col{
         width: 100%;
+        
+        .city-h-wrapper{
+            display: flex;
+            // align-items: center;
+            gap: .5rem;
+        }
+
+        .city-warn{
+            font-size: .8em;
+            margin-top: auto;
+            margin-bottom: .6rem;
+            color: #8d8c8a;
+        }
     }
     
     h1{

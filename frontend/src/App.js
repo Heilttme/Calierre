@@ -113,9 +113,6 @@ const App = () => {
     i18n.changeLanguage(localStorage.getItem("language"))
   }, [])
 
-  console.log(authenticated);
-  
-
   
   return (
     <div className="app">
