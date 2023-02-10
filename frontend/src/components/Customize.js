@@ -101,7 +101,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
       })
     }
     if ( !orderData.waxAdvanced.length && option === "Advanced" ) {
-      toast.error(t("Please select wax colour for basic option"), {
+      toast.error(t("Please select wax colour for advanced option"), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -291,7 +291,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                         type="radio"
                         onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Cursive"}))}
                       />
-                      <label htmlFor='sealAdvanced7'>Cursive  <a onClick={(e) => setTimeout(() => showDemo(e, "Cursive"), 10)}>{t("View")}</a></label>
+                      <label htmlFor='sealAdvanced7'>{t("Cursive")}  <a onClick={(e) => setTimeout(() => showDemo(e, "Cursive"), 10)}>{t("View")}</a></label>
                     </li>
                     <li className='seal'>
                       <input 
@@ -300,7 +300,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                         type="radio"
                         onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, sealAdvanced: "Rose"}))}
                       />
-                      <label htmlFor='sealAdvanced8'>Rose  <a onClick={(e) => setTimeout(() => showDemo(e, "Rose"), 10)}>{t("View")}</a></label>
+                      <label htmlFor='sealAdvanced8'>{t("Rose")}  <a onClick={(e) => setTimeout(() => showDemo(e, "Rose"), 10)}>{t("View")}</a></label>
                     </li>
                   </ul>
 
@@ -361,7 +361,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
               <span><h2>{t("Multiple")}*</h2></span>
               <div className='desc'>
                 <p>·{t("For your events")}</p>
-                <p className='additional'>*{t("from 10 letters")}</p>
+                <p className='additional'>*{t("*from 10 letters")}</p>
               </div>
               <button onClick={() => toDelivery("Multiple")}>{t("Opt for multiple")}</button>
             </div>

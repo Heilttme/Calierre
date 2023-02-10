@@ -85,7 +85,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     const res = axios.put("/auth/users/me/", uploadData, config)
     .then(() => {
       setUserData(prev => ({...prev, image: `/media/pfps/${e.target.files[0].name}`}))
-      toast.success('Image has been changed successfully', {
+      toast.success(t('Image has been changed successfully'), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -99,7 +99,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     .catch((data) => {
       if (data.response.data.current_password) {
         setCurPasswordError(true)
-        toast.error('Current password error has occured', {
+        toast.error(t('Current password error has occured'), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -142,7 +142,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     if (userData.username !== formData.username) res1 = axios.put("/auth/users/me/", {username: formData.username, email: userData.email, password: formData.currentPassword}, config).then(() => {
       setUsernameSuccess(true)
       setUserData(prev => ({...prev, username: formData.username}))
-      toast.success('Username has been changed successfully', {
+      toast.success(t('Username has been changed successfully'), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -155,7 +155,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     }).catch((data) => {
       if (data.response.data.current_password) {
         setCurPasswordError(true)
-        toast.error('Current password error has occured', {
+        toast.error(t('Current password error has occured'), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -167,7 +167,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
         })
       } else {
         setUsernameSuccess(false)
-        toast.error('Username error has occured', {
+        toast.error(t('Username error has occured'), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -226,7 +226,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
         if (formData.password) res3 = axios.post("/auth/users/set_password/", {new_password: formData.password, re_new_password: formData.password, current_password: formData.currentPassword}, config)
         .then(() => {
           setPasswordSuccess(true)
-          toast.success('Password has been changed successfully', {
+          toast.success(t('Password has been changed successfully'), {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: true,
@@ -240,7 +240,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
         .catch((data) => {
           if (data.response.data.current_password) {
             setCurPasswordError(true)
-            toast.error('Current password error has occured', {
+            toast.error(t('Current password error has occured'), {
               position: "bottom-right",
               autoClose: 5000,
               hideProgressBar: true,
@@ -252,7 +252,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
             })
           } else {
             setPasswordSuccess(false)
-            toast.error('Password error has occured', {
+            toast.error(t('Password error has occured'), {
               position: "bottom-right",
               autoClose: 5000,
               hideProgressBar: true,
@@ -292,7 +292,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     })
   }
 
-  const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false && el.option == "Advanced").map(el => (
+  const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false && el.option == "Advanced" && el.paid == true).map(el => (
     <AnimatePresence>
       <motion.div exit={{x: 100}} className='order-wrapper'>
         <div className='order'>
@@ -308,7 +308,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
 
   console.log(userData.ordersForWriter);
 
-  const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false && el.option == "Advanced").map(el => (
+  const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false && el.option == "Advanced" && el.paid == true).map(el => (
     <TakenOrdersForWriter el={el} setUserData={setUserData} />
   ))
   

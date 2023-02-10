@@ -13,7 +13,7 @@ const Vacations = () => {
           <li>{t("Live inside MEH")}</li>
         </ul>
         <h2 className='apply'>{t("If you want to apply to us, then submit form")}</h2>
-        <Link to='/contact'>Contact</Link>
+        <Link to='/contact'>{t("Contact")}</Link>
     </div>
   )
 }

@@ -196,9 +196,8 @@ const Destination = ({ orderData, setOrderData }) => {
                 /> */}
               </div>
             </div>
-            
             <div className='date-time'>
-              <h2>{t("Date and time")}</h2>
+              <h2>{t("Date")}</h2>
               <input className={`date-input${dateTimeError ? " error" : ""}`} type="date" value={dateTime} onChange={(e) => setDate(e)} />
             </div>
             <button onClick={() => toPay()}>{t("Next")}</button>
