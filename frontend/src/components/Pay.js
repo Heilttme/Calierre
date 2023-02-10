@@ -25,7 +25,6 @@ const Pay = ({orderData, setBlurred, userData }) => {
     window.scrollTo(0, 0);
   }, [])
 
-  console.log(mobile);
 
   // useEffect(() => {
   //   const script = document.createElement("script")
@@ -187,11 +186,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
       <motion.div
         className='extended'
         initial={{width: 0, height: 0, padding: 0}}
-        animate={extendedText ? {
-          width: "60%",
-          height: "75%",
-          padding: "3rem"
-        } : {width: 0, height: 0, padding: 0}}
+        animate={extendedText ? width < 900 ? width < 500 ? {width: "90%", height: "75%", padding: "2rem"} : {width: "85%", height: "75%", padding: "3rem"} : {width: "60%", height: "75%", padding: "3rem"} : {width: 0, height: 0, padding: 0}}
       >
         <h1>Content</h1>
         <p>{orderData.content}</p>

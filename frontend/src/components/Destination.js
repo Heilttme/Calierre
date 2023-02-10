@@ -75,7 +75,19 @@ const Destination = ({ orderData, setOrderData }) => {
 
   const onMapClick = (e) => {
     setCoords(e.get('coords'))
-    const res = axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=ceecbf3e-58ca-4fe6-a06b-97c89dc04f18&geocode=${e.get("coords")[1]}, ${e.get("coords")[0]}&format=json`).then(data => setOrderData(prev => ({...prev, street: data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""})))
+    const res = axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=ceecbf3e-58ca-4fe6-a06b-97c89dc04f18&geocode=${e.get("coords")[1]}, ${e.get("coords")[0]}&format=json`).then(data => {
+      toast.success(`${t(`Address was set to ${data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""}`)}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+      })
+      setOrderData(prev => ({...prev, street: data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""}))
+    })
   }
 
   useEffect(() => {
@@ -203,7 +215,8 @@ const Destination = ({ orderData, setOrderData }) => {
                 className={`map ${mapOpened ? "opened-map" : ""}`}
                 onClick={(e) => onMapClick(e)}
               >
-                <Placemark geometry={coords} />
+                <Placemark geometry={coords} balloonContent={["<a>saddasads</a>"]} />
+                <div>asddas</div>
               </Map>
               <button className='cross' onClick={() => setMapOpened(false)}>X</button>
             </div>

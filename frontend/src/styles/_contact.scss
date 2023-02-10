@@ -4,7 +4,7 @@
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
-    
+
     .block-1{
         display: flex;
         justify-content: space-around;
@@ -83,6 +83,10 @@
                 &:focus{
                     border: 2px solid white;
                 }
+            }
+
+            .error{
+                border: 2px solid #af2323;
             }
 
             button{

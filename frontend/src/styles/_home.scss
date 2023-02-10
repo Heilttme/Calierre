@@ -638,15 +638,14 @@
     .home .blocks {
         position: unset;
         transform: none;
-        flex-direction: column;
-        gap: 5rem;
+        gap: 3rem;
         align-items: center;
     }
     
     .home .block {
-        width: 36rem;
-        height: 42rem;
-        font-size: 1.5em;
+        width: 26rem;
+        height: 32rem;
+        font-size: 1.2em;
     }
     
     .home .order-options {
@@ -685,6 +684,12 @@
     .home .reviews {
         width: 87%;
     }
+
+    .home .block {
+        width: 22rem;
+        height: 28rem;
+        font-size: 1em;
+    }
 }
 
 @media (max-width: 900px) {
@@ -700,6 +705,16 @@
                 font-size: .85em;
             }
         }
+
+    }
+    .home .blocks {
+        gap: 1.5rem;
+    }
+    
+    .home .block {
+        width: 19rem;
+        height: 24rem;
+        font-size: .9em;
     }
 
     .home .order-options .wrapper .option .describe p {
@@ -741,6 +756,15 @@
     .home .reviews .header-reviews p {
         font-size: 1.5em;
         letter-spacing: 2px;
+    }
+
+    .home .blocks {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .home .col {
+        gap: 3rem;
     }
 
     .home .block {

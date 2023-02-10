@@ -333,6 +333,24 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
                       />
                       <label htmlFor='waxAdvanced3'>{t("Green")}</label>
                     </li>
+                    <li className='seal'>
+                      <input 
+                        name='waxAdvanced'
+                        id='waxAdvanced4'
+                        type="radio"
+                        onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, waxAdvanced: "White"}))}
+                      />
+                      <label htmlFor='waxAdvanced4'>{t("White")}</label>
+                    </li>
+                    <li className='seal'>
+                      <input 
+                        name='waxAdvanced'
+                        id='waxAdvanced5'
+                        type="radio"
+                        onClick={(e) => e.target.checked && setOrderData(prev => ({...prev, waxAdvanced: "Black"}))}
+                      />
+                      <label htmlFor='waxAdvanced5'>{t("Black")}</label>
+                    </li>
                   </ul>
                 </div>
                 </div>

@@ -292,7 +292,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     })
   }
 
-  const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false).map(el => (
+  const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false && el.option == "Advanced").map(el => (
     <AnimatePresence>
       <motion.div exit={{x: 100}} className='order-wrapper'>
         <div className='order'>
@@ -306,7 +306,9 @@ const Profile = ({ userData, setUserData, authorize }) => {
     </AnimatePresence>
   ))
 
-  const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false).map(el => (
+  console.log(userData.ordersForWriter);
+
+  const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false && el.option == "Advanced").map(el => (
     <TakenOrdersForWriter el={el} setUserData={setUserData} />
   ))
   
@@ -430,12 +432,11 @@ const TakenOrdersForWriter = ({ el, setUserData }) => {
 
   const confirmOrder = (id) => {
     setUserData(prev => ({...prev, ordersForWriter: prev.ordersForWriter.filter(el => el.id !== id)}))
-    // const res1 = axios.post("http://127.0.0.1:8000/authentication/change_order_status_completed/", {id}).then(data => {
+    const res1 = axios.post("/authentication/change_order_status_completed/", {id}).then(data => {
       // const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => {
-        setExited(true)
+        // setExited(true)
         // setUserData(prev => ({...prev, ordersForWriter: data.data.orders}))
-      // })
-    // })
+    })
   }
   
   return (
