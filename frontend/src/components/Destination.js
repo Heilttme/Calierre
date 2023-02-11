@@ -95,6 +95,19 @@ const Destination = ({ orderData, setOrderData }) => {
   }, [])
 
   useEffect(() => {
+    if (localStorage.getItem("access")){
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `JWT ${localStorage.getItem('access')}`,
+          "Accept": "application/json"
+        }
+      }
+      const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
+    } else navigate("/")
+  }, [])
+
+  useEffect(() => {
     if (!orderData.content || !orderData.option || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 

@@ -71,42 +71,54 @@ const Pay = ({orderData, setBlurred, userData }) => {
     if (!orderData.content || !orderData.option || !orderData.dateTime || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 
+  useEffect(() => {
+    if (localStorage.getItem("access")){
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `JWT ${localStorage.getItem('access')}`,
+          "Accept": "application/json"
+        }
+      }
+      const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
+    } else navigate("/")
+  }, [])
 
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
         <motion.div animate={extendedText ? {opacity: 0.35} : {opacity: 1}} className='payment-wrapper'>
           <div className='left-col'>
             <div className='letter'>
-              <h1>Your letter</h1>
+              <h1>{t("Your letter")}</h1>
               <div className='data'>
                 <ul className='f-col'>
-                  {orderData.title && <li>Title</li>}
-                  <li>Content</li>
-                  {orderData.details && <li>Letter details</li>}
-                  <li>City</li>
-                  <li>Street</li>
-                  {orderData.flat && <li>Flat</li>}
-                  {orderData.detailsForCourier && <li>Details for courier</li>}
-                  <li>Option</li>
-                  <li>Seal</li>
-                  {orderData.waxAdvanced && <li>Wax</li>}
-                  <li>Date</li>
+                  {orderData.title && <li>{t("Title")}</li>}
+                  <li>{t("Content")}</li>
+                  {orderData.details && <li>{t("Letter details")}</li>}
+                  <li>{t("City")}</li>
+                  <li>{t("Street")}</li>
+                  {orderData.flat && <li>{t("Flat")}</li>}
+                  {orderData.detailsForCourier && <li>{t("Details for courier")}</li>}
+                  <li>{t("Option")}</li>
+                  <li>{t("Seal")}</li>
+                  {orderData.waxAdvanced && <li>{t("Wax")}</li>}
+                  <li>{t("Date")}</li>
                 </ul>
                 <ul className='s-col'>
                   {orderData.title && <li>{orderData.title}</li>}
                   <li onClick={(e) => {e.stopPropagation();setExtendedText(true)}} className='content'>{orderData.content.slice(0, width > 720 ? 30 : 10)}...</li>
                   {orderData.details && <li>{orderData.details}</li>}
-                  <li>{orderData.city}</li>
+                  <li>{t(orderData.city)}</li>
                   <li>{orderData.street}</li>
                   {orderData.flat && <li>{orderData.flat}</li>}
                   {orderData.detailsForCourier && <li>{orderData.detailsForCourier}</li>}
-                  <li>{orderData.option}</li>
-                  <li>{orderData.option === "Basic" ? orderData.sealBasic : orderData.sealAdvanced}</li>
-                  {orderData.waxAdvanced && <li>{orderData.waxAdvanced}</li>}
+                  <li>{t(orderData.option)}</li>
+                  <li>{orderData.option === "Basic" ? t(orderData.sealBasic) : t(orderData.sealAdvanced)}</li>
+                  {orderData.waxAdvanced && <li>{t(orderData.waxAdvanced)}</li>}
                   <li>{orderData.dateTime.split("T")[0]}</li>
                 </ul>
               </div>
-              <h1 className='total'>Total: {orderData.option === "Basic" ? "₽490" : "₽690"}</h1>
+              <h1 className='total'>{t("Total")}: {orderData.option === "Basic" ? "₽490" : "₽690"}</h1>
             </div>
           </div>
           <div className='right-col'>
@@ -188,7 +200,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
         initial={{width: 0, height: 0, padding: 0}}
         animate={extendedText ? width < 900 ? width < 500 ? {width: "90%", height: "75%", padding: "2rem"} : {width: "85%", height: "75%", padding: "3rem"} : {width: "60%", height: "75%", padding: "3rem"} : {width: 0, height: 0, padding: 0}}
       >
-        <h1>Content</h1>
+        <h1>{t("Content")}</h1>
         <p>{orderData.content}</p>
       </motion.div>
       <ToastContainer

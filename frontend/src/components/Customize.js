@@ -2,7 +2,7 @@ import { t } from 'i18next'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import eye from "../images/eye-outline.png"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { toast, ToastContainer } from "react-toastify"
 import useWindowsDimensions from "./useWindowsDimensions"
 import Lily from "../images/LILY.png"
@@ -15,8 +15,9 @@ import Rings from "../images/WEDDING.png"
 import Royal from "../images/ROYAL.png"
 import useScrollBlock from "./useBlockScroll"
 import useStore from "../store";
+import axios from 'axios'
 
-const Customize = ({ setOrderData, orderData, changeOrderData }) => {
+const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
   const [contentError, setContentError] = useState(false)
   const [next, setNext] = useState(false)
   const [mistakes, setMistakes] = useState(false)
@@ -30,7 +31,16 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    !authenticated && navigate("/login") 
+    if (localStorage.getItem("access")){
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `JWT ${localStorage.getItem('access')}`,
+          "Accept": "application/json"
+        }
+      }
+      const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
+    } else navigate("/")
   }, [])
   
   const showDemo = (e, par) => {
@@ -361,7 +371,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
               <span><h2>{t("Multiple")}*</h2></span>
               <div className='desc'>
                 <p>·{t("For your events")}</p>
-                <p className='additional'>*{t("*from 10 letters")}</p>
+                <p className='additional'>{t("*from 10 letters")}</p>
               </div>
               <button onClick={() => toDelivery("Multiple")}>{t("Opt for multiple")}</button>
             </div>

@@ -115,7 +115,7 @@ const App = () => {
 
   
   return (
-    <div className="app">
+    <div className="app" onClick={() => setMenuOpened(false)}>
       <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} changeLanguage={changeLanguage} language={language} />
       <main >
         <Routes>
@@ -124,7 +124,6 @@ const App = () => {
           <Route path="/sign_up" element={<SignUp authenticated={authenticated} />} />
           <Route path="/order" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} authenticated={authenticated} />} />
           <Route path="/order/delivery" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
-          {/* <Route path="/order/delivery/time" element={<DeliveryTime orderData={orderData} changeOrderData={changeOrderData} />} /> */}
           <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} userData={userData} />} />
           <Route path="/reset" element={<ForgotPassword />} />
           <Route path="/activate/:uid/:token" element={<Activate/>} />

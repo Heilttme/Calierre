@@ -306,7 +306,6 @@ const Profile = ({ userData, setUserData, authorize }) => {
     </AnimatePresence>
   ))
 
-  console.log(userData.ordersForWriter);
 
   const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false && el.option == "Advanced" && el.paid == true).map(el => (
     <TakenOrdersForWriter el={el} setUserData={setUserData} />

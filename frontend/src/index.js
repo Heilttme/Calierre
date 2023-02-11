@@ -11,7 +11,7 @@ axios.defaults.baseURL = "https://api.calierre.ru"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>CALIERRE</div>}>
         <Router>
             <App />
         </Router>

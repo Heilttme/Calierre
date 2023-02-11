@@ -49,8 +49,8 @@
     "Successfuly changed. Redirecting...": "Изменён успешно. Перенаправляем...",
     "Order": "Заказать",
     "Contact": "Связаться",
-    "Writing has always been a very popular means of communication. It was believed that an educated person simply must be able to write beautiful letters. Now, of course, the situation has changed, but you can be impressed by a beautiful and perfectly composed letter nowadays, too!": "Writing has always been a very popular means of communication. It was believed that an educated person simply must be able to write beautiful letters. Now, of course, the situation has changed, but you can be impressed by a beautiful and perfectly composed letter nowadays, too!",
-    "Our company provides every person with an opportunity to get their hands on a real, beautifully designed, competent letter that will certainly warm the heart of your beloved ones.": "Our company provides every person with an opportunity to get their hands on a real, beautifully designed, competent letter that will certainly warm the heart of your beloved ones.",
+    "Writing has always been a very popular means of communication. It was believed that an educated person simply must be able to write beautiful letters. Now, of course, the situation has changed, but you can be impressed by a beautiful and perfectly composed letter nowadays, too!": "Письмо во все времена было очень популярным средством коммуникации. Считалось, что образованный человек просто обязан уметь писать красивые письма. Сейчас, конечно, ситуация изменилась, но от красивого и отлично составленного письма можно остаться под впечатлением и в наше время тоже!",
+    "Our company provides every person with an opportunity to get their hands on a real, beautifully designed, competent letter that will certainly warm the heart of your beloved ones.": "Наша компания предоставляет каждому человеку возможность получить в свои руки настоящее, красиво оформленное, грамотное письмо, которое не оставит без внимания ближнего.",
     "Order options": "Опции заказа",
     "Basic": "Базовый",
     "Advanced": "Продвинутый",
@@ -99,7 +99,7 @@
     "Wedding rings": "Свадебные кольца",
     "Lily": "Лилия",
     "Moose": "Лось",
-    "Opt for basic": "Продвинутый",
+    "Opt for basic": "Базовый",
     "Seals": "Печати",
     "Waxes": "Сургучи",
     "more than 10 letters": "больше 10 писем",
@@ -166,5 +166,10 @@
     "Username error has occured": "Произошла ошибка в поле с именем",
     "Password has been changed successfully": "Пароль был успешно изменён",
     "You will get e-mail notification when somebody orders a letter": "Вы получите E-mail, когда кто-то закажет письмо",
-    "Your untaken orders list is empty": "Список свободных писем пуст"
+    "Your untaken orders list is empty": "Список свободных писем пуст",
+    "Confess to your crush.": "Напишите признание в любви своей второй половинке.",
+    "Congratulate your friend on his birthday through a letter, he will be pleasantly surprised.": "Поздравьте своего друга с днём рождения через письмо, он будет приятно удивлён.",
+    "A letter can serve as an interesting and unusual gift for holidays such as Valentine’s Day, March 8th.": "Письмо может служить очень интересным и необычным подарком на такие праздники, как 14 февраля, 8 марта.",
+    "In addition to letters, our company is engaged in the production of personalized, creative invitations that will serve as an excellent tone in organizing your event, whether it's a wedding, corporate party or birthday.": "Помимо писем наша компания занимается изготовлением именных, креативных пригласительных, которые послужат отличным тоном в организации вашего мероприятия, будь то свадьба, корпоратив или день рождения и помогут оставить хорошее впечатление.",
+    "Preorder": "Предзаказ"
 }

@@ -110,7 +110,6 @@ def change_order_status_taken(request):
 
     return Response({"status": status.HTTP_200_OK})
 
-    
 @api_view(["POST"])
 def change_order_status_checked(request):
     order = Order.objects.filter(id=request.data.get("id"))[0]
@@ -126,6 +125,40 @@ def change_order_status_completed(request):
 
     order.completed = 1
     order.save()
+
+    title = order.title
+    content = order.content
+    city = order.city
+    street = order.street
+    flat = order.flat
+    option = order.option
+    seal_advanced = order.seal_advanced
+    seal_basic = order.seal_basic
+    wax_advanced = order.wax_advanced
+    to_deliver = order.delivery
+    date = order.date
+    details = order.details
+    details_for_courier = order.details_for_courier
+    phone = order.phone
+    mistakes = order.mistakes
+
+    post("https://api.calierre.ru/email/order_completed_notification/", {"title": title, 
+        "content": content, 
+        "city": city, 
+        "street": street, 
+        "flat": flat,
+        "option": option, 
+        "seal_advanced": seal_advanced, 
+        "seal_basic": seal_basic, 
+        "wax_advanced": wax_advanced, 
+        "to_deliver": to_deliver, 
+        "date": date, 
+        "details": details, 
+        "details_for_courier": details_for_courier, 
+        "phone": phone, 
+        "mistakes": mistakes, 
+        "email": email
+    })
 
     return Response({"status": status.HTTP_200_OK})
 
@@ -238,6 +271,7 @@ def proceed_payment(request):
     dateTime = request.data.get("orderData").get("dateTime")
     phone = request.data.get("orderData").get("phone")
     user = request.data.get("orderData").get("user")
+    email = LetterUser.objects.filter(id=user)[0].email
     
     # post("http://localhost:8000/authentication/add_orders/", {"title": title, 
     post("https://api.calierre.ru/authentication/add_orders/", {"title": title, 
@@ -257,6 +291,7 @@ def proceed_payment(request):
         "user": user, 
         "payment_id": payment.id
     })
+    post("https://api.calierre.ru/email/notify_user_order_was_created/", {"email": email})
     
     return Response({"url": return_data}, status=status.HTTP_200_OK)
 

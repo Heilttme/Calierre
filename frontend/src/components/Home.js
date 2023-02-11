@@ -104,14 +104,14 @@ const Home = ({ userData }) => {
             onClick={() => setExpandedBlock1(prev => !prev)}
           >
             <img className='pergament' src={pergament}/>
-            <p>{t("Письмо во все времена было очень популярным средством коммуникации. Считалось, что образованный человек просто обязан уметь писать красивые письма. Сейчас, конечно, ситуация изменилась, но от красивого и отлично составленного письма можно остаться под впечатлением и в наше время тоже!")}</p>
+            <p>{t("Writing has always been a very popular means of communication. It was believed that an educated person simply must be able to write beautiful letters. Now, of course, the situation has changed, but you can be impressed by a beautiful and perfectly composed letter nowadays, too!")}</p>
           </motion.div>
           <motion.div 
             className='block' 
             onClick={() => setExpandedBlock2(prev => !prev)}
           >
             <img className='envelope' src={envelope}/>
-            <p>{t("Наша компания предоставляет каждому человеку возможность получить в свои руки настоящее, красиво оформленное, грамотное письмо, которое не оставит без внимания ближнего.")}</p>
+            <p>{t("Our company provides every person with an opportunity to get their hands on a real, beautifully designed, competent letter that will certainly warm the heart of your beloved ones.")}</p>
           </motion.div>
         </div>
         <div className='col col-2'>
@@ -121,13 +121,13 @@ const Home = ({ userData }) => {
           >
             <img className='feather' src={rose}/>
             <p>
-              Напишите признание в любви своей второй половинке.
+              {t("Confess to your crush.")}  
               <br/>
               <br/>
-              Поздравьте своего друга с днём рождения через письмо, он будет приятно удивлён.
+              {t("Congratulate your friend on his birthday through a letter, he will be pleasantly surprised.")}
               <br/>
               <br/>
-              Письмо может служить очень интересным и необычным подарком на такие праздники, как 14 февраля, 8 марта.
+              {t("A letter can serve as an interesting and unusual gift for holidays such as Valentine’s Day, March 8th.")}
             </p>
           </motion.div>
           <motion.div 
@@ -136,9 +136,9 @@ const Home = ({ userData }) => {
           >
             <img className='feather' src={feather}/>
             <p>
-            Помимо писем наша компания занимается изготовлением именных, креативных пригласительных, которые послужат отличным тоном в организации вашего мероприятия, будь то свадьба, корпоратив или день рождения и помогут оставить хорошее впечатление.
-
-            </p>
+              
+              {t("In addition to letters, our company is engaged in the production of personalized, creative invitations that will serve as an excellent tone in organizing your event, whether it's a wedding, corporate party or birthday.")}
+            </p>  
           </motion.div>
         </div>
       </div>
@@ -170,12 +170,12 @@ const Home = ({ userData }) => {
           <div className='option multiple-b'>
               <div className='before'>
                 <h2 className='multiple'>{t("Multiple")}</h2>
-                <p className='multiple-p'><strong>From 10</strong></p>
+                <p className='multiple-p'><strong>{t("From 10")}</strong></p>
               </div>
               <div className='describe'>
                 <p>·{t("For your events")}</p>
               </div>
-              <a className='contact-us' href='/contact'>Contact us</a>
+              <a className='contact-us' href='/contact'>{t("Contact us")}</a>
           </div>
         </div>
       </div>
