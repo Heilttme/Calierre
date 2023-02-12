@@ -40,7 +40,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
 
   const pay = (method) => {
     method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
-    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}})
+    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}, option: orderData.option})
     .then(data => { 
         if (method === "sberpay") setPendingSber(false)
         if (method === "sberpay" && !mobile){
@@ -52,19 +52,21 @@ const Pay = ({orderData, setBlurred, userData }) => {
         }
       }
     )
-    .catch(data => 
-      toast.error(t("Payment was cancelled. Try again later"), {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-      })
+    .catch(data => {
+        setPendingCredit(false)
+        setPendingSber(false)
+        toast.error(t("Payment was cancelled. Try again later"), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      }
     )
-
   }
 
   useEffect(() => {
@@ -81,7 +83,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
         }
       }
       const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-    } else navigate("/")
+    } else navigate("/login")
   }, [])
 
   return (
@@ -133,14 +135,14 @@ const Pay = ({orderData, setBlurred, userData }) => {
               <button className='pay-btn' onClick={() => pay("sberpay")}>
                 <img className='sberpay' width={64} src={sberPay}/>
                 SberPay
-                {pendingSber && <div className='ring-wrapper'>
+                {pendingSber && !mobile && <div className='ring-wrapper'>
                   <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>}
               </button>
               <button className='pay-btn' onClick={() => pay("credit")}>
                 <img className='credit' width={42} src={credit}/>
                 Credit Card
-                {pendingCredit && <div className='ring-wrapper'>
+                {pendingCredit && !mobile && <div className='ring-wrapper'>
                   <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>}
               </button>
@@ -157,6 +159,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
                 width="256"
                 height="256"
               />
+              <p>{t("Check your profile after payment. Your order will appear in an hour")}</p>
             </motion.div>}
             {/* {method === "credit" && <div className='form'>
               <div className='field credit'>

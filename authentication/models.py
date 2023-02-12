@@ -22,6 +22,7 @@ class LetterUser(AbstractUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=15)
     image = models.ImageField(default="pfps/default_pfp.jpg", upload_to=upload_path)
+    is_printer = models.BooleanField(default=False)
 
     objects = UserAccountManager()
 

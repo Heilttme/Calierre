@@ -47,4 +47,6 @@ while True:
             })
 
             post("https://api.calierre.ru/authentication/set_order_notified/", {"id": orders[i].get("id")})
+            post("https://api.calierre.ru/email/notify_user_order_was_paid/", {"id": user})
+            post("https://api.calierre.ru/email/set_order_paid/", {"id": user})
     sleep(30)

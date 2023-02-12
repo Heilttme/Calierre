@@ -19,12 +19,14 @@ const App = () => {
     image: "",
     orders: [],
     ordersForWriter: [],
+    ordersForPrinter: [],
     staff: false,
+    printer: false,
   })
 
   useEffect(() => {
     if (userData.staff === true) {
-      const res = axios.post("/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders})))
+      const res = axios.post("/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => setUserData(prev => ({...prev, ordersForWriter: data.data.orders, ordersForPrinter: data.data.orders})))
     }
   }, [userData.staff])
   
@@ -75,7 +77,7 @@ const App = () => {
            
           const res = axios.get("/auth/users/me/", config).then(data => {
             authorize(true)
-            const resOrders = axios.post("/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: "https://api.calierre.ru/media/pfps/" + data.data.image.split("/")[data.data.image.split("/").length - 1], orders: data2.data.orders, staff: data.data.is_staff})))
+            const resOrders = axios.post("/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: "https://api.calierre.ru/media/pfps/" + data.data.image.split("/")[data.data.image.split("/").length - 1], orders: data2.data.orders, staff: data.data.is_staff, printer: data.data.is_printer})))
           })
         })
       }

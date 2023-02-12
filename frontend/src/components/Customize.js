@@ -40,7 +40,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
         }
       }
       const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-    } else navigate("/")
+    } else navigate("/login")
   }, [])
   
   const showDemo = (e, par) => {
@@ -201,7 +201,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
           transition={{display: {delay: .1}}}
           className='right-col'
         >
-          {width <= 900 && <button onClick={() => setNext(false)}>Back</button>}
+          {width <= 900 && <button onClick={() => setNext(false)}>{t("Back")}</button>}
           <h1>{t("Choose option")}</h1>
           <div className='options'>
             
@@ -373,7 +373,7 @@ const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
                 <p>·{t("For your events")}</p>
                 <p className='additional'>{t("*from 10 letters")}</p>
               </div>
-              <button onClick={() => toDelivery("Multiple")}>{t("Opt for multiple")}</button>
+              <button onClick={() => navigate("/contact")}>{t("Contact us")}</button>
             </div>
           </div>
         </motion.div>

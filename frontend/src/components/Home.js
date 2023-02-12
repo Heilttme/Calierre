@@ -154,6 +154,7 @@ const Home = ({ userData }) => {
               <div className='describe'>
                 <p>·{t("Printed letter")}</p>
                 <p>·{t("Seal options")}</p>
+                <p>·{t("Delivery")}</p>
               </div>
           </div>
           <div className='option'>
@@ -165,6 +166,7 @@ const Home = ({ userData }) => {
                 <p>·{t("Handwritten letter")}</p>
                 <p>·{t("Huge variety of sealing wax")}</p>
                 <p>·{t("Seal options")}</p>
+                <p>·{t("Delivery")}</p>
               </div>
           </div>
           <div className='option multiple-b'>

@@ -14,6 +14,7 @@ const Login = ({ authorize, authenticated }) => {
   const [errors, setErrors] = useState([])
   const [errorTypes, setErrorTypes] = useState([])
   const [rightPageData, setRightPageData] = useState(null)
+  const [mobile] = useState((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
   
   const navigate = useNavigate()
 
@@ -88,7 +89,7 @@ const Login = ({ authorize, authenticated }) => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("email") && "error"}`}
             />
-            <motion.label animate={formData.email || emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
+            <motion.label animate={formData.email || emailFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
           </div>
 
           <div className='password-block block'>
@@ -101,7 +102,7 @@ const Login = ({ authorize, authenticated }) => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("password") && "error"}`}
             />
-            <motion.label animate={formData.password || passwordFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
+            <motion.label animate={formData.password || passwordFocus ? {y: mobile ? -30 : -26, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
           </div>
           <div className='check-forgot'>
             <Link to='/reset'>{t("Forgot your password?")}</Link>

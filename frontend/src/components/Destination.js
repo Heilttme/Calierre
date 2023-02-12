@@ -104,7 +104,7 @@ const Destination = ({ orderData, setOrderData }) => {
         }
       }
       const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-    } else navigate("/")
+    } else navigate("/login")
   }, [])
 
   useEffect(() => {
@@ -145,9 +145,9 @@ const Destination = ({ orderData, setOrderData }) => {
           <div className='left-col'>
             <h1>{t("Choose delivery destination")}</h1>
             <div className='field f-3'>
-              <div className='city-h-wrapper'>
+              <div className='h-wrapper'>
                 <h2>{t("City")}</h2>
-                <span className='city-warn'>{t("Calierre currently delivers only in Moscow")}</span>
+                <span className='warn'>{t("Calierre currently delivers only in Moscow")}</span>
               </div>
               <div className='input-block'>
                 <img onClick={() => setMapOpened(true)} src={map}/>
@@ -210,7 +210,10 @@ const Destination = ({ orderData, setOrderData }) => {
               </div>
             </div>
             <div className='date-time'>
-              <h2>{t("Date")}</h2>
+              <div className='h-wrapper'>
+                <h2>{t("Date")}</h2>
+                <span className='warn'>{t("Calierre starts to deliver at 13 February")}</span>
+              </div>
               <input className={`date-input${dateTimeError ? " error" : ""}`} type="date" value={dateTime} onChange={(e) => setDate(e)} />
             </div>
             <button onClick={() => toPay()}>{t("Next")}</button>

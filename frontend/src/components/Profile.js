@@ -275,7 +275,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
     // }, 2000)
   }
 
-  const orders = userData.orders.map(el => (
+  const orders = userData.orders.filter(el => el.paid == true).map(el => (
     <div className='order-wrapper'>
       <div className='order'>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
@@ -300,10 +300,25 @@ const Profile = ({ userData, setUserData, authorize }) => {
           <p>{el.data}</p>
           {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
           <p className='content'>{el.content}</p>
-        <button onClick={() => takeOrder(el.id)}>{t("Take")}</button>
+          <button onClick={() => takeOrder(el.id)}>{t("Take")}</button>
         </div>
       </motion.div>
     </AnimatePresence>
+  ))
+
+  const untakenPrinterOrders = userData.orders.filter(el => el.taken == false && el.option == "Basic" && el.paid == true).map(el => (
+    <div className='order-wrapper'>
+      <div className='order'>
+        <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
+        <p>{el.data}</p>
+        <p className='content'>{el.content}</p>
+        <button onClick={() => takeOrder(el.id)}>{t("Take")}</button>
+      </div>
+    </div>
+  ))
+
+  const takenPrinterOrders = userData.orders.filter(el => el.taken == true && el.option == "Basic" && el.paid == true).map(el => (
+    <TakenOrdersForPrinter el={el} setUserData={setUserData} />
   ))
 
 
@@ -394,7 +409,13 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     </div>
                                 : selectedBlock === "taken" ? 
                                     <div className='taken orders'>
-                                        {takenOrdersForWriter.length ? takenOrdersForWriter : 
+                                        {userData.is_printer ? takenPrinterOrders.length ? takenPrinterOrders :
+                                          <div className='empty taken'>
+                                            <h1>{t("Your taken orders list is empty")}</h1>
+                                            <p>{t("See your orders to take one")}</p>
+                                          </div>
+                                        :
+                                        takenOrdersForWriter.length ? takenOrdersForWriter : 
                                           <div className='empty taken'>
                                             <h1>{t("Your taken orders list is empty")}</h1>
                                             <p>{t("See your orders to take one")}</p>
@@ -403,7 +424,14 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     </div>
                                       :
                                     <div className='orders'>
-                                      {userData.staff ? untakenOrdersForWriter.length ? untakenOrdersForWriter : 
+                                      {userData.staff ? userData.printer ?
+                                        untakenPrinterOrders.length ? untakenPrinterOrders :
+                                        <div className='empty untaken'>
+                                          <h1>{t("Your untaken orders list is empty")}</h1>
+                                          <p>{t("You will get e-mail notification when somebody orders a letter")}</p>
+                                        </div>
+                                        :
+                                      untakenOrdersForWriter.length ? untakenOrdersForWriter : 
                                         <div className='empty untaken'>
                                           <h1>{t("Your untaken orders list is empty")}</h1>
                                           <p>{t("You will get e-mail notification when somebody orders a letter")}</p>
@@ -431,6 +459,32 @@ const TakenOrdersForWriter = ({ el, setUserData }) => {
 
   const confirmOrder = (id) => {
     setUserData(prev => ({...prev, ordersForWriter: prev.ordersForWriter.filter(el => el.id !== id)}))
+    const res1 = axios.post("/authentication/change_order_status_completed/", {id}).then(data => {
+      // const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => {
+        // setExited(true)
+        // setUserData(prev => ({...prev, ordersForWriter: data.data.orders}))
+    })
+  }
+  
+  return (
+    <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
+      <div className='order'>
+        <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
+        <p>{el.data}</p>
+        {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
+        <p className='content'>{el.content}</p>
+      {/* <button onClick={() => takeOrder(el.id)}>Take</button> */}
+      <button onClick={() => confirmOrder(el.id)}>{t("Done")}</button>
+      </div>
+    </motion.div>
+  )
+}
+
+const TakenOrdersForPrinter = ({ el, setUserData }) => {
+  const [exited, setExited] = useState(false)
+
+  const confirmOrder = (id) => {
+    setUserData(prev => ({...prev, ordersForPrinter: prev.ordersForPrinter.filter(el => el.id !== id)}))
     const res1 = axios.post("/authentication/change_order_status_completed/", {id}).then(data => {
       // const res2 = axios.post("http://127.0.0.1:8000/authentication/get_orders_from_users/", /*{id: userData.id}*/ ).then(data => {
         // setExited(true)

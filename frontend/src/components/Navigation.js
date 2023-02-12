@@ -54,8 +54,6 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
     }
   }, [scrollPosition])
 
-  const MotionLink = motion(Link)
-
   return (
     <motion.div
       animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "4rem", top: "0", backgroundColor: "#EAE7DC"}}
@@ -88,14 +86,14 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
 
       {scrollPosition != 0 && <div className={`hamburger-wrapper${menuOpened ? " opened-hamburger" : ""}`} onClick={(e) => {e.stopPropagation();setMenuOpened(prev => !prev)}}><div className='hamburger'></div></div>}
 
-      <MotionLink
+      <motion.a
         initial={{left: "unset", fontSize: "2em", left: "45%"}}
         animate={scrollPosition == 0 ? {color: "#EAE7DC", fontSize: "10em", left: "5%", top: "2rem", textAlign: "left", transform: "unset"} : {left: "unset", fontSize: "2em", left: "45%"}}
-        to='/'
+        href='/'
         className='logo'
       >
         Calierré
-      </MotionLink>
+      </motion.a>
       {
         scrollPosition == 0 && 
           <div className='quote-block'>
@@ -106,9 +104,9 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
       }
       {
         userData.username ? 
-          <MotionLink animate={scrollPosition == 0 ? {backgroundColor: "#EAE7DC", color: "#E85A4F"} : {}} to='/profile' className='login'>{userData.username}</MotionLink>
+          <motion.a animate={scrollPosition == 0 ? {backgroundColor: "#EAE7DC", color: "#E85A4F"} : {}} href='/profile' className='login'>{userData.username}</motion.a>
         :
-          <MotionLink animate={scrollPosition == 0 ? {backgroundColor: "#EAE7DC", color: "#E85A4F"} : {}} to='/login' className='login'>{t("Log in")}</MotionLink>
+          <motion.a animate={scrollPosition == 0 ? {backgroundColor: "#EAE7DC", color: "#E85A4F"} : {}} href='/login' className='login'>{t("Log in")}</motion.a>
       }
     </motion.div>
   )

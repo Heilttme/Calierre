@@ -10,7 +10,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
-
+from authentication.models import LetterUser
 
 class ActivationEmail(BaseEmailMessage):
     template_name = "emails/activation.html"
@@ -136,12 +136,16 @@ def notify_user_order_was_created(request):
 @api_view(["POST"])
 def notify_user_order_was_paid(request):
     html_body = render_to_string("emails/order_paid.html")
+    email = LetterUser.objects.filter(id=request.data.get("id"))[0].email
+
+    print(email)
+    print("SENT")
 
     message = EmailMultiAlternatives(
         subject="Заказ",
         body="Заказ оплачен",
         from_email="settings.EMAIL_HOST_USER",
-        to=[request.data.get("email")]
+        to=[email]
     )
 
     message.attach_alternative(html_body, "text/html")

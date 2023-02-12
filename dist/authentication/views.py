@@ -206,11 +206,13 @@ def proceed_payment(request):
 
     return_data = ""
 
+    option = request.data.get("option")
+
     if request.data.get("method") == "sberpay":
         if request.data.get("mobile"):
             payment = Payment.create({
                 "amount": {
-                    "value": "2.00",
+                    "value": "490.00" if option == "Basic" else "690",
                     "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -226,7 +228,7 @@ def proceed_payment(request):
         else:
             payment = Payment.create({
                 "amount": {
-                    "value": "2.00",
+                    "value": "490.00" if option == "Basic" else "690",
                     "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -242,7 +244,7 @@ def proceed_payment(request):
     elif request.data.get("method") == "credit":
         payment = Payment.create({
             "amount": {
-                "value": "2.00",
+                "value": "490.00" if option == "Basic" else "690",
                 "currency": "RUB"
             },
             "payment_method_data": {

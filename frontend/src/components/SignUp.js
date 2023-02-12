@@ -14,6 +14,7 @@ const SignUp = ({authenticated}) => {
   const [password2Focus, setPassword2Focus] = useState(false)
   const [errorTypes, setErrorTypes] = useState([])
   const [pending, setPending] = useState(false)
+  const [mobile] = useState((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
 
   const navigate = useNavigate()
 
@@ -105,7 +106,7 @@ const SignUp = ({authenticated}) => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("username") && "error"}`}
             />
-            <motion.label animate={formData.username || usernameFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">{t("Username")}</motion.label>
+            <motion.label animate={formData.username || usernameFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">{t("Username")}</motion.label>
           </div>
           
           <div className='email-block block'>
@@ -118,7 +119,7 @@ const SignUp = ({authenticated}) => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("email") && "error"}`}
             />
-            <motion.label animate={formData.email || emailFocus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
+            <motion.label animate={formData.email || emailFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
           </div>
 
           <div className='password-block block'>
