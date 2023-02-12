@@ -153,7 +153,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
               className='qr'
             >
               <h1>Sberpay</h1>
-              <p>Scan this QR code with your Sber app</p>
+              <p>{t("Scan this QR code with your Sber app")}</p>
               <QRCode
                 value={QRValue}
                 width="256"

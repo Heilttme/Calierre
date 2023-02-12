@@ -409,7 +409,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                     </div>
                                 : selectedBlock === "taken" ? 
                                     <div className='taken orders'>
-                                        {userData.is_printer ? takenPrinterOrders.length ? takenPrinterOrders :
+                                        {userData.printer ? takenPrinterOrders.length ? takenPrinterOrders :
                                           <div className='empty taken'>
                                             <h1>{t("Your taken orders list is empty")}</h1>
                                             <p>{t("See your orders to take one")}</p>
