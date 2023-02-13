@@ -292,23 +292,10 @@ const Profile = ({ userData, setUserData, authorize }) => {
     })
   }
 
-  const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false && el.option == "Advanced" && el.paid == true).map(el => (
-    <AnimatePresence>
-      <motion.div exit={{x: 100}} className='order-wrapper'>
-        <div className='order'>
-          <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
-          <p>{el.data}</p>
-          {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
-          <p className='content'>{el.content}</p>
-          <button onClick={() => takeOrder(el.id)}>{t("Take")}</button>
-        </div>
-      </motion.div>
-    </AnimatePresence>
-  ))
-
-  const untakenPrinterOrders = userData.orders.filter(el => el.taken == false && el.option == "Basic" && el.paid == true).map(el => (
+  const untakenPrinterOrders = userData.ordersForPrinter.filter(el => el.taken == false && el.option == "Basic" && el.paid == true).map(el => (
     <div className='order-wrapper'>
       <div className='order'>
+        <h2>ID: {el.id}</h2>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         <p className='content'>{el.content}</p>
@@ -316,11 +303,24 @@ const Profile = ({ userData, setUserData, authorize }) => {
       </div>
     </div>
   ))
-
-  const takenPrinterOrders = userData.orders.filter(el => el.taken == true && el.option == "Basic" && el.paid == true).map(el => (
+  
+  const takenPrinterOrders = userData.ordersForPrinter.filter(el => el.taken == true && el.option == "Basic" && el.paid == true).map(el => (
     <TakenOrdersForPrinter el={el} setUserData={setUserData} />
-  ))
-
+    ))
+    
+    const untakenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === false && el.option == "Advanced" && el.paid == true).map(el => (
+      <AnimatePresence>
+        <motion.div exit={{x: 100}} className='order-wrapper'>
+          <div className='order'>
+            <h2>ID: {el.id}</h2>
+            <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
+            <p>{el.data}</p>
+            <p className='content'>{el.content}</p>
+            <button onClick={() => takeOrder(el.id)}>{t("Take")}</button>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    ))
 
   const takenOrdersForWriter = userData.ordersForWriter.filter(el => el.taken === true && el.completed === false && el.option == "Advanced" && el.paid == true).map(el => (
     <TakenOrdersForWriter el={el} setUserData={setUserData} />
@@ -469,6 +469,7 @@ const TakenOrdersForWriter = ({ el, setUserData }) => {
   return (
     <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
       <div className='order'>
+        <h2>ID: {el.id}</h2>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
@@ -494,6 +495,7 @@ const TakenOrdersForPrinter = ({ el, setUserData }) => {
   
   return (
     <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
+      <h2>ID: {el.id}</h2>
       <div className='order'>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>

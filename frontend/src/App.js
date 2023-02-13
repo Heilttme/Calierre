@@ -77,6 +77,7 @@ const App = () => {
            
           const res = axios.get("/auth/users/me/", config).then(data => {
             authorize(true)
+            console.log(data);
             const resOrders = axios.post("/authentication/orders/", {id: data.data.id}).then(data2 => setUserData(prev => ({...prev, id: data.data.id, username: data.data.username, email: data.data.email, image: "https://api.calierre.ru/media/pfps/" + data.data.image.split("/")[data.data.image.split("/").length - 1], orders: data2.data.orders, staff: data.data.is_staff, printer: data.data.is_printer})))
           })
         })
@@ -91,6 +92,7 @@ const App = () => {
         orders: [],
         ordersForWriter: [],
         staff: false,
+        printer: false
       })
     }
 
@@ -115,7 +117,6 @@ const App = () => {
     i18n.changeLanguage(localStorage.getItem("language"))
   }, [])
 
-  
   return (
     <div className="app" onClick={() => setMenuOpened(false)}>
       <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} changeLanguage={changeLanguage} language={language} />

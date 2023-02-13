@@ -3,7 +3,7 @@ import React from 'react'
 
 const SuccessfulPayment = () => {
   return (
-    <div>
+    <div className='success'>
         <h1>{t("Success!")}</h1>
         <p>{t("You have successfully ordered a letter.")}</p>
         <p>{t("Check your profile.")}</p>

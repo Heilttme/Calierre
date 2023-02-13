@@ -2086,6 +2086,9 @@ example {
   margin-bottom: 0.6rem;
   color: #8d8c8a;
 }
+.destination .left-col .warn-red {
+  color: #E85A4F;
+}
 .destination h1 {
   color: #E85A4F;
   margin-bottom: 1rem;
@@ -2820,6 +2823,11 @@ example {
   background-color: #ee7366;
 }
 
+@media (max-width: 800px) {
+  .vacations {
+    margin-left: 1.5rem;
+  }
+}
 a {
   text-decoration: none;
 }

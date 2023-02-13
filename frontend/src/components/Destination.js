@@ -212,7 +212,7 @@ const Destination = ({ orderData, setOrderData }) => {
             <div className='date-time'>
               <div className='h-wrapper'>
                 <h2>{t("Date")}</h2>
-                <span className='warn'>{t("Calierre starts to deliver at 13 February")}</span>
+                <span className='warn warn-red'>{t("Same day delivery +299₽")}</span>
               </div>
               <input className={`date-input${dateTimeError ? " error" : ""}`} type="date" value={dateTime} onChange={(e) => setDate(e)} />
             </div>
@@ -230,7 +230,7 @@ const Destination = ({ orderData, setOrderData }) => {
                 className={`map ${mapOpened ? "opened-map" : ""}`}
                 onClick={(e) => onMapClick(e)}
               >
-                <Placemark geometry={coords} balloonContent={["<a>saddasads</a>"]} />
+                <Placemark geometry={coords} />
                 <div>asddas</div>
               </Map>
               <button className='cross' onClick={() => setMapOpened(false)}>X</button>
