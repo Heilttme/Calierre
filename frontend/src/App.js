@@ -47,6 +47,7 @@ const App = () => {
     waxAdvanced: "",
     dateTime: "",
     phone: "",
+    sameDay: false
   })
 
   const changeOrderData = (e) => {

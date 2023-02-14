@@ -40,7 +40,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
 
   const pay = (method) => {
     method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
-    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}, option: orderData.option})
+    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}, option: orderData.option, sameDay: orderData.sameDay})
     .then(data => { 
         if (method === "sberpay") setPendingSber(false)
         if (method === "sberpay" && !mobile){
@@ -86,6 +86,8 @@ const Pay = ({orderData, setBlurred, userData }) => {
     } else navigate("/login")
   }, [])
 
+  console.log(orderData);
+
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
         <motion.div animate={extendedText ? {opacity: 0.35} : {opacity: 1}} className='payment-wrapper'>
@@ -120,7 +122,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
                   <li>{orderData.dateTime.split("T")[0]}</li>
                 </ul>
               </div>
-              <h1 className='total'>{t("Total")}: {orderData.option === "Basic" ? "₽490" : "₽690"}</h1>
+              <h1 className='total'>{t("Total")}: {orderData.option === "Basic" && orderData.sameDay ? "₽789" : orderData.option === "Basic" ? "₽490" : orderData.option === "Advanced" && orderData.sameDay ? "₽989" : "₽690"}</h1>
             </div>
           </div>
           <div className='right-col'>

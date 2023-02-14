@@ -55,9 +55,11 @@ const Destination = ({ orderData, setOrderData }) => {
 
     let inpYear = e.target.value.split("-")[0]
 
-    if ((inpDay > day || inpMon > month) && inpMon >= month && inpYear >= year) {
+    if ((inpDay >= day || inpMon > month) && inpMon >= month && inpYear >= year) {
       setDateTime(e.target.value)
       setOrderData(prev => ({...prev, dateTime: e.target.value}))
+      if (parseInt(inpDay) === parseInt(day)) setOrderData(prev => ({...prev, sameDay: true}))
+      else setOrderData(prev => ({...prev, sameDay: false}))
     } else {
       toast.error('Please select correct date', {
         position: "bottom-right",
@@ -231,7 +233,6 @@ const Destination = ({ orderData, setOrderData }) => {
                 onClick={(e) => onMapClick(e)}
               >
                 <Placemark geometry={coords} />
-                <div>asddas</div>
               </Map>
               <button className='cross' onClick={() => setMapOpened(false)}>X</button>
             </div>
