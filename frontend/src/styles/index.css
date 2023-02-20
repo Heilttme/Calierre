@@ -317,10 +317,32 @@ example {
   width: 70%;
   margin: 1rem auto;
   margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
 }
 .home .order-options .header-options {
   font-size: 40px;
   letter-spacing: 4px;
+}
+.home .order-options .order {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: #E85A4F;
+  color: #EAE7DC;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.195em;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.home .order-options .order:hover {
+  background-color: #ee7366;
 }
 .home .order-options .wrapper {
   color: #EAE7DC;
@@ -581,6 +603,9 @@ example {
     width: 420px;
     font-size: 1.2em;
   }
+  .home .order-options {
+    margin-top: 18rem;
+  }
 }
 @media (max-width: 1260px) {
   .home .blocks {
@@ -637,7 +662,7 @@ example {
     margin: 0 auto;
   }
   .home .order-options .wrapper .option {
-    margin-top: 5rem;
+    margin-top: 3rem;
   }
   .home .order-options .wrapper .option .before {
     font-size: 0.85em;
@@ -3144,6 +3169,7 @@ main {
 @media (max-width: 440px) {
   .header .logo {
     left: 17% !important;
+    top: 3.4rem !important;
   }
   .extended .logo {
     left: 5% !important;

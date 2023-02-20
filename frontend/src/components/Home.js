@@ -145,7 +145,6 @@ const Home = ({ userData }) => {
       <div className='order-options'>
         <p className='header-options'>{t("Order options")}</p>
         <div className='wrapper'>
-
           <div className='option'>
               <div className='before'>
                 <h2>{t("Basic")}</h2>
@@ -180,6 +179,7 @@ const Home = ({ userData }) => {
               <a className='contact-us' href='/contact'>{t("Contact us")}</a>
           </div>
         </div>
+        <a className='order' href='/order'>{t("Order")}</a>
       </div>
       {/* <a href='/customize' className='order'>{t("Order a letter")}</a> */}
       <div className='reviews'>

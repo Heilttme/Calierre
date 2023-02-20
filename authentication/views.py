@@ -216,11 +216,15 @@ def proceed_payment(request):
 
     option = request.data.get("option")
 
+    print(request.data)
+
+    value = str(789 if option == "Basic" and request.data.get("sameDay") else 490 if option == "Basic" else 989 if option == "Advanced" and request.data.get("sameDay") else 690)
+
     if request.data.get("method") == "sberpay":
         if request.data.get("mobile"):
             payment = Payment.create({
                 "amount": {
-                    "value": "490.00" if option == "Basic" else "690",
+                    "value": value,
                     "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -236,7 +240,7 @@ def proceed_payment(request):
         else:
             payment = Payment.create({
                 "amount": {
-                    "value": "490.00" if option == "Basic" else "690",
+                    "value": value,
                     "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -252,7 +256,7 @@ def proceed_payment(request):
     elif request.data.get("method") == "credit":
         payment = Payment.create({
             "amount": {
-                "value": "490.00" if option == "Basic" else "690",
+                "value": value,
                 "currency": "RUB"
             },
             "payment_method_data": {

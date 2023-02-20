@@ -157,7 +157,6 @@ def change_order_status_completed(request):
         "details_for_courier": details_for_courier, 
         "phone": phone, 
         "mistakes": mistakes, 
-        "email": email
     })
 
     return Response({"status": status.HTTP_200_OK})
@@ -178,6 +177,15 @@ def set_order_notified(request):
     order = Order.objects.filter(id=request.data.get("id"))[0]
 
     order.notified = 1
+    order.save()
+
+    return Response({"status": status.HTTP_200_OK})
+    
+@api_view(["POST"])
+def set_order_paid(request):
+    order = Order.objects.filter(id=request.data.get("id"))[0]
+
+    order.paid = 1
     order.save()
 
     return Response({"status": status.HTTP_200_OK})
@@ -208,11 +216,13 @@ def proceed_payment(request):
 
     option = request.data.get("option")
 
+    value = str(789 if option == "Basic" and request.data.get("sameDay") else 490 if option == "Basic" else 989 if option == "Advanced" and request.data.get("sameDay") else 690)
+
     if request.data.get("method") == "sberpay":
         if request.data.get("mobile"):
             payment = Payment.create({
                 "amount": {
-                    "value": "490.00" if option == "Basic" else "690",
+                    "value": value,
                     "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -228,7 +238,7 @@ def proceed_payment(request):
         else:
             payment = Payment.create({
                 "amount": {
-                    "value": "490.00" if option == "Basic" else "690",
+                    "value": value,
                     "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -244,7 +254,7 @@ def proceed_payment(request):
     elif request.data.get("method") == "credit":
         payment = Payment.create({
             "amount": {
-                "value": "490.00" if option == "Basic" else "690",
+                "value": value,
                 "currency": "RUB"
             },
             "payment_method_data": {

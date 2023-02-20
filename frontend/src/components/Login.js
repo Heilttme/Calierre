@@ -102,7 +102,7 @@ const Login = ({ authorize, authenticated }) => {
               onChange={(e) => changeFormData(e)}
               className={`${errorTypes.includes("password") && "error"}`}
             />
-            <motion.label animate={formData.password || passwordFocus ? {y: mobile ? -30 : -26, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
+            <motion.label animate={formData.password || passwordFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
           </div>
           <div className='check-forgot'>
             <Link to='/reset'>{t("Forgot your password?")}</Link>

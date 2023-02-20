@@ -12,12 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+5)l$9hbje@c(@0*9i&c!_=5a5cfzkl6&b$coraf9vrk@@5e=@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["localhost", "api.calierre.ru", "127.0.0.1"]
-
-CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ["api.calierre.ru", "calierre.ru"]
+CORS_ALLOWED_ORIGINS = ["https://calierre.ru"]
+# CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',

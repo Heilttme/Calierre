@@ -296,6 +296,10 @@ const Profile = ({ userData, setUserData, authorize }) => {
     <div className='order-wrapper'>
       <div className='order'>
         <h2>ID: {el.id}</h2>
+        <h2>{t("Seal")}: {el.seal_advanced ? el.seal_advanced : el.seal_basic}</h2>
+        <h2>{t("Wax")}: {el.wax_advanced ? el.wax_advanced : t("Default red wax")}</h2>
+        <h2>{t("Details")}: {el.details}</h2>
+        <h2>{t("Mistakes")}: {el.mistakes}</h2>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         <p className='content'>{el.content}</p>
@@ -313,6 +317,10 @@ const Profile = ({ userData, setUserData, authorize }) => {
         <motion.div exit={{x: 100}} className='order-wrapper'>
           <div className='order'>
             <h2>ID: {el.id}</h2>
+            <h2>{t("Seal")}: {el.seal_advanced ? el.seal_advanced : el.seal_basic}</h2>
+            <h2>{t("Wax")}: {el.wax_advanced ? el.wax_advanced : t("Default red wax")}</h2>
+            <h2>{t("Details")}: {el.details}</h2>
+            <h2>{t("Mistakes")}: {el.mistakes}</h2>
             <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
             <p>{el.data}</p>
             <p className='content'>{el.content}</p>
@@ -401,7 +409,7 @@ const Profile = ({ userData, setUserData, authorize }) => {
                                         <div className='buttons'>
                                             <button onClick={logout}>{t("Logout")}</button>
                                             <button onClick={() => setEdit(prev => !prev)}>{t("Edit")}</button>
-                                            {edit && <button disabled={!formData.currentPassword && true} className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>{t("Confim")}</button>}
+                                            {edit && <button disabled={!formData.currentPassword && true} className={`${!formData.currentPassword && "disabled"}`} onClick={confirmChanges}>{t("Confirm")}</button>}
                                             {pending && <div className='ring-wrapper'>
                                               <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                                             </div>}
@@ -470,6 +478,10 @@ const TakenOrdersForWriter = ({ el, setUserData }) => {
     <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
       <div className='order'>
         <h2>ID: {el.id}</h2>
+        <h2>{t("Seal")}: {el.seal_advanced ? el.seal_advanced : el.seal_basic}</h2>
+        <h2>{t("Wax")}: {el.wax_advanced ? el.wax_advanced : t("Default red wax")}</h2>
+        <h2>{t("Details")}: {el.details}</h2>
+        <h2>{t("Mistakes")}: {el.mistakes}</h2>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         {/* <p className='content'><strong>City</strong>: {el.city}</p> */}
@@ -497,6 +509,11 @@ const TakenOrdersForPrinter = ({ el, setUserData }) => {
     <motion.div animate={exited ? {x: 500, opacity: 0, height: 0} : {}} transition={{duration: .4, type: "spring", opacity: {duration: .1}}} className='order-wrapper'>
       <h2>ID: {el.id}</h2>
       <div className='order'>
+        <h2>ID: {el.id}</h2>
+        <h2>{t("Seal")}: {el.seal_advanced ? el.seal_advanced : el.seal_basic}</h2>
+        <h2>{t("Wax")}: {el.wax_advanced ? el.wax_advanced : t("Default red wax")}</h2>
+        <h2>{t("Details")}: {el.details}</h2>
+        <h2>{t("Mistakes")}: {el.mistakes}</h2>
         <h2>{el.title ? el.title : t("NO TITLE ON LETTER")}</h2>
         <p>{el.data}</p>
         {/* <p className='content'><strong>City</strong>: {el.city}</p> */}

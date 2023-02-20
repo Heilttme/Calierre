@@ -27,7 +27,7 @@ class LetterUser(AbstractUser, PermissionsMixin):
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ["is_staff", 'username', "image"]
+    REQUIRED_FIELDS = ["is_staff", "is_printer", 'username', "image"]
 
 
 class Review(models.Model):
@@ -52,22 +52,6 @@ class Order(models.Model):
     delivery = models.CharField(max_length=255, blank=True, null=True)
 
     payment_id = models.CharField(max_length=255, default="", blank=True, null=True)
-    # title = models.CharField(max_length=255, default="")
-    # content = models.CharField(max_length=2550, default="")
-    # details = models.CharField(max_length=255, default="")
-    # mistakes = models.CharField(max_length=255, default="")
-    # city = models.CharField(max_length=255, default="Moscow")
-    # street = models.CharField(max_length=255, default="")
-    # flat = models.CharField(max_length=255, default="")
-    # details_for_courier = models.CharField(max_length=255, default="")
-    # option = models.CharField(max_length=255, default="")
-    # seal_basic = models.CharField(max_length=255, default="")
-    # seal_advanced = models.CharField(max_length=255, default="")
-    # wax_advanced = models.CharField(max_length=255, default="")
-    # phone = models.CharField(max_length=255, default="")
-    # delivery = models.CharField(max_length=255, default="")
-
-    # payment_id = models.CharField(max_length=255, default="")
 
     date = models.DateTimeField(default=datetime.now(), blank=True, null=True)
     

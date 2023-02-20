@@ -27,7 +27,7 @@ class LetterUser(AbstractUser, PermissionsMixin):
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ["is_staff", 'username', "image"]
+    REQUIRED_FIELDS = ["is_staff", "is_printer", 'username', "image"]
 
 
 class Review(models.Model):

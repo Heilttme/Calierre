@@ -1,6 +1,0 @@
-django
-djoser
-djangorestframework
-django-cors-headers
-Pillow
-psycopg2
