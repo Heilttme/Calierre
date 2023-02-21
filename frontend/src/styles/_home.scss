@@ -479,6 +479,79 @@
         }
     }
 
+    .slick-slider-container{
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 2rem;
+
+        h1{
+            margin-bottom: 1rem;
+        }
+
+        .slick-slide{
+            padding: 1rem;
+        }
+
+        .arrow-image-left{
+            display: none;
+            width: 100px;
+            height: 100px;
+            
+            &::after{
+                content: "";
+                position: absolute;
+                // top: -20%;
+                // right: 2rem;
+                transform: translateY(-50%) rotate(63deg); 
+                width: 3px;
+                height: 48px;
+                background-color: #E85A4F;
+                opacity: 1 !important;
+            }
+
+            &::before{
+                content: "";
+                position: absolute;
+                // top: 87%;
+                // right: 2rem;
+                transform: translateY(-50%) rotate(-63deg); 
+                width: 3px;
+                height: 48px;
+                background-color: #E85A4F;
+                opacity: 1 !important;
+            }
+        }
+        
+        .arrow-image-right{
+            display: none;
+            
+            &::after{
+                content: "";
+                position: absolute;
+                top: -20%;
+                left: 2rem;
+                transform: translateY(-50%) rotate(-63deg); 
+                width: 3px;
+                height: 48px;
+                background-color: #E85A4F;
+                opacity: 1 !important;
+            }
+
+            &::before{
+                content: "";
+                position: absolute;
+                top: 87%;
+                left: 2rem;
+                transform: translateY(-50%) rotate(-117deg); 
+                width: 3px;
+                height: 48px;
+                background-color: #E85A4F;
+                opacity: 1 !important;
+            }
+        }
+    }
+
+
     .reviews{
         width: 70%;
         margin: 0 auto;
@@ -524,7 +597,7 @@
                 font-weight: bold;
             }
 
-            input{
+            textarea{
                 background-color: #D8C3A5;
                 border: 1px solid #D8C3A5;
                 outline: none;
@@ -532,9 +605,28 @@
                 padding: .5rem;
                 margin-top: .5rem;
                 min-width: 400px;
+                resize: none;
                 
                 &:focus{
                     border: 1px solid#B4B1A7;
+                }
+            }
+
+            .file{
+                display: none;
+            }
+
+            label{
+                background-color: #E85A4F;
+                padding: .6rem 1rem;
+                margin-top: 1rem;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                svg{
+                    color: #D8C3A5;
                 }
             }
 

@@ -6,9 +6,9 @@ import map from "../images/map.jpg"
 import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
 import InputMask from 'react-input-mask';
+import useScrollBlock from "./useBlockScroll"
 
-
-const Destination = ({ orderData, setOrderData }) => {
+const Destination = ({ orderData, setOrderData, authenticated }) => {
   const [coords, setCoords] = useState([55.753994, 37.622093])
   const [mapOpened, setMapOpened] = useState(false)
   const navigate = useNavigate()
@@ -17,6 +17,9 @@ const Destination = ({ orderData, setOrderData }) => {
   const [dateTimeError, setDateTimeError] = useState(false)
   const [addressError, setAddressError] = useState(false)
   const [phoneError, setPhoneError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+
+  const [blockScroll, allowScroll] = useScrollBlock()
 
   const changeFormData = (e) => {
     if (e.target.name === "phone"){
@@ -78,7 +81,7 @@ const Destination = ({ orderData, setOrderData }) => {
   const onMapClick = (e) => {
     setCoords(e.get('coords'))
     const res = axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=ceecbf3e-58ca-4fe6-a06b-97c89dc04f18&geocode=${e.get("coords")[1]}, ${e.get("coords")[0]}&format=json`).then(data => {
-      toast.success(`${t(`Address was set to ${data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""}`)}`, {
+      toast.success(`${t(`Address was set to`) + `${data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""}`}`, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -96,25 +99,25 @@ const Destination = ({ orderData, setOrderData }) => {
     window.scrollTo(0, 0);
   }, [])
 
-  useEffect(() => {
-    if (localStorage.getItem("access")){
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `JWT ${localStorage.getItem('access')}`,
-          "Accept": "application/json"
-        }
-      }
-      const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-    } else navigate("/login")
-  }, [])
+  // useEffect(() => {
+  //   if (localStorage.getItem("access")){
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `JWT ${localStorage.getItem('access')}`,
+  //         "Accept": "application/json"
+  //       }
+  //     }
+  //     const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
+  //   } else navigate("/login")
+  // }, [])
 
   useEffect(() => {
     if (!orderData.content || !orderData.option || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 
   const toPay = () => {
-    if (!orderData.street || !dateTime.length || orderData.phone.split("_").join("").length < 11) {
+    if (!orderData.street || !dateTime.length || (authenticated ? false : !orderData.email ? true : false) || orderData.phone.split("_").join("").length < 11) {
       toast.error(t("Please fill necessary fields"), {
         position: "bottom-right",
         autoClose: 5000,
@@ -131,6 +134,9 @@ const Destination = ({ orderData, setOrderData }) => {
       }
       if (!dateTime.length) {
         setDateTimeError(true)
+      }
+      if (!orderData.email){
+        setEmailError(true)
       }
       if (orderData.phone.split("_").join("").length < 11) {
         setPhoneError(true)
@@ -152,7 +158,7 @@ const Destination = ({ orderData, setOrderData }) => {
                 <span className='warn'>{t("Calierre currently delivers only in Moscow")}</span>
               </div>
               <div className='input-block'>
-                <img onClick={() => setMapOpened(true)} src={map}/>
+                <img onClick={() => {setMapOpened(true);window.scrollTo(0, 0);blockScroll()}} src={map}/>
                 <input
                   name='city'
                   className='city'
@@ -165,7 +171,7 @@ const Destination = ({ orderData, setOrderData }) => {
             <div className='field f-4'>
               <h2>{t("Street")}</h2>
               <div className='input-block'>
-                <img onClick={() => setMapOpened(true)} src={map}/>
+                <img onClick={() => {setMapOpened(true);window.scrollTo(0, 0);blockScroll()}} src={map}/>
                 <input
                   name='street'
                   className={addressError ? "error" : ""}
@@ -192,6 +198,16 @@ const Destination = ({ orderData, setOrderData }) => {
                 onChange={(e) => changeFormData(e)}
               />
             </div>
+            {!authenticated && <div className='field f-5'>
+              <h2>{t("E-mail")}</h2>
+              <input
+                type="email"
+                name='email'
+                value={orderData.email}
+                onChange={(e) => changeFormData(e)}
+                className={emailError ? "error" : ""}
+              />
+            </div>}
             <div className='field f-4'>
               <h2>{t("Reciever phone number")}</h2>
               <div className='input-block'>
@@ -234,7 +250,7 @@ const Destination = ({ orderData, setOrderData }) => {
               >
                 <Placemark geometry={coords} />
               </Map>
-              <button className='cross' onClick={() => setMapOpened(false)}>X</button>
+              <button className='cross' onClick={() => {setMapOpened(false);allowScroll()}}>X</button>
             </div>
           </div>
       </div>

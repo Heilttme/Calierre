@@ -424,6 +424,65 @@ example {
 .home .order-options .wrapper .multiple-b .before {
   padding-bottom: 1.7rem !important;
 }
+.home .slick-slider-container {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+.home .slick-slider-container h1 {
+  margin-bottom: 1rem;
+}
+.home .slick-slider-container .slick-slide {
+  padding: 1rem;
+}
+.home .slick-slider-container .arrow-image-left {
+  display: none;
+  width: 100px;
+  height: 100px;
+}
+.home .slick-slider-container .arrow-image-left::after {
+  content: "";
+  position: absolute;
+  transform: translateY(-50%) rotate(63deg);
+  width: 3px;
+  height: 48px;
+  background-color: #E85A4F;
+  opacity: 1 !important;
+}
+.home .slick-slider-container .arrow-image-left::before {
+  content: "";
+  position: absolute;
+  transform: translateY(-50%) rotate(-63deg);
+  width: 3px;
+  height: 48px;
+  background-color: #E85A4F;
+  opacity: 1 !important;
+}
+.home .slick-slider-container .arrow-image-right {
+  display: none;
+}
+.home .slick-slider-container .arrow-image-right::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 2rem;
+  transform: translateY(-50%) rotate(-63deg);
+  width: 3px;
+  height: 48px;
+  background-color: #E85A4F;
+  opacity: 1 !important;
+}
+.home .slick-slider-container .arrow-image-right::before {
+  content: "";
+  position: absolute;
+  top: 87%;
+  left: 2rem;
+  transform: translateY(-50%) rotate(-117deg);
+  width: 3px;
+  height: 48px;
+  background-color: #E85A4F;
+  opacity: 1 !important;
+}
 .home .reviews {
   width: 70%;
   margin: 0 auto;
@@ -478,7 +537,7 @@ example {
   color: #E85A4F;
   font-weight: bold;
 }
-.home .reviews .leave-review input {
+.home .reviews .leave-review textarea {
   background-color: #D8C3A5;
   border: 1px solid #D8C3A5;
   outline: none;
@@ -486,9 +545,25 @@ example {
   padding: 0.5rem;
   margin-top: 0.5rem;
   min-width: 400px;
+  resize: none;
 }
-.home .reviews .leave-review input:focus {
+.home .reviews .leave-review textarea:focus {
   border: 1px solid #B4B1A7;
+}
+.home .reviews .leave-review .file {
+  display: none;
+}
+.home .reviews .leave-review label {
+  background-color: #E85A4F;
+  padding: 0.6rem 1rem;
+  margin-top: 1rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.home .reviews .leave-review label svg {
+  color: #D8C3A5;
 }
 .home .reviews .leave-review button {
   margin-top: 1rem;

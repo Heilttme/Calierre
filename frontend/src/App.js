@@ -41,6 +41,7 @@ const App = () => {
     street: "",
     flat: "",
     detailsForCourier: "",
+    email: "",
     option: "",
     sealBasic: "",
     sealAdvanced: "",
@@ -130,8 +131,8 @@ const App = () => {
           <Route path="/login" element={<Login authorize={authorize} authenticated={authenticated}/>} />
           <Route path="/sign_up" element={<SignUp authenticated={authenticated} />} />
           <Route path="/order" element={<Customize setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} authenticated={authenticated} />} />
-          <Route path="/order/delivery" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} />} />
-          <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} userData={userData} />} />
+          <Route path="/order/delivery" element={<Destination setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} authenticated={authenticated} />} />
+          <Route path="/order/delivery/payment" element={<Pay setOrderData={setOrderData} orderData={orderData} changeOrderData={changeOrderData} setBlurred={setBlurred} userData={userData} authenticated={authenticated} />} />
           <Route path="/reset" element={<ForgotPassword />} />
           <Route path="/activate/:uid/:token" element={<Activate/>} />
           <Route path="/contact" element={<Contact/>} />

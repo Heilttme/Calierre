@@ -10,7 +10,7 @@ import credit from "../images/credit_card.png"
 import QRCode from "react-qr-code";
 import { toast, ToastContainer } from 'react-toastify';
 
-const Pay = ({orderData, setBlurred, userData }) => {
+const Pay = ({ orderData, userData, authenticated }) => {
   const [method, setMethod] = useState("")
   const [extendedText, setExtendedText] = useState(false)
   const { height, width } = useWindowDimensions()
@@ -40,7 +40,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
 
   const pay = (method) => {
     method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
-    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id}, option: orderData.option, sameDay: orderData.sameDay})
+    const res = axios.post("/authentication/proceed_payment/", {method, mobile, orderData: {...orderData, user: userData.id ? userData.id : -1}, email: orderData.email, option: orderData.option, sameDay: orderData.sameDay})
     .then(data => { 
         if (method === "sberpay") setPendingSber(false)
         if (method === "sberpay" && !mobile){
@@ -73,20 +73,18 @@ const Pay = ({orderData, setBlurred, userData }) => {
     if (!orderData.content || !orderData.option || !orderData.dateTime || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 
-  useEffect(() => {
-    if (localStorage.getItem("access")){
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `JWT ${localStorage.getItem('access')}`,
-          "Accept": "application/json"
-        }
-      }
-      const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-    } else navigate("/login")
-  }, [])
-
-  console.log(orderData);
+  // useEffect(() => {
+  //   if (localStorage.getItem("access")){
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `JWT ${localStorage.getItem('access')}`,
+  //         "Accept": "application/json"
+  //       }
+  //     }
+  //     const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
+  //   } else navigate("/login")
+  // }, [])
 
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
@@ -161,7 +159,7 @@ const Pay = ({orderData, setBlurred, userData }) => {
                 width="256"
                 height="256"
               />
-              <p>{t("Check your profile after payment. Your order will appear in an hour")}</p>
+              {authenticated && <p>{t("Check your profile after payment. Your order will appear in an hour")}</p>}
             </motion.div>}
             {/* {method === "credit" && <div className='form'>
               <div className='field credit'>

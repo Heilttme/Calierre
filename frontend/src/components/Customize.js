@@ -14,10 +14,8 @@ import Rose from "../images/ROSE.png"
 import Rings from "../images/WEDDING.png"
 import Royal from "../images/ROYAL.png"
 import useScrollBlock from "./useBlockScroll"
-import useStore from "../store";
-import axios from 'axios'
 
-const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
+const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [contentError, setContentError] = useState(false)
   const [next, setNext] = useState(false)
   const [mistakes, setMistakes] = useState(false)
@@ -26,22 +24,21 @@ const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
   const [seal, setSeal] = useState("")
   const [demo, setDemo] = useState(false)
   const [blockScroll, allowScroll] = useScrollBlock()
-  const authenticated = useStore(state => state.authenticated)
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (localStorage.getItem("access")){
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `JWT ${localStorage.getItem('access')}`,
-          "Accept": "application/json"
-        }
-      }
-      const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-    } else navigate("/login")
-  }, [])
+  // useEffect(() => {
+  //   if (localStorage.getItem("access")){
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `JWT ${localStorage.getItem('access')}`,
+  //         "Accept": "application/json"
+  //       }
+  //     }
+  //     const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
+  //   } else navigate("/login")
+  // }, [])
   
   const showDemo = (e, par) => {
     setSeal(par)
@@ -52,7 +49,6 @@ const Customize = ({ setOrderData, orderData, changeOrderData, authorize }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
-  
 
   const proceed = () => {
     if (orderData.content.length) {
