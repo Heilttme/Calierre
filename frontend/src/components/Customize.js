@@ -26,19 +26,6 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
   const [blockScroll, allowScroll] = useScrollBlock()
 
   const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("access")){
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": `JWT ${localStorage.getItem('access')}`,
-  //         "Accept": "application/json"
-  //       }
-  //     }
-  //     const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-  //   } else navigate("/login")
-  // }, [])
   
   const showDemo = (e, par) => {
     setSeal(par)

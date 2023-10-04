@@ -1,0 +1,45 @@
+.carousel-wrapper{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    overflow: hidden;
+
+    .arrow {
+        cursor: pointer;
+        z-index: 199;
+        user-select: none;
+    }
+
+    .wrapper{
+        overflow: hidden;
+
+    }
+
+    .carousel-items{
+        display: flex;
+        gap: 1rem;
+        // overflow: hidden;
+        transition: transform .35s ease-in-out;
+        
+        img{
+            // width: 300px;
+            flex-basis: 300px;
+            user-select: none;
+        }
+    }
+}
+
+// @media (max-width: 1800px) {
+//     .carousel-wrapper .carousel-items img {
+//         width: 250px;
+//     }
+// }
+
+// @media (max-width: 1700px) {
+//     .carousel-wrapper .carousel-items img {
+//         width: 220px;
+//     }
+// }

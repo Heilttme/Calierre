@@ -1,7 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.4bf45f3a.css",
-    "main.js": "/static/js/main.a565b732.js",
+    "main.css": "/static/css/main.d95d05a3.css",
+    "main.js": "/static/js/main.c8b0a8d2.js",
+    "static/media/test2.jpeg": "/static/media/test2.7111c475950abc8edb82.jpeg",
+    "static/media/test1.jpeg": "/static/media/test1.d52570f6741d199a4b95.jpeg",
+    "static/media/test3.jpeg": "/static/media/test3.0165fd1f2d569fd7e55b.jpeg",
+    "static/media/test5.jpeg": "/static/media/test5.2ac91183632ba67fa1c4.jpeg",
+    "static/media/example.png": "/static/media/example.78e13ae02a7671203f10.png",
     "static/media/LILY.png": "/static/media/LILY.88b7a96288323637bed6.png",
     "static/media/KUST.png": "/static/media/KUST.40bdd5cbfeae0030c456.png",
     "static/media/TEXT.png": "/static/media/TEXT.40bdd5cbfeae0030c456.png",
@@ -20,11 +25,11 @@
     "static/media/sber_pay.png": "/static/media/sber_pay.db456fa8527a9644f0c1.png",
     "index.html": "/index.html",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.4bf45f3a.css.map": "/static/css/main.4bf45f3a.css.map",
-    "main.a565b732.js.map": "/static/js/main.a565b732.js.map"
+    "main.d95d05a3.css.map": "/static/css/main.d95d05a3.css.map",
+    "main.c8b0a8d2.js.map": "/static/js/main.c8b0a8d2.js.map"
   },
   "entrypoints": [
-    "static/css/main.4bf45f3a.css",
-    "static/js/main.a565b732.js"
+    "static/css/main.d95d05a3.css",
+    "static/js/main.c8b0a8d2.js"
   ]
 }

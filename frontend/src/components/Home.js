@@ -5,18 +5,23 @@ import feather from "../images/feather_pen.png"
 import envelope from "../images/envelope.png"
 import rose from "../images/rose_let.png"
 import example from "../images/example.png"
+
+import test1 from "../images/test1.jpeg"
+import test2 from "../images/test2.jpeg"
+import test3 from "../images/test3.jpeg"
+import test4 from "../images/test3.jpeg"
+import test5 from "../images/test3.jpeg"
+import test6 from "../images/test5.jpeg"
+
 import { useTranslation } from "react-i18next"
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { use } from 'i18next'
-import { Link, NavLink } from "react-router-dom"
-import { setSettings } from "./slickSettings"
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 import useWindowDimensions from "./useWindowsDimensions"
+import useScrollBlock from "./useBlockScroll"
+import Carousel from './carousel/Carousel'
+
 
 const Home = ({ userData }) => {
   const { t, i18n } = useTranslation()
@@ -28,6 +33,7 @@ const Home = ({ userData }) => {
   const [reviewImage, setReviewImage] = useState("")
   const [attachedImageEvent, setAttachedImageEvent] = useState("")
   const { height, width } = useWindowDimensions()
+  const [blockScroll, allowScroll] = useScrollBlock()
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,22 +80,22 @@ const Home = ({ userData }) => {
       <div className='text'>
         <p className='name'>{el.username}</p>
         <p className='desc'>{el.review}</p>
-        <p className='view' onClick={(e) => {setExpandReviewImage(true);setReviewImage(`/media/reviews/${el.reviewImage}`)}}>View image</p>
+        <p className='view' onClick={(e) => {e.stopPropagation();setReviewImage("");blockScroll();setExpandReviewImage(true);setReviewImage(`https://api.calierre.ru${el.reviewImage}`)}}>View image</p>
       </div>
     </div>
   ))
 
-  const slickItems = [
-    <img src={example}/>,
-    <img src={example}/>,
-    <img src={example}/>,
-    <img src={example}/>,
-    <img src={example}/>
+  const carouselItems = [
+    <img src={test1}/>,
+    <img src={test2}/>,
+    <img src={test3}/>,
+    <img src={test4}/>,
+    <img src={test5}/>,
+    <img src={test6}/>
   ]
 
-
   return (
-    <div className='home-wrapper' onClick={() => setExpandReviewImage(false)}>
+    <div className='home-wrapper' onClick={() => {setExpandReviewImage(false);allowScroll()}}>
       <motion.div animate={expandReviewImage ? {opacity: 0.35} : {opacity: 1}} className='home'>
         <img src={ink} className='bg-ink image-1'/>
         <img src={ink} className='bg-ink image-2'/>
@@ -198,18 +204,22 @@ const Home = ({ userData }) => {
           </div>
           <a className='order' href='/order'>{t("Order")}</a>
         </div>
-        {/* <div className='slick-slider-container'>
-          <h1>{t("Our letters")}</h1>
-          <Slider {...setSettings(3)}>
-            {slickItems}
-          </Slider>
-        </div> */}
+        <div className='slick-slider-container'>
+          <p className='header-options'>{t("Our letters")}</p>
+          <Carousel
+            itemWidth={width <= 1800 ? width <= 1700 ? width <= 1600 ? width <= 1400 ? width <= 1300 ? width <= 1200 ? width <= 1100 ? width <= 1000 ? 300 : 200 : 220 : 260 : 200 : 220 : 250 : 250 : 300}
+            itemCount={carouselItems.length}
+            itemsPerScroll={width <= 1800 ? width <= 1700 ? width <= 1600 ? width <= 1400 ? width <= 1300 ? width <= 1000 ? 2 : 3 : 4 : 4 : 4 : 5 : 4}
+          >
+            {carouselItems}
+          </Carousel>
+        </div>
         {/* <a href='/customize' className='order'>{t("Order a letter")}</a> */}
         <div className='reviews'>
           <span className='header-reviews'><p>{t("See our reviews")}</p><button onClick={() => {
-            // if (userData.email) 
+            if (userData.email) 
             setLeaveReview(prev => !prev) 
-            // else navigate("/login")
+            else navigate("/login")
           }}>{t("Leave a review")}</button></span>
             <motion.div
               initial={{height: "0"}}
@@ -247,13 +257,18 @@ const Home = ({ userData }) => {
           {reviewsDisplay.splice(0, shownReviews)}
           <button className={`more-reviews`} onClick={() => setShownReviews(prev => prev += 2)}>{t("More")}</button>
         </div>
-        <motion.div
-          className='extended'
-          initial={{width: 0, height: 0, padding: 0}}
-          animate={expandReviewImage ? width < 900 ? width < 500 ? {width: "90%", height: "75%", padding: "2rem"} : {width: "85%", height: "75%", padding: "3rem"} : {width: "60%", height: "75%", padding: "3rem"} : {width: 0, height: 0, padding: 0}}
-        >
-          <img src={reviewImage} />
-        </motion.div>
+      </motion.div>
+      <motion.div
+        className='extended'
+        initial={{width: 0, height: 0, padding: 0}}
+        animate={expandReviewImage ? width < 900 ? width < 650 ? width < 450 ? {width: 320, height: 240} : {width: 400, height: 300} : {width: 600, height: 450} : {width: 800, height: 600} : {width: 0, height: 0}}
+      >
+        <motion.img 
+          className='skeleton'
+          animate={expandReviewImage ? width < 900 ? width < 650 ? width < 450 ? {width: 320, height: 240} : {width: 400, height: 300} : {width: 600, height: 450} : {width: 800, height: 600} : {width: 0, height: 0}}
+          src={reviewImage}
+          alt=""
+        />
       </motion.div>
     </div>
   )

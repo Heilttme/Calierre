@@ -1,5 +1,21 @@
 @import "./presets";
 
+.home-wrapper{
+    position: relative;
+
+    .extended{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        
+        img{
+            scale: 1;
+        }
+    }
+}
+
 .home{
     display: flex;
     flex-direction: column;
@@ -371,6 +387,13 @@
     }
 
 
+    .header-options{
+        font-size: 36px;
+        letter-spacing: 4px;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
     .order-options{
         width: 70%;
         margin: 1rem auto;
@@ -378,10 +401,6 @@
         display: flex;
         flex-direction: column;
 
-        .header-options{
-            font-size: 40px;
-            letter-spacing: 4px;
-        }
         
         .order{
             @include button;
@@ -659,6 +678,18 @@
             .desc{
                 font-size: 18px;
             }
+
+            .view{
+                cursor: pointer;
+                font-size: 1.4em;
+                margin-top: .5rem;
+                color: #E85A4F;
+                transition: all .15s ease-in-out;
+
+                &:hover{
+                    color: #e67269
+                }
+            }
         }
 
         .more-reviews{
@@ -689,6 +720,10 @@
     .home .order-options {
         width: 85%;
     }
+
+    .home .slick-slider-container {
+        width: 85%;
+    }
 }
 
 @media (max-width: 1650px) {
@@ -705,6 +740,10 @@
     }
 
     .home .order-options {
+        width: 95%;
+    }
+
+    .home .slick-slider-container {
         width: 95%;
     }
 }

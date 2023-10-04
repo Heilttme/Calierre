@@ -124,7 +124,8 @@ const Pay = ({ orderData, userData, authenticated }) => {
             </div>
           </div>
           <div className='right-col'>
-            <motion.div
+            <h1>NOT AVAILABLE NOW</h1>
+            {/* <motion.div
               animate={displayedQR ? {opacity: 0, display: "none"} : {}}
               transition={{display: {delay: .4}, opacity: {duration: .3}}}
               className='payment-methods'
@@ -160,7 +161,7 @@ const Pay = ({ orderData, userData, authenticated }) => {
                 height="256"
               />
               {authenticated && <p>{t("Check your profile after payment. Your order will appear in an hour")}</p>}
-            </motion.div>}
+            </motion.div>} */}
             {/* {method === "credit" && <div className='form'>
               <div className='field credit'>
                   <h2>{t("Credit card")}</h2>

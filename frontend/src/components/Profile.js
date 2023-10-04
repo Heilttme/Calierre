@@ -10,6 +10,7 @@ import { t } from 'i18next'
 const Profile = ({ userData, setUserData, authorize }) => {
   const [selectedBlock, setSelectedBlock] = useState("info")  
   const [edit, setEdit] = useState(false)
+  const [imgError, setImgError] = useState(false)
   const [curPasswordError, setCurPasswordError] = useState(false)
   const [formData, setFormData] = useState({
     username: userData.username,
@@ -338,10 +339,14 @@ const Profile = ({ userData, setUserData, authorize }) => {
     <div className='profile-container'>
         <div className='profile-wrapper' >
             <div className='profile'>
-                <div className='username'><h1>{userData.username}</h1> {userData.staff ? <strong>{t("Writer")}</strong> : ""}</div>
+                <div className='username'><h1>{userData.username ? userData.username : "..."}</h1> {userData.staff ? <strong>{t("Writer")}</strong> : ""}</div>
                 <div className='wrapper'>
                     <div className='left-col'>
-                        <img className='skeleton' src={userData.image}/>
+                        {userData.image ?
+                          <img src={userData.image} alt="" onError={() => setImgError(true)}/>
+                          :
+                          <div className='skeleton'></div>
+                        }
                         <input type="file" id='file' accept='image/*' onClick={checkPassword} onChange={(e) => setImage(e)}/>
                         <label htmlFor="file" className={`${!formData.currentPassword && "disabled"}`}>{t("Select image")}</label>
                     </div>

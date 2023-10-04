@@ -12,6 +12,7 @@
 @import "./contact";
 @import "./vacations";
 @import "./delivery_time";
+@import "./carousel";
 @import url("https://cdn.syncfusion.com/ej2/material.css");
 
 a{
@@ -38,7 +39,7 @@ img{
 }
 
 body{
-    background-color: #EAE7DC;
+    background-color: white;
     position: relative;
     min-height: calc(100vh - 5rem);
 
@@ -50,6 +51,19 @@ body{
     
 }
 
+.skeleton{
+    animation: skeleton 1s linear infinite alternate;
+
+    @keyframes skeleton {
+        0%{
+            background-color: hsl(200, 20%, 70%);
+        }
+
+        100%{
+            background-color: hsl(200, 20%, 95%);
+        }
+    }
+}
 
 main{
     margin-top: 5rem;
@@ -59,7 +73,7 @@ main{
 
 .header{
     z-index: 1999;
-    background-color: #EAE7DC;
+    background-color: white;
     width: 100%;
     position: relative;
     display: flex;
@@ -74,7 +88,7 @@ main{
         left: -14rem;
         top: 0;
         min-height: 100vh;
-        background-color: #D8C3A5;
+        background-color: #e6e6e6;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -90,12 +104,12 @@ main{
         a{
             @include button;
             margin-top: 2rem;
-            background-color: #D8C3A5;
+            background-color: #e6e6e6;
             color: #E85A4F;
             border: 2px solid #E85A4F;
 
             &:hover{
-                background-color: #EAE7DC;
+                background-color: #eeeded;
             }
         }
 
