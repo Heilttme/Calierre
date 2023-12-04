@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ink from "../images/ink.png"
-import pergament from "../images/pergament.png"
-import feather from "../images/feather_pen.png"
-import envelope from "../images/envelope.png"
-import rose from "../images/rose_let.png"
-import example from "../images/example.png"
+import videoCandleWriter from "../images/bg_candle.MP4"
 
 import test1 from "../images/test1.jpeg"
 import test2 from "../images/test2.jpeg"
@@ -21,7 +17,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import useWindowDimensions from "./useWindowsDimensions"
 import useScrollBlock from "./useBlockScroll"
 import Carousel from './carousel/Carousel'
-
+import HorizontalScrollCarousel from './carousel/HorizontalScrollCarousel'
 
 const Home = ({ userData }) => {
   const { t, i18n } = useTranslation()
@@ -94,10 +90,16 @@ const Home = ({ userData }) => {
     <img src={test6}/>
   ]
 
+  const video = document.getElementsByClassName('video-bg')[0]
+
+  if (video) {
+    video.playbackRate = .8;
+  }
+
   return (
     <div className='home-wrapper' onClick={() => {setExpandReviewImage(false);allowScroll()}}>
       <motion.div animate={expandReviewImage ? {opacity: 0.35} : {opacity: 1}} className='home'>
-        <img src={ink} className='bg-ink image-1'/>
+        {/* <img src={ink} className='bg-ink image-1'/>
         <img src={ink} className='bg-ink image-2'/>
         <img src={ink} className='bg-ink image-3'/>
         <img src={ink} className='bg-ink image-4'/>
@@ -119,90 +121,37 @@ const Home = ({ userData }) => {
         <img src={ink} className='bg-ink image-20'/>
         <img src={ink} className='bg-ink image-21'/>
         <img src={ink} className='bg-ink image-22'/>
-        <img src={ink} className='bg-ink image-23'/>
-
+        <img src={ink} className='bg-ink image-23'/> */}
+{/* 
         <div className='pergament-previews'>
           <Paper/>
-        </div>
-        <div className='blocks'>
-          <div className='col col-1'>
-            <motion.div
-              className='block'
-            >
-              <img className='pergament' src={pergament}/>
-              <p>{t("Writing has always been a very popular means of communication. It was believed that an educated person simply must be able to write beautiful letters. Now, of course, the situation has changed, but you can be impressed by a beautiful and perfectly composed letter nowadays, too!")}</p>
-            </motion.div>
-            <motion.div 
-              className='block' 
-            >
-              <img className='envelope' src={envelope}/>
-              <p>{t("Our company provides every person with an opportunity to get their hands on a real, beautifully designed, competent letter that will certainly warm the heart of your beloved ones.")}</p>
-            </motion.div>
-          </div>
-          <div className='col col-2'>
-            <motion.div 
-              className='block' 
-            >
-              <img className='feather' src={rose}/>
-              <p>
-                {t("Confess to your crush.")}  
-                <br/>
-                <br/>
-                {t("Congratulate your friend on his birthday through a letter, he will be pleasantly surprised.")}
-                <br/>
-                <br/>
-                {t("A letter can serve as an interesting and unusual gift for holidays such as Valentine’s Day, March 8th.")}
-              </p>
-            </motion.div>
-            <motion.div 
-              className='block' 
-            >
-              <img className='feather' src={feather}/>
-              <p>
-                
-                {t("In addition to letters, our company is engaged in the production of personalized, creative invitations that will serve as an excellent tone in organizing your event, whether it's a wedding, corporate party or birthday.")}
-              </p>  
-            </motion.div>
-          </div>
+        </div> */}
+        
+        <div className='video-bg-block'>
+          {/* <video className='video-bg' src={videoCandleWriter} autoPlay loop muted/> */}
+          <HorizontalScrollCarousel/>
         </div>
         <div className='order-options'>
-          <p className='header-options'>{t("Order options")}</p>
-          <div className='wrapper'>
-            <div className='option'>
-                <div className='before'>
-                  <h2>{t("Basic")}</h2>
-                  <p>₽<strong>490</strong></p>
-                </div>
-                <div className='describe'>
-                  <p>·{t("Printed letter")}</p>
-                  <p>·{t("Seal options")}</p>
-                  <p>·{t("Delivery")}</p>
-                </div>
+          
+          <div className='card'>
+            <div className='card-content'>
+              <p className='card-title'>BASIC</p>
             </div>
-            <div className='option'>
-                <div className='before'>
-                  <h2>{t("Advanced")}</h2>
-                  <p>₽<strong>690</strong></p>
-                </div>
-                <div className='describe'>
-                  <p>·{t("Handwritten letter")}</p>
-                  <p>·{t("Huge variety of sealing wax")}</p>
-                  <p>·{t("Seal options")}</p>
-                  <p>·{t("Delivery")}</p>
-                </div>
-            </div>
-            <div className='option multiple-b'>
-                <div className='before'>
-                  <h2 className='multiple'>{t("Multiple")}</h2>
-                  <p className='multiple-p'><strong>{t("From 10")}</strong></p>
-                </div>
-                <div className='describe'>
-                  <p>·{t("For your events")}</p>
-                </div>
-                <a className='contact-us' href='/contact'>{t("Contact us")}</a>
-            </div>
+            <img src={test1} className='bg-img'/>
           </div>
-          <a className='order' href='/order'>{t("Order")}</a>
+          <div className='card'>
+            <div className='card-content'>
+              <p className='card-title'>ADVANCED</p>
+            </div>
+            <img src={test1} className='bg-img'/>
+          </div>
+          <div className='card'>
+            <div className='card-content'>
+              <p className='card-title'>EVENT</p>
+            </div>
+            <img src={test1} className='bg-img'/>
+          </div>
+          {/* <a className='order' href='/order'>{t("Order")}</a> */}
         </div>
         <div className='slick-slider-container'>
           <p className='header-options'>{t("Our letters")}</p>
@@ -274,49 +223,89 @@ const Home = ({ userData }) => {
   )
 }
 
-const Paper = () => {
-  const texts = [
-    {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев."},
-    {head: "Дорогой Владислав!", end: "Ваши Никита и Анастасия", content: 'В связи со сложившимися обстоятельствами, а именно: \n невозможностью больше глядеть на пустующую 14 страницу наших паспортов и постоянно отвечать на вопросы: "Ну когда же уже?", мы все-таки решили совершить обряд бракосочетания. \n В связи с чем, будем рады видеть Вас на нашей свадьбе 5 июня 2023 года! \n Данное мероприятие будет проходить в нескольких действиях: \n Действие 1 (для души): Торжественное, по адресу: г. Москва, ул. Горная 48 \n Действие 2 (для желудка): Горько-Поцелуйно-Выпивательное,  по адресу: г. Москва, ул. Полянка 11'},
-    {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
-    {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга. Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
-  ]
+// const Paper = () => {
+//   const texts = [
+//     {head: "Уважаемая Екатерина Сергеевна!", end: "", content: "Компания ООО «Фрешкейк» приглашает Вас посетить презентацию нашей новой продукции. Мероприятие будет проходить по адресу: г. Москва, ул. Черняховского, д. 19, «белый» зал, 3 апреля 2023 года в 13:00. В программе: дегустация продукции, фуршет. Ответственный за мероприятие Сорокин Никита Сергеевич, тел.: 8 (8332) 63-63-63 Генеральный директор ООО «Фрешкейк» Хатукаев / Э.В. Хатукаев."},
+//     {head: "Дорогой Владислав!", end: "Ваши Никита и Анастасия", content: 'В связи со сложившимися обстоятельствами, а именно: \n невозможностью больше глядеть на пустующую 14 страницу наших паспортов и постоянно отвечать на вопросы: "Ну когда же уже?", мы все-таки решили совершить обряд бракосочетания. \n В связи с чем, будем рады видеть Вас на нашей свадьбе 5 июня 2023 года! \n Данное мероприятие будет проходить в нескольких действиях: \n Действие 1 (для души): Торжественное, по адресу: г. Москва, ул. Горная 48 \n Действие 2 (для желудка): Горько-Поцелуйно-Выпивательное,  по адресу: г. Москва, ул. Полянка 11'},
+//     {head: "Дорогой,", end: "Твоя и только твоя Лиза", content: 'Спасибо, что был рядом, когда мне нужна была твоя поддержка, что терпеливо слушал мои проблемы и жалобы. Любимый, я просто хочу, чтобы ты знал, как я счастлива, что ты есть в моей жизни. Спасибо тебе за любовь и радость, которую ты приносишь. Ты изменил мою жизнь, Малыш. Я люблю тебя, и хочу чтоб ты хранил нашу любовь в своем сердце.'},
+//     {head: "Любимая,", end: "Твой Илья", content: 'Всегда знай, что я люблю тебя. Я скучаю по тебе каждый день. Глубоко в моем сердце выгравированы воспоминания о тебе. Передо мной всплывают наши встречи, твоя улыбка, твой взгляд, черты лица. Я безмерно рад, что нашел тебя, мы так близки душой и одновременно далеки друг от друга. Я люблю тебя, дорогая, ты всегда будешь моей мечтой.'},
+//   ]
 
-  const [textObject, setTextObject] = useState(texts[Math.floor(Math.random() * texts.length)])
-  const [fullTextTitle, setFullTextTitle] = useState("")
-  const [fullEndTitle, setFullEndTitle] = useState("")
-  const [fullText, setFullText] = useState("")
-  const [paperTitleText, setPaperTitleText] = useState("")
-  const [paperEndText, setPaperEndText] = useState("")
-  const [paperText, setPaperText] = useState("")
+//   const [textObject, setTextObject] = useState(texts[Math.floor(Math.random() * texts.length)])
+//   const [fullTextTitle, setFullTextTitle] = useState("")
+//   const [fullEndTitle, setFullEndTitle] = useState("")
+//   const [fullText, setFullText] = useState("")
+//   const [paperTitleText, setPaperTitleText] = useState("")
+//   const [paperEndText, setPaperEndText] = useState("")
+//   const [paperText, setPaperText] = useState("")
   
-  useEffect(() => {
-    setFullTextTitle(textObject.head)
-    setFullText(textObject.content)
-    setFullEndTitle(textObject.end)
-  }, [textObject])
+//   useEffect(() => {
+//     setFullTextTitle(textObject.head)
+//     setFullText(textObject.content)
+//     setFullEndTitle(textObject.end)
+//   }, [textObject])
 
-  useEffect(() => {
-    for (let i = 0; i < fullTextTitle.length; i++) {
-      setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 70))
-    }
-    for (let i = 0; i < fullText.length; i++) {
-      setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 70) + (i * 70))
-    }
-    for (let i = 0; i < fullEndTitle.length; i++) {
-      setTimeout(() => setPaperEndText(prev => prev += fullEndTitle[i]), 4000 + (fullEndTitle.length * 70) + (fullText.length * 70) + (i * 70))
-    }
-  }, [fullText])
+//   useEffect(() => {
+//     for (let i = 0; i < fullTextTitle.length; i++) {
+//       setTimeout(() => setPaperTitleText(prev => prev += fullTextTitle[i]), 4000 + (i * 70))
+//     }
+//     for (let i = 0; i < fullText.length; i++) {
+//       setTimeout(() => setPaperText(prev => prev += fullText[i]), 4000 + (fullTextTitle.length * 70) + (i * 70))
+//     }
+//     for (let i = 0; i < fullEndTitle.length; i++) {
+//       setTimeout(() => setPaperEndText(prev => prev += fullEndTitle[i]), 4000 + (fullEndTitle.length * 70) + (fullText.length * 70) + (i * 70))
+//     }
+//   }, [fullText])
   
-  return (
-    <div className='pergament-paper'>
-      {paperTitleText}
-      {paperTitleText ? <br/>: ""}
-      {paperText}
-      {paperEndText ? <br/>: ""}
-      {paperEndText}
-    </div>
-  )
-}
+//   return (
+//     <div className='pergament-paper'>
+//       {paperTitleText}
+//       {paperTitleText ? <br/>: ""}
+//       {paperText}
+//       {paperEndText ? <br/>: ""}
+//       {paperEndText}
+//     </div>
+//   )
+// }
+
+/*
+
+<div className='wrapper'>
+            <div className='option'>
+                <div className='before'>
+                  <h2>{t("Basic")}</h2>
+                  <p>₽<strong>490</strong></p>
+                </div>
+                <div className='describe'>
+                  <p>·{t("Printed letter")}</p>
+                  <p>·{t("Seal options")}</p>
+                  <p>·{t("Delivery")}</p>
+                </div>
+            </div>
+            <div className='option'>
+                <div className='before'>
+                  <h2>{t("Advanced")}</h2>
+                  <p>₽<strong>690</strong></p>
+                </div>
+                <div className='describe'>
+                  <p>·{t("Handwritten letter")}</p>
+                  <p>·{t("Huge variety of sealing wax")}</p>
+                  <p>·{t("Seal options")}</p>
+                  <p>·{t("Delivery")}</p>
+                </div>
+            </div>
+            <div className='option multiple-b'>
+                <div className='before'>
+                  <h2 className='multiple'>{t("Multiple")}</h2>
+                  <p className='multiple-p'><strong>{t("From 10")}</strong></p>
+                </div>
+                <div className='describe'>
+                  <p>·{t("For your events")}</p>
+                </div>
+                <a className='contact-us' href='/contact'>{t("Contact us")}</a>
+            </div>
+          </div>
+
+*/
 
 export default Home

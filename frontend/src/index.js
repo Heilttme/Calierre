@@ -6,8 +6,8 @@ import { BrowserRouter as Router } from "react-router-dom"
 import "./i18n"
 import axios from 'axios';
 
-// axios.defaults.baseURL = "http://localhost:8000"
-axios.defaults.baseURL = "https://api.calierre.ru"
+axios.defaults.baseURL = "http://localhost:8000"
+// axios.defaults.baseURL = "https://api.calierre.ru"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

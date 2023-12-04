@@ -1,13 +1,18 @@
 .login-page{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     width: 75%;
+    height: 100%;
     margin: 0 auto;
-    margin-top: 6rem;
+    margin-top: 200px;
 
-
-    .left-col{
-
+    .login-form{
+        background-color: #38220f;
+        color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        
         .header-login{
             display: flex;
             align-items: center;

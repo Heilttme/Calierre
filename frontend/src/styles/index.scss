@@ -39,9 +39,14 @@ img{
 }
 
 body{
-    background-color: white;
+    background-color: #fdfabc;
     position: relative;
     min-height: calc(100vh - 5rem);
+    scrollbar-width: 0px;
+
+    &::-webkit-scrollbar{
+        width: 0px;
+    }
 
     &::after{
         content: "";

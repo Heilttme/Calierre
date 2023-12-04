@@ -56,9 +56,9 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
 
   return (
     <motion.div
-      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "4rem", top: "0"}}
-      transition={{height: {duration: 1}, backgroundColor: {duration: 1}}}
-      className={`header ${scrollPosition == 0 && "extended"}`}
+      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "0rem", top: "0", overflow: "hidden"}}
+      transition={{height: {duration: .4}, backgroundColor: {duration: .4}}}
+      className={`header ${scrollPosition === 0 && "extended"}`}
     >
       <div className={`menu${menuOpened && scrollPosition != 0 ? " opened" : ""}`} onClick={(e) => e.stopPropagation()}>
         <div className='links'>
@@ -66,22 +66,6 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
           <a href='/contact' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Contact")}</a>
           <a href='/vacations' onClick={(e) => setTimeout(() => closeOnClick(e), 10)}>{t("Vacations")}</a>
         </div>
-        {/* {language === "ru" ?
-          <svg onClick={changeLanguage} className='language' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="64" height="36"><rect fill="#fff" width="9" height="3"/><rect fill="#d52b1e" y="3" width="9" height="3"/><rect fill="#0039a6" y="2" width="9" height="2"/></svg>
-        :
-          <svg onClick={changeLanguage} className='language' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="64" height="36">
-          <clipPath id="s">
-            <path d="M0,0 v30 h60 v-30 z"/>
-          </clipPath>
-          <g clip-path="url(#s)">
-            <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-            <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
-            <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-            <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-          </g>
-          </svg>
-        } */}
       </div>
 
       {scrollPosition != 0 && <div className={`hamburger-wrapper${menuOpened ? " opened-hamburger" : ""}`} onClick={(e) => {e.stopPropagation();setMenuOpened(prev => !prev)}}><div className='hamburger'></div></div>}

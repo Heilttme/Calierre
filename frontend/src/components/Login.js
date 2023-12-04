@@ -67,14 +67,10 @@ const Login = ({ authorize, authenticated }) => {
       }
     })
   }
-  
-  const handleEnterPress = (e) => {
-    if (e.key === "Enter") logIn()
-  }
 
   return (
-    <div className='login-page' onKeyDown={(e) => handleEnterPress(e)}>
-      <div className='left-col'>
+    <div className='login-page'>
+      <div className='login-form'>
         <span className='header-login'>
           <h2>{t("Log in")}</h2>
           <Link to='/sign_up'>{t("Create an account")}</Link>
@@ -110,28 +106,6 @@ const Login = ({ authorize, authenticated }) => {
           <button className='login-button' onClick={logIn}>{t("Log in")}</button>
         </div>
       </div>
-      {/* <div className='right-col'>
-        {
-          // (rightPageData === null || errors.length === 0) ?
-            <img src={testimonial}></img>
-          // : rightPageData === 200 ?
-          //   (
-          //     <>
-          //       <h2>You have successfully created an account</h2>
-          //       <h2>Check your e-mail for a letter to verify your account</h2>
-          //       <button>Send the letter again</button>
-          //     </>
-          //   )
-          // : rightPageData === 400 && errors.length !== 0 &&
-          //   (
-          //     <>
-          //       <h2>Whoops...</h2>
-          //       <h2>Some errors occured here</h2>
-          //       {errors.map(el => <p>{el.charAt(0).toUpperCase() + el.slice(1)}</p>)}
-          //     </>
-          //   )
-        }
-      </div> */}
       <ToastContainer
         limit={3}
       />
