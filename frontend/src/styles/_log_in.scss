@@ -3,15 +3,23 @@
     justify-content: center;
     align-items: center;
     width: 75%;
-    height: 100%;
+    height: 500px;
     margin: 0 auto;
     margin-top: 200px;
 
+    .side-image{
+        height: 100%;
+    }
+
     .login-form{
-        background-color: #38220f;
+        background-color: #E85A4F;
         color: white;
+        height: inherit;
         padding: 2rem;
-        border-radius: 8px;
+        height: inherit;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
         
         .header-login{
             display: flex;
@@ -27,7 +35,7 @@
             }
 
             a{
-                color: #E85A4F;
+                color: white;
             }
         }
 
@@ -50,7 +58,7 @@
                 height: 40px;
                 padding: .6rem 1.2rem;
                 width: 400px;
-                background-color: #D8C3A5;
+                background-color: white;
                 border: 1px solid #D8C3A5;
                 outline: none;
                 transition: all .1s ease-in-out;
@@ -84,7 +92,7 @@
                 align-items: center;
 
                 a{
-                    color: #E85A4F;
+                    color: white;
                 }
             }
 
@@ -114,12 +122,6 @@
                     border-color: #D8C3A5;
                     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='red' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");  
                 }
-            }
-
-            .login-button{
-                @include button;
-                margin-top: .8rem;
-                width: 100%;
             }
 
             .button-pending{
@@ -171,6 +173,55 @@
                   transform: rotate(360deg);
                 }
               }
+        }
+
+        .login-button{
+            @include button;
+            color: black;
+            background-color: white;
+            letter-spacing: 0;
+            margin-top: .8rem;
+            width: 100%;
+
+            &:hover{
+                background-color: rgb(214, 214, 214);
+            }
+        }
+    }
+
+    .side-login{
+        height: inherit;
+        position: relative;
+        overflow: hidden;
+
+        .text{
+            width: 90%;
+            position: absolute;
+            top: 0;
+            font-size: 1.7em;
+            // box-shadow: 0px 5px 12px black;
+            
+            p{
+                color: white;
+                margin-left: 24px;
+                margin-top: 24px;
+            }
+        }
+
+        img{ 
+            object-position: -20% -20%;
+        }
+
+        .shadow-overlay{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110%;
+            height: 200px;
+            background-color: black;
+            opacity: .37;
+            box-shadow: 0px 12px 12px black;
         }
     }
 }

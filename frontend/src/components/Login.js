@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
 import { useStore } from 'zustand'
+import side from "../images/envelope-flower.jpg"
 
 const Login = ({ authorize, authenticated }) => {
   const [emailFocus, setEmailFocus] = useState(false)
@@ -71,39 +72,63 @@ const Login = ({ authorize, authenticated }) => {
   return (
     <div className='login-page'>
       <div className='login-form'>
-        <span className='header-login'>
-          <h2>{t("Log in")}</h2>
-          <Link to='/sign_up'>{t("Create an account")}</Link>
-        </span>
-        <div className='form'>
-          <div className='email-block block'>
-            <input
-              name="email"
-              id="email"
-              onFocus={() => setEmailFocus(true)}
-              onBlur={() => setEmailFocus(false)}
-              onChange={(e) => changeFormData(e)}
-              className={`${errorTypes.includes("email") && "error"}`}
-            />
-            <motion.label animate={formData.email || emailFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
-          </div>
+        <div className='upper-body'>
+          <span className='header-login'>
+            <h2>{t("Log in")}</h2>
+            <Link to='/sign_up'>{t("Create an account")}</Link>
+          </span>
+          <div className='form'>
+            <div className='email-block block'>
+              <input
+                name="email"
+                id="email"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
+                onChange={(e) => changeFormData(e)}
+                className={`${errorTypes.includes("email") && "error"}`}
+              />
+              <motion.label 
+                animate={formData.email || emailFocus ? {y: mobile ? -32 : -28, x: -14, fontSize: "16px", color: "rgb(255, 255, 255)"} : {color: "rgb(0, 0, 0)"}} 
+                transition={{color: {duration: .3}}}
+                className='text-label'  
+                htmlFor="email"
+              >
+                {t("E-mail")}
+              </motion.label>
+            </div>
 
-          <div className='password-block block'>
-            <input
-              name="password"
-              id="password"
-              type="password"
-              onFocus={() => setPasswordFocus(true)}
-              onBlur={() => setPasswordFocus(false)}
-              onChange={(e) => changeFormData(e)}
-              className={`${errorTypes.includes("password") && "error"}`}
-            />
-            <motion.label animate={formData.password || passwordFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password">{t("Password")}</motion.label>
+            <div className='password-block block'>
+              <input
+                name="password"
+                id="password"
+                type="password"
+                onFocus={() => setPasswordFocus(true)}
+                onBlur={() => setPasswordFocus(false)}
+                onChange={(e) => changeFormData(e)}
+                className={`${errorTypes.includes("password") && "error"}`}
+              />
+              <motion.label
+                animate={formData.password || passwordFocus ? {y: mobile ? -32 : -28, x: -14, fontSize: "16px", color: "rgb(255, 255, 255)"} : {color: "rgb(0, 0, 0)"}} 
+                transition={{color: {duration: .3}}}
+                className='text-label'  
+                htmlFor="password"
+              >
+                {t("Password")}
+              </motion.label>
+            </div>
+            <div className='check-forgot'>
+              <Link to='/reset'>{t("Forgot your password?")}</Link>
+            </div>
           </div>
-          <div className='check-forgot'>
-            <Link to='/reset'>{t("Forgot your password?")}</Link>
-          </div>
-          <button className='login-button' onClick={logIn}>{t("Log in")}</button>
+        </div>
+        <button className='login-button' onClick={logIn}>{t("Log in")}</button>
+      </div>
+      <div className='side-login'>
+        <img className='side-image' src={side}/>
+        <div class="shadow-overlay"></div>
+        <div className='text'>
+          <p>Sign in & order</p>
+          <p>Make your order & get it the same day</p>
         </div>
       </div>
       <ToastContainer

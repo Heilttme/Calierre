@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
 import { useNavigate } from 'react-router-dom'
+import side from "../images/letter-flower.jpg"
 
 const SignUp = ({authenticated}) => {
   const [usernameFocus, setUsernameFocus] = useState(false)
@@ -92,72 +93,79 @@ const SignUp = ({authenticated}) => {
 
   return (
     <div className='login-page' onKeyDown={(e) => handleEnterPress(e)}>
-      <div className='left-col'>
-        <span className='header-login'>
-          <h2>{t("Sign up")}</h2>
-        </span>
-        <div className='form'>
-          <div className='username-block block'>
-            <input
-              name="username"
-              id="username"
-              onFocus={() => setUsernameFocus(true)}
-              onBlur={() => setUsernameFocus(false)}
-              onChange={(e) => changeFormData(e)}
-              className={`${errorTypes.includes("username") && "error"}`}
-            />
-            <motion.label animate={formData.username || usernameFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">{t("Username")}</motion.label>
-          </div>
-          
-          <div className='email-block block'>
-            <input
-              name="email"
-              id="email"
-              type="email"
-              onFocus={() => setEmailFocus(true)}
-              onBlur={() => setEmailFocus(false)}
-              onChange={(e) => changeFormData(e)}
-              className={`${errorTypes.includes("email") && "error"}`}
-            />
-            <motion.label animate={formData.email || emailFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
-          </div>
+      <div className='login-form'>
+        <div className='upper-body'>
+          <span className='header-login'>
+            <h2>{t("Sign up")}</h2>
+          </span>
+          <div className='form'>
+            <div className='username-block block'>
+              <input
+                name="username"
+                id="username"
+                onFocus={() => setUsernameFocus(true)}
+                onBlur={() => setUsernameFocus(false)}
+                onChange={(e) => changeFormData(e)}
+                className={`${errorTypes.includes("username") && "error"}`}
+              />
+              <motion.label animate={formData.username || usernameFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">{t("Username")}</motion.label>
+            </div>
+            
+            <div className='email-block block'>
+              <input
+                name="email"
+                id="email"
+                type="email"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
+                onChange={(e) => changeFormData(e)}
+                className={`${errorTypes.includes("email") && "error"}`}
+              />
+              <motion.label animate={formData.email || emailFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
+            </div>
 
-          <div className='password-block block'>
-            <input
-              name="password1"
-              id="password1"
-              type="password"
-              onFocus={() => setPassword1Focus(true)}
-              onBlur={() => setPassword1Focus(false)}
-              onChange={(e) => changeFormData(e)}
-              className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
-            />
-            <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">{t("Password")}</motion.label>
-          </div>
+            <div className='password-block block'>
+              <input
+                name="password1"
+                id="password1"
+                type="password"
+                onFocus={() => setPassword1Focus(true)}
+                onBlur={() => setPassword1Focus(false)}
+                onChange={(e) => changeFormData(e)}
+                className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
+              />
+              <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">{t("Password")}</motion.label>
+            </div>
 
-          <div className='password-block block'>
-            <input
-              name="password2"
-              id="password2"
-              type="password"
-              onFocus={() => setPassword2Focus(true)}
-              onBlur={() => setPassword2Focus(false)}
-              onChange={(e) => changeFormData(e)}
-              className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
-            />
-            <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">{t("Password again")}</motion.label>
-          </div>
-          <div className='button-pending'>
-            <button className='login-button' onClick={signUp}>{t("Sign up")}</button>
-            {pending && <div className='ring-wrapper'>
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>}
+            <div className='password-block block'>
+              <input
+                name="password2"
+                id="password2"
+                type="password"
+                onFocus={() => setPassword2Focus(true)}
+                onBlur={() => setPassword2Focus(false)}
+                onChange={(e) => changeFormData(e)}
+                className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
+              />
+              <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">{t("Password again")}</motion.label>
+            </div>
+            <div className='button-pending'>
+              <button className='login-button' onClick={signUp}>{t("Sign up")}</button>
+              {pending && <div className='ring-wrapper'>
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+              </div>}
+            </div>
           </div>
         </div>
       </div>
-      {/* <div className='right-col'>
-            <img src={testimonial}></img>
-      </div> */}
+      <div className='side-login'>
+        <img className='side-image' src={side}/>
+        <div class="shadow-overlay"></div>
+        <div className='text'>
+          <p>Sign in & order</p>
+          <p>Make your order & get it the same day</p>
+        </div>
+      </div>
       <ToastContainer
         limit={3}
        />

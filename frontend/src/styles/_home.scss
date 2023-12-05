@@ -322,7 +322,7 @@
 
         .hor-scrl-car-wrap{
             position: relative;
-            height: 150vh;
+            height: 170vh;
 
             .hor-scrl-car-block{
                 position: sticky;
@@ -350,7 +350,7 @@
         // transform: translateX(-50%);
         // width: 85%;
         // width: 200vw;
-        min-width: 150vw;
+        min-width: 180vw;
         gap: 4rem;
         // margin: 0 auto;
         justify-content: space-between;
@@ -362,13 +362,13 @@
         background-color: transparent;
         overflow: hidden;
         position: relative;
-        width: 650px;
-        height: 550px;
+        width: 100%;
+        height: 650px;
         padding: 2rem 2rem;
         color: #EAE7DC;
         font-weight: 900;
         letter-spacing: 2px;
-        font-size: 1.43em;
+        font-size: 1.6em;
         white-space: pre-wrap;
 
         img{
@@ -379,7 +379,7 @@
             height: inherit;
             object-fit: cover;
             z-index: -1;
-            filter: blur(4px) brightness(.4);
+            filter: blur(2px) brightness(.4);
         }
     }
 
@@ -434,7 +434,7 @@
             transition: all .15s ease-in-out;
 
             &:hover{
-                scale: 1.02;
+                scale: 1.01;
             }
 
             .bg-img{
@@ -452,11 +452,32 @@
             .card-content{
                 padding: .6rem 1rem;
 
-                .card-title{
-                    font-size: 2em;
-                    font-weight: 900;
-                    color: white;    
+                .title{
+                    display: flex;
+                    justify-content: space-between;
+                    
+                    .card-title{
+                        font-size: 2em;
+                        font-weight: 900;
+                        color: white;    
+                    }
                 }
+
+                .characteristics{
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-size: 1.4em;
+                    letter-spacing: 1.5px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: .6rem;
+                }
+
             }
         }
     }

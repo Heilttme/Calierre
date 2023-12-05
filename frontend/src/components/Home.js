@@ -135,19 +135,42 @@ const Home = ({ userData }) => {
           
           <div className='card'>
             <div className='card-content'>
-              <p className='card-title'>BASIC</p>
+              <div className='title'>
+                <p className='card-title'>BASIC</p>
+                <p className='card-title'>490</p>
+              </div>
+              <div className='characteristics'>
+                <p>{t("Printed letter")}</p>
+                <p>{t("Seal options")}</p>
+                <p>{t("Delivery")}</p>
+              </div>
             </div>
             <img src={test1} className='bg-img'/>
           </div>
           <div className='card'>
             <div className='card-content'>
-              <p className='card-title'>ADVANCED</p>
+              <div className='title'>
+                <p className='card-title'>ADVANCED</p>
+                <p className='card-title'>890</p>
+              </div>
+              <div className='characteristics'>
+                <p>{t("Handwritten letter")}</p>
+                <p>{t("Huge variety of sealing wax")}</p>
+                <p>{t("Seal options")}</p>
+                <p>{t("Delivery")}</p>
+              </div>
             </div>
             <img src={test1} className='bg-img'/>
           </div>
           <div className='card'>
             <div className='card-content'>
-              <p className='card-title'>EVENT</p>
+              <div className='title'>
+                <p className='card-title'>EVENT</p>
+                <p className='card-title'>&gt;10</p>
+              </div>
+              <div className='characteristics'>
+                <p>{t("For your events")}</p>
+              </div>
             </div>
             <img src={test1} className='bg-img'/>
           </div>
