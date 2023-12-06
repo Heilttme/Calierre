@@ -7,13 +7,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
 import { useNavigate } from 'react-router-dom'
 import side from "../images/letter-flower.jpg"
+import Input from './Input'
 
 const SignUp = ({authenticated}) => {
   const [usernameFocus, setUsernameFocus] = useState(false)
   const [emailFocus, setEmailFocus] = useState(false)
   const [password1Focus, setPassword1Focus] = useState(false)
   const [password2Focus, setPassword2Focus] = useState(false)
-  const [errorTypes, setErrorTypes] = useState([])
+  const [usernameError, setUsernameError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
   const [pending, setPending] = useState(false)
   const [mobile] = useState((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
 
@@ -70,7 +73,10 @@ const SignUp = ({authenticated}) => {
       })
       .catch(data => {
         setPending(false)
-        setErrorTypes([...new Set([...Object.keys(data.response.data)])])
+        let errors = new Set([...Object.keys(data.response.data)])
+        if (errors.has("password")) setPasswordError(true)
+        if (errors.has("username")) setUsernameError(true)
+        if (errors.has("email")) setEmailError(true)
         const errorsNow = [...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')]
         for (let i = 0; i < errorsNow.length; i++) {
           toast.error(t(errorsNow[i][0]), {
@@ -99,56 +105,11 @@ const SignUp = ({authenticated}) => {
             <h2>{t("Sign up")}</h2>
           </span>
           <div className='form'>
-            <div className='username-block block'>
-              <input
-                name="username"
-                id="username"
-                onFocus={() => setUsernameFocus(true)}
-                onBlur={() => setUsernameFocus(false)}
-                onChange={(e) => changeFormData(e)}
-                className={`${errorTypes.includes("username") && "error"}`}
-              />
-              <motion.label animate={formData.username || usernameFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="username">{t("Username")}</motion.label>
-            </div>
-            
-            <div className='email-block block'>
-              <input
-                name="email"
-                id="email"
-                type="email"
-                onFocus={() => setEmailFocus(true)}
-                onBlur={() => setEmailFocus(false)}
-                onChange={(e) => changeFormData(e)}
-                className={`${errorTypes.includes("email") && "error"}`}
-              />
-              <motion.label animate={formData.email || emailFocus ? {y: mobile ? -30 : -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="email">{t("E-mail")}</motion.label>
-            </div>
+            <Input name={"username"} label={"Username"} error={usernameError} setError={setUsernameError} onChange={(e) => changeFormData(e)} value={formData.username}/>
+            <Input name={"email"} label={"E-mail"} error={emailError} setError={setEmailError} onChange={(e) => changeFormData(e)} value={formData.email}/>
+            <Input name={"password1"} label={"Password"} error={passwordError} setError={setPasswordError} onChange={(e) => changeFormData(e)} value={formData.password1}/>
+            <Input name={"password2"} label={"Password again"} error={passwordError} setError={setPasswordError} onChange={(e) => changeFormData(e)} value={formData.password2}/>
 
-            <div className='password-block block'>
-              <input
-                name="password1"
-                id="password1"
-                type="password"
-                onFocus={() => setPassword1Focus(true)}
-                onBlur={() => setPassword1Focus(false)}
-                onChange={(e) => changeFormData(e)}
-                className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
-              />
-              <motion.label animate={formData.password1 || password1Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password1">{t("Password")}</motion.label>
-            </div>
-
-            <div className='password-block block'>
-              <input
-                name="password2"
-                id="password2"
-                type="password"
-                onFocus={() => setPassword2Focus(true)}
-                onBlur={() => setPassword2Focus(false)}
-                onChange={(e) => changeFormData(e)}
-                className={`${(errorTypes.includes("password") || errorTypes.includes("non_field_errors")) && "error"}`}
-              />
-              <motion.label animate={formData.password2 || password2Focus ? {y: -26, x: -12, fontSize: "16px"} : {}} className='text-label' htmlFor="password2">{t("Password again")}</motion.label>
-            </div>
             <div className='button-pending'>
               <button className='login-button' onClick={signUp}>{t("Sign up")}</button>
               {pending && <div className='ring-wrapper'>

@@ -58,11 +58,6 @@ const App = () => {
   const authenticated = useStore(state => state.authenticated)
   const authorize = useStore(state => state.authorize)
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("access")) {
-  //   }
-  // }, [])
-  
   useEffect(() => {
     if (localStorage.getItem("access")){
       if (localStorage.getItem("refresh")) {

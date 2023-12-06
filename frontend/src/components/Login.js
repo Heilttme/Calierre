@@ -8,12 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { t } from 'i18next'
 import { useStore } from 'zustand'
 import side from "../images/envelope-flower.jpg"
+import Input from './Input'
 
 const Login = ({ authorize, authenticated }) => {
-  const [emailFocus, setEmailFocus] = useState(false)
-  const [passwordFocus, setPasswordFocus] = useState(false)
-  const [errors, setErrors] = useState([])
-  const [errorTypes, setErrorTypes] = useState([])
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
   const [rightPageData, setRightPageData] = useState(null)
   const [mobile] = useState((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
   
@@ -31,7 +30,6 @@ const Login = ({ authorize, authenticated }) => {
     email: "",
     password: "",
   })
-
   
   const changeFormData = (e) => {
     if (e.target.type !== "checkbox"){
@@ -40,7 +38,6 @@ const Login = ({ authorize, authenticated }) => {
       setFormData(prev => ({...prev, rememberMe: e.target.checked}))
     }
   }
-
   
   const logIn = () => {
     const res = axios.post("/auth/jwt/create/", {email: formData.email, password: formData.password})
@@ -52,7 +49,9 @@ const Login = ({ authorize, authenticated }) => {
     })
     .catch(data => {
       setRightPageData(400)
-      setErrorTypes([...new Set([...Object.keys(data.response.data)])])
+      let errors = new Set([...Object.keys(data.response.data)])
+      if (errors.has("password")) setPasswordError(true)
+      if (errors.has("email")) setEmailError(true)
       const errorsNow = [...Object.values(data.response.data).filter(el => el[0] !== 'This field may not be blank.')]
       for (let i = 0; i < errorsNow.length; i++) {
         toast.error(t(errorsNow[i]), {
@@ -78,44 +77,8 @@ const Login = ({ authorize, authenticated }) => {
             <Link to='/sign_up'>{t("Create an account")}</Link>
           </span>
           <div className='form'>
-            <div className='email-block block'>
-              <input
-                name="email"
-                id="email"
-                onFocus={() => setEmailFocus(true)}
-                onBlur={() => setEmailFocus(false)}
-                onChange={(e) => changeFormData(e)}
-                className={`${errorTypes.includes("email") && "error"}`}
-              />
-              <motion.label 
-                animate={formData.email || emailFocus ? {y: mobile ? -32 : -28, x: -14, fontSize: "16px", color: "rgb(255, 255, 255)"} : {color: "rgb(0, 0, 0)"}} 
-                transition={{color: {duration: .3}}}
-                className='text-label'  
-                htmlFor="email"
-              >
-                {t("E-mail")}
-              </motion.label>
-            </div>
-
-            <div className='password-block block'>
-              <input
-                name="password"
-                id="password"
-                type="password"
-                onFocus={() => setPasswordFocus(true)}
-                onBlur={() => setPasswordFocus(false)}
-                onChange={(e) => changeFormData(e)}
-                className={`${errorTypes.includes("password") && "error"}`}
-              />
-              <motion.label
-                animate={formData.password || passwordFocus ? {y: mobile ? -32 : -28, x: -14, fontSize: "16px", color: "rgb(255, 255, 255)"} : {color: "rgb(0, 0, 0)"}} 
-                transition={{color: {duration: .3}}}
-                className='text-label'  
-                htmlFor="password"
-              >
-                {t("Password")}
-              </motion.label>
-            </div>
+            <Input name={"email"} label={"E-mail"} error={emailError} setError={setEmailError} onChange={(e) => changeFormData(e)} value={formData.email}/>
+            <Input name={"password"} label={"Password"} error={passwordError} setError={setPasswordError} onChange={(e) => changeFormData(e)} value={formData.password}/>
             <div className='check-forgot'>
               <Link to='/reset'>{t("Forgot your password?")}</Link>
             </div>
