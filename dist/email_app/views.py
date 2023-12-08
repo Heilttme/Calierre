@@ -59,11 +59,11 @@ def send_order_notification(request):
             city: {request.data.get('city')} \n\
             street: {request.data.get('street')} \n\
             flat: {request.data.get('flat')} \n\
-            detailsForCourier: {request.data.get('detailsForCourier')} \n\
+            detailsForCourier: {request.data.get('details_for_courier')} \n\
             option: {request.data.get('option')} \n\
-            sealBasic: {request.data.get('sealBasic')} \n\
-            sealAdvanced: {request.data.get('sealAdvanced')} \n\
-            waxAdvanced: {request.data.get('waxAdvanced')} \n\
+            sealBasic: {request.data.get('seal_basic')} \n\
+            sealAdvanced: {request.data.get('seal_advanced')} \n\
+            waxAdvanced: {request.data.get('wax_advanced')} \n\
             dateTime: {request.data.get('dateTime')} \n\
             phone: {request.data.get('phone')}",
         "settings.EMAIL_HOST_USER",
@@ -136,10 +136,7 @@ def notify_user_order_was_created(request):
 @api_view(["POST"])
 def notify_user_order_was_paid(request):
     html_body = render_to_string("emails/order_paid.html")
-    email = LetterUser.objects.filter(id=request.data.get("id"))[0].email
-
-    print(email)
-    print("SENT")
+    email = request.data.get("email")
 
     message = EmailMultiAlternatives(
         subject="Заказ",

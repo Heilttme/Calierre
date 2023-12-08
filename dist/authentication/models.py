@@ -17,6 +17,10 @@ class UserAccountManager(BaseUserManager):
         
 def upload_path(instance, filename):
     return "/".join(["pfps", filename])
+
+
+def upload_path_reviews(instance, filename):
+    return "/".join(["reviews", filename])
         
 class LetterUser(AbstractUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
@@ -33,6 +37,7 @@ class LetterUser(AbstractUser, PermissionsMixin):
 class Review(models.Model):
     content = models.CharField(max_length=255)
     reviewer = models.ForeignKey(LetterUser, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_path_reviews, blank=True, null=True)
 
 
 class Order(models.Model):
@@ -50,24 +55,9 @@ class Order(models.Model):
     wax_advanced = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
     delivery = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(max_length=255, blank=True, null=True, default="")
 
     payment_id = models.CharField(max_length=255, default="", blank=True, null=True)
-    # title = models.CharField(max_length=255, default="")
-    # content = models.CharField(max_length=2550, default="")
-    # details = models.CharField(max_length=255, default="")
-    # mistakes = models.CharField(max_length=255, default="")
-    # city = models.CharField(max_length=255, default="Moscow")
-    # street = models.CharField(max_length=255, default="")
-    # flat = models.CharField(max_length=255, default="")
-    # details_for_courier = models.CharField(max_length=255, default="")
-    # option = models.CharField(max_length=255, default="")
-    # seal_basic = models.CharField(max_length=255, default="")
-    # seal_advanced = models.CharField(max_length=255, default="")
-    # wax_advanced = models.CharField(max_length=255, default="")
-    # phone = models.CharField(max_length=255, default="")
-    # delivery = models.CharField(max_length=255, default="")
-
-    # payment_id = models.CharField(max_length=255, default="")
 
     date = models.DateTimeField(default=datetime.now(), blank=True, null=True)
     
@@ -78,4 +68,4 @@ class Order(models.Model):
     checked = models.BooleanField(default=False)    # third step: expert checks letter
     delivered = models.BooleanField(default=False)  # fourth step: delivery co delivers order
 
-    user = models.ForeignKey(LetterUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(LetterUser, blank=True, null=True, on_delete=models.CASCADE)

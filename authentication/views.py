@@ -38,7 +38,7 @@ def get_reviews(request):
 def add_review(request):
     user = LetterUser.objects.filter(email=request.data.get("email"))[0]
     
-    review = ReviewSerializer(data={"content": request.data.get("content"), "reviewer": user.id})
+    review = ReviewSerializer(data={"content": request.data.get("content"), "reviewer": user.id, "image": request.data.get("image")})
     review.is_valid()
     review.save()
     
@@ -46,11 +46,8 @@ def add_review(request):
     
 @api_view(["POST"])
 def get_orders(request):
-    
     orders = Order.objects.filter(user=request.data.get("id"))
 
-    # orders = list(map(lambda x: remove_data(x), orders))
-    
     return Response({"orders": OrderSerializer(orders, many=True).data})
     
 @api_view(["POST"])
@@ -70,25 +67,47 @@ def add_orders(request):
     dateTime = request.data.get("dateTime")
     phone = request.data.get("phone")
     user = request.data.get("user")
+    email = request.data.get("email")
     payment_id = request.data.get("payment_id")
 
-    order = OrderSerializer(data={"title": title, 
-        "content": content, 
-        "details": details, 
-        "mistakes": mistakes, 
-        "street": street, 
-        "city": city, 
-        "flat": flat, 
-        "details_for_courier": detailsForCourier, 
-        "option": option, 
-        "seal_basic": sealBasic, 
-        "seal_advanced": sealAdvanced, 
-        "wax_advanced": waxAdvanced, 
-        "delivery": dateTime, 
-        "phone": phone, 
-        "user": user,
-        "payment_id": payment_id
-    })
+    if user == -1:
+        order = OrderSerializer(data={"title": title, 
+            "content": content, 
+            "details": details, 
+            "mistakes": mistakes, 
+            "street": street, 
+            "city": city, 
+            "flat": flat, 
+            "details_for_courier": detailsForCourier, 
+            "option": option, 
+            "seal_basic": sealBasic, 
+            "seal_advanced": sealAdvanced, 
+            "wax_advanced": waxAdvanced, 
+            "delivery": dateTime, 
+            "phone": phone, 
+            "user": None,
+            "email": email,
+            "payment_id": payment_id
+        })
+    else:
+        order = OrderSerializer(data={"title": title, 
+            "content": content, 
+            "details": details, 
+            "mistakes": mistakes, 
+            "street": street, 
+            "city": city, 
+            "flat": flat, 
+            "details_for_courier": detailsForCourier, 
+            "option": option, 
+            "seal_basic": sealBasic, 
+            "seal_advanced": sealAdvanced, 
+            "wax_advanced": waxAdvanced, 
+            "delivery": dateTime, 
+            "phone": phone, 
+            "user": user,
+            "email": email,
+            "payment_id": payment_id
+        })
     order.is_valid()
     order.save()
 
@@ -216,8 +235,6 @@ def proceed_payment(request):
 
     option = request.data.get("option")
 
-    print(request.data)
-
     value = str(789 if option == "Basic" and request.data.get("sameDay") else 490 if option == "Basic" else 989 if option == "Advanced" and request.data.get("sameDay") else 690)
 
     if request.data.get("method") == "sberpay":
@@ -285,7 +302,10 @@ def proceed_payment(request):
     dateTime = request.data.get("orderData").get("dateTime")
     phone = request.data.get("orderData").get("phone")
     user = request.data.get("orderData").get("user")
-    email = LetterUser.objects.filter(id=user)[0].email
+    if user == -1:
+        email = request.data.get("email")
+    else:
+        email = LetterUser.objects.filter(id=user)[0].email
     
     # post("http://localhost:8000/authentication/add_orders/", {"title": title, 
     post("https://api.calierre.ru/authentication/add_orders/", {"title": title, 
@@ -303,6 +323,7 @@ def proceed_payment(request):
         "dateTime": dateTime, 
         "phone": phone, 
         "user": user, 
+        "email": email,
         "payment_id": payment.id
     })
     post("https://api.calierre.ru/email/notify_user_order_was_created/", {"email": email})

@@ -10,7 +10,8 @@ while True:
     for i in range(len(orders)):
         payment = Payment.find_one(orders[i].get("payment_id"))
         if payment.status == "succeeded" and not orders[i].get("notified"):
-
+            
+            order_id = orders[i].get("id")
             title = orders[i].get("title")
             content = orders[i].get("content")
             details = orders[i].get("details")
@@ -27,6 +28,7 @@ while True:
             phone = orders[i].get("phone")
             user = orders[i].get("user")
             payment_id = orders[i].get("payment_id")
+            email = orders[i].get("email")
             
             post("https://api.calierre.ru/email/send_email/", {
                 "content": content, 
@@ -46,7 +48,7 @@ while True:
                 "payment_id": payment_id
             })
 
-            post("https://api.calierre.ru/authentication/set_order_notified/", {"id": orders[i].get("id")})
-            post("https://api.calierre.ru/email/notify_user_order_was_paid/", {"id": user})
-            post("https://api.calierre.ru/email/set_order_paid/", {"id": user})
-    sleep(30)
+            post("https://api.calierre.ru/authentication/set_order_notified/", {"id": order_id})
+            post("https://api.calierre.ru/authentication/set_order_paid/", {"id": order_id})
+            post("https://api.calierre.ru/email/notify_user_order_was_paid/", {"email": email})
+    sleep(60)

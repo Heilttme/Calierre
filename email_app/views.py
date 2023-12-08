@@ -136,7 +136,7 @@ def notify_user_order_was_created(request):
 @api_view(["POST"])
 def notify_user_order_was_paid(request):
     html_body = render_to_string("emails/order_paid.html")
-    email = LetterUser.objects.filter(id=request.data.get("id"))[0].email
+    email = request.data.get("email")
 
     message = EmailMultiAlternatives(
         subject="Заказ",
