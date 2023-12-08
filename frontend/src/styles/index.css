@@ -343,9 +343,10 @@ example {
   width: 350px;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
+  overflow: hidden;
 }
-.home .order-options .card:hover {
-  scale: 1.01;
+.home .order-options .card:hover .bg-img {
+  scale: 1.02;
 }
 .home .order-options .card .bg-img {
   z-index: -1;
@@ -356,8 +357,9 @@ example {
   width: 350px;
   -o-object-fit: cover;
      object-fit: cover;
-  filter: brightness(0.4) blur(4px);
-  box-shadow: 10px 6px 12px #3f3f3f;
+  filter: brightness(0.38) blur(2px);
+  box-shadow: 6px 6px 10px #3f3f3f;
+  transition: all 0.2s ease-in-out;
 }
 .home .order-options .card .card-content {
   padding: 0.6rem 1rem;
@@ -799,6 +801,9 @@ example {
 }
 .customize .left-col {
   width: 100%;
+}
+.customize .left-col h1 {
+  color: #E85A4F;
 }
 .customize textarea {
   border-radius: 8px;
@@ -1569,19 +1574,22 @@ example {
   align-items: center;
   cursor: pointer;
 }
-.destination input {
-  font-size: 1.15em;
-  height: 35px;
-  padding: 0.6rem 1.2rem;
-  width: 100%;
-  background-color: #D8C3A5;
-  border: 1px solid #D8C3A5;
-  outline: none;
-  transition: all 0.1s ease-in-out;
-  margin-bottom: 0.5rem;
+.destination input, .destination .ant-picker {
+  font-size: 1.1em !important;
+  height: 35px !important;
+  padding: 0.6rem !important;
+  width: 100% !important;
+  background-color: #D8C3A5 !important;
+  border: 1px solid #D8C3A5 !important;
+  outline: none !important;
+  transition: all 0.1s ease-in-out !important;
+  border-radius: 0px;
 }
-.destination input:focus {
+.destination input:focus, .destination .ant-picker:focus {
   border: 1px solid #B4B1A7;
+}
+.destination input svg, .destination .ant-picker svg {
+  display: none;
 }
 .destination .date-input {
   -webkit-user-select: none;
@@ -1719,6 +1727,35 @@ example {
   display: flex;
   justify-content: space-between;
 }
+.payment .payment-wrapper .summary .image-slider {
+  display: flex;
+  gap: 0.6rem;
+}
+.payment .payment-wrapper .summary .image-slider .card {
+  overflow: hidden;
+  position: relative;
+}
+.payment .payment-wrapper .summary .image-slider .card p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+  padding: 0.2rem 0;
+  background-color: #1a1a1a;
+  font-weight: 700;
+}
+.payment .payment-wrapper .summary .image-slider .card img {
+  width: 400px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(0.5) blur(1px);
+}
 .payment .payment-wrapper .letter {
   background-color: #E85A4F;
   padding: 2.5rem;
@@ -1780,8 +1817,10 @@ example {
   font-size: 1.1em;
 }
 .payment h1 {
-  color: #E85A4F;
   margin-bottom: 1rem;
+}
+.payment h1 strong {
+  color: #E85A4F;
 }
 .payment h2 {
   margin-bottom: 0.4rem;

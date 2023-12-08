@@ -1,12 +1,15 @@
 import { t } from 'i18next'
 import React, { useEffect, useState } from 'react'
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps'
 import axios from "axios"
 import map from "../images/map.jpg"
 import { useNavigate } from 'react-router-dom'
-import { toast, ToastContainer } from 'react-toastify';
-import InputMask from 'react-input-mask';
+import { toast, ToastContainer } from 'react-toastify'
+import InputMask from 'react-input-mask'
 import useScrollBlock from "./useBlockScroll"
+import DatePickerField from './DatePicker'
+import { useForm } from "react-hook-form"
+
 
 const Destination = ({ orderData, setOrderData, authenticated }) => {
   const [coords, setCoords] = useState([55.753994, 37.622093])
@@ -37,31 +40,32 @@ const Destination = ({ orderData, setOrderData, authenticated }) => {
     }
   }
 
-  const setDate = (e) => {
+  const setDate = (newDate) => {
     const date = new Date()
+    console.log(newDate);
 
-    let day = date.getDate()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
+    let dayNow = date.getDate()
+    let monthNow = date.getMonth() + 1
+    let yearNow = date.getFullYear()
 
-    let inpDay = e.target.value.split("-")[2].split("T")[0]
+    let inpDay = newDate.getDate()
 
     if (inpDay[0] === "0") {
       inpDay = inpDay[1]
     }
     
-    let inpMon = e.target.value.split("-")[1]
+    let inpMon = newDate.getMonth() + 1
     
     if (inpMon[0] === "0") {
       inpMon = inpMon[1]
     }
 
-    let inpYear = e.target.value.split("-")[0]
+    let inpYear = newDate.getFullYear()
 
-    if ((inpDay >= day || inpMon > month) && inpMon >= month && inpYear >= year) {
-      setDateTime(e.target.value)
-      setOrderData(prev => ({...prev, dateTime: e.target.value}))
-      if (parseInt(inpDay) === parseInt(day)) setOrderData(prev => ({...prev, sameDay: true}))
+    if ((inpDay >= dayNow || inpMon > monthNow) && inpMon >= monthNow && inpYear >= yearNow) {
+      setDateTime(`${inpDay}.${inpMon}.${inpYear}`)
+      setOrderData(prev => ({...prev, dateTime: `${inpDay}.${inpMon}.${inpYear}`}))
+      if (parseInt(inpDay) === parseInt(dayNow)) setOrderData(prev => ({...prev, sameDay: true}))
       else setOrderData(prev => ({...prev, sameDay: false}))
     } else {
       toast.error('Please select correct date', {
@@ -81,16 +85,29 @@ const Destination = ({ orderData, setOrderData, authenticated }) => {
   const onMapClick = (e) => {
     setCoords(e.get('coords'))
     const res = axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=ceecbf3e-58ca-4fe6-a06b-97c89dc04f18&geocode=${e.get("coords")[1]}, ${e.get("coords")[0]}&format=json`).then(data => {
-      toast.success(`${t(`Address was set to`) + `${data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""}`}`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-      })
+      if (data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва")) {
+        toast.success(`${t(`Address was set to`) + `${data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name}`}`, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      } else {
+        toast.error(`${t(`Invalid address`)}`, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "light",
+        })
+      }
       setOrderData(prev => ({...prev, street: data.data.response.GeoObjectCollection.featureMember[0].GeoObject.description.includes("Москва") ? data.data.response.GeoObjectCollection.featureMember[0].GeoObject.name : ""}))
     })
   }
@@ -146,6 +163,10 @@ const Destination = ({ orderData, setOrderData, authenticated }) => {
     }
   }
 
+  const { control } = useForm()
+
+  console.log(orderData);
+
   return (
     <YMaps>
       <div className='destination'>
@@ -155,7 +176,6 @@ const Destination = ({ orderData, setOrderData, authenticated }) => {
             <div className='field f-3'>
               <div className='h-wrapper'>
                 <h2>{t("City")}</h2>
-                <span className='warn'>{t("Calierre currently delivers only in Moscow")}</span>
               </div>
               <div className='input-block'>
                 <img onClick={() => {setMapOpened(true);window.scrollTo(0, 0);blockScroll()}} src={map}/>
@@ -232,7 +252,14 @@ const Destination = ({ orderData, setOrderData, authenticated }) => {
                 <h2>{t("Date")}</h2>
                 <span className='warn warn-red'>{t("Same day delivery +299₽")}</span>
               </div>
-              <input className={`date-input${dateTimeError ? " error" : ""}`} type="date" value={dateTime} onChange={(e) => setDate(e)} />
+              {/* <input className={`date-input${dateTimeError ? " error" : ""}`} type="date" value={dateTime} onChange={(e) => setDate(e)} /> */}
+              <DatePickerField
+                placeholder="Date"
+                control={control}
+                name="date"
+                onChange={(date) => setOrderData(prev => ({...prev, dateTime: date}))}
+                setDate={setDate}
+              />
             </div>
             <button onClick={() => toPay()}>{t("Next")}</button>
           </div>

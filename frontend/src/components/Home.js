@@ -90,10 +90,8 @@ const Home = ({ userData }) => {
     <img src={test6}/>
   ]
 
-  const video = document.getElementsByClassName('video-bg')[0]
-
-  if (video) {
-    video.playbackRate = .8;
+  const goToOrderLink = () => {
+    navigate("/order")
   }
 
   return (
@@ -133,7 +131,7 @@ const Home = ({ userData }) => {
         </div>
         <div className='order-options'>
           
-          <div className='card'>
+          <div className='card' onClick={goToOrderLink}>
             <div className='card-content'>
               <div className='title'>
                 <p className='card-title'>BASIC</p>
@@ -147,7 +145,7 @@ const Home = ({ userData }) => {
             </div>
             <img src={test1} className='bg-img'/>
           </div>
-          <div className='card'>
+          <div className='card' onClick={goToOrderLink}>
             <div className='card-content'>
               <div className='title'>
                 <p className='card-title'>ADVANCED</p>
@@ -162,7 +160,7 @@ const Home = ({ userData }) => {
             </div>
             <img src={test1} className='bg-img'/>
           </div>
-          <div className='card'>
+          <div className='card' onClick={goToOrderLink}>
             <div className='card-content'>
               <div className='title'>
                 <p className='card-title'>EVENT</p>

@@ -9,6 +9,9 @@ import sberPay from "../images/sber_pay.png"
 import credit from "../images/credit_card.png"
 import QRCode from "react-qr-code";
 import { toast, ToastContainer } from 'react-toastify';
+import recieving1 from "../images/recieving1.jpg"
+import recieving2 from "../images/recieving2.jpg"
+import recieving3 from "../images/recieving3.jpg"
 
 const Pay = ({ orderData, userData, authenticated }) => {
   const [method, setMethod] = useState("")
@@ -24,19 +27,6 @@ const Pay = ({ orderData, userData, authenticated }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
-
-
-  // useEffect(() => {
-  //   const script = document.createElement("script")
-  //   script.src = "https://static.yoomoney.ru/checkout-js/v1/checkout.js"
-  //   script.async = true
-    
-  //   document.body.appendChild(script)
-
-  //   return () => {
-  //     document.body.removeChild(script)
-  //   }
-  // }, [])
 
   const pay = (method) => {
     method === "sberpay" ? setPendingSber(true) : setPendingCredit(true)
@@ -73,58 +63,51 @@ const Pay = ({ orderData, userData, authenticated }) => {
     if (!orderData.content || !orderData.option || !orderData.dateTime || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("access")){
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": `JWT ${localStorage.getItem('access')}`,
-  //         "Accept": "application/json"
-  //       }
-  //     }
-  //     const res = axios.get("/auth/users/me/", config).catch(() => navigate("/"))
-  //   } else navigate("/login")
-  // }, [])
-
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
         <motion.div animate={extendedText ? {opacity: 0.35} : {opacity: 1}} className='payment-wrapper'>
-          <div className='left-col'>
-            <div className='letter'>
-              <h1>{t("Your letter")}</h1>
-              <div className='data'>
-                <ul className='f-col'>
-                  {orderData.title && <li>{t("Title")}</li>}
-                  <li>{t("Content")}</li>
-                  {orderData.details && <li>{t("Letter details")}</li>}
-                  <li>{t("City")}</li>
-                  <li>{t("Street")}</li>
-                  {orderData.flat && <li>{t("Flat")}</li>}
-                  {orderData.detailsForCourier && <li>{t("Details for courier")}</li>}
-                  <li>{t("Option")}</li>
-                  <li>{t("Seal")}</li>
-                  {orderData.waxAdvanced && <li>{t("Wax")}</li>}
-                  <li>{t("Date")}</li>
-                </ul>
-                <ul className='s-col'>
-                  {orderData.title && <li>{orderData.title}</li>}
-                  <li onClick={(e) => {e.stopPropagation();setExtendedText(true)}} className='content'>{orderData.content.slice(0, width > 720 ? 30 : 10)}...</li>
-                  {orderData.details && <li>{orderData.details}</li>}
-                  <li>{t(orderData.city)}</li>
-                  <li>{orderData.street}</li>
-                  {orderData.flat && <li>{orderData.flat}</li>}
-                  {orderData.detailsForCourier && <li>{orderData.detailsForCourier}</li>}
-                  <li>{t(orderData.option)}</li>
-                  <li>{orderData.option === "Basic" ? t(orderData.sealBasic) : t(orderData.sealAdvanced)}</li>
-                  {orderData.waxAdvanced && <li>{t(orderData.waxAdvanced)}</li>}
-                  <li>{orderData.dateTime.split("T")[0]}</li>
-                </ul>
+          <div className='summary'>
+            <h1>В шаге от <strong>Восторга</strong></h1>
+            <div className='image-slider'>
+              <div className='card'>
+                <img src={recieving1}/>
+                <p>Дари</p>
               </div>
-              <h1 className='total'>{t("Total")}: {orderData.option === "Basic" && orderData.sameDay ? "₽789" : orderData.option === "Basic" ? "₽490" : orderData.option === "Advanced" && orderData.sameDay ? "₽989" : "₽690"}</h1>
+              <div className='card'>
+                <img src={recieving2}/>
+                <p>Радуй</p>
+              </div>
+              <div className='card'>
+                <img src={recieving3}/>
+                <p>Дари</p>
+              </div>
+              <div className='card'>
+                <img src={recieving1}/>
+                <p>Радуй</p>
+              </div>
+              <div className='card'>
+                <img src={recieving2}/>
+                <p>Дари</p>
+              </div>
+              <div className='card'>
+                <img src={recieving3}/>
+                <p>Радуй</p>
+              </div>
+              <div className='card'>
+                <img src={recieving1}/>
+                <p>Дари</p>
+              </div>
+              <div className='card'>
+                <img src={recieving2}/>
+                <p>Радуй</p>
+              </div>
+              <div className='card'>
+                <img src={recieving3}/>
+                <p>Дари</p>
+              </div>
+
             </div>
-          </div>
-          <div className='right-col'>
-            <h1>NOT AVAILABLE NOW</h1>
+          </div>  
             {/* <motion.div
               animate={displayedQR ? {opacity: 0, display: "none"} : {}}
               transition={{display: {delay: .4}, opacity: {duration: .3}}}
@@ -197,7 +180,6 @@ const Pay = ({ orderData, userData, authenticated }) => {
               </div>
               <button className="pay" onClick={pay}>{t("Pay")}</button>
             </div>} */}
-          </div>
       </motion.div>
       <motion.div
         className='extended'
@@ -215,3 +197,41 @@ const Pay = ({ orderData, userData, authenticated }) => {
 }
 
 export default Pay
+
+
+/*
+
+<div className='letter'>
+              <h1>{t("Your letter")}</h1>
+              <div className='data'>
+                <ul className='f-col'>
+                  {orderData.title && <li>{t("Title")}</li>}
+                  <li>{t("Content")}</li>
+                  {orderData.details && <li>{t("Letter details")}</li>}
+                  <li>{t("City")}</li>
+                  <li>{t("Street")}</li>
+                  {orderData.flat && <li>{t("Flat")}</li>}
+                  {orderData.detailsForCourier && <li>{t("Details for courier")}</li>}
+                  <li>{t("Option")}</li>
+                  <li>{t("Seal")}</li>
+                  {orderData.waxAdvanced && <li>{t("Wax")}</li>}
+                  <li>{t("Date")}</li>
+                </ul>
+                <ul className='s-col'>
+                  {orderData.title && <li>{orderData.title}</li>}
+                  <li onClick={(e) => {e.stopPropagation();setExtendedText(true)}} className='content'>{orderData.content.slice(0, width > 720 ? 30 : 10)}...</li>
+                  {orderData.details && <li>{orderData.details}</li>}
+                  <li>{t(orderData.city)}</li>
+                  <li>{orderData.street}</li>
+                  {orderData.flat && <li>{orderData.flat}</li>}
+                  {orderData.detailsForCourier && <li>{orderData.detailsForCourier}</li>}
+                  <li>{t(orderData.option)}</li>
+                  <li>{orderData.option === "Basic" ? t(orderData.sealBasic) : t(orderData.sealAdvanced)}</li>
+                  {orderData.waxAdvanced && <li>{t(orderData.waxAdvanced)}</li>}
+                  <li>{orderData.dateTime.split("T")[0]}</li>
+                </ul>
+              </div>
+              <h1 className='total'>{t("Total")}: {orderData.option === "Basic" && orderData.sameDay ? "₽789" : orderData.option === "Basic" ? "₽490" : orderData.option === "Advanced" && orderData.sameDay ? "₽989" : "₽690"}</h1>
+            </div>
+
+*/

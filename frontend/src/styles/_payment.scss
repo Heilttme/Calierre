@@ -6,6 +6,41 @@
         display: flex;
         justify-content: space-between;
 
+        .summary{
+            .image-slider{
+                display: flex;
+                gap: .6rem;
+
+                .card{
+                    overflow: hidden;
+                    position: relative;
+                    
+                    p{
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        color: white;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        font-size: 2em;
+                        padding: .2rem 0;
+                        background-color: #1a1a1a;
+                        font-weight: 700;
+                    }
+
+                    img {
+                        width: 400px;
+                        height: 300px;
+                        object-fit: cover;
+                        filter: brightness(.5) blur(1px);
+                    }
+                }
+                
+            }
+        }
+
         .letter{
             background-color: #E85A4F;
             padding: 2.5rem;
@@ -80,8 +115,11 @@
     }
 
     h1{
-        color: #E85A4F;
         margin-bottom: 1rem;
+
+        strong {
+            color: #E85A4F;
+        }
     }
 
     h2{

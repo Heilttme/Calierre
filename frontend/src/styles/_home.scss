@@ -432,9 +432,12 @@
             width: 350px;
             cursor: pointer;
             transition: all .15s ease-in-out;
+            overflow: hidden;
 
             &:hover{
-                scale: 1.01;
+                .bg-img{
+                    scale: 1.02;
+                }
             }
 
             .bg-img{
@@ -445,8 +448,9 @@
                 height: 450px;
                 width: 350px;
                 object-fit: cover;
-                filter: brightness(.4) blur(4px);
-                box-shadow: 10px 6px 12px #3f3f3f;
+                filter: brightness(.38) blur(2px);
+                box-shadow: 6px 6px 10px #3f3f3f;
+                transition: all .2s ease-in-out;
             }
 
             .card-content{

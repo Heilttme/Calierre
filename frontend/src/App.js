@@ -120,7 +120,7 @@ const App = () => {
   return (
     <div className="app" onClick={() => setMenuOpened(false)}>
       <Navigation userData={userData} setMenuOpened={setMenuOpened} menuOpened={menuOpened} changeLanguage={changeLanguage} language={language} />
-      <main >
+      <main>
         <Routes>
           <Route path="/" element={<Home userData={userData} />} />
           <Route path="/login" element={<Login authorize={authorize} authenticated={authenticated}/>} />

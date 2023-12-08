@@ -55,19 +55,24 @@
         cursor: pointer;
     }
     
-    input{
-        font-size: 1.15em;
-        height: 35px;
-        padding: .6rem 1.2rem;
-        width: 100%;
-        background-color: #D8C3A5;
-        border: 1px solid #D8C3A5;
-        outline: none;
-        transition: all .1s ease-in-out;
-        margin-bottom: .5rem;
+    input, .ant-picker{
+        font-size: 1.1em !important;
+        height: 35px !important;
+        padding: .6rem !important;
+        width: 100% !important;
+        background-color: #D8C3A5 !important;
+        border: 1px solid #D8C3A5 !important;
+        outline: none !important;
+        transition: all .1s ease-in-out !important;
+        border-radius: 0px;
+        // margin-bottom: .5rem !important;
 
         &:focus{
             border: 1px solid#B4B1A7;
+        }
+
+        svg {
+            display: none;
         }
     }
 

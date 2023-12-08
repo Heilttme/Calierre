@@ -128,13 +128,11 @@ const Customize = ({ setOrderData, orderData, changeOrderData }) => {
               <div className='content block'>
                 <div className='content-header'>
                   <h2>{t("Content")}</h2>
-                  <span>{t("Up to 1200 symbols")}</span>
-                  {symbols !== 0 && <span className='counter'>{symbols}</span>}
                 </div>
                 <textarea
                   value={orderData.content}
                   name="content"
-                  onChange={(e) => {e.target.value.length <= 1200 ? changeOrderData(e) : setContentError(true); e.target.value.length <= 1200 ? countSymbols(e) : setContentError(true); setNext(false)}}
+                  onChange={(e) => {e.target.value.length <= 1200 ? changeOrderData(e) || setContentError(false) : setContentError(true); e.target.value.length <= 1200 ? countSymbols(e) : setContentError(true); setNext(false)}}
                   className={`${contentError && "error"}`}
                 />
               </div>
