@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { t } from 'i18next'
 
-const Input = ({ name, label, onChange, value, error, setError, question="", type="", disabled=false }) => {
+const TextAreaInput = ({ name, label, onChange, value, error, setError, question="", type="", disabled=false }) => {
   const [inputFocus, setInputFocus] = useState(false)
+  const textareaRef = useRef(null);
 
+  const textarea = textareaRef.current
+  if (textarea) {
+    textarea.style.height = 'auto'
+    textarea.style.height = `${textarea.scrollHeight}px`
+  }
+  
   return (
     <div className={`field`}>
-      <input 
+      <textarea 
         name={name}
         onChange={onChange}
+        ref={textareaRef}
         id={label}
         value={value}
         type={type}
@@ -31,4 +39,4 @@ const Input = ({ name, label, onChange, value, error, setError, question="", typ
   )
 }
 
-export default Input
+export default TextAreaInput

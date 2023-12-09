@@ -12,6 +12,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import recieving1 from "../images/recieving1.jpg"
 import recieving2 from "../images/recieving2.jpg"
 import recieving3 from "../images/recieving3.jpg"
+import Input from "./Input"
+import TextAreaInput from "./TextAreaInput"
+
 
 const Pay = ({ orderData, userData, authenticated }) => {
   const [method, setMethod] = useState("")
@@ -63,51 +66,77 @@ const Pay = ({ orderData, userData, authenticated }) => {
     if (!orderData.content || !orderData.option || !orderData.dateTime || ( !orderData.sealBasic.length && orderData.option == "Basic" ) || ( !orderData.sealAdvanced.length && !orderData.waxAdvanced.length && orderData.option == "Advanced" ) || ( !orderData.option == "Multiple" )) navigate("/order") 
   }, [])
 
+  const previewImages = Array(10).fill(
+    (
+      <>
+      <div className='card'>
+        <img src={recieving1}/>
+        <p>Дари</p>
+      </div>
+      <div className='card'>
+        <img src={recieving2}/>
+        <p>Радуй</p>
+      </div>
+      <div className='card'>
+        <img src={recieving3}/>
+        <p>Дари</p>
+      </div>
+      </>
+    )
+  )
+
   return (
     <div className='payment' onClick={() => setExtendedText(false)}>
-        <motion.div animate={extendedText ? {opacity: 0.35} : {opacity: 1}} className='payment-wrapper'>
+        <div className='payment-wrapper'>
           <div className='summary'>
             <h1>В шаге от <strong>Восторга</strong></h1>
-            <div className='image-slider'>
-              <div className='card'>
-                <img src={recieving1}/>
-                <p>Дари</p>
+            <div className='slide-track'>
+              <div className='image-slider'>
+                {previewImages}                
               </div>
-              <div className='card'>
-                <img src={recieving2}/>
-                <p>Радуй</p>
-              </div>
-              <div className='card'>
-                <img src={recieving3}/>
-                <p>Дари</p>
-              </div>
-              <div className='card'>
-                <img src={recieving1}/>
-                <p>Радуй</p>
-              </div>
-              <div className='card'>
-                <img src={recieving2}/>
-                <p>Дари</p>
-              </div>
-              <div className='card'>
-                <img src={recieving3}/>
-                <p>Радуй</p>
-              </div>
-              <div className='card'>
-                <img src={recieving1}/>
-                <p>Дари</p>
-              </div>
-              <div className='card'>
-                <img src={recieving2}/>
-                <p>Радуй</p>
-              </div>
-              <div className='card'>
-                <img src={recieving3}/>
-                <p>Дари</p>
-              </div>
-
             </div>
-          </div>  
+            <div className='details'>
+              <h2>Письмо</h2>
+              {
+                orderData.title && <Input value={orderData.title} disabled label={"Заголовок"} />
+              }
+              <TextAreaInput value={orderData.content} disabled label={"Текст письма"} />
+              {
+                orderData.mistakes && <TextAreaInput value={orderData.mistakes} disabled label={"Ошибки"} />
+              }
+              {
+                orderData.details && <Input value={orderData.details} disabled label={"Детали"} />
+              }
+              <Input value={orderData.option} disabled label={"Тариф"} />
+              {
+                orderData.sealAdvanced ? 
+                  <Input value={orderData.sealAdvanced} disabled label={"Печать"} />
+                :
+                  <Input value={orderData.sealBasic} disabled label={"Печать"} />
+              }
+              {
+                orderData.waxAdvanced && <Input value={orderData.waxAdvanced} disabled label={"Цвет печати"} />
+              }
+              {
+                orderData.details && <Input value={orderData.details} disabled label={"Детали письма"} />
+              }
+
+              <h2>Доставка</h2>
+              <Input value={orderData.city} disabled label={"Город"} />
+              <Input value={orderData.street} disabled label={"Улица"} />
+              {
+                orderData.flat && <Input value={orderData.flat} disabled label={"Квартира, подъезд"} />
+              }
+              <Input value={orderData.email} disabled label={"E-mail"} />
+              <Input value={orderData.phone} disabled label={"Телефон"} />
+              {
+                orderData.detailsForCourier && <Input value={orderData.detailsForCourier} disabled label={"Детали для курьера"} />
+              }
+            </div>
+            <div className='button-block'>
+              <button onClick={pay}>К оплате</button>
+            </div>
+          </div>    
             {/* <motion.div
               animate={displayedQR ? {opacity: 0, display: "none"} : {}}
               transition={{display: {delay: .4}, opacity: {duration: .3}}}
@@ -180,15 +209,7 @@ const Pay = ({ orderData, userData, authenticated }) => {
               </div>
               <button className="pay" onClick={pay}>{t("Pay")}</button>
             </div>} */}
-      </motion.div>
-      <motion.div
-        className='extended'
-        initial={{width: 0, height: 0, padding: 0}}
-        animate={extendedText ? width < 900 ? width < 500 ? {width: "90%", height: "75%", padding: "2rem"} : {width: "85%", height: "75%", padding: "3rem"} : {width: "60%", height: "75%", padding: "3rem"} : {width: 0, height: 0, padding: 0}}
-      >
-        <h1>{t("Content")}</h1>
-        <p>{orderData.content}</p>
-      </motion.div>
+      </div>
       <ToastContainer
         limit={3}
        />

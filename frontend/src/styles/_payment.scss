@@ -1,170 +1,123 @@
 .payment{
-    width: 75%;
+    width: 100%;
     margin: 0 auto;
+    margin-bottom: 2rem;
 
     .payment-wrapper{
         display: flex;
         justify-content: space-between;
 
         .summary{
-            .image-slider{
-                display: flex;
-                gap: .6rem;
-
-                .card{
-                    overflow: hidden;
-                    position: relative;
-                    
-                    p{
-                        position: absolute;
-                        left: 50%;
-                        top: 50%;
-                        transform: translate(-50%, -50%);
-                        color: white;
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        font-size: 2em;
-                        padding: .2rem 0;
-                        background-color: #1a1a1a;
-                        font-weight: 700;
-                    }
-
-                    img {
-                        width: 400px;
-                        height: 300px;
-                        object-fit: cover;
-                        filter: brightness(.5) blur(1px);
-                    }
-                }
-                
-            }
-        }
-
-        .letter{
-            background-color: #E85A4F;
-            padding: 2.5rem;
-            border-radius: 10px;
-            min-width: 600px;
-            
             h1{
-                color: white;
+                margin: 0 auto;
                 margin-bottom: 1rem;
+                width: 80%;
+        
+                strong {
+                    color: #E85A4F;
+                }
             }
 
-            .content{
-                transition: all .2s ease-in-out;
-                user-select: none;
-                
-                &:hover{
-                    color: #f5a6a0;
-                    cursor: pointer;
+            .slide-track{
+                --image-width: 410px; 
+                overflow: hidden;
+                width: 100vw;
+                display: flex;
+                justify-content: center;
+            
+                .image-slider{
+                    display: flex;
+                    gap: .6rem;
+                    width: calc(var(--image-width) * 30);
+                    animation: scroll 60s linear alternate infinite;
+    
+                    .card{
+                        overflow: hidden;
+                        position: relative;
+                        width: var(--image-width);
+                        height: 300px;
+                        
+                        p{
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                            color: white;
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            font-size: 2em;
+                            padding: .2rem 0;
+                            background-color: #E85A4F;
+                            font-weight: 700;
+                        }
+    
+                        img {
+                            width: inherit;
+                            height: inherit;
+                            object-fit: cover;
+                            filter: brightness(.5) blur(1px);
+                            transition: all .2s ease-in-out;
+                        }
+
+                        &:hover{
+                            img{
+                                scale: 1.02;
+                            }
+                        }
+                    }
+                    
+                    @keyframes scroll {
+                        0%{
+                            transform: translateX(-400px);
+                        }
+
+                        100%{
+                            transform: translateX(calc(-1 * var(--image-width) * 10));
+                        }
+                    }
+                }
+            }
+
+            .details{
+                width: 80%;
+                margin: 0 auto;
+                margin-top: 4rem;
+
+                h2{
+                    position: relative;
+                    top: -1.2rem;
+                    margin-bottom: 1.6rem;
+                    font-size: 1.8em;
+                    color: #E85A4F;
+                    padding-bottom: .4rem;
+                    border-bottom: 1px solid #E85A4F;
+                }
+
+                label{
+                    color: black !important;
+                    font-size: 1.25em !important;
+                    top: 0px;
+                }
+            }
+
+            .button-block{
+                width: 80%;
+                margin: 0 auto;
+
+                button{
+                    @include button;
+                    // background-color: #E85A4F;
                 }
             }
         }
-
-        .data{
-            font-size: 1.2em;
-            line-height: 2rem;
-            color: white;
-            display: flex;
-            gap: 4rem;
-            justify-content: space-between;
-        }
-
-    }
-
-    ::-webkit-scrollbar {
-        width: 1.5rem;
-        padding: 10px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background-color: #E85A4F;
-        border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: #f36b61;
-        margin: 2px;
-        border-radius: 10px;
-    }
-
-    .extended{
-        position: absolute;
-        overflow: auto;
-        word-break: break-all;
-        left: 50%;
-        top: 40%;
-        background-color: #E85A4F;
-        transform: translate(-50%, -50%);
-        border-radius: 20px;
-        padding: 3rem;
-
-        
-        h1{
-            color: white;
-        }
-
-        p{
-            color: white;
-            letter-spacing: 2px;
-            font-size: 1.1em;
-        }
-
-    }
-
-    h1{
-        margin-bottom: 1rem;
-
-        strong {
-            color: #E85A4F;
-        }
-    }
-
-    h2{
-        margin-bottom: .4rem;
     }
 
     .total{
         margin-top: 1rem;
     }
 
-    .form{
-        width: 100%;
-        // margin-left: 1rem;
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: 
-            "CARD CARD"
-            "NAME NAME"
-            "EXPIRES CVV"
-            "BTN BTN";
-
-            .credit{
-                grid-area: CARD;
-            }
-
-            .name{
-                grid-area: NAME;
-            }
-
-            .expires{
-                grid-area: EXPIRES;
-            }
-
-            .cvv{
-                grid-area: CVV;
-            }
-
-            button{
-                grid-area: BTN;
-            }
-
-    }
-
-    input{
+    input, textarea{
         height: 42px;
         padding: .6rem 1.2rem;
         font-size: 1.3em;
@@ -176,8 +129,14 @@
         margin-bottom: .5rem;
 
         &:focus{
-            border: 1px solid#B4B1A7;
+            border: 1px solid #B4B1A7;
         }
+    }
+
+    textarea{
+        height: unset;
+        resize: none;
+        overflow: hidden;
     }
 
     .pay-head{
@@ -186,7 +145,6 @@
 
         button{
             @include button;
-            
             padding: .4rem 1.4rem;
         }
     }

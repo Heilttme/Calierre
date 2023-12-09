@@ -9,7 +9,7 @@ label, input[type=text]{
     user-select: none;
 }
 
-input{
+input, textarea{
     height: 40px;
     padding: .6rem 1.2rem;
     width: 400px;
