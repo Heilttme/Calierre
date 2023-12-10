@@ -5,154 +5,15 @@
     display: flex;
     flex-direction: column;
 
-    .block-1{
-        display: flex;
-        justify-content: space-around;
-    }
-    
-    .left-col{
-        padding: 2rem;
-        padding-right: 3rem;
-        width: 50%;
-        background-color: transparent;
-        border: 4px solid #E85A4F;
-        border-radius: 20px;
-
-        h1{
-            color: #E85A4F;
-            margin-bottom: 1rem;
-        }
-        
-        h2{
-            color: #E85A4F;
-            margin-bottom: .3rem;
-        }
-    }
-    
     .form{
-        margin-left: 1rem;
-        display: grid;
-        gap: 1.5rem;
-        grid-template-areas: 
-            "NAME SURNAME"
-            "EMAIL EMAIL"
-            "MESSAGE MESSAGE"
-            "BTN BTN";
+        margin-top: 1rem;
 
-            .name{
-                grid-area: NAME;
-            }
-            
-            .surname{
-                grid-area: SURNAME;
-            }
-
-            .message{
-                grid-area: MESSAGE;
-            }
-
-            .email{
-                grid-area: EMAIL;
-            }
-
-            input{
-                height: 35px;
-                padding: .6rem 1.2rem;
-                width: 100%;
-                background-color: #d4675f;
-                border: 2px solid #d4675f;
-                color: white;
-                outline: none;
-                transition: all .1s ease-in-out;
-                margin-bottom: .5rem;
-        
-                &:focus{
-                    // border: 2px solid #f7c9c6;
-                }
-            }
-
-            textarea{
-                width: 100%;
-                resize: none;
-                background-color: #d4675f;
-                border: none;
-                height: 200px;
-                padding: .6rem;
-                border: 2px solid #d4675f;
-                outline: none;
-                transition: all .1s ease-in-out;
-        
-                &:focus{
-                    border: 2px solid white;
-                }
-            }
-
-            .error{
-                border: 2px solid #af2323;
-            }
-
-            button{
-                @include button;
-                margin-top: .8rem;
-                background-color: #d4675f;
-                color: white;
-
-                grid-area: BTN;
-
-                &:hover{
-                    background-color: rgb(255, 114, 114);
-                }
-            }
-    }
-
-    .info{
-        h1{
-            color: #E85A4F;
-            margin-bottom: .5rem;
-        }
-
-        p{
-            font-size: 1.3em;
-        }
-
-        ul{
-            background-color: #E85A4F;
-            border-radius: 20px;
-            margin-top: 1rem;
-            padding: 2rem;
-            padding-top: 1rem;
-        }
-
-        .hours{
-            width: 75%;
-            margin-bottom: 1rem;
-            font-size: 1.2em;
-            
-            div{
-                display: flex;
-                justify-content: space-between;
-            }
-        }
-
-        .block{
-            margin-top: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid white;
-
-
-            h2{
-                color: white;
-                // color: #E85A4F;
-            }
-
-            p{
-                font-size: 1.1em;
-                color: white;
-                opacity: .7;
-            }
+        .name-surname{
+            display: flex;
+            gap: .6rem;
         }
     }
-
+    
 }
 
 

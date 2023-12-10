@@ -1,15 +1,20 @@
 import React from 'react'
 import penLetter from "../../images/pen-letter.jpg"
+import { useNavigate } from 'react-router-dom'
 
 const Orders = ({}) => {
+  const navigate = useNavigate()
+  
+  const navigateToOrder = () => navigate("/order")
+  
   return (
     <div className='user-orders'>
       <div className='orders'>
-        <div className='order'>
+        <div onClick={navigateToOrder} className='order'>
           <img src={penLetter}/>
-          <a target='_blank' href='/order'>Сделать заказ</a>
+          <a>Сделать заказ</a>
         </div>
-        <div className='order'>
+        <div onClick={navigateToOrder} className='order'>
           <img src={penLetter}/>
           <p>Кто-то правда ждет твоего письма</p>
         </div>

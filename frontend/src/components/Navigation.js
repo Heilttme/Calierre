@@ -56,7 +56,7 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
 
   return (
     <motion.div
-      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "0rem", top: "0", overflow: "hidden"}}
+      animate={scrollPosition == 0 ? {height: "100vh", backgroundColor: "#E85A4F"} : {position: "fixed", height: "0rem", overflow: "hidden"}}
       transition={{height: {duration: .4}, backgroundColor: {duration: .4}}}
       className={`header ${scrollPosition === 0 && "extended"}`}
     >
@@ -68,11 +68,11 @@ const Navigation = ({ language, changeLanguage, userData, setMenuOpened, menuOpe
         </div>
       </div>
 
-      {scrollPosition != 0 && <div className={`hamburger-wrapper${menuOpened ? " opened-hamburger" : ""}`} onClick={(e) => {e.stopPropagation();setMenuOpened(prev => !prev)}}><div className='hamburger'></div></div>}
+      {/* {scrollPosition != 0 && <div className={`hamburger-wrapper${menuOpened ? " opened-hamburger" : ""}`} onClick={(e) => {e.stopPropagation();setMenuOpened(prev => !prev)}}><div className='hamburger'></div></div>} */}
 
       <motion.a
         initial={{left: "unset", fontSize: "2em", left: "45%"}}
-        animate={scrollPosition == 0 ? {color: "#EAE7DC", fontSize: "10em", left: "5%", top: "2rem", textAlign: "left", transform: "unset"} : {left: "unset", fontSize: "2em", left: "45%"}}
+        animate={scrollPosition == 0 ? {color: "#EAE7DC", fontSize: "10em", left: "5%", top: "2rem", textAlign: "left", transform: "unset"} : {fontSize: "2em", left: "45%"}}
         href='/'
         className='logo'
       >

@@ -1,12 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.d95d05a3.css",
-    "main.js": "/static/js/main.c8b0a8d2.js",
+    "main.css": "/static/css/main.ed3d46a9.css",
+    "main.js": "/static/js/main.9c769b67.js",
+    "static/media/couple.jpg": "/static/media/couple.5f31af4139fa6c314bb7.jpg",
+    "static/media/bg_candle.MP4": "/static/media/bg_candle.eaef4deba389863947db.MP4",
+    "static/media/letter-flower.jpg": "/static/media/letter-flower.e4a1a1bd0a197cd5e8ca.jpg",
+    "static/media/envelope-flower.jpg": "/static/media/envelope-flower.127972b5ba5183485470.jpg",
+    "static/media/recieving1.jpg": "/static/media/recieving1.01aaa41dd3f2ede04b29.jpg",
+    "static/media/event.jpg": "/static/media/event.8d41bcfb0dc6d946783a.jpg",
+    "static/media/calligraphy.jpg": "/static/media/calligraphy.d4b34b45c42013e374dd.jpg",
+    "static/media/letter.jpg": "/static/media/letter.bed2167b3e1da6ae7c6d.jpg",
+    "static/media/recieving2.jpg": "/static/media/recieving2.fad9ea95fbc35cbf79f5.jpg",
+    "static/media/pen-letter.jpg": "/static/media/pen-letter.b1d620d4f30bafc19cc0.jpg",
+    "static/media/recieving3.jpg": "/static/media/recieving3.d7c8bea59fa10cb25585.jpg",
     "static/media/test2.jpeg": "/static/media/test2.7111c475950abc8edb82.jpeg",
     "static/media/test1.jpeg": "/static/media/test1.d52570f6741d199a4b95.jpeg",
     "static/media/test3.jpeg": "/static/media/test3.0165fd1f2d569fd7e55b.jpeg",
     "static/media/test5.jpeg": "/static/media/test5.2ac91183632ba67fa1c4.jpeg",
-    "static/media/example.png": "/static/media/example.78e13ae02a7671203f10.png",
     "static/media/LILY.png": "/static/media/LILY.88b7a96288323637bed6.png",
     "static/media/KUST.png": "/static/media/KUST.40bdd5cbfeae0030c456.png",
     "static/media/TEXT.png": "/static/media/TEXT.40bdd5cbfeae0030c456.png",
@@ -16,20 +26,17 @@
     "static/media/ROSE.png": "/static/media/ROSE.6aaffea52ac0d4b68001.png",
     "static/media/WEDDING.png": "/static/media/WEDDING.0c5de4bf69b4c1f5b971.png",
     "static/media/negr.png": "/static/media/negr.c2734cf5f17dec9c97dd.png",
-    "static/media/feather_pen.png": "/static/media/feather_pen.7293c96799c8e2f19b5e.png",
-    "static/media/pergament.png": "/static/media/pergament.328e530c7d1f7e190bf0.png",
-    "static/media/envelope.png": "/static/media/envelope.e7486038d06cda6d6e04.png",
     "static/media/credit_card.png": "/static/media/credit_card.d82a8dca7aac8db395a9.png",
     "static/media/map.jpg": "/static/media/map.9fb60fc8b92eb066d128.jpg",
     "static/media/ink.png": "/static/media/ink.5fcc61d6c5069c778611.png",
     "static/media/sber_pay.png": "/static/media/sber_pay.db456fa8527a9644f0c1.png",
     "index.html": "/index.html",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.d95d05a3.css.map": "/static/css/main.d95d05a3.css.map",
-    "main.c8b0a8d2.js.map": "/static/js/main.c8b0a8d2.js.map"
+    "main.ed3d46a9.css.map": "/static/css/main.ed3d46a9.css.map",
+    "main.9c769b67.js.map": "/static/js/main.9c769b67.js.map"
   },
   "entrypoints": [
-    "static/css/main.d95d05a3.css",
-    "static/js/main.c8b0a8d2.js"
+    "static/css/main.ed3d46a9.css",
+    "static/js/main.9c769b67.js"
   ]
 }

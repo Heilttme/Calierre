@@ -7,6 +7,7 @@
     width: 80%;
     margin: 0 auto;
     margin-top: 3rem;
+    margin-bottom: 5rem;
 
     .username{
         display: flex;
@@ -77,22 +78,34 @@
 
                 &:hover{
                     img{
-                        filter: blur(1.4px) brightness(.5);
+                        filter: blur(1.4px) brightness(.45);
                     }
                 }
             }
         }
-
     }
     
-    .user-data-info{
-        margin-top: .8rem;
+    .user-data-info {
+        margin-top: 3.6rem;
         
-        .user-header{
-            color: #E85A4F;
-            font-size: 1.7em;
-            font-weight: 800;
-            
+        // .user-header {
+        //     color: #E85A4F;
+        //     font-size: 1.5em;
+        //     margin-bottom: 1.6rem;
+        //     border-bottom: 1px solid #E85A4F;
+        // }
+
+        label{
+            color: #333 !important;
+        }
+
+        .btns{
+            display: flex;
+            gap: 1rem;
+        }
+
+        button{
+            @include button;
         }
     }
 }
