@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ink from "../images/ink.png"
-import videoCandleWriter from "../images/bg_candle.MP4"
 
 import test1 from "../images/test1.jpeg"
 import test2 from "../images/test2.jpeg"
